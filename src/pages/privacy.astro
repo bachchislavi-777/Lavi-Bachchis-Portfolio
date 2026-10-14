@@ -29,12 +29,16 @@ const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
       <h2>Who else handles it</h2>
       <ul>
         <li><b>Web3Forms</b> passes contact-form messages to my email inbox{formOn ? '' : ' (once the form is switched on)'}. Their privacy policy is at <a href="https://web3forms.com/privacy" rel="noopener">web3forms.com/privacy</a>.</li>
-        <li><b>Google</b> provides my email (Gmail) and the web fonts used on this site, which your browser loads from Google Fonts.</li>
+        <li><b>Google</b> provides my email (Google Workspace / Gmail). The fonts on this site are stored on the site itself, so your browser does not contact Google or any other font service when you visit.</li>
         <li><b>GitHub Pages</b> hosts this website and may keep standard technical logs, such as IP addresses, to keep the service secure.</li>
       </ul>
 
-      <h2>Cookies and analytics</h2>
-      <p>This website does not set cookies and does not use tracking or advertising tools. If I add privacy-friendly analytics later, it will be a cookieless tool that only counts visits, and I will name it here.</p>
+      <h2 id="cookies">Cookies and analytics</h2>
+      <p>This website does not set any cookies and does not store anything in your browser, such as local storage. It does not use tracking, advertising or social media pixels, and it does not load content from other websites. That is why you will not see a cookie banner here: under the UK's Privacy and Electronic Communications Regulations (PECR), consent is only needed when a site stores or reads information on your device.</p>
+      <p>If I add privacy-friendly analytics later, it will be a cookieless tool that only counts visits, and I will name it here before it goes live.</p>
+
+      <h2>Security</h2>
+      <p>The site is served over an encrypted HTTPS connection and uses a strict content security policy, which stops the browser from loading scripts or content from anywhere other than this site. If you spot a security problem, please email <a href={`mailto:${s.email}`}>{s.email}</a>.</p>
 
       <h2>How long I keep it</h2>
       <p>I keep enquiry emails for as long as needed to reply and follow up, and no longer than two years unless we work together. Project records are kept as long as the law requires for tax and accounting.</p>

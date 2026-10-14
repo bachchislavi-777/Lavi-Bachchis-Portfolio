@@ -7,5 +7,5 @@ export const PUBLIC_WEB3FORMS_KEY = '';
 
 // About-page photo. Upload your photo to public/images/ (e.g. lavi.jpg, ideally 1080×1350 portrait),
 // then write its file name here, e.g. 'images/lavi.jpg'. While this is empty, a placeholder card is shown.
-export const ABOUT_PHOTO = '';
-export const ABOUT_PHOTO_ALT = 'Lavi Bachchis, smiling, in London';
+export const ABOUT_PHOTO = 'images/lavi.jpg';
+export const ABOUT_PHOTO_ALT = 'Lavi Bachchis, smiling, in a navy blazer';

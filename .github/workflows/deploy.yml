@@ -1,0 +1,62 @@
+# Builds the site and publishes it to GitHub Pages.
+# Runs automatically on every change to the `main` branch (the live site),
+# and can be run by hand from the Actions tab ("Run workflow").
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deploy at a time; a newer push replaces a queued one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  # Where the site is served from.
+  # Today (free GitHub address): https://bachchislavi-777.github.io/lavi-bachchis-portfolio/
+  #   SITE_URL: https://bachchislavi-777.github.io
+  #   BASE_PATH: /lavi-bachchis-portfolio
+  # After adding a custom domain (e.g. lavibachchis.com), change these two lines to:
+  #   SITE_URL: https://lavibachchis.com
+  #   BASE_PATH: /
+  # and add a file public/CNAME containing just the domain name.
+  SITE_URL: https://bachchislavi-777.github.io
+  BASE_PATH: /lavi-bachchis-portfolio
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Upload the built site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

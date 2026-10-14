@@ -1,0 +1,137 @@
+---
+import '../styles/base.css';
+import '../styles/site.css';
+import copy from '../data/copy.json';
+import { url, absUrl } from '../lib/url.js';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string; // e.g. '/work/' (used for canonical + og:url)
+  schema?: object[]; // extra JSON-LD objects
+  breadcrumbs?: { name: string; path: string }[];
+  brandFonts?: boolean;
+  noindex?: boolean;
+  current?: string;
+}
+const { title, description, path = '/', schema = [], breadcrumbs, brandFonts = false, noindex = false, current = '' } = Astro.props;
+const site = Astro.site ?? new URL('https://bachchislavi-777.github.io');
+const canonical = absUrl(path, site);
+const ogImage = absUrl('og-image.jpg', site);
+const homeUrl = absUrl('/', site);
+
+const graph: object[] = [
+  {
+    '@type': 'WebSite',
+    '@id': `${homeUrl}#website`,
+    url: homeUrl,
+    name: `${copy.site.name}, ${copy.site.role}`,
+    inLanguage: 'en-GB',
+    publisher: { '@id': `${homeUrl}#person` },
+  },
+  ...schema,
+];
+if (breadcrumbs && breadcrumbs.length) {
+  graph.push({
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Home', path: '/' }, ...breadcrumbs].map((b, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: b.name,
+      item: absUrl(b.path, site),
+    })),
+  });
+}
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+
+const coreFonts = 'family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Caveat:wght@600;700';
+const brandFontQ = '&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Work+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Karla:wght@400;600;700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;800&family=Archivo:wght@400;600;800;900';
+const fontsHref = `https://fonts.googleapis.com/css2?${coreFonts}${brandFonts ? brandFontQ : ''}&display=swap`;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#163A2E" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="author" content={copy.site.name} />
+
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={url('favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={url('apple-touch-icon.png')} />
+    <link rel="manifest" href={url('site.webmanifest')} />
+    <link rel="sitemap" href={url('sitemap-index.xml')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={`${copy.site.name}, ${copy.site.role}`} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Lavi Bachchis, content & creative: portfolio card with three product photos" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={fontsHref} />
+    <script type="application/ld+json" set:html={jsonLd} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Nav current={current} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Mobile nav toggle
+      const toggle = document.querySelector<HTMLButtonElement>('.navtoggle');
+      const menu = document.getElementById('site-menu');
+      if (toggle && menu) {
+        const set = (open: boolean) => {
+          toggle.setAttribute('aria-expanded', String(open));
+          toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+          document.documentElement.classList.toggle('menu-open', open);
+        };
+        toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { set(false); toggle.focus(); }
+        });
+        menu.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) set(false); });
+        matchMedia('(min-width: 1001px)').addEventListener('change', (m) => { if (m.matches) set(false); });
+      }
+      // Copy-to-clipboard buttons
+      document.querySelectorAll<HTMLButtonElement>('button.copy[data-copy]').forEach((btn) => {
+        const label = btn.textContent;
+        const status = btn.parentElement?.querySelector('.copy-status');
+        btn.addEventListener('click', async () => {
+          const text = btn.dataset.copy || '';
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = btn.dataset.copied || 'Copied';
+            if (status) status.textContent = `${text} copied to clipboard`;
+          } catch {
+            const target = btn.parentElement?.querySelector('a, span.v');
+            if (target) { const r = document.createRange(); r.selectNodeContents(target); const s = getSelection(); s?.removeAllRanges(); s?.addRange(r); }
+            if (status) status.textContent = 'Selected. Press Ctrl+C or Cmd+C to copy.';
+          }
+          setTimeout(() => { btn.textContent = label; }, 1800);
+        });
+      });
+    </script>
+  </body>
+</html>

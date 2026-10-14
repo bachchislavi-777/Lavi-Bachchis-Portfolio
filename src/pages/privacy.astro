@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import copy from '../data/copy.json';
+import { PUBLIC_WEB3FORMS_KEY } from '../data/settings.js';
+const s = copy.site;
+const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
+---
+<Layout title="Privacy | Lavi Bachchis, Content & Creative" description="How Lavi Bachchis handles your details when you get in touch through this website: what is collected, why, who processes it and how to contact her."
+  path="/privacy/" breadcrumbs={[{ name: 'Privacy', path: '/privacy/' }]}>
+  <PageHead eyebrow="Privacy" h1="Your details," h1Em="kept simple." intro="A short, plain-English note on what happens to your information when you visit this site or get in touch." crumbs={[{ name: 'Privacy', path: '/privacy/' }]} />
+  <section class="band light">
+    <div class="wrap prose">
+      <p class="upd">Last updated: October 2026</p>
+
+      <h2>Who I am</h2>
+      <p>This website belongs to {s.name}, a freelance content and creative professional based in {s.location}. I am responsible for any personal information you share with me through this site. You can reach me at <a href={`mailto:${s.email}`}>{s.email}</a>.</p>
+
+      <h2>What I collect</h2>
+      <ul>
+        <li>If you email or phone me, I receive the details you choose to share, such as your name, email address, phone number and business details.</li>
+        <li>{formOn ? 'If you use the contact form, I receive the name, email address, business details and message you enter.' : 'When the online contact form is switched on, it will collect the name, email address, business details and message you enter.'}</li>
+        <li>I do not ask for payment details on this website.</li>
+      </ul>
+
+      <h2>Why I use it</h2>
+      <p>I only use your details to reply to your enquiry and, if we work together, to manage our project. I do not sell your details or add you to a mailing list without asking first.</p>
+
+      <h2>Who else handles it</h2>
+      <ul>
+        <li><b>Web3Forms</b> passes contact-form messages to my email inbox{formOn ? '' : ' (once the form is switched on)'}. Their privacy policy is at <a href="https://web3forms.com/privacy" rel="noopener">web3forms.com/privacy</a>.</li>
+        <li><b>Google</b> provides my email (Gmail) and the web fonts used on this site, which your browser loads from Google Fonts.</li>
+        <li><b>GitHub Pages</b> hosts this website and may keep standard technical logs, such as IP addresses, to keep the service secure.</li>
+      </ul>
+
+      <h2>Cookies and analytics</h2>
+      <p>This website does not set cookies and does not use tracking or advertising tools. If I add privacy-friendly analytics later, it will be a cookieless tool that only counts visits, and I will name it here.</p>
+
+      <h2>How long I keep it</h2>
+      <p>I keep enquiry emails for as long as needed to reply and follow up, and no longer than two years unless we work together. Project records are kept as long as the law requires for tax and accounting.</p>
+
+      <h2>Your rights</h2>
+      <p>You can ask to see, correct or delete the information I hold about you, or object to how I use it. Email <a href={`mailto:${s.email}`}>{s.email}</a> and I will reply within one month. If you are unhappy with how I have handled your information, you can contact the UK Information Commissioner's Office at <a href="https://ico.org.uk" rel="noopener">ico.org.uk</a>.</p>
+    </div>
+  </section>
+</Layout>

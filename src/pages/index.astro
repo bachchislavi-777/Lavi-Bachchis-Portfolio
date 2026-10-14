@@ -1,0 +1,152 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CoverCard from '../components/CoverCard.astro';
+import Process from '../components/Process.astro';
+import CtaBand from '../components/CtaBand.astro';
+import copy from '../data/copy.json';
+import { B } from '../data/brands.js';
+import { url } from '../lib/url.js';
+import { R, varStyle, panel, tabButton } from '../lib/tiles.js';
+import { personSchema, businessSchema } from '../lib/schema.js';
+
+const h = copy.home;
+const site = Astro.site;
+const byId = Object.fromEntries(B.map((b) => [b.id, b]));
+// Hero collage, as in the reference: Solenne launch post, Ask Ashby series tile, Lowtide photo.
+const pick = [
+  [byId.solenne, byId.solenne.grid[0]],
+  [byId.ashbygrant, byId.ashbygrant.grid[1]],
+  [byId.lowtide, { t: 'pic', src: 'glow_latte', k: 'Lowtide Coffee', title: 'Roasted by the sea.', fs: '11cqi', at: 'bot' }],
+];
+const groups = [
+  { g: 'product', light: true, eyebrow: `Case studies · ${copy.work.productEyebrow}`, h2: copy.work.productH2, em: copy.work.productH2Em, p: copy.work.productIntro },
+  { g: 'service', light: false, eyebrow: `Case studies · ${copy.work.serviceEyebrow}`, h2: copy.work.serviceH2, em: copy.work.serviceH2Em, p: copy.work.serviceIntro },
+];
+const icons = ['✦', '✎', '↗'];
+---
+<Layout title={copy.seo.home.title} description={copy.seo.home.description} path="/" brandFonts
+  schema={[businessSchema(site), personSchema(site)]}>
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">{h.eyebrow}</span>
+        <h1>{h.h1} <em>{h.h1Em}</em></h1>
+        <p class="lede">{h.lede}</p>
+        <div class="cta">
+          <a class="btn" href={url(h.ctaPrimary.href)}>{h.ctaPrimary.label}</a>
+          <a class="btn ghost" href={url(h.ctaSecondary.href)}>{h.ctaSecondary.label}</a>
+        </div>
+        <div class="facts">
+          {h.facts.map((f) => <div><b>{f.n}</b><span>{f.label}</span></div>)}
+        </div>
+      </div>
+      <div class="collage" aria-hidden="true">
+        {pick.map(([b, t]) => <div class="ci" style={varStyle(b)} set:html={R(t)} />)}
+        <span class="badge">{copy.site.availability}</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="strip" aria-hidden="true">
+    <div class="row">{[...h.ticker, ...h.ticker].map((w) => <span>{w}</span>)}</div>
+  </div>
+
+  <section class="band light" aria-labelledby="intro-h">
+    <div class="wrap about">
+      <div>
+        <h2 class="eyebrow" id="intro-h">{h.intro.eyebrow}</h2>
+        <p class="big" style="margin-top:16px">{h.intro.text}</p>
+      </div>
+      <div class="cols">
+        {h.pillars.map((p, i) => <div><i aria-hidden="true">{icons[i]}</i><p><b>{p.title}</b><span>{p.text}</span></p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">{h.workTeaser.eyebrow}</span>
+        <h2 id="work-h">{h.workTeaser.h2} <em>{h.workTeaser.h2Em}</em></h2>
+        <p>{h.workTeaser.text}</p>
+      </div>
+      <div class="covers">
+        {B.map((b, i) => <CoverCard brand={b} index={i} />)}
+      </div>
+      <p class="sample-note"><b>{copy.work.sampleLabel}</b><span>{copy.site.footerNote}</span></p>
+    </div>
+  </section>
+
+  {groups.map((grp) => {
+    const list = B.filter((b) => b.g === grp.g);
+    return (
+      <section class:list={['band', { light: grp.light }]} id={grp.g} aria-labelledby={`${grp.g}-h`}>
+        <div class="wrap">
+          <div class="shead">
+            <span class="eyebrow">{grp.eyebrow}</span>
+            <h2 id={`${grp.g}-h`}>{grp.h2} <em>{grp.em}</em></h2>
+            <p>{grp.p} Choose a brand to see its identity, feed and creatives.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label={`${grp.g === 'product' ? 'Product' : 'Service'} brand case studies`} data-group={grp.g}
+            set:html={list.map((b, i) => tabButton(b, i === 0)).join('')} />
+          <div data-panels={grp.g} set:html={list.map((b, i) => panel(b, url(`/work/${b.id}/`), copy.work.cardCta, i !== 0)).join('')} />
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="band light" aria-labelledby="svc-h">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">{h.servicesTeaser.eyebrow}</span>
+        <h2 id="svc-h">{h.servicesTeaser.h2} <em>{h.servicesTeaser.h2Em}</em></h2>
+        <p>{h.servicesTeaser.text}</p>
+      </div>
+      <div class="svc">
+        {copy.services.list.map((s) => <div><span class="eyebrow">{s.eyebrow}</span><h3 class="ttl">{s.title}</h3><p>{s.text}</p></div>)}
+      </div>
+      <div class="scope"><b>{copy.services.scope.title}</b><span>{copy.services.scope.text}</span></div>
+      <div class="teaser-foot">
+        <a class="btn" href={url('/services/')}>Services &amp; packages</a>
+        <a class="btn ghost" href={url('/about/')}>About Lavi</a>
+      </div>
+    </div>
+  </section>
+
+  <Process />
+  <CtaBand />
+</Layout>
+
+<script>
+  // Brand tabs (WAI-ARIA tabs pattern). Panels are static HTML; this only toggles which one is shown.
+  document.querySelectorAll<HTMLElement>('.tabs[role="tablist"]').forEach((tabs) => {
+    const g = tabs.dataset.group;
+    const btns = [...tabs.querySelectorAll<HTMLButtonElement>('.bt')];
+    const panels = document.querySelector(`[data-panels="${g}"]`);
+    const select = (id: string, focus = false) => {
+      btns.forEach((b) => {
+        const on = b.dataset.id === id;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+        if (on && focus) b.focus();
+      });
+      panels?.querySelectorAll<HTMLElement>('.panel').forEach((p) => { p.hidden = p.id !== `panel-${id}`; });
+    };
+    tabs.addEventListener('click', (e) => {
+      const bt = (e.target as HTMLElement).closest<HTMLButtonElement>('.bt');
+      if (bt?.dataset.id) select(bt.dataset.id);
+    });
+    tabs.addEventListener('keydown', (e) => {
+      const i = btns.indexOf(document.activeElement as HTMLButtonElement);
+      if (i < 0) return;
+      let n = -1;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % btns.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + btns.length) % btns.length;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = btns.length - 1;
+      if (n < 0) return;
+      e.preventDefault();
+      select(btns[n].dataset.id!, true);
+    });
+  });
+</script>

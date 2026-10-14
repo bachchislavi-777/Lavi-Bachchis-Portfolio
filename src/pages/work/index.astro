@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHead from '../../components/PageHead.astro';
+import CoverCard from '../../components/CoverCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import copy from '../../data/copy.json';
+import { B } from '../../data/brands.js';
+import { absUrl } from '../../lib/url.js';
+
+const w = copy.work;
+const site = Astro.site;
+const groups = [
+  { g: 'product', light: true, eyebrow: w.productEyebrow, h2: w.productH2, em: w.productH2Em, p: w.productIntro },
+  { g: 'service', light: false, eyebrow: w.serviceEyebrow, h2: w.serviceH2, em: w.serviceH2Em, p: w.serviceIntro },
+];
+const list = {
+  '@type': 'CollectionPage',
+  name: copy.seo.work.title,
+  description: copy.seo.work.description,
+  url: absUrl('/work/', site),
+  hasPart: B.map((b) => ({ '@type': 'CreativeWork', name: `${copy.cases[b.id].name}: sample case study`, url: absUrl(`/work/${b.id}/`, site) })),
+};
+---
+<Layout title={copy.seo.work.title} description={copy.seo.work.description} path="/work/" current="/work/"
+  breadcrumbs={[{ name: 'Work', path: '/work/' }]} schema={[list]}>
+  <PageHead eyebrow={w.eyebrow} h1={w.h1} h1Em={w.h1Em} intro={w.intro} crumbs={[{ name: 'Work', path: '/work/' }]}>
+    <p class="sample-note"><b>{w.sampleLabel}</b><span>{copy.site.footerNote}</span></p>
+  </PageHead>
+  {groups.map((grp) => {
+    let n = 0;
+    return (
+      <section class:list={['band', { light: grp.light }]} id={grp.g} aria-labelledby={`${grp.g}-h`}>
+        <div class="wrap">
+          <div class="shead">
+            <span class="eyebrow">{grp.eyebrow}</span>
+            <h2 id={`${grp.g}-h`}>{grp.h2} <em>{grp.em}</em></h2>
+            <p>{grp.p}</p>
+          </div>
+          <div class="covers">
+            {B.map((b, i) => b.g === grp.g ? <CoverCard brand={b} index={i} /> : null)}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+  <CtaBand />
+</Layout>

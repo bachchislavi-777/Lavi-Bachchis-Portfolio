@@ -1,0 +1,20 @@
+---
+import copy from '../data/copy.json';
+import { url } from '../lib/url.js';
+const c = copy.home.cta;
+const { headingLevel = 2 } = Astro.props;
+const Tag = `h${headingLevel}`;
+---
+<section class="band terra ctaband" aria-labelledby="cta-h">
+  <div class="wrap contact">
+    <div>
+      <span class="eyebrow">Let's work together</span>
+      <Tag id="cta-h" class="ch2" style="margin-top:14px">{`${c.h2} `}<em>{c.h2Em}</em></Tag>
+      <p class="about2">{c.text} {copy.site.coverage}.</p>
+    </div>
+    <div class="cta-side">
+      <a class="btn dark big" href={url('/contact/')}>{c.button} <span aria-hidden="true">→</span></a>
+      <a class="cta-mail" href={`mailto:${copy.site.email}`}>{copy.site.email}</a>
+    </div>
+  </div>
+</section>

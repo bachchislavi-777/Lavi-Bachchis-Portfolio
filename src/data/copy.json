@@ -1,0 +1,786 @@
+{
+  "site": {
+    "name": "Lavi Bachchis",
+    "role": "Content & Creative",
+    "tagline": "Social media, newsletters and blogs, designed and written for you.",
+    "email": "bachchis.lavi@gmail.com",
+    "phoneDisplay": "+44 7438 216452",
+    "phoneHref": "+447438216452",
+    "linkedin": "https://www.linkedin.com/in/lavi-bachchis-63a758166/",
+    "linkedinDisplay": "linkedin.com/in/lavi-bachchis",
+    "location": "London, UK",
+    "coverage": "Working with clients across the UK & US",
+    "availability": "Taking on new clients · UK & US",
+    "footerNote": "All six brands on this site are sample case studies I created to show my work. Names, people, reviews and figures in them are illustrative. Legal and tax points in the samples are not advice.",
+    "photoCredits": "Product photography for the sample brands is art-directed and AI-generated. Additional photography via Unsplash: Kalos Skincare, Nathan Dumlao, Eric Muhr, Jakub Żerdzicki, Christina @ wocintechchat.com, LinkedIn Sales Solutions, Kellen Riggin, Timur Shakerzianov, Bernard Hermant and Anne Nygård, colour-graded for each brand.",
+    "copyright": "© 2026 Lavi Bachchis · Content & Creative",
+    "ctaNav": "Start a project"
+  },
+  "nav": [
+    {
+      "label": "Work",
+      "href": "/work/"
+    },
+    {
+      "label": "Services",
+      "href": "/services/"
+    },
+    {
+      "label": "About",
+      "href": "/about/"
+    },
+    {
+      "label": "Insights",
+      "href": "/insights/"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact/"
+    }
+  ],
+  "seo": {
+    "home": {
+      "title": "Lavi Bachchis | Freelance Social Media Content, London",
+      "description": "Freelance social media content, Mailchimp newsletters and WordPress blogs for UK and US businesses. Designed, written and delivered on time from London."
+    },
+    "work": {
+      "title": "Portfolio: Social Media & Brand Case Studies | Lavi B.",
+      "description": "Six sample brand case studies: brand kits, planned Instagram grids, Reel covers and LinkedIn carousels for product and service businesses in the UK and US."
+    },
+    "services": {
+      "title": "Services & Packages | Social, Email & Blog Content",
+      "description": "Monthly social media, Mailchimp newsletter and WordPress blog packages on a fixed fee. You approve the calendar, and nothing goes live without your sign-off."
+    },
+    "about": {
+      "title": "About Lavi Bachchis | Content & Brand, London",
+      "description": "London-based marketing and brand lead who designs and writes social media, newsletters and blogs for product and service businesses in the UK and the US."
+    },
+    "insights": {
+      "title": "2026 Social Media Trends for Brands | Lavi Bachchis",
+      "description": "Twelve 2026 trend notes behind my work: Reels hooks, photo dumps, the 3:4 Instagram grid, LinkedIn PDF carousels and repeatable newsletters, with sources."
+    },
+    "contact": {
+      "title": "Contact | Plan Your First Month of Content",
+      "description": "Get in touch about freelance social media, newsletter and blog content for your UK or US business. I reply within one working day to book a short call."
+    },
+    "solenne": {
+      "title": "Solenne Skincare: Instagram Case Study | Lavi Bachchis",
+      "description": "Sample case study: a calm Instagram feed for a small-batch skincare brand, with brand kit, 9-post grid, Reel cover, how-to carousel and a photo dump post."
+    },
+    "lowtide": {
+      "title": "Lowtide Coffee: Instagram Case Study | Lavi Bachchis",
+      "description": "Sample case study: a playful Instagram feed for a coffee roaster, with brew-guide carousels, a weekly Cupping Club series, a bakery collab and Reel covers."
+    },
+    "loomhouse": {
+      "title": "Loom House Homeware: Instagram Case Study | Lavi B.",
+      "description": "Sample case study: a textured Instagram feed for a woven homeware maker, with a woven-check grid, Mill Diaries series, a styling Reel cover and photo dump."
+    },
+    "ashbygrant": {
+      "title": "Ashby Grant: LinkedIn Carousels for Law Firms | Lavi B.",
+      "description": "Sample case study: LinkedIn carousels for law firms, a partner's personal post, a subtitled explainer video and plain-English social content for solicitors."
+    },
+    "northfield": {
+      "title": "Northfield: Content for Accountants | Lavi Bachchis",
+      "description": "Sample case study: calm LinkedIn and Instagram content for an accountancy firm, with a Making Tax Digital carousel, year-end checklist and 3-2-1 newsletter."
+    },
+    "halden": {
+      "title": "Halden Heating: Social Media for Trades | Lavi Bachchis",
+      "description": "Sample case study: Facebook and Instagram content for a local plumbing and heating firm, with a weekly tip series, review cards and job-of-the-week posts."
+    }
+  },
+  "home": {
+    "eyebrow": "Freelance content & creative · UK & US",
+    "h1": "Content that makes your brand look",
+    "h1Em": "as good as it is.",
+    "lede": "I design and write social media, Mailchimp newsletters and WordPress blogs for product and service businesses. You get on-brand content, planned a month ahead and delivered on time, so you can get on with running the business.",
+    "ctaPrimary": {
+      "label": "See the work",
+      "href": "/work/"
+    },
+    "ctaSecondary": {
+      "label": "Plan your first month",
+      "href": "/contact/"
+    },
+    "facts": [
+      {
+        "n": "6",
+        "label": "sample brands, built end to end"
+      },
+      {
+        "n": "54",
+        "label": "grid posts planned"
+      },
+      {
+        "n": "24",
+        "label": "trend-led creatives"
+      }
+    ],
+    "ticker": [
+      "Instagram",
+      "LinkedIn",
+      "Facebook",
+      "Mailchimp",
+      "WordPress",
+      "Reel covers",
+      "Carousels",
+      "Brand kits",
+      "Newsletters",
+      "Blogs"
+    ],
+    "intro": {
+      "eyebrow": "Hello",
+      "text": "I'm Lavi, a marketing and brand lead in London. I help businesses show up consistently on social, in the inbox and on their blog, without hiring an in-house team."
+    },
+    "pillars": [
+      {
+        "title": "In-house brand experience",
+        "text": "I lead marketing and brand for a London law firm, so I know how careful professional-services content needs to be, and how to keep it readable."
+      },
+      {
+        "title": "Design and copy in one place",
+        "text": "Graphics, captions, newsletters and articles come from one person who knows your brand. You brief once, and everything matches."
+      },
+      {
+        "title": "Built around what works now",
+        "text": "Reel hooks, carousels, photo dumps and LinkedIn PDF carousels, planned into a calm monthly calendar you approve in advance."
+      }
+    ],
+    "workTeaser": {
+      "eyebrow": "Selected work",
+      "h2": "Six sample brands,",
+      "h2Em": "built end to end.",
+      "text": "I created six brands to show the whole job: a brand kit, a planned Instagram grid and four trend-led creatives for each. Three sell products. Three sell expertise."
+    },
+    "servicesTeaser": {
+      "eyebrow": "Services",
+      "h2": "What you get",
+      "h2Em": "every month.",
+      "text": "Feed posts, carousels, Reel covers, newsletters and blog articles on a fixed monthly fee. You approve the calendar first, and nothing goes live without your sign-off."
+    },
+    "cta": {
+      "h2": "Let's plan your",
+      "h2Em": "first month of content.",
+      "text": "Tell me about your brand and the channels that matter to you. I'll reply within one working day to book a short call.",
+      "button": "Get in touch"
+    }
+  },
+  "work": {
+    "eyebrow": "Work",
+    "h1": "Six brands, each with",
+    "h1Em": "its own look and voice.",
+    "intro": "Every brand here is a sample I created to show how I work. Each one has a brand kit, content pillars, a planned 9-post Instagram grid and four creatives built on current formats. Names, people, reviews and figures are illustrative.",
+    "productEyebrow": "Product brands",
+    "productH2": "For brands that",
+    "productH2Em": "sell things.",
+    "productIntro": "E-commerce shops, makers and boutique consumer brands. The job is visual: make the product look desirable and make the whole feed look like one brand.",
+    "serviceEyebrow": "Service brands",
+    "serviceH2": "For businesses that",
+    "serviceH2Em": "sell expertise.",
+    "serviceIntro": "Law and accounting firms, consultancies and local trades. The job is trust: clear answers, real people and a professional look on every channel.",
+    "cardCta": "View case study",
+    "sampleLabel": "Sample brand"
+  },
+  "cases": {
+    "solenne": {
+      "name": "Solenne",
+      "type": "product",
+      "sector": "Skincare & beauty",
+      "location": "Bristol",
+      "channels": "Instagram · Facebook · Pinterest",
+      "summary": "A calm, sensory Instagram feed for a small-batch skincare studio.",
+      "brief": "We make botanical skincare in batches of 200 in Bristol. Our products are simple, but our feed looked busy and mismatched. We wanted it to feel as calm as our routines, with real texture and real customers.",
+      "challenge": "Skincare feeds blur together. Solenne needed a look people recognise in a second, and product claims that stay honest about what the products do.",
+      "approach": [
+        "Built a soft palette of milk, blush, clay rose, sage and plum, with Cormorant Garamond headlines and Jost body text.",
+        "Set three content pillars: product, ritual and education, and proof from the studio.",
+        "Planned the grid so no two neighbouring posts share a format, with blush and plum alternating down the rows.",
+        "Created Ritual Notes, a weekly education series with one fixed template."
+      ],
+      "deliverables": [
+        "Logo, tagline and colour palette",
+        "Tone-of-voice notes with lines to use and avoid",
+        "9-post Instagram grid",
+        "Routine Reel cover with on-screen hook",
+        "Customer repost template",
+        "5-slide how-to carousel",
+        "5-slide photo dump",
+        "Search-led caption and alt text"
+      ],
+      "nextCase": "lowtide"
+    },
+    "lowtide": {
+      "name": "Lowtide Coffee",
+      "type": "product",
+      "sector": "Food & drink",
+      "location": "Cornwall",
+      "channels": "Instagram · Facebook · TikTok",
+      "summary": "A playful coastal feed for a coffee roaster, built on brew guides and a weekly series.",
+      "brief": "We roast coffee on the Cornish coast every Tuesday and post it the same day. We wanted a feed that sounds like us, playful and unfussy, and that helps people brew better coffee at home.",
+      "challenge": "Coffee photography is everywhere. Lowtide needed bold colour it could own, and brew education people save and share, so the feed builds interest in subscriptions week by week.",
+      "approach": [
+        "Paired warm coffee photography with bold Sunrise orange and Deep Tide navy tiles.",
+        "Wrote brew guides with exact recipes, such as 15 g of coffee to 250 g of water at 94°C.",
+        "Designed Cupping Club, one template reused every Thursday so followers know it on sight.",
+        "Planned a collab post with a local bakery so both brands reach each other's followers."
+      ],
+      "deliverables": [
+        "Logo, tagline and colour palette",
+        "Tone-of-voice notes with lines to use and avoid",
+        "9-post Instagram grid",
+        "Brew-fix Reel cover",
+        "Bakery collab post",
+        "4-episode Cupping Club series",
+        "5-slide grind-size carousel",
+        "Search-led caption and alt text"
+      ],
+      "nextCase": "loomhouse"
+    },
+    "loomhouse": {
+      "name": "Loom House",
+      "type": "product",
+      "sector": "Home & artisan",
+      "location": "Lancashire",
+      "channels": "Instagram · Pinterest · Facebook",
+      "summary": "A textured, unhurried feed for a woven homeware maker and its family mill.",
+      "brief": "We sell woven throws and cushions made with a family mill in Lancashire. We wanted our feed to show the craft and the texture, and to look at home in real living rooms.",
+      "challenge": "Homeware feeds often look like catalogues. Loom House needed warmth, real rooms and a reason for people to follow between launches.",
+      "approach": [
+        "Built a linen, oat, saffron, olive and indigo palette, with Fraunces headlines and Karla body text.",
+        "Laid out the grid like a woven check, alternating textured photos with saffron and indigo tiles.",
+        "Created Mill Diaries, a fortnightly behind-the-scenes series.",
+        "Kept text posts quiet so the textures do the work."
+      ],
+      "deliverables": [
+        "Logo, tagline and colour palette",
+        "Tone-of-voice notes with lines to use and avoid",
+        "9-post Instagram grid",
+        "Single-product hero post",
+        "Styling Reel cover",
+        "Mill Diaries series cover",
+        "5-slide 'A week at the mill' photo dump",
+        "Care-guide post, caption and alt text"
+      ],
+      "nextCase": "ashbygrant"
+    },
+    "ashbygrant": {
+      "name": "Ashby Grant",
+      "type": "service",
+      "sector": "Legal",
+      "location": "High-street firm, England",
+      "channels": "LinkedIn · Facebook · Instagram",
+      "summary": "Plain-English LinkedIn and social content for a firm of family, property and wills solicitors.",
+      "brief": "We're a high-street firm handling family, property and wills work. Clients ask us the same good questions every week. We wanted to answer them in plain English and put our solicitors' faces on the firm.",
+      "challenge": "Legal content has to be accurate and careful, and still easy to read. It also has to come from people, because clients choose a solicitor they trust.",
+      "approach": [
+        "Started Ask Ashby, one common client question answered every Monday.",
+        "Wrote a 6-slide conveyancing explainer for buyers in England and Wales, one step per slide and well under 60 words each.",
+        "Drafted a partner's personal LinkedIn post in the first person, about real work.",
+        "Wrote every legal point so it can be checked, with each one marked for the firm's solicitors to approve before posting."
+      ],
+      "deliverables": [
+        "Logo, tagline and colour palette",
+        "Tone-of-voice notes with lines to use and avoid",
+        "9-post Instagram grid with team profile tiles",
+        "6-slide LinkedIn PDF carousel on buying a home",
+        "Partner's personal LinkedIn post (about 120 words)",
+        "Subtitled 60-second explainer video cover",
+        "Myth vs fact card on unmarried couples and property"
+      ],
+      "note": "Sample content based on the law in England and Wales in 2026. It is not legal advice.",
+      "nextCase": "northfield"
+    },
+    "northfield": {
+      "name": "Northfield",
+      "type": "service",
+      "sector": "Accounting & finance",
+      "location": "Leeds",
+      "channels": "LinkedIn · Instagram · Facebook",
+      "summary": "Calm, practical content for an accountancy practice that takes the dread out of tax deadlines.",
+      "brief": "We're a small accountancy practice in Leeds working with sole traders and small businesses. Our clients find tax stressful. We wanted content that explains dates and rule changes calmly, and shows there are real people here to help.",
+      "challenge": "Tax content can sound alarming, and it dates quickly. Northfield needed accurate dates, a plain explanation of Making Tax Digital and a feed that feels reassuring.",
+      "approach": [
+        "Built a mint and forest palette, keeping coral for reviews and questions only.",
+        "Set out the Self Assessment dates clearly: 31 October for paper returns, and 31 January for online returns and any tax owed.",
+        "Explained Making Tax Digital for Income Tax with its real thresholds: qualifying income over £50,000 from April 2026, over £30,000 from April 2027 and over £20,000 from April 2028.",
+        "Gave the LinkedIn newsletter a fixed 3-2-1 shape, so each issue is quick to read and quick to write."
+      ],
+      "deliverables": [
+        "Logo, tagline and colour palette",
+        "Tone-of-voice notes with lines to use and avoid",
+        "9-post Instagram grid",
+        "6-slide Making Tax Digital PDF carousel",
+        "Annotated spreadsheet post with illustrative figures",
+        "'Screenshot this' year-end checklist",
+        "LinkedIn newsletter in a 3-2-1 format"
+      ],
+      "note": "Sample content based on HMRC guidance as of October 2026. Figures are illustrative, and it is not tax advice.",
+      "nextCase": "halden"
+    },
+    "halden": {
+      "name": "Halden",
+      "type": "service",
+      "sector": "Local trades",
+      "location": "Leicester",
+      "channels": "Facebook · Instagram · Google Business Profile",
+      "summary": "Helpful, slightly funny content for a plumbing and heating firm, full of real jobs on real streets.",
+      "brief": "We're a plumbing and heating firm in Leicester, and most of our work comes from word of mouth. We wanted our social channels to show real jobs, share quick fixes and remind people to book a boiler service before winter.",
+      "challenge": "Trades content is often stock photos and price offers. Halden needed proof from real jobs, and posts timed to land when people start thinking about their heating.",
+      "approach": [
+        "Made signal yellow, the colour of the van and uniform, the anchor of every grid row.",
+        "Created Two-Minute Fix, a weekly tip series for simple jobs like bleeding a radiator.",
+        "Timed a boiler-service reminder to the first cold snap.",
+        "Turned reviews and job photos into a weekly job-of-the-week carousel."
+      ],
+      "deliverables": [
+        "Logo, tagline and colour palette",
+        "Tone-of-voice notes with lines to use and avoid",
+        "9-post Instagram grid",
+        "How-to Reel cover",
+        "Seasonal boiler-service post",
+        "Review card template",
+        "4-slide job-of-the-week carousel"
+      ],
+      "note": "Sample brand. For a real client, Gas Safe wording and badges are used only with their registration number.",
+      "nextCase": "solenne"
+    }
+  },
+  "services": {
+    "eyebrow": "Services",
+    "h1": "Content, designed and written",
+    "h1Em": "for you every month.",
+    "intro": "You get social media, email and blog content from one person who knows your brand. Everything is planned in a monthly calendar that you approve before anything is made.",
+    "list": [
+      {
+        "eyebrow": "Social",
+        "title": "Feeds & carousels",
+        "text": "Feed posts, carousels and Reel covers with on-screen hooks, plus captions written for search and alt text for every image.",
+        "deliverables": [
+          "Designed feed posts at 4:5",
+          "Instagram carousels and LinkedIn PDF carousels",
+          "Reel covers with on-screen hooks",
+          "Captions, hashtags and alt text",
+          "Scheduling in Meta Business Suite or LinkedIn"
+        ]
+      },
+      {
+        "eyebrow": "Email",
+        "title": "Mailchimp newsletters",
+        "text": "A branded template built once, then regular issues written, designed and scheduled to your list after a test send to you.",
+        "deliverables": [
+          "Branded Mailchimp template",
+          "Newsletter copy and design",
+          "Launch, offer and update emails",
+          "Subject lines and preview text",
+          "A test send before every scheduled send"
+        ]
+      },
+      {
+        "eyebrow": "Blog",
+        "title": "WordPress articles",
+        "text": "Articles that answer your customers' real questions, formatted and published with clear headings, featured images and meta descriptions.",
+        "deliverables": [
+          "Researched, written articles",
+          "Headings and internal links",
+          "A featured image designed to match",
+          "Meta title and description",
+          "Published, or saved as a draft for your review"
+        ]
+      },
+      {
+        "eyebrow": "Brand",
+        "title": "Brand kit set-up",
+        "text": "Your palette, fonts, logo files and tone of voice gathered in one place, with reusable Canva templates so every post matches from month one.",
+        "deliverables": [
+          "Colour palette and type pairing",
+          "Tone-of-voice notes with lines to use and avoid",
+          "Content pillars",
+          "Reusable Canva templates",
+          "Brand kit set up in your own Canva account"
+        ]
+      }
+    ],
+    "scope": {
+      "title": "In plain terms",
+      "text": "You get finished, on-brand content, delivered on time. I don't promise follower, lead or sales numbers, because those depend on your offer, budget and market. Legal, tax and other regulated content is checked and approved by a qualified person on your side before it goes out."
+    },
+    "packagesEyebrow": "Packages",
+    "packagesH2": "Three ways",
+    "packagesH2Em": "to work together.",
+    "packages": [
+      {
+        "name": "Social",
+        "for": "A consistent, good-looking feed.",
+        "items": [
+          {
+            "label": "Designed posts",
+            "value": "12"
+          },
+          {
+            "label": "Carousels",
+            "value": "2"
+          },
+          {
+            "label": "Reel covers & hooks",
+            "value": "2"
+          },
+          {
+            "label": "Platforms",
+            "value": "2"
+          },
+          {
+            "label": "Captions & scheduling",
+            "value": "Included"
+          }
+        ],
+        "featured": false,
+        "note": "Fixed monthly fee · quoted after a short call"
+      },
+      {
+        "name": "Content",
+        "for": "Social plus long-form, so your website and inbox stay active.",
+        "items": [
+          {
+            "label": "Designed posts",
+            "value": "12"
+          },
+          {
+            "label": "Carousels",
+            "value": "3"
+          },
+          {
+            "label": "Blog articles",
+            "value": "2"
+          },
+          {
+            "label": "Newsletter",
+            "value": "1"
+          },
+          {
+            "label": "Platforms",
+            "value": "3"
+          }
+        ],
+        "featured": true,
+        "badge": "A good place to start",
+        "note": "Fixed monthly fee · quoted after a short call"
+      },
+      {
+        "name": "Full content desk",
+        "for": "One person running all of your content.",
+        "items": [
+          {
+            "label": "Designed posts",
+            "value": "20"
+          },
+          {
+            "label": "Carousels",
+            "value": "4"
+          },
+          {
+            "label": "Blog articles",
+            "value": "4"
+          },
+          {
+            "label": "Newsletters",
+            "value": "2"
+          },
+          {
+            "label": "Website content upkeep",
+            "value": "Included"
+          }
+        ],
+        "featured": false,
+        "detail": "Website upkeep covers small text and image updates on your existing site.",
+        "note": "Fixed monthly fee · quoted after a short call"
+      }
+    ],
+    "packagesFootnote": "All quantities are per month. Need something different? Packages can be adjusted on our first call.",
+    "faqEyebrow": "Questions",
+    "faqH2": "Good to know",
+    "faqH2Em": "before we start.",
+    "faq": [
+      {
+        "q": "How much does it cost?",
+        "a": "Each package is a fixed monthly fee, quoted after a short call once I know your channels and how much you need. One-off projects, such as a brand kit on its own, get a fixed quote too. You'll know the full price before we start, and there are no hourly bills."
+      },
+      {
+        "q": "How quickly can you start?",
+        "a": "Usually within two weeks of our first call. That covers your brand kit and your first monthly calendar. The timing depends on you sharing your logo, brand assets and account access promptly. One-off pieces come with a delivery date in the quote."
+      },
+      {
+        "q": "How many revisions are included?",
+        "a": "Two rounds of changes on each piece are included, and most posts need one. If the brief changes after you've approved the calendar, I'll tell you before doing any extra work."
+      },
+      {
+        "q": "What do you need from me?",
+        "a": "Your logo and any brand guidelines, product or team photos, access to the accounts I'll post to, and one named person who approves content. For legal, tax or other regulated topics, someone qualified on your side checks the facts before anything goes live."
+      },
+      {
+        "q": "Is there a contract or notice period?",
+        "a": "Yes, a short written agreement that sets out what's included each month, the fee and the key dates. After the first month it rolls monthly, and either of us can end it with 30 days' notice."
+      },
+      {
+        "q": "Do you work with US clients?",
+        "a": "Yes. I'm in London, and UK afternoons overlap with US mornings, so calls are easy to book with the East Coast and can be arranged with the West Coast. I write in US or UK English and schedule posts for your local time."
+      },
+      {
+        "q": "Which tools do you use?",
+        "a": "Canva for design, Mailchimp for email, WordPress for blogs, and Meta Business Suite and LinkedIn for scheduling. If you already use other tools, tell me on our call and I'll confirm I can work in them."
+      },
+      {
+        "q": "Who owns the files?",
+        "a": "You do, once each month's invoice is paid. Templates are built in your own Canva account, so they stay with you if we stop working together. Stock photos and fonts follow their own licences, and I'll tell you if any need a paid licence."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "h2": "From first call to first post",
+    "h2Em": "in about two weeks.",
+    "steps": [
+      {
+        "title": "Intro call",
+        "text": "Twenty minutes on your brand, your customers and the channels that matter most. You get a fixed monthly quote afterwards."
+      },
+      {
+        "title": "Brand kit",
+        "text": "I set up your palette, type, Canva templates and tone-of-voice notes, so every piece matches."
+      },
+      {
+        "title": "Monthly calendar",
+        "text": "You get a full month of planned posts, emails and articles to approve or change before I make anything."
+      },
+      {
+        "title": "Create & publish",
+        "text": "Everything is designed, written and scheduled for the dates you approved. Nothing goes live without your sign-off."
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "About",
+    "h1": "Hi, I'm Lavi. I help your brand",
+    "h1Em": "look like itself everywhere.",
+    "intro": "I'm a marketing and brand lead based in London. I design and write content for product and service businesses across the UK and US.",
+    "paragraphs": [
+      "In my in-house role, I lead marketing and brand for a London law firm. That means LinkedIn posts for partners, client newsletters, website articles and a brand that has to look right every time. I know how careful professional-services content needs to be, and how to keep it easy to read.",
+      "As a freelancer, I bring the same habits to smaller businesses. You get one person who designs the graphics, writes the captions, builds the newsletter and formats the blog, so your brand stays consistent without hiring a team.",
+      "I plan each month around formats that are working now, from Reel hooks to LinkedIn PDF carousels. My promise is simple: content that looks like your brand, sounds like your brand and arrives when I said it would."
+    ],
+    "highlights": [
+      {
+        "title": "In-house brand experience",
+        "text": "I run marketing and brand for a London law firm, so I'm used to approvals, accuracy and a brand that has to stay consistent."
+      },
+      {
+        "title": "Design and copy in one place",
+        "text": "Graphics, captions, newsletters and articles, all from one person who knows your brand."
+      },
+      {
+        "title": "Built around what works now",
+        "text": "Every format I use is backed by recent platform research."
+      }
+    ],
+    "toolsTitle": "Tools I use",
+    "tools": [
+      "Canva",
+      "Mailchimp",
+      "WordPress",
+      "Meta Business Suite",
+      "LinkedIn",
+      "Google Analytics",
+      "Google Business Profile",
+      "Google Workspace",
+      "Pinterest"
+    ],
+    "valuesTitle": "How I work",
+    "values": [
+      {
+        "title": "Plain words",
+        "text": "I write the way your customers talk: short sentences, real answers and no jargon."
+      },
+      {
+        "title": "Dates you can plan around",
+        "text": "You get your calendar before the month starts, and your content on the dates we agreed."
+      },
+      {
+        "title": "Honest about results",
+        "text": "I promise finished, on-brand content. I don't promise follower or sales numbers that depend on things outside my control."
+      }
+    ],
+    "whyText": "Most small businesses need design and writing that match, but can't justify a team for it. That's the gap I fill: one person, one brief, every channel looking like the same brand."
+  },
+  "insights": {
+    "eyebrow": "Insights · 2026 trend notes",
+    "h1": "Why the work",
+    "h1Em": "looks the way it does.",
+    "intro": "Every creative in my portfolio uses a format that's working on the platforms right now. These are my 2026 notes, drawn from recent platform research, with sources listed below.",
+    "groups": [
+      {
+        "title": "Product brands · Instagram & Facebook",
+        "items": [
+          {
+            "tag": "Reels · 3-second hook",
+            "title": "Reels lead, and they work on mute",
+            "text": "Reels take a large share of time spent on Instagram. The best ones hook viewers in three seconds and carry on-screen text for people watching with the sound off.",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "tag": "Repeatable series",
+            "title": "A weekly series beats one-offs",
+            "text": "A recurring format with one fixed template builds recognition faster than unrelated posts. Followers know the post before they read it.",
+            "sources": [
+              1
+            ]
+          },
+          {
+            "tag": "Raw & relatable · Customer content",
+            "title": "Real beats perfect",
+            "text": "Honest, less-produced posts and reposted customer content are outperforming studio-perfect feeds. Customer posts are always reposted with permission.",
+            "sources": [
+              1,
+              2
+            ]
+          },
+          {
+            "tag": "Photo dump · Save-worthy carousel",
+            "title": "Photo dumps and teaching carousels",
+            "text": "Five to ten slides mixing polished and candid shots feel personal. Carousels that teach something earn saves.",
+            "sources": [
+              2
+            ]
+          },
+          {
+            "tag": "Editorial minimalism · Collab post",
+            "title": "Grain, space and handwriting",
+            "text": "Film grain, one subject with room to breathe and handwritten type all signal a human touch. Collab posts share one post across two brands' grids.",
+            "sources": [
+              2,
+              4
+            ]
+          },
+          {
+            "tag": "Grid & search",
+            "title": "The 3:4 grid and Instagram SEO",
+            "text": "Profile grids now preview at 3:4, so key content sits in the centre of each 4:5 post. Keyword-led captions and alt text help posts get found.",
+            "sources": [
+              3,
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Service brands · LinkedIn & Facebook",
+        "items": [
+          {
+            "tag": "PDF carousel · 4:5",
+            "title": "LinkedIn PDF carousels, done properly",
+            "text": "Portrait slides, 5 to 15 of them, with one idea and under 60 words on each. The post copy runs to 100 to 200 words.",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "tag": "People over logos",
+            "title": "People reach further than logos",
+            "text": "Posts from personal profiles tend to earn more engagement than company-page posts, so I write content your team can post as themselves.",
+            "sources": [
+              5
+            ]
+          },
+          {
+            "tag": "Raw screenshots · Lo-fi expert video",
+            "title": "Proof over polish",
+            "text": "First-person detail, real screenshots and simple subtitled videos from experts are outperforming generic templates.",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "tag": "Zero-click value",
+            "title": "The whole answer, in the post",
+            "text": "LinkedIn favours posts that deliver their full value in the feed over posts that push people to a link.",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "tag": "Newsletter with a fixed shape",
+            "title": "Repeatable newsletters",
+            "text": "A fixed structure, such as 3 proof points, 2 takes and 1 risk, makes every issue quick to read and quick to write.",
+            "sources": [
+              6
+            ]
+          },
+          {
+            "tag": "Moment-led post",
+            "title": "Timed to real moments",
+            "text": "Posts tied to a moment people already care about, like the first cold snap or a tax deadline, beat generic offers.",
+            "sources": [
+              1
+            ]
+          }
+        ]
+      }
+    ],
+    "sourcesTitle": "Sources",
+    "sources": [
+      {
+        "title": "Sprout Social, Instagram trends UK",
+        "url": "https://sproutsocial.com/insights/instagram-trends-uk/"
+      },
+      {
+        "title": "ContentStudio, Top Instagram photo trends in 2026",
+        "url": "https://contentstudio.io/blog/trending-visuals-for-instagram/"
+      },
+      {
+        "title": "Inro, Instagram post size 2026",
+        "url": "https://www.inro.social/blog/instagram-post-size"
+      },
+      {
+        "title": "Adobe Express, Design trends for 2026",
+        "url": "https://www.adobe.com/express/learn/blog/design-trends-2026"
+      },
+      {
+        "title": "Oktopost, LinkedIn carousel best practices for B2B in 2026",
+        "url": "https://www.oktopost.com/blog/linkedin-carousel-pdf-best-practices/"
+      },
+      {
+        "title": "Pettauer, LinkedIn trends 2026",
+        "url": "https://pettauer.net/en/linkedin-trends-2026-feed-zero-click-trust-signals/"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "h1": "Let's plan your",
+    "h1Em": "first month of content.",
+    "intro": "Tell me about your brand and the channels you want to focus on. I work with product and service businesses across the UK and US.",
+    "promise": "I reply within one working day to book a short call. You get a fixed monthly quote within two working days of that call.",
+    "whatToSendTitle": "Helpful to include",
+    "whatToSend": [
+      "Your business name and website",
+      "What you sell, and who buys it",
+      "The channels you want covered",
+      "Roughly when you'd like to start",
+      "A few examples of content you like"
+    ],
+    "formNote": "Your details are only used to reply to your enquiry. Prefer email? Write to bachchis.lavi@gmail.com.",
+    "labels": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone · UK",
+      "linkedin": "LinkedIn",
+      "workingWith": "Working with",
+      "copy": "Copy",
+      "copied": "Copied"
+    },
+    "hours": "Based in London, on UK time (GMT/BST). UK afternoons overlap with US mornings, so calls are easy to book from the East Coast and can be arranged from the West Coast."
+  },
+  "notFound": {
+    "h1": "This page has moved on.",
+    "text": "The link may be old or mistyped. Try the work or the services, or get in touch and I'll point you in the right direction."
+  }
+}

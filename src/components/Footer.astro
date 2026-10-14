@@ -1,0 +1,33 @@
+---
+import copy from '../data/copy.json';
+import { url } from '../lib/url.js';
+const s = copy.site;
+---
+<footer class="sitefoot">
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-me">
+        <a class="me" href={url('/')}><span class="mono" aria-hidden="true">LB</span><b>{s.name}</b></a>
+        <p>{s.tagline}</p>
+        <p class="ft-loc">{s.location} · {s.coverage}</p>
+      </div>
+      <nav aria-label="Footer">
+        <h2 class="ft-h">Pages</h2>
+        <ul>
+          {copy.nav.map((n) => <li><a href={url(n.href)}>{n.label}</a></li>)}
+          <li><a href={url('/privacy/')}>Privacy</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h2 class="ft-h">Contact</h2>
+        <ul>
+          <li><a href={`mailto:${s.email}`}>{s.email}</a></li>
+          <li><a href={`tel:${s.phoneHref}`}>{s.phoneDisplay}</a></li>
+          <li><a href={s.linkedin} rel="noopener" target="_blank">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fl"><span>{s.copyright}</span><span>{s.footerNote}</span></div>
+    <p class="credits">{s.photoCredits}</p>
+  </div>
+</footer>

@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import Process from '../components/Process.astro';
+import CtaBand from '../components/CtaBand.astro';
+import copy from '../data/copy.json';
+import { servicesSchema } from '../lib/schema.js';
+const s = copy.services;
+---
+<Layout title={copy.seo.services.title} description={copy.seo.services.description} path="/services/" current="/services/"
+  breadcrumbs={[{ name: 'Services', path: '/services/' }]} schema={servicesSchema(Astro.site)}>
+  <PageHead eyebrow={s.eyebrow} h1={s.h1} h1Em={s.h1Em} intro={s.intro} crumbs={[{ name: 'Services', path: '/services/' }]} />
+
+  <section class="band light" aria-labelledby="svc-h">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">What's included</span>
+        <h2 id="svc-h">{copy.home.servicesTeaser.h2} <em>{copy.home.servicesTeaser.h2Em}</em></h2>
+        <p>{copy.home.servicesTeaser.text}</p>
+      </div>
+      <div class="svc">
+        {s.list.map((x) => (
+          <div>
+            <span class="eyebrow">{x.eyebrow}</span>
+            <h3 class="ttl">{x.title}</h3>
+            <p>{x.text}</p>
+            <ul>{x.deliverables.map((d) => <li><span>{d}</span></li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <div class="scope"><b>{s.scope.title}</b><span>{s.scope.text}</span></div>
+
+      <div class="shead" style="margin-top:96px;margin-bottom:0">
+        <span class="eyebrow">{s.packagesEyebrow}</span>
+        <h2>{s.packagesH2} <em>{s.packagesH2Em}</em></h2>
+      </div>
+      <div class="pk" style="margin-top:40px">
+        {s.packages.map((p) => (
+          <div class:list={['pkg', { feat: p.featured }]}>
+            {p.badge && <span class="pbadge">{p.badge}</span>}
+            <h3 class="ttl">{p.name}</h3>
+            <p class="for">{p.for}</p>
+            <ul>{p.items.map((i) => <li><span>{i.label}</span><b>{i.value}</b></li>)}</ul>
+            {p.detail && <p class="detail">{p.detail}</p>}
+            <p class="price">{p.note}</p>
+          </div>
+        ))}
+      </div>
+      <p class="pk-foot">{s.packagesFootnote}</p>
+    </div>
+  </section>
+
+  <Process />
+
+  <section class="band light" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="shead">
+        <span class="eyebrow">{s.faqEyebrow}</span>
+        <h2 id="faq-h">{s.faqH2} <em>{s.faqH2Em}</em></h2>
+      </div>
+      <div class="faq">
+        {s.faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

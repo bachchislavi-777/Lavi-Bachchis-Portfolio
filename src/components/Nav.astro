@@ -1,0 +1,20 @@
+---
+import copy from '../data/copy.json';
+import { url } from '../lib/url.js';
+const { current = '' } = Astro.props;
+---
+<nav class="top" aria-label="Main">
+  <div class="wrap">
+    <a class="me" href={url('/')}><span class="mono" aria-hidden="true">LB</span><b>{copy.site.name}</b><span class="sr-only">, home</span></a>
+    <ul id="site-menu">
+      {copy.nav.map((n) => (
+        <li><a href={url(n.href)} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a></li>
+      ))}
+      <li class="menu-cta"><a class="btn" href={url('/contact/')}>{copy.site.ctaNav}</a></li>
+    </ul>
+    <a class="btn navcta" href={url('/contact/')}>{copy.site.ctaNav}</a>
+    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+      <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</nav>

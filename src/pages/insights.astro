@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import copy from '../data/copy.json';
+const ins = copy.insights;
+const srcLabel = (arr) => (arr.length > 1 ? 'Sources ' : 'Source ');
+const article = {
+  '@type': 'Article',
+  headline: copy.seo.insights.title,
+  description: copy.seo.insights.description,
+  author: { '@type': 'Person', name: copy.site.name },
+  datePublished: '2026-10-14',
+  inLanguage: 'en-GB',
+  citation: ins.sources.map((s) => s.url),
+};
+---
+<Layout title={copy.seo.insights.title} description={copy.seo.insights.description} path="/insights/" current="/insights/"
+  breadcrumbs={[{ name: 'Insights', path: '/insights/' }]} schema={[article]}>
+  <PageHead eyebrow={ins.eyebrow} h1={ins.h1} h1Em={ins.h1Em} intro={ins.intro} crumbs={[{ name: 'Insights', path: '/insights/' }]} />
+  {ins.groups.map((g, gi) => (
+    <section class:list={['band', { light: gi === 0 }]} aria-labelledby={`tg-${gi}`}>
+      <div class="wrap">
+        <div class="shead" style="margin-bottom:8px">
+          <span class="eyebrow">{gi === 0 ? 'Product brands' : 'Service brands'}</span>
+          <h2 id={`tg-${gi}`}>{g.title.split(' · ')[1]} <em>trend notes</em></h2>
+        </div>
+        <div class="tgroup" style="margin-top:28px">
+          <div class="tgrid">
+            {g.items.map((t) => (
+              <article class="trend">
+                <span class="tnum">{t.tag}</span>
+                <h3 class="ttl">{t.title}</h3>
+                <p>{t.text}</p>
+                <span class="src">{srcLabel(t.sources)}{t.sources.map((n, i) => <>{i > 0 && ', '}<a href={`#source-${n}`}>{n}</a></>)}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+        {gi === ins.groups.length - 1 && (
+          <div class="sources" style="margin-top:56px">
+            <h2 class="mini-h" id="src-h">{ins.sourcesTitle}</h2>
+            <ol>
+              {ins.sources.map((s, i) => <li id={`source-${i + 1}`}><a href={s.url} rel="noopener" target="_blank">{s.title}<span class="sr-only"> (opens in a new tab)</span></a></li>)}
+            </ol>
+          </div>
+        )}
+      </div>
+    </section>
+  ))}
+  <CtaBand />
+</Layout>

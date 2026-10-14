@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Picture from '../../components/Picture.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import copy from '../../data/copy.json';
+import { B } from '../../data/brands.js';
+import { LEAD } from '../../data/images.js';
+import { url } from '../../lib/url.js';
+import { varStyle, idBoard, feed, creatives } from '../../lib/tiles.js';
+import { caseSchema } from '../../lib/schema.js';
+
+export function getStaticPaths() {
+  return B.map((b, i) => ({ params: { id: b.id }, props: { b, i } }));
+}
+const { b, i } = Astro.props;
+const c = copy.cases[b.id];
+const seo = copy.seo[b.id];
+const next = B.find((x) => x.id === c.nextCase);
+const nc = copy.cases[next.id];
+const num = String(i + 1).padStart(2, '0');
+const groupLabel = c.type === 'product' ? 'Product brand' : 'Service brand';
+const path = `/work/${b.id}/`;
+const crumbs = [{ name: 'Work', path: '/work/' }, { name: c.name, path }];
+const sampleText = copy.site.footerNote;
+---
+<Layout title={seo.title} description={seo.description} path={path} current="/work/" brandFonts
+  breadcrumbs={crumbs} schema={[caseSchema(Astro.site, b.id)]}>
+  <div style={varStyle(b)}>
+    <header class="hero phead case-head">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href={url('/')}>Home</a></li>
+            <li><a href={url('/work/')}>Work</a></li>
+            <li><span aria-current="page">{c.name}</span></li>
+          </ol>
+        </nav>
+        <div class="ch-head">
+          <span class="ch-num" aria-hidden="true">{num}</span>
+          <div>
+            <span class="eyebrow">{groupLabel} · {c.sector}</span>
+            <h1>{c.name}</h1>
+            <div class="chan">{c.channels}</div>
+          </div>
+          <div class="ch-meta">
+            <p class="lede" style="margin-top:0;font-size:18px">{c.summary}</p>
+            <dl>
+              <dt>Sector</dt><dd>{c.sector}</dd>
+              <dt>Based</dt><dd>{c.location}</dd>
+              <dt>Channels</dt><dd>{c.channels}</dd>
+            </dl>
+          </div>
+        </div>
+        <p class="sample-note"><b>{copy.work.sampleLabel}</b><span>{sampleText}</span></p>
+      </div>
+    </header>
+
+    <section class="band light" aria-labelledby="brief-h">
+      <div class="wrap">
+        <h2 class="sr-only" id="brief-h">The brief</h2>
+        <div class="ch-hero">
+          <div class="ch-photo">
+            <Picture name={LEAD[b.id]} sizes="(min-width: 1000px) 660px, 100vw" eager />
+            <div class="idc id-logo" aria-label={`${c.name} logo and tagline`} role="group"><span class="lbl" style="font-family:var(--f-m);font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.7">Logo &amp; tagline</span><div set:html={b.logo} /><div class="tagl">{b.tagline}</div></div>
+          </div>
+          <div class="ch-brief">
+            <span class="eyebrow">The brief</span>
+            <blockquote><p>{c.brief}</p></blockquote>
+            <span class="who">Sample client brief · {c.name}, {c.location}</span>
+          </div>
+        </div>
+        <div class="ch-cols" style="margin-top:16px">
+          <div class="ch-card"><span class="eyebrow">01 · Challenge</span><h3>The <em>challenge</em></h3><p>{c.challenge}</p></div>
+          <div class="ch-card"><span class="eyebrow">02 · Approach</span><h3>The <em>approach</em></h3><ol>{c.approach.map((a) => <li><span>{a}</span></li>)}</ol></div>
+          <div class="ch-card"><span class="eyebrow">03 · Deliverables</span><h3>What I <em>delivered</em></h3><ul>{c.deliverables.map((d) => <li><span>{d}</span></li>)}</ul></div>
+        </div>
+        {c.note && <p class="case-note"><b>Please note</b><span>{c.note}</span></p>}
+      </div>
+    </section>
+
+    <section class="band case-band" aria-labelledby="id-h">
+      <div class="wrap">
+        <div class="panel">
+          <div class="case-sec">
+            <span class="eyebrow">Identity</span>
+            <h2 class="sec-h" id="id-h" style="margin-top:10px">Brand <em>identity board</em></h2>
+            <Fragment set:html={idBoard(b, 3)} />
+          </div>
+          <div class="case-sec">
+            <span class="eyebrow">Instagram</span>
+            <h2 class="sec-h" style="margin-top:10px">The planned <em>feed</em></h2>
+            <Fragment set:html={feed(b, 3, '#id-h')} />
+          </div>
+          <div class="case-sec">
+            <Fragment set:html={creatives(b, 2, 3).replace('class="ttl">Trend-led', 'class="ttl sec-h" style="margin:0">Trend-led')} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band light" aria-labelledby="next-h">
+      <div class="wrap">
+        <h2 class="eyebrow" id="next-h" style="margin-bottom:18px">Next case study</h2>
+        <a class="next" href={url(`/work/${next.id}/`)}>
+          <span class="next-txt">
+            <small>{nc.type === 'product' ? 'Product' : 'Service'} brand · {nc.sector}</small>
+            <strong>{nc.name}</strong>
+            <span>{nc.summary}</span>
+            <span class="btn" style="align-self:flex-start;margin-top:10px">{copy.work.cardCta} <span aria-hidden="true">→</span></span>
+          </span>
+          <span class="next-img"><Picture name={LEAD[next.id]} sizes="(min-width: 620px) 50vw, 100vw" decorative /></span>
+        </a>
+        <p style="margin-top:22px"><a href={url('/work/')} class="btn ghost">All work</a></p>
+      </div>
+    </section>
+  </div>
+  <CtaBand />
+</Layout>

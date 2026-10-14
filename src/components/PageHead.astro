@@ -1,0 +1,23 @@
+---
+// Inner-page header (forest band, Playfair h1 with ochre italic accent).
+const { eyebrow, h1, h1Em, intro, crumbs = [] } = Astro.props;
+import { url } from '../lib/url.js';
+---
+<header class="hero phead">
+  <div class="wrap">
+    {crumbs.length > 0 && (
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href={url('/')}>Home</a></li>
+          {crumbs.map((c, i) => i === crumbs.length - 1
+            ? <li><span aria-current="page">{c.name}</span></li>
+            : <li><a href={url(c.path)}>{c.name}</a></li>)}
+        </ol>
+      </nav>
+    )}
+    <span class="eyebrow">{eyebrow}</span>
+    <h1>{h1} {h1Em && <em>{h1Em}</em>}</h1>
+    {intro && <p class="lede">{intro}</p>}
+    <slot />
+  </div>
+</header>

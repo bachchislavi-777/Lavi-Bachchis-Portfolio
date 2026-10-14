@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import CtaBand from '../components/CtaBand.astro';
+import copy from '../data/copy.json';
+import { url } from '../lib/url.js';
+import { personSchema } from '../lib/schema.js';
+import { ABOUT_PHOTO, ABOUT_PHOTO_ALT } from '../data/settings.js';
+const a = copy.about;
+const icons = ['✦', '✎', '↗'];
+const profile = {
+  '@type': 'ProfilePage',
+  name: copy.seo.about.title,
+  url: new URL(url('/about/'), Astro.site).href,
+  mainEntity: { '@id': `${new URL(url('/'), Astro.site).href}#person` },
+};
+---
+<Layout title={copy.seo.about.title} description={copy.seo.about.description} path="/about/" current="/about/"
+  breadcrumbs={[{ name: 'About', path: '/about/' }]} schema={[personSchema(Astro.site, { description: a.intro }), profile]}>
+  <PageHead eyebrow={a.eyebrow} h1={a.h1} h1Em={a.h1Em} intro={a.intro} crumbs={[{ name: 'About', path: '/about/' }]} />
+
+  <section class="band light" aria-labelledby="story-h">
+    <div class="wrap ab-grid">
+      {ABOUT_PHOTO ? (
+        <figure class="ab-photo">
+          <img src={url(ABOUT_PHOTO)} alt={ABOUT_PHOTO_ALT} width="1080" height="1350" loading="eager" decoding="async" />
+        </figure>
+      ) : (
+        <figure class="ab-photo ab-ph" aria-label="Photo of Lavi coming soon">
+          <span class="mono-xl" aria-hidden="true">LB</span>
+          <figcaption>Photo coming soon</figcaption>
+        </figure>
+      )}
+      <div class="ab-copy">
+        <h2 class="eyebrow" id="story-h">My story</h2>
+        {a.paragraphs.map((p, i) => <p class:list={{ big: i === 0 }}>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="hl-h">
+    <div class="wrap about">
+      <div>
+        <span class="eyebrow">Why work with me</span>
+        <h2 class="mini-h" id="hl-h" style="margin-top:14px">Brand experience, <em>design and words.</em></h2>
+        <p style="color:var(--mt);font-size:17px">{a.whyText}</p>
+      </div>
+      <div class="cols">
+        {a.highlights.map((h, i) => <div><i aria-hidden="true" style="background:var(--forest-d)">{icons[i]}</i><p><b>{h.title}</b><span>{h.text}{i === 2 && <> <a href={url('/insights/')}>Read my trend notes</a>.</>}</span></p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="band light" aria-labelledby="vals-h">
+    <div class="wrap">
+      <div class="shead"><span class="eyebrow">Values</span><h2 id="vals-h">{a.valuesTitle.split(' ').slice(0, -1).join(' ')} <em>{a.valuesTitle.split(' ').slice(-1)}</em></h2></div>
+      <div class="vals">
+        {a.values.map((v) => <div><h3>{v.title}</h3><p>{v.text}</p></div>)}
+      </div>
+      <div style="margin-top:56px">
+        <h2 class="mini-h">{a.toolsTitle}</h2>
+        <ul class="tools">{a.tools.map((t) => <li>{t}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

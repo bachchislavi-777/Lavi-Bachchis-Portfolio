@@ -1,0 +1,16 @@
+{
+  "name": "Lavi Bachchis — Content & creative",
+  "short_name": "Lavi Bachchis",
+  "description": "Freelance content & creative, London. Social, email and blog for UK & US clients.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#163A2E",
+  "background_color": "#163A2E",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

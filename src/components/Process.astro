@@ -1,0 +1,13 @@
+---
+import copy from '../data/copy.json';
+const p = copy.process;
+const { light = false } = Astro.props;
+---
+<section class:list={['band', { light }]} aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="shead"><span class="eyebrow">{p.eyebrow}</span><h2 id="process-h">{p.h2} <em>{p.h2Em}</em></h2></div>
+    <ol class="steps">
+      {p.steps.map((s) => <li><b>{s.title}</b><p>{s.text}</p></li>)}
+    </ol>
+  </div>
+</section>

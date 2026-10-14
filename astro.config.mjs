@@ -6,8 +6,8 @@ import sitemap from '@astrojs/sitemap';
 // - Today (GitHub Pages project site): https://bachchislavi-777.github.io/Lavi-Bachchis-Portfolio/
 // - Later (custom domain): set SITE_URL=https://yourdomain.com and BASE_PATH=/
 //   (in .github/workflows/deploy.yml), and add public/CNAME. Nothing else changes.
-const SITE_URL = process.env.SITE_URL || 'https://bachchislavi-777.github.io';
-const BASE_PATH = process.env.BASE_PATH || '/Lavi-Bachchis-Portfolio';
+const SITE_URL = process.env.SITE_URL || 'https://lavibachchis.com';
+const BASE_PATH = process.env.BASE_PATH || '/';
 
 export default defineConfig({
   site: SITE_URL,

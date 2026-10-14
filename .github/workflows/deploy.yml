@@ -27,8 +27,8 @@ env:
   #   SITE_URL: https://lavibachchis.com
   #   BASE_PATH: /
   # and add a file public/CNAME containing just the domain name.
-  SITE_URL: https://bachchislavi-777.github.io
-  BASE_PATH: /Lavi-Bachchis-Portfolio
+  SITE_URL: https://lavibachchis.com
+  BASE_PATH: /
 
 jobs:
   build:

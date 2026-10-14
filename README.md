@@ -2,7 +2,7 @@
 
 This is the code and content for Lavi's portfolio website: freelance content & creative, London, for clients across the UK & US. It has a home page, six sample case studies, services and packages, about, 2026 trend notes, contact and privacy pages.
 
-**Live site (once GitHub Pages is switched on):** https://bachchislavi-777.github.io/Lavi-Bachchis-Portfolio/
+**Live site (once GitHub Pages is switched on):** https://lavibachchis.com/
 
 To switch it on the first time, go to the repo on github.com, then **Settings → Pages → Build and deployment → Source: GitHub Actions**. You only do this once.
 

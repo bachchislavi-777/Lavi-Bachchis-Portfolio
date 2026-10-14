@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Placeholder GitHub Pages URL: update this line when the custom domain is added.
-Sitemap: https://bachchislavi-777.github.io/lavi-bachchis-portfolio/sitemap-index.xml
+Sitemap: https://bachchislavi-777.github.io/Lavi-Bachchis-Portfolio/sitemap-index.xml

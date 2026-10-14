@@ -1,5 +1,5 @@
 // Base-aware links. Every internal link and asset URL goes through url(),
-// so moving from GitHub Pages (/lavi-bachchis-portfolio/) to a custom domain (/) only
+// so moving from GitHub Pages (/Lavi-Bachchis-Portfolio/) to a custom domain (/) only
 // needs BASE_PATH changed in the build settings.
 const BASE = (import.meta.env.BASE_URL || '/').replace(/\/+$/, '');
 

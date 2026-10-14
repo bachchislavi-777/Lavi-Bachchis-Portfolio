@@ -20,15 +20,15 @@ concurrency:
 
 env:
   # Where the site is served from.
-  # Today (free GitHub address): https://bachchislavi-777.github.io/lavi-bachchis-portfolio/
+  # Today (free GitHub address): https://bachchislavi-777.github.io/Lavi-Bachchis-Portfolio/
   #   SITE_URL: https://bachchislavi-777.github.io
-  #   BASE_PATH: /lavi-bachchis-portfolio
+  #   BASE_PATH: /Lavi-Bachchis-Portfolio
   # After adding a custom domain (e.g. lavibachchis.com), change these two lines to:
   #   SITE_URL: https://lavibachchis.com
   #   BASE_PATH: /
   # and add a file public/CNAME containing just the domain name.
   SITE_URL: https://bachchislavi-777.github.io
-  BASE_PATH: /lavi-bachchis-portfolio
+  BASE_PATH: /Lavi-Bachchis-Portfolio
 
 jobs:
   build:

@@ -2,7 +2,7 @@
 
 This is the code and content for Lavi's portfolio website: freelance content & creative, London, for clients across the UK & US. It has a home page, six sample case studies, services and packages, about, 2026 trend notes, contact and privacy pages.
 
-**Live site (once GitHub Pages is switched on):** https://bachchislavi-777.github.io/lavi-bachchis-portfolio/
+**Live site (once GitHub Pages is switched on):** https://bachchislavi-777.github.io/Lavi-Bachchis-Portfolio/
 
 To switch it on the first time, go to the repo on github.com, then **Settings → Pages → Build and deployment → Source: GitHub Actions**. You only do this once.
 
@@ -104,12 +104,12 @@ Static site built with [Astro](https://astro.build) 5, plain CSS and `@astrojs/s
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321/lavi-bachchis-portfolio/
+npm run dev       # http://localhost:4321/Lavi-Bachchis-Portfolio/
 npm run build     # outputs to dist/
 npm run preview   # serves dist/ locally
 ```
 
-- **Base path:** `astro.config.mjs` reads `SITE_URL` and `BASE_PATH` from the environment (defaults: `https://bachchislavi-777.github.io`, `/lavi-bachchis-portfolio`). All internal links and assets go through `url()` in `src/lib/url.js`. For a custom domain, build with `BASE_PATH=/`.
+- **Base path:** `astro.config.mjs` reads `SITE_URL` and `BASE_PATH` from the environment (defaults: `https://bachchislavi-777.github.io`, `/Lavi-Bachchis-Portfolio`). All internal links and assets go through `url()` in `src/lib/url.js`. For a custom domain, build with `BASE_PATH=/`.
 - **Content:** `src/data/copy.json` (all page copy and SEO), `src/data/brands.js` (the six sample brands, ported from the approved design `docs/reference/portfolio-v3-forest.html`), `src/data/images.js` (alt text and lead photos), `src/data/settings.js` (form key, about photo).
 - **Design:** `src/styles/base.css` is the reference CSS. `src/styles/site.css` holds the multi-page additions. Tile renderers (`T` in the reference) live in `src/lib/tiles.js` and return HTML strings rendered at build time with `set:html`.
 - **Pages:** `src/pages/` has index, work/index, work/[id] (6 case studies), services, about, insights, contact, privacy and 404.

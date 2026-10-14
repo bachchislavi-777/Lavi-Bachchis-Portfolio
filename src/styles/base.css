@@ -28,6 +28,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .top{position:sticky;top:env(safe-area-inset-top, 0px);z-index:30;background:rgba(15,42,33,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(244,236,223,.12);color:var(--ivory)}
 .top .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
 .me{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.logo-mark{width:40px;height:40px;display:block;flex:none}
 .mono{width:40px;height:40px;border-radius:50%;background:var(--terra);color:var(--ivory);display:grid;place-items:center;font-family:var(--f-d);font-style:italic;font-weight:600;font-size:17px}
 .me b{font-family:var(--f-d);font-weight:600;font-size:20px;letter-spacing:.01em}
 .top ul{display:flex;gap:26px;list-style:none;margin:0 0 0 auto;padding:0}

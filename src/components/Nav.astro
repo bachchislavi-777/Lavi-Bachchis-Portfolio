@@ -5,7 +5,7 @@ const { current = '' } = Astro.props;
 ---
 <nav class="top" aria-label="Main">
   <div class="wrap">
-    <a class="me" href={url('/')}><span class="mono" aria-hidden="true">LB</span><b>{copy.site.name}</b><span class="sr-only">, home</span></a>
+    <a class="me" href={url('/')}><img class="logo-mark" src={url('brand/lb-mark-96.png')} alt="" width="40" height="40" /><b>{copy.site.name}</b><span class="sr-only">, home</span></a>
     <ul id="site-menu">
       {copy.nav.map((n) => (
         <li><a href={url(n.href)} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a></li>

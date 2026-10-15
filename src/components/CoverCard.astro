@@ -1,6 +1,7 @@
 ---
 import CaseArt from './CaseArt.astro';
-import copy from '../data/copy.json';
+import { getCopy } from '../lib/region.js';
+const copy = getCopy();
 import { url } from '../lib/url.js';
 import { brandMark } from '../lib/tiles.js';
 const { brand, index, headingLevel = 3, showSummary = true } = Astro.props;

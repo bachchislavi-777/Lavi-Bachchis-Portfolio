@@ -1,20 +1,24 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import PageHead from '../../components/PageHead.astro';
-import CtaBand from '../../components/CtaBand.astro';
-import copy from '../../data/copy.json';
-import { url, absUrl } from '../../lib/url.js';
+import Layout from '../../../layouts/Layout.astro';
+import PageHead from '../../../components/PageHead.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { getCopy, setRegion, REGIONS, REGION_META } from '../../../lib/region.js';
+setRegion(Astro.params.region);
+const copy = getCopy();
+export const getStaticPaths = () => REGIONS.map((region) => ({ params: { region } }));
+import { url, absUrl } from '../../../lib/url.js';
 const ins = copy.insights;
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
+const meta = REGION_META[Astro.params.region];
+const posts = (await getCollection('blog', ({ data }) => !data.draft && data.regions.includes(Astro.params.region)))
   .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
-const fmt = (d) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmt = (d) => d.toLocaleDateString(meta.lang, { day: 'numeric', month: 'long', year: 'numeric' });
 const blog = {
   '@type': 'Blog',
   name: copy.seo.insights.title,
   description: copy.seo.insights.description,
   url: absUrl('/insights/', Astro.site),
-  inLanguage: 'en-GB',
+  inLanguage: meta.lang,
   author: { '@id': `${absUrl('/', Astro.site)}#person` },
   blogPost: posts.map((p) => ({
     '@type': 'BlogPosting',

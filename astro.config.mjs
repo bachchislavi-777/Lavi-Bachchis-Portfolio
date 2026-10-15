@@ -13,10 +13,14 @@ export default defineConfig({
   site: SITE_URL,
   base: BASE_PATH,
   trailingSlash: 'ignore',
-  build: { format: 'directory' },
+  // One page at a time: src/lib/region.js tracks the region of the page being built (UK or US).
+  build: { format: 'directory', concurrency: 1 },
   integrations: [
     sitemap({
-      filter: (page) => !/\/404\/?$/.test(page),
+      // Only the regional pages. The root and old addresses are region choosers, not content.
+      filter: (page) => /\/(uk|us)\//.test(new URL(page).pathname) && !/\/404\/?$/.test(page),
+      // Adds UK/US alternate links (hreflang) for each page that exists in both regions.
+      i18n: { defaultLocale: 'uk', locales: { uk: 'en-GB', us: 'en-US' } },
     }),
   ],
 });

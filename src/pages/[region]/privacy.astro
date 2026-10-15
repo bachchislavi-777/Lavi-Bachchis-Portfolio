@@ -1,8 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageHead from '../components/PageHead.astro';
-import copy from '../data/copy.json';
-import { PUBLIC_WEB3FORMS_KEY } from '../data/settings.js';
+import Layout from '../../layouts/Layout.astro';
+import PageHead from '../../components/PageHead.astro';
+import { getCopy, setRegion, REGIONS } from '../../lib/region.js';
+setRegion(Astro.params.region);
+const copy = getCopy();
+export const getStaticPaths = () => REGIONS.map((region) => ({ params: { region } }));
+import { PUBLIC_WEB3FORMS_KEY } from '../../data/settings.js';
 const s = copy.site;
 const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
 ---

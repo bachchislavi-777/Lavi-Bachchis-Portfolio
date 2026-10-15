@@ -1,11 +1,15 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PageHead from '../../components/PageHead.astro';
-import CoverCard from '../../components/CoverCard.astro';
-import CtaBand from '../../components/CtaBand.astro';
-import copy from '../../data/copy.json';
-import { ALL } from '../../data/brands.js';
-import { absUrl } from '../../lib/url.js';
+import Layout from '../../../layouts/Layout.astro';
+import PageHead from '../../../components/PageHead.astro';
+import CoverCard from '../../../components/CoverCard.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { getCopy, setRegion, localise, REGIONS } from '../../../lib/region.js';
+setRegion(Astro.params.region);
+const copy = getCopy();
+export const getStaticPaths = () => REGIONS.map((region) => ({ params: { region } }));
+import { ALL as ALL_SRC } from '../../../data/brands.js';
+const ALL = localise(ALL_SRC);
+import { absUrl } from '../../../lib/url.js';
 
 const w = copy.work;
 const site = Astro.site;

@@ -2,7 +2,10 @@
 // They return HTML strings that Astro renders at build time with set:html, so the output is static HTML.
 // The only change from the reference: photo URLs are base-aware and use WebP (540/1080) with a JPEG fallback.
 import { url } from './url.js';
-import { ALT } from '../data/images.js';
+import { ALT as ALT_SRC } from '../data/images.js';
+import { localise } from './region.js';
+// Photo descriptions in the current region's spelling (grey -> gray on the US site).
+const ALT = new Proxy({}, { get: (_, k) => localise(ALT_SRC[k]) });
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const strip = (s = '') => String(s).replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
@@ -87,7 +90,7 @@ export function feed(b, lv = 4, siteHref = '#') {
       ${H(lv, 'lbl', 'Grid logic')}<p>${b.gridNote}</p>
       ${H(lv, 'lbl', 'Sample caption · written for search')}<div class="capbox">${b.caption}</div>
       ${H(lv, 'lbl', 'Alt text')}<p class="alt">${b.alt}</p>
-      <p class="spec-note">Grid previews at 3:4. Posts are designed at 1080×1350 with key content in the centre.</p>
+      <p class="spec-note">${localise('Grid previews at 3:4. Posts are designed at 1080×1350 with key content in the centre.')}</p>
     </div>
   </div>`;
 }

@@ -46,7 +46,8 @@ import '@fontsource/archivo/800.css';
 import '@fontsource/archivo/900.css';
 import '../styles/base.css';
 import '../styles/site.css';
-import copy from '../data/copy.json';
+import { getCopy, getRegion, REGIONS, REGION_META } from '../lib/region.js';
+const copy = getCopy();
 import { url, absUrl } from '../lib/url.js';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -61,8 +62,14 @@ interface Props {
   noindex?: boolean;
   current?: string;
   article?: { published: string; modified?: string; tags?: string[] }; // blog posts: og:type article + dates
+  regions?: string[]; // regional sites this page exists on (default both); drives hreflang and the UK/US switcher
 }
-const { title, description, path = '/', schema = [], breadcrumbs, brandFonts = false, noindex = false, current = '', article } = Astro.props;
+const { title, description, path = '/', schema = [], breadcrumbs, brandFonts = false, noindex = false, current = '', article, regions = REGIONS } = Astro.props;
+const region = getRegion();
+const meta = REGION_META[region];
+// hreflang: each regional version points at all of them; the UK version is the default for everyone else.
+const alternates = regions.map((r) => ({ lang: REGION_META[r].lang, href: absUrl(path, Astro.site ?? new URL('https://lavibachchis.com'), { region: r }) }));
+const xDefault = alternates.length > 1 ? alternates[0].href : null;
 const site = Astro.site ?? new URL('https://bachchislavi-777.github.io');
 const canonical = absUrl(path, site);
 const ogImage = absUrl('og-image.jpg', site);
@@ -74,7 +81,7 @@ const graph: object[] = [
     '@id': `${homeUrl}#website`,
     url: homeUrl,
     name: `${copy.site.name}, ${copy.site.role}`,
-    inLanguage: 'en-GB',
+    inLanguage: meta.lang,
     publisher: { '@id': `${homeUrl}#person` },
   },
   ...schema,
@@ -94,7 +101,7 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 
 ---
 <!doctype html>
-<html lang="en-GB">
+<html lang={meta.lang}>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
@@ -103,6 +110,8 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {alternates.length > 1 && alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+    {xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#163A2E" />
     <meta name="color-scheme" content="dark light" />
@@ -121,7 +130,8 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
     {article && <meta property="article:author" content={absUrl('/about/', site)} />}
     {article?.tags?.map((t) => <meta property="article:tag" content={t} />)}
     <meta property="og:site_name" content={`${copy.site.name}, ${copy.site.role}`} />
-    <meta property="og:locale" content="en_GB" />
+    <meta property="og:locale" content={meta.ogLocale} />
+    {regions.filter((r) => r !== region).map((r) => <meta property="og:locale:alternate" content={REGION_META[r].ogLocale} />)}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -139,12 +149,16 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <Nav current={current} />
+    <Nav current={current} regions={regions} path={path} />
     <main id="main" tabindex="-1">
       <slot />
     </main>
     <Footer />
     <script>
+      // Remember the region a visitor picks, so lavibachchis.com sends them back to it next time.
+      document.querySelectorAll<HTMLAnchorElement>('.region-switch a[data-region]').forEach((a) => {
+        a.addEventListener('click', () => { try { localStorage.setItem('lb-region', a.dataset.region || ''); } catch {} });
+      });
       // Mobile nav toggle
       const toggle = document.querySelector<HTMLButtonElement>('.navtoggle');
       const menu = document.getElementById('site-menu');

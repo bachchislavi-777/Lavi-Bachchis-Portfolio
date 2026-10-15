@@ -1,21 +1,25 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from '../../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import CaseArt from '../../components/CaseArt.astro';
-import CtaBand from '../../components/CtaBand.astro';
-import copy from '../../data/copy.json';
-import { ALL } from '../../data/brands.js';
-import { url } from '../../lib/url.js';
-import { varStyle, idBoard, feed, creatives } from '../../lib/tiles.js';
-import { caseSchema } from '../../lib/schema.js';
+import CaseArt from '../../../components/CaseArt.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { getCopy, setRegion, localise, REGIONS } from '../../../lib/region.js';
+setRegion(Astro.params.region);
+const copy = getCopy();
+import { ALL } from '../../../data/brands.js';
+import { url } from '../../../lib/url.js';
+import { varStyle, idBoard, feed, creatives } from '../../../lib/tiles.js';
+import { caseSchema } from '../../../lib/schema.js';
 
 export function getStaticPaths() {
-  return ALL.map((b, i) => ({ params: { id: b.id }, props: { b, i } }));
+  return REGIONS.flatMap((region) => ALL.map((b, i) => ({ params: { region, id: b.id }, props: { i } })));
 }
-const { b, i } = Astro.props;
+const { i } = Astro.props;
+const all = localise(ALL);
+const b = all[i];
 const c = copy.cases[b.id];
 const seo = copy.seo[b.id];
-const next = ALL.find((x) => x.id === c.nextCase);
+const next = all.find((x) => x.id === c.nextCase);
 const nc = copy.cases[next.id];
 const num = String(i + 1).padStart(2, '0');
 const typeLabel = (t) => (t === 'own' ? copy.work.ownLabel : t === 'product' ? 'Product brand' : 'Service brand');
@@ -26,7 +30,7 @@ const noteLabel = b.own ? copy.work.ownLabel : copy.work.sampleLabel;
 const noteText = b.own ? copy.work.ownNote : copy.site.footerNote;
 const briefBy = b.own ? `In my words · ${copy.site.name}, founder` : `Sample client brief · ${c.name}, ${c.location}`;
 // Blog posts tagged with this brand's name (own projects only).
-const related = b.own ? (await getCollection('blog', ({ data }) => !data.draft && data.tags.includes(c.name))) : [];
+const related = b.own ? (await getCollection('blog', ({ data }) => !data.draft && data.regions.includes(Astro.params.region) && data.tags.includes(c.name))) : [];
 ---
 <Layout title={seo.title} description={seo.description} path={path} current="/work/" brandFonts
   breadcrumbs={crumbs} schema={[caseSchema(Astro.site, b.id)]}>

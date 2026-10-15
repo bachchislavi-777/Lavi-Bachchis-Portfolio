@@ -1,10 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageHead from '../components/PageHead.astro';
-import Process from '../components/Process.astro';
-import CtaBand from '../components/CtaBand.astro';
-import copy from '../data/copy.json';
-import { servicesSchema } from '../lib/schema.js';
+import Layout from '../../layouts/Layout.astro';
+import PageHead from '../../components/PageHead.astro';
+import Process from '../../components/Process.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getCopy, setRegion, REGIONS } from '../../lib/region.js';
+setRegion(Astro.params.region);
+const copy = getCopy();
+export const getStaticPaths = () => REGIONS.map((region) => ({ params: { region } }));
+import { servicesSchema } from '../../lib/schema.js';
 const s = copy.services;
 const faqSchema = {
   '@type': 'FAQPage',

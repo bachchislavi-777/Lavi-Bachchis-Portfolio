@@ -4,6 +4,7 @@ seoTitle: "Freelance Social Media Manager Cost UK (2026 Guide)"
 description: "What UK small businesses actually pay a freelance social media manager in 2026, what's included at each price, and the questions to ask before you sign."
 excerpt: "Monthly retainers, hourly rates and the hidden extras. An honest look at what you'll pay, and what you should get for it."
 keyword: "freelance social media manager cost UK"
+regions: ["uk"]
 published: 2026-10-15
 tags: ["Pricing", "Hiring help", "Social media"]
 faq:
@@ -46,7 +47,7 @@ The things that move the price most:
 - **Video.** Reels and short videos take far longer than a static post. Check whether they're included or priced per video.
 - **Community management.** Replying to comments and DMs every day is a real time commitment, and many packages leave it out.
 - **Reporting.** A monthly report is useful. A 20-page deck nobody reads is not.
-- **Your sector.** Regulated businesses like law firms and accountants need extra care and an approval step, which takes time. I've written about that in [social media for solicitors](/insights/social-media-for-solicitors-uk/).
+- **Your sector.** Regulated businesses like law firms and accountants need extra care and an approval step, which takes time. I've written about that in [social media for solicitors](../social-media-for-solicitors-uk/).
 
 ## Freelancer or agency?
 
@@ -78,6 +79,6 @@ One thing I'd be wary of: anyone who guarantees follower numbers, leads or sales
 
 I charge a fixed monthly fee, quoted after a 20-minute call, once I know which channels matter to you and how much you need. There's no hourly billing, so you won't get a surprise invoice. Every month starts with a calendar you approve before I make anything, and nothing goes live without your sign-off.
 
-If you'd like to see the kind of work you'd be paying for, have a look at the [sample case studies](/work/), such as the [Halden plumbing and heating feed](/work/halden/) or the [Solenne skincare grid](/work/solenne/). The [services page](/services/) shows what's in each package.
+If you'd like to see the kind of work you'd be paying for, have a look at the [sample case studies](../../work/), such as the [Halden plumbing and heating feed](../../work/halden/) or the [Solenne skincare grid](../../work/solenne/). The [services page](../../services/) shows what's in each package.
 
-And if you're still not sure what you need, [get in touch](/contact/). Even if I'm not the right fit, I'll tell you roughly what you should expect to pay.
+And if you're still not sure what you need, [get in touch](../../contact/). Even if I'm not the right fit, I'll tell you roughly what you should expect to pay.

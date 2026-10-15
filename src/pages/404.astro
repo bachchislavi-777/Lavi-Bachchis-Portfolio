@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import copy from '../data/copy.json';
+import { getCopy, setRegion } from '../lib/region.js';
+setRegion('uk');
+const copy = getCopy();
 import { url } from '../lib/url.js';
 const n = copy.notFound;
 ---

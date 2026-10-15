@@ -36,11 +36,11 @@ For a product business, they might be:
 
 For a service business, swap "product" for **answers**: the questions customers ask you every week, explained clearly.
 
-You can see this in practice in the [Lowtide Coffee sample](/work/lowtide/), which is built on brew guides, a weekly series and real moments from the roastery.
+You can see this in practice in the [Lowtide Coffee sample](../../work/lowtide/), which is built on brew guides, a weekly series and real moments from the roastery.
 
 ## Step 2: Set a weekly rhythm you can keep
 
-Consistency beats frequency every time. Three good posts a week, every week, will do more for you than daily posting for a fortnight followed by silence.
+Consistency beats frequency every time. Three good posts a week, every week, will do more for you than daily posting for two weeks followed by silence.
 
 A simple rhythm might be:
 
@@ -50,7 +50,7 @@ A simple rhythm might be:
 | Wednesday | Product or service post | Product / answers |
 | Friday | Customer post, review or behind the scenes | Proof / people |
 
-Once a rhythm is set, a recurring series makes it even easier. "Tip Tuesday", "Ask us anything" or a monthly photo dump gives followers something to recognise, and gives you a template to fill rather than a blank page.
+Once a rhythm is set, a recurring series makes it even easier. "Tip Tuesday", "Ask us anything" or a monthly photo dump gives followers something they know on sight, and gives you a template to fill rather than a blank page.
 
 ## Step 3: Map the month's key dates
 
@@ -100,4 +100,4 @@ The plan matters less than sticking to it. A simple calendar you follow beats a 
 
 This planning process is exactly how I work with clients. You get a full month of planned posts to approve before I make anything, then I design, write and schedule it all for the dates we agreed.
 
-If you're weighing up the cost first, I've written an honest guide to [what a freelance social media manager costs in the UK](/insights/freelance-social-media-manager-cost-uk/). Otherwise, have a look at the [services and packages](/services/) or [get in touch](/contact/) to plan your first month.
+If you're weighing up the cost first, I've written an honest guide to [what a freelance social media manager costs in the UK](/uk/insights/freelance-social-media-manager-cost-uk/). Otherwise, have a look at the [services and packages](../../services/) or [get in touch](../../contact/) to plan your first month.

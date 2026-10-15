@@ -1,5 +1,6 @@
 ---
-import copy from '../data/copy.json';
+import { getCopy } from '../lib/region.js';
+const copy = getCopy();
 const p = copy.process;
 const { light = false } = Astro.props;
 ---

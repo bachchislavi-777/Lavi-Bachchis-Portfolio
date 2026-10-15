@@ -4,6 +4,7 @@ seoTitle: "Tired After Sleeping? Mental Exhaustion Explained"
 description: "Slept eight hours and still exhausted? A plain-English guide to mental exhaustion: why stress drains your energy, the common signs, what helps and when to see a GP."
 excerpt: "Sometimes we're not tired because we've done too much. We're tired because we've been carrying too much. Here's why, and what helps."
 keyword: "tired even after sleeping mental exhaustion"
+regions: ["uk"]
 published: 2026-10-15
 tags: ["Mental wellbeing", "Stress", "Paws, Peace & Poems"]
 faq:
@@ -57,7 +58,7 @@ Real rest is time when your mind isn't being asked to do anything: a walk withou
 
 ### Unfinished business follows you to bed
 
-Our minds tend to hold on to unfinished tasks more than finished ones. That's why a single thing left undone can make a whole productive day feel incomplete, and why it can be hard to switch off at night. I've written more about this in [what the Zeigarnik effect is, and why unfinished tasks stay on your mind](/insights/zeigarnik-effect-unfinished-tasks/).
+Our minds tend to hold on to unfinished tasks more than finished ones. That's why a single thing left undone can make a whole productive day feel incomplete, and why it can be hard to switch off at night. I've written more about this in [what the Zeigarnik effect is, and why unfinished tasks stay on your mind](../zeigarnik-effect-unfinished-tasks/).
 
 ## Common signs of mental exhaustion
 
@@ -103,4 +104,4 @@ Feeling exhausted doesn't mean you're weak, lazy or doing life wrong. It usually
 
 Rest isn't a reward you earn once everything's done. It's a need.
 
-*This post is part of [Paws, Peace & Poems](/work/pawspeacepoems/), my own project explaining psychology in plain, kind words. You can follow along on [Instagram](https://www.instagram.com/pawspeacenpoems/).*
+*This post is part of [Paws, Peace & Poems](../../work/pawspeacepoems/), my own project explaining psychology in plain, kind words. You can follow along on [Instagram](https://www.instagram.com/pawspeacenpoems/).*

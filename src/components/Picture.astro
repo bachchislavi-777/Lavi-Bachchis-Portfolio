@@ -2,9 +2,10 @@
 // Responsive photo: WebP 540w/1080w with a JPEG fallback. Files live in public/images/.
 import { url } from '../lib/url.js';
 import { ALT } from '../data/images.js';
+import { localise } from '../lib/region.js';
 interface Props { name: string; alt?: string; sizes?: string; eager?: boolean; class?: string; imgClass?: string; decorative?: boolean }
 const { name, alt, sizes = '(min-width: 1000px) 33vw, 100vw', eager = false, class: cls, imgClass, decorative = false } = Astro.props;
-const altText = decorative ? '' : (alt ?? ALT[name] ?? '');
+const altText = decorative ? '' : localise(alt ?? ALT[name] ?? '');
 ---
 <picture class={cls}>
   <source type="image/webp" srcset={`${url(`images/${name}-540.webp`)} 540w, ${url(`images/${name}-1080.webp`)} 1080w`} sizes={sizes} />

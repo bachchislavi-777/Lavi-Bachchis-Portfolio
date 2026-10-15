@@ -4,6 +4,7 @@ seoTitle: "The Zeigarnik Effect: Why Unfinished Tasks Stay With You"
 description: "The Zeigarnik effect in plain English: why your brain holds on to unfinished tasks, what the research says, and simple ways to switch off at the end of the day."
 excerpt: "Ticked off ten things but still feel you didn't do enough? Blame the one thing left undone. Here's the psychology, and how to let it go."
 keyword: "Zeigarnik effect"
+regions: ["uk"]
 published: 2026-10-15
 tags: ["Mental wellbeing", "Psychology", "Paws, Peace & Poems"]
 faq:
@@ -39,7 +40,7 @@ The simplest way to think about it is this: when you start something, your mind 
 
 That's actually helpful most of the time. It's how you remember to go back to the thing you were doing before the phone rang. Without it, half-finished jobs would simply disappear from your mind.
 
-The trouble is that modern life gives us a lot of open loops at once. Work tasks, messages, life admin, plans with friends, things we said we'd do "next week". Each one keeps a small claim on your attention, and together they can leave you feeling scattered, restless and tired, even when you've done plenty. If that sounds familiar, you might also find it useful to read about [mental exhaustion, and why you can feel tired even after sleeping](/insights/tired-after-sleeping-mental-exhaustion/).
+The trouble is that modern life gives us a lot of open loops at once. Work tasks, messages, life admin, plans with friends, things we said we'd do "next week". Each one keeps a small claim on your attention, and together they can leave you feeling scattered, restless and tired, even when you've done plenty. If that sounds familiar, you might also find it useful to read about [mental exhaustion, and why you can feel tired even after sleeping](../tired-after-sleeping-mental-exhaustion/).
 
 ## What the research says now
 
@@ -83,4 +84,4 @@ Write it down. Give it a time. Then let yourself rest.
 
 <p><em>This is general information about how our minds work, not medical or psychological advice. If racing thoughts, worry or poor sleep are affecting your daily life, talk to your GP. If you're struggling and need help now, call NHS 111 and choose the mental health option, or call 999 in an emergency.</em></p>
 
-*This post is part of [Paws, Peace & Poems](/work/pawspeacepoems/), my own project explaining psychology in plain, kind words. You can follow along on [Instagram](https://www.instagram.com/pawspeacenpoems/).*
+*This post is part of [Paws, Peace & Poems](../../work/pawspeacepoems/), my own project explaining psychology in plain, kind words. You can follow along on [Instagram](https://www.instagram.com/pawspeacenpoems/).*

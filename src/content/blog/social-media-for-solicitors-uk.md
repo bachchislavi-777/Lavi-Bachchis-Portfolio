@@ -4,6 +4,7 @@ seoTitle: "Social Media for Solicitors & Law Firms in the UK"
 description: "A practical guide to social media for UK solicitors and law firms: what to post on LinkedIn and Instagram, how to stay within the rules, and how to keep it human."
 excerpt: "What to post, what to avoid and how to keep it compliant, from someone who runs marketing for a London law firm."
 keyword: "social media for solicitors UK"
+regions: ["uk"]
 published: 2026-10-15
 tags: ["Law firms", "LinkedIn", "Professional services"]
 faq:
@@ -34,7 +35,7 @@ The best source of content for a law firm isn't a trends report. It's the questi
 
 Each of those is a post. Several of them are a whole series. Ask your team to jot down the questions they hear most for a fortnight and you'll have a quarter's worth of ideas.
 
-I built the [Ashby Grant sample case study](/work/ashbygrant/) around exactly this idea: a weekly "Ask Ashby" post that answers one real question, in a fixed format, so followers recognise it before they've read a word.
+I built the [Ashby Grant sample case study](../../work/ashbygrant/) around exactly this idea: a weekly "Ask Ashby" post that answers one real question, in a fixed format, so followers recognise it before they've read a word.
 
 ## Which platforms are worth your time
 
@@ -80,7 +81,7 @@ Law firm social media usually dies in a busy month. Someone's on a big completio
 
 What fixes it:
 
-1. **A monthly calendar**, planned and approved before the month starts. I walk through how I build one in [how to plan a month of social media content](/insights/social-media-content-plan-small-business/).
+1. **A monthly calendar**, planned and approved before the month starts. I walk through how I build one in [how to plan a month of social media content](../social-media-content-plan-small-business/).
 2. **Repeatable formats.** A weekly Q&A or a monthly myth-buster means you're not starting from a blank page.
 3. **Batching.** Film four short videos in one sitting. Write a month of captions in one afternoon.
 4. **Someone whose job it is.** Whether that's a member of staff or a freelancer, it can't be "whoever has time", because nobody ever does.
@@ -89,4 +90,4 @@ What fixes it:
 
 I write and design plain-English social content, LinkedIn carousels and client newsletters for law firms and other professional services businesses. Everything is reviewed and approved by a qualified person on your side before it goes live.
 
-Have a look at the [Ashby Grant sample](/work/ashbygrant/) or the [Northfield accountancy sample](/work/northfield/) to see the style, then [get in touch](/contact/) to talk about your firm.
+Have a look at the [Ashby Grant sample](../../work/ashbygrant/) or the [Northfield accountancy sample](../../work/northfield/) to see the style, then [get in touch](../../contact/) to talk about your firm.

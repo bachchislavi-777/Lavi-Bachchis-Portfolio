@@ -9,7 +9,9 @@ export const GET: APIRoute = async ({ site }) => {
   const s = copy.site;
   const posts = (await getCollection('blog', ({ data }) => !data.draft))
     .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
-  const link = (name: string, path: string, note: string) => `- [${name}](${absUrl(path, site)}): ${note}`;
+  // Main links point at the UK site; pages that also exist in US English say so.
+  const link = (name: string, path: string, note: string, regions = ['uk', 'us']) =>
+    `- [${name}](${absUrl(path, site, { region: regions[0] })}): ${note}${regions.includes('us') && regions[0] !== 'us' ? ` (US version: ${absUrl(path, site, { region: 'us' })})` : ''}`;
   const cases = Object.entries(copy.cases).map(([id, c]: [string, any]) =>
     link(`${c.name} (${c.type === 'own' ? "Lavi's own project" : 'sample case study'})`, `/work/${id}/`, c.summary));
 
@@ -22,7 +24,8 @@ export const GET: APIRoute = async ({ site }) => {
 - Sectors: skincare and beauty, food and drink, homeware, law firms, accountants and local trades, among others.
 - How it works: a short intro call, a brand kit, a monthly content calendar the client approves, then design, writing and scheduling. Nothing is published without the client's sign-off.
 - Pricing: fixed monthly fee, quoted after a short call. No hourly billing.
-- Contact: ${s.email} · ${absUrl('/contact/', site)}
+- Contact: ${s.email} · ${absUrl('/contact/', site, { region: 'uk' })}
+- Regional versions: the site is published twice, for UK visitors at ${absUrl('/', site, { region: 'uk' })} (British English) and US visitors at ${absUrl('/', site, { region: 'us' })} (American English). Some articles are UK-only.
 - The portfolio has six sample case studies created to show the work (not real clients) and one real project of Lavi's own.
 - Own project: Paws, Peace & Poems (https://www.instagram.com/pawspeacenpoems/), a mental-health education page that explains psychology in plain, kind words, with a YouTube channel, Take a Paws with Lavi (https://www.youtube.com/@TakeaPawswithLavi), and a LinkedIn community group. It shares general wellbeing information, not therapy or medical advice; Lavi is not a qualified therapist.
 
@@ -34,7 +37,7 @@ ${link('Portfolio', '/work/', copy.seo.work.description)}
 ${link('Contact', '/contact/', copy.seo.contact.description)}
 
 ## Blog
-${posts.map((p) => link(p.data.title, `/insights/${p.id}/`, p.data.description)).join('\n')}
+${posts.map((p) => link(p.data.title, `/insights/${p.id}/`, p.data.description, p.data.regions)).join('\n')}
 
 ## Case studies
 ${cases.join('\n')}

@@ -11,6 +11,8 @@ const blog = defineCollection({
     description: z.string().max(165), // meta description
     excerpt: z.string(), // card text on the blog page
     keyword: z.string(), // main search phrase the post targets (for your reference)
+    // Which regional sites publish the post. UK-only posts (UK prices, UK law, NHS signposting) use ["uk"].
+    regions: z.array(z.enum(['uk', 'us'])).default(['uk', 'us']),
     published: z.coerce.date(),
     updated: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),

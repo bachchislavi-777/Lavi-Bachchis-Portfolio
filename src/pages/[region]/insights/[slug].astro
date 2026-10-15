@@ -1,20 +1,25 @@
 ---
 import { getCollection, render } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import PageHead from '../../components/PageHead.astro';
-import CtaBand from '../../components/CtaBand.astro';
-import copy from '../../data/copy.json';
-import { url, absUrl } from '../../lib/url.js';
+import Layout from '../../../layouts/Layout.astro';
+import PageHead from '../../../components/PageHead.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { getCopy, setRegion, REGIONS, REGION_META } from '../../../lib/region.js';
+setRegion(Astro.params.region);
+const copy = getCopy();
+import { url, absUrl } from '../../../lib/url.js';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  const all = (await getCollection('blog', ({ data }) => !data.draft))
     .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
   // "Keep reading": posts sharing the most tags first, then newest.
   const shared = (a, b) => a.data.tags.filter((t) => b.data.tags.includes(t)).length;
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post, others: posts.filter((p) => p.id !== post.id).sort((a, b) => shared(b, post) - shared(a, post)) },
-  }));
+  return REGIONS.flatMap((region) => {
+    const posts = all.filter((p) => p.data.regions.includes(region));
+    return posts.map((post) => ({
+      params: { region, slug: post.id },
+      props: { post, others: posts.filter((p) => p.id !== post.id).sort((a, b) => shared(b, post) - shared(a, post)) },
+    }));
+  });
 }
 
 const { post, others } = Astro.props;
@@ -22,7 +27,7 @@ const d = post.data;
 const { Content, headings } = await render(post);
 const path = `/insights/${post.id}/`;
 const iso = (x) => x.toISOString().slice(0, 10);
-const fmt = (x) => x.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const fmt = (x) => x.toLocaleDateString(REGION_META[Astro.params.region].lang, { day: 'numeric', month: 'long', year: 'numeric' });
 const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
 const minutes = Math.max(1, Math.round(words / 220));
 const toc = headings.filter((h) => h.depth === 2);
@@ -37,7 +42,7 @@ const schema = [
     mainEntityOfPage: absUrl(path, Astro.site),
     datePublished: iso(d.published),
     dateModified: iso(d.updated ?? d.published),
-    inLanguage: 'en-GB',
+    inLanguage: REGION_META[Astro.params.region].lang,
     wordCount: words,
     keywords: [d.keyword, ...d.tags].join(', '),
     image: absUrl('og-image.jpg', Astro.site),
@@ -59,7 +64,7 @@ const schema = [
 ];
 const crumbs = [{ name: 'Blog', path: '/insights/' }, { name: d.title, path }];
 ---
-<Layout title={d.seoTitle} description={d.description} path={path} current="/insights/" breadcrumbs={crumbs} schema={schema}
+<Layout title={d.seoTitle} description={d.description} path={path} regions={d.regions} current="/insights/" breadcrumbs={crumbs} schema={schema}
   article={{ published: iso(d.published), modified: d.updated ? iso(d.updated) : undefined, tags: d.tags }}>
   <PageHead eyebrow={d.tags[0] ?? 'Blog'} h1={d.title} crumbs={crumbs}>
     <p class="post-meta">

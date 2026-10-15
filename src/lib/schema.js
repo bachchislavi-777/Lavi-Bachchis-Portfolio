@@ -1,10 +1,12 @@
 // JSON-LD helpers (schema.org). Kept honest: no Review/AggregateRating, case studies described as concept work.
-import copy from '../data/copy.json';
+import { getCopy, getRegion, REGION_META } from './region.js';
 import { absUrl } from './url.js';
 
-const s = copy.site;
+// Copy and language follow the region of the page being built (see region.js).
+const lang = () => REGION_META[getRegion()].lang;
 
 export function personSchema(site, extra = {}) {
+  const copy = getCopy(), s = copy.site;
   return {
     '@type': 'Person',
     '@id': `${absUrl('/', site)}#person`,
@@ -22,6 +24,7 @@ export function personSchema(site, extra = {}) {
 }
 
 export function businessSchema(site) {
+  const copy = getCopy(), s = copy.site;
   return {
     '@type': 'ProfessionalService',
     '@id': `${absUrl('/', site)}#business`,
@@ -41,6 +44,7 @@ export function businessSchema(site) {
 }
 
 export function servicesSchema(site) {
+  const copy = getCopy(), s = copy.site;
   return copy.services.list.map((x) => ({
     '@type': 'Service',
     name: x.title,
@@ -60,6 +64,7 @@ export function servicesSchema(site) {
 }
 
 export function caseSchema(site, id) {
+  const copy = getCopy(), s = copy.site;
   const c = copy.cases[id];
   if (c.type === 'own') {
     return {
@@ -72,7 +77,7 @@ export function caseSchema(site, id) {
       creator: { '@id': `${absUrl('/', site)}#person` },
       url: absUrl(`/work/${id}/`, site),
       sameAs: (c.links || []).map((l) => l.url),
-      inLanguage: 'en-GB',
+      inLanguage: lang(),
     };
   }
   return {
@@ -86,6 +91,6 @@ export function caseSchema(site, id) {
     url: absUrl(`/work/${id}/`, site),
     image: absUrl(`images/${({ solenne: 'gsol_hero', lowtide: 'glow_bag', loomhouse: 'gloom_stack', ashbygrant: 'ash1', northfield: 'nor2', halden: 'ghal_boiler' })[id]}.jpg`, site),
     dateCreated: '2026',
-    inLanguage: 'en-GB',
+    inLanguage: lang(),
   };
 }

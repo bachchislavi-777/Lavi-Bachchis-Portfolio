@@ -33,6 +33,7 @@ const contactPage = {
         <div class="crow"><div><small>{L.name}</small><span class="v">{s.name}</span></div></div>
         <div class="crow"><div><small>{L.email}</small><a href={`mailto:${s.email}`}>{s.email}</a></div><button class="copy" type="button" data-copy={s.email} data-copied={L.copied} aria-label={`${L.copy} email address`}>{L.copy}</button><span class="copy-status" role="status" aria-live="polite"></span></div>
         <div class="crow"><div><small>{L.phone}</small><a href={`tel:${s.phoneHref}`}>{s.phoneDisplay}</a></div><button class="copy" type="button" data-copy={s.phoneDisplay} data-copied={L.copied} aria-label={`${L.copy} phone number`}>{L.copy}</button><span class="copy-status" role="status" aria-live="polite"></span></div>
+        <div class="crow"><div><small>{L.whatsapp}</small><a href={s.whatsapp} target="_blank" rel="noopener">{L.whatsappText}<span class="sr-only"> (opens in a new tab)</span></a></div></div>
         <div class="crow"><div><small>{L.linkedin}</small><a href={s.linkedin} target="_blank" rel="noopener">{s.linkedinDisplay}<span class="sr-only"> (opens in a new tab)</span></a></div></div>
         <div class="crow"><div><small>{L.workingWith}</small><span class="v">{s.coverage.replace(/^I work with clients across the /, '').replace(/.$/, '')}</span></div></div>
       </div>
@@ -65,7 +66,7 @@ const contactPage = {
       ) : (
         <div class="form-soon" id="enquiry">
           <b>Online form coming soon</b>
-          <p>For now, the quickest way to reach me is by email at <a href={`mailto:${s.email}`}>{s.email}</a> or by phone on <a href={`tel:${s.phoneHref}`}>{s.phoneDisplay}</a> (UK number; from the US dial 011 44 7438 216452).</p>
+          <p>For now, the quickest way to reach me is by email at <a href={`mailto:${s.email}`}>{s.email}</a> or by phone on <a href={`tel:${s.phoneHref}`}>{s.phoneDisplay}</a> (a UK number). Outside the UK? <a href={s.whatsapp} rel="noopener" target="_blank">Message me on WhatsApp<span class="sr-only"> (opens in a new tab)</span></a> instead.</p>
           <a class="btn" style="justify-self:start" href={`mailto:${s.email}?subject=${encodeURIComponent('New project enquiry')}`}>Email me</a>
         </div>
       )}

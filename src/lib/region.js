@@ -55,7 +55,7 @@ const PHRASES = [
 ];
 
 // Keys whose values are addresses, codes or data, never prose.
-const SKIP = new Set(['quote', 'href', 'url', 'src', 'linkedin', 'instagram', 'youtube', 'email', 'phoneHref', 'phoneDisplay', 'id', 'hli', 'avatar']);
+const SKIP = new Set(['quote', 'href', 'url', 'src', 'whatsapp', 'linkedin', 'instagram', 'youtube', 'email', 'phoneHref', 'phoneDisplay', 'id', 'hli', 'avatar']);
 
 export function toUS(text) {
   if (typeof text !== 'string') return text;

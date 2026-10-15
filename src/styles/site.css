@@ -208,9 +208,11 @@ figure.ab-photo { margin: 0; }
 .cover-img .pp-cover, .next-img .pp-cover { padding: 8%; }
 .cover-img .pp-cover .pp-logo, .next-img .pp-cover .pp-logo { width: auto; height: 100%; }
 .cover-img:has(.case-art)::after { opacity: 0; }
-.t.t-html { display: grid; place-items: center; padding: 12%; background: #FBEFC9; }
-.t-html .pp-logo { height: 100%; }
-.iga.iga-logo, .bm-logo { display: block; padding: 10%; background: #FBEFC9; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); overflow: hidden; }
+.t.t-html { display: grid; place-items: center; padding: 0; background: #FBEFC9; }
+.t-html .pp-logo { position: absolute; inset: 14%; width: auto; background: transparent; }
+/* No percentage padding here: it would be measured against the whole profile row, not the circle. */
+.iga.iga-logo, .bm-logo { display: grid; place-items: center; padding: 0; background: #FBEFC9; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); overflow: hidden; }
+.iga.iga-logo img, .bm-logo img { width: 80%; height: 80%; }
 .cover-img:has(.case-art) .cover-num { color: rgba(0, 0, 0, .72); }
 .case-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 .own-row { margin-top: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 40px; align-items: center; padding-top: 48px; border-top: 1px solid var(--ln); }

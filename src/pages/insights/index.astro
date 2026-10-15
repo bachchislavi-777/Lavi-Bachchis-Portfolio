@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageHead from '../../components/PageHead.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import copy from '../../data/copy.json';
+import { url, absUrl } from '../../lib/url.js';
+const ins = copy.insights;
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
+const fmt = (d) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const blog = {
+  '@type': 'Blog',
+  name: copy.seo.insights.title,
+  description: copy.seo.insights.description,
+  url: absUrl('/insights/', Astro.site),
+  inLanguage: 'en-GB',
+  author: { '@id': `${absUrl('/', Astro.site)}#person` },
+  blogPost: posts.map((p) => ({
+    '@type': 'BlogPosting',
+    headline: p.data.title,
+    url: absUrl(`/insights/${p.id}/`, Astro.site),
+    datePublished: p.data.published.toISOString().slice(0, 10),
+  })),
+};
+---
+<Layout title={copy.seo.insights.title} description={copy.seo.insights.description} path="/insights/" current="/insights/"
+  breadcrumbs={[{ name: 'Blog', path: '/insights/' }]} schema={[blog]}>
+  <PageHead eyebrow={ins.eyebrow} h1={ins.h1} h1Em={ins.h1Em} intro={ins.intro} crumbs={[{ name: 'Blog', path: '/insights/' }]} />
+  <section class="band light" aria-labelledby="posts-h">
+    <div class="wrap">
+      <h2 class="mini-h" id="posts-h">{ins.listTitle}</h2>
+      {posts.length === 0 ? <p>{ins.empty}</p> : (
+        <ul class="posts">
+          {posts.map((p) => (
+            <li>
+              <article class="post-card">
+                <span class="eyebrow">{p.data.tags[0] ?? 'Article'} · <time datetime={p.data.published.toISOString().slice(0, 10)}>{fmt(p.data.published)}</time></span>
+                <h3><a href={url(`/insights/${p.id}/`)}>{p.data.title}</a></h3>
+                <p>{p.data.excerpt}</p>
+                <span class="more" aria-hidden="true">{ins.readMore} →</span>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+  <CtaBand />
+</Layout>

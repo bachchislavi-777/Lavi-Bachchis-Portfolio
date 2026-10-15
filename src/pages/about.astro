@@ -46,7 +46,7 @@ const profile = {
         <p style="color:var(--mt);font-size:17px">{a.whyText}</p>
       </div>
       <div class="cols">
-        {a.highlights.map((h, i) => <div><i aria-hidden="true" style="background:var(--forest-d)">{icons[i]}</i><p><b>{h.title}</b><span>{h.text}{i === 2 && <> <a href={url('/insights/')}>Read my trend notes</a>.</>}</span></p></div>)}
+        {a.highlights.map((h, i) => <div><i aria-hidden="true" style="background:var(--forest-d)">{icons[i]}</i><p><b>{h.title}</b><span>{h.text}{i === 2 && <> <a href={url('/insights/')}>Read the blog</a>.</>}</span></p></div>)}
       </div>
     </div>
   </section>

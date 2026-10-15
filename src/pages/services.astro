@@ -6,9 +6,13 @@ import CtaBand from '../components/CtaBand.astro';
 import copy from '../data/copy.json';
 import { servicesSchema } from '../lib/schema.js';
 const s = copy.services;
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: s.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
 ---
 <Layout title={copy.seo.services.title} description={copy.seo.services.description} path="/services/" current="/services/"
-  breadcrumbs={[{ name: 'Services', path: '/services/' }]} schema={servicesSchema(Astro.site)}>
+  breadcrumbs={[{ name: 'Services', path: '/services/' }]} schema={[...servicesSchema(Astro.site), faqSchema]}>
   <PageHead eyebrow={s.eyebrow} h1={s.h1} h1Em={s.h1Em} intro={s.intro} crumbs={[{ name: 'Services', path: '/services/' }]} />
 
   <section class="band light" aria-labelledby="svc-h">

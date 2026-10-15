@@ -30,7 +30,7 @@
       "href": "/about/"
     },
     {
-      "label": "Insights",
+      "label": "Blog",
       "href": "/insights/"
     },
     {
@@ -56,8 +56,8 @@
       "description": "London-based marketing and brand lead who designs and writes social media, newsletters and blogs for product and service businesses in the UK and the US."
     },
     "insights": {
-      "title": "2026 Social Media Trends for Brands | Lavi Bachchis",
-      "description": "Twelve 2026 trend notes behind my work: Reels hooks, photo dumps, the 3:4 Instagram grid, LinkedIn PDF carousels and repeatable newsletters, with sources."
+      "title": "Social Media & Content Blog for Small Businesses | Lavi B.",
+      "description": "Practical articles on social media, newsletters and blog content for UK and US small businesses, from a London freelance content creator and brand lead."
     },
     "contact": {
       "title": "Contact | Plan Your First Month of Content",
@@ -577,7 +577,7 @@
       },
       {
         "title": "Built around what works now",
-        "text": "Every format I use is backed by recent platform research."
+        "text": "I plan around the formats that are working on each platform right now, not last year's playbook."
       }
     ],
     "toolsTitle": "Tools I use",
@@ -610,149 +610,15 @@
     "whyText": "Most small businesses need design and writing that match, but can't justify a team for it. That's the gap I fill: one person, one brief, every channel looking like the same brand."
   },
   "insights": {
-    "eyebrow": "Insights · 2026 trend notes",
-    "h1": "Why the work",
-    "h1Em": "looks the way it does.",
-    "intro": "Every creative in my portfolio uses a format that's working on the platforms right now. These are my 2026 notes, drawn from recent platform research, with sources listed below.",
-    "groups": [
-      {
-        "title": "Product brands · Instagram & Facebook",
-        "items": [
-          {
-            "tag": "Reels · 3-second hook",
-            "title": "Reels lead, and they work on mute",
-            "text": "Reels take a large share of time spent on Instagram. The best ones hook viewers in three seconds and carry on-screen text for people watching with the sound off.",
-            "sources": [
-              1
-            ]
-          },
-          {
-            "tag": "Repeatable series",
-            "title": "A weekly series beats one-offs",
-            "text": "A recurring format with one fixed template builds recognition faster than unrelated posts. Followers know the post before they read it.",
-            "sources": [
-              1
-            ]
-          },
-          {
-            "tag": "Raw & relatable · Customer content",
-            "title": "Real beats perfect",
-            "text": "Honest, less-produced posts and reposted customer content are outperforming studio-perfect feeds. Customer posts are always reposted with permission.",
-            "sources": [
-              1,
-              2
-            ]
-          },
-          {
-            "tag": "Photo dump · Save-worthy carousel",
-            "title": "Photo dumps and teaching carousels",
-            "text": "Five to ten slides mixing polished and candid shots feel personal. Carousels that teach something earn saves.",
-            "sources": [
-              2
-            ]
-          },
-          {
-            "tag": "Editorial minimalism · Collab post",
-            "title": "Grain, space and handwriting",
-            "text": "Film grain, one subject with room to breathe and handwritten type all signal a human touch. Collab posts share one post across two brands' grids.",
-            "sources": [
-              2,
-              4
-            ]
-          },
-          {
-            "tag": "Grid & search",
-            "title": "The 3:4 grid and Instagram SEO",
-            "text": "Profile grids now preview at 3:4, so key content sits in the centre of each 4:5 post. Keyword-led captions and alt text help posts get found.",
-            "sources": [
-              3,
-              1
-            ]
-          }
-        ]
-      },
-      {
-        "title": "Service brands · LinkedIn & Facebook",
-        "items": [
-          {
-            "tag": "PDF carousel · 4:5",
-            "title": "LinkedIn PDF carousels, done properly",
-            "text": "Portrait slides, 5 to 15 of them, with one idea and under 60 words on each. The post copy runs to 100 to 200 words.",
-            "sources": [
-              5
-            ]
-          },
-          {
-            "tag": "People over logos",
-            "title": "People reach further than logos",
-            "text": "Posts from personal profiles tend to earn more engagement than company-page posts, so I write content your team can post as themselves.",
-            "sources": [
-              5
-            ]
-          },
-          {
-            "tag": "Raw screenshots · Lo-fi expert video",
-            "title": "Proof over polish",
-            "text": "First-person detail, real screenshots and simple subtitled videos from experts are outperforming generic templates.",
-            "sources": [
-              6
-            ]
-          },
-          {
-            "tag": "Zero-click value",
-            "title": "The whole answer, in the post",
-            "text": "LinkedIn favours posts that deliver their full value in the feed over posts that push people to a link.",
-            "sources": [
-              6
-            ]
-          },
-          {
-            "tag": "Newsletter with a fixed shape",
-            "title": "Repeatable newsletters",
-            "text": "A fixed structure, such as 3 proof points, 2 takes and 1 risk, makes every issue quick to read and quick to write.",
-            "sources": [
-              6
-            ]
-          },
-          {
-            "tag": "Moment-led post",
-            "title": "Timed to real moments",
-            "text": "Posts tied to a moment people already care about, like the first cold snap or a tax deadline, beat generic offers.",
-            "sources": [
-              1
-            ]
-          }
-        ]
-      }
-    ],
-    "sourcesTitle": "Sources",
-    "sources": [
-      {
-        "title": "Sprout Social, Instagram trends UK",
-        "url": "https://sproutsocial.com/insights/instagram-trends-uk/"
-      },
-      {
-        "title": "ContentStudio, Top Instagram photo trends in 2026",
-        "url": "https://contentstudio.io/blog/trending-visuals-for-instagram/"
-      },
-      {
-        "title": "Inro, Instagram post size 2026",
-        "url": "https://www.inro.social/blog/instagram-post-size"
-      },
-      {
-        "title": "Adobe Express, Design trends for 2026",
-        "url": "https://www.adobe.com/express/learn/blog/design-trends-2026"
-      },
-      {
-        "title": "Oktopost, LinkedIn carousel best practices for B2B in 2026",
-        "url": "https://www.oktopost.com/blog/linkedin-carousel-pdf-best-practices/"
-      },
-      {
-        "title": "Pettauer, LinkedIn trends 2026",
-        "url": "https://pettauer.net/en/linkedin-trends-2026-feed-zero-click-trust-signals/"
-      }
-    ]
+    "eyebrow": "Blog",
+    "h1": "Straight answers on content,",
+    "h1Em": "for busy business owners.",
+    "intro": "Practical notes on social media, newsletters and blogs for small product and service businesses in the UK and US. Written by me, from the work I do every week.",
+    "listTitle": "Latest articles",
+    "readMore": "Read the article",
+    "empty": "New articles are on the way."
   },
+
   "contact": {
     "eyebrow": "Contact",
     "h1": "Let's plan your",

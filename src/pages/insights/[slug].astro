@@ -1,0 +1,109 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PageHead from '../../components/PageHead.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import copy from '../../data/copy.json';
+import { url, absUrl } from '../../lib/url.js';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, others: posts.filter((p) => p.id !== post.id) } }));
+}
+
+const { post, others } = Astro.props;
+const d = post.data;
+const { Content, headings } = await render(post);
+const path = `/insights/${post.id}/`;
+const iso = (x) => x.toISOString().slice(0, 10);
+const fmt = (x) => x.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 220));
+const toc = headings.filter((h) => h.depth === 2);
+const home = absUrl('/', Astro.site);
+const schema = [
+  {
+    '@type': 'BlogPosting',
+    '@id': `${absUrl(path, Astro.site)}#article`,
+    headline: d.title,
+    description: d.description,
+    url: absUrl(path, Astro.site),
+    mainEntityOfPage: absUrl(path, Astro.site),
+    datePublished: iso(d.published),
+    dateModified: iso(d.updated ?? d.published),
+    inLanguage: 'en-GB',
+    wordCount: words,
+    keywords: [d.keyword, ...d.tags].join(', '),
+    image: absUrl('og-image.jpg', Astro.site),
+    author: {
+      '@type': 'Person',
+      '@id': `${home}#person`,
+      name: copy.site.name,
+      url: absUrl('/about/', Astro.site),
+      jobTitle: 'Freelance content & creative; marketing and brand lead',
+      sameAs: [copy.site.linkedin],
+    },
+    publisher: { '@id': `${home}#person` },
+    isPartOf: { '@type': 'Blog', url: absUrl('/insights/', Astro.site) },
+  },
+  ...(d.faq.length ? [{
+    '@type': 'FAQPage',
+    mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  }] : []),
+];
+const crumbs = [{ name: 'Blog', path: '/insights/' }, { name: d.title, path }];
+---
+<Layout title={d.seoTitle} description={d.description} path={path} current="/insights/" breadcrumbs={crumbs} schema={schema}
+  article={{ published: iso(d.published), modified: d.updated ? iso(d.updated) : undefined, tags: d.tags }}>
+  <PageHead eyebrow={d.tags[0] ?? 'Blog'} h1={d.title} crumbs={crumbs}>
+    <p class="post-meta">
+      By <a href={url('/about/')}>{copy.site.name}</a> · <time datetime={iso(d.published)}>{fmt(d.published)}</time>
+      {d.updated && <> · Updated <time datetime={iso(d.updated)}>{fmt(d.updated)}</time></>} · {minutes} min read
+    </p>
+  </PageHead>
+
+  <section class="band light">
+    <div class="wrap post-wrap">
+      {toc.length > 2 && (
+        <nav class="post-toc" aria-labelledby="toc-h">
+          <h2 class="eyebrow" id="toc-h">In this article</h2>
+          <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+        </nav>
+      )}
+      <article class="prose">
+        <Content />
+        {d.faq.length > 0 && (
+          <section class="post-faq" aria-labelledby="faq-h">
+            <h2 id="faq-h">Quick answers</h2>
+            {d.faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+          </section>
+        )}
+        <aside class="post-author" aria-label="About the author">
+          <span class="mono" aria-hidden="true">LB</span>
+          <p><b>{copy.site.name}</b> is a London-based marketing and brand lead who designs and writes social media, Mailchimp newsletters and WordPress blogs for small businesses in the UK and US. <a href={url('/about/')}>More about Lavi</a> or <a href={url('/services/')}>see the services</a>.</p>
+        </aside>
+      </article>
+    </div>
+  </section>
+
+  {others.length > 0 && (
+    <section class="band" aria-labelledby="more-h">
+      <div class="wrap">
+        <h2 class="mini-h" id="more-h">Keep <em>reading</em></h2>
+        <ul class="posts">
+          {others.slice(0, 3).map((p) => (
+            <li>
+              <article class="post-card">
+                <span class="eyebrow">{p.data.tags[0] ?? 'Article'}</span>
+                <h3><a href={url(`/insights/${p.id}/`)}>{p.data.title}</a></h3>
+                <p>{p.data.excerpt}</p>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+  <CtaBand />
+</Layout>

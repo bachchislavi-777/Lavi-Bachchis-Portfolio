@@ -9,7 +9,12 @@ import { url, absUrl } from '../../lib/url.js';
 export async function getStaticPaths() {
   const posts = (await getCollection('blog', ({ data }) => !data.draft))
     .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post, others: posts.filter((p) => p.id !== post.id) } }));
+  // "Keep reading": posts sharing the most tags first, then newest.
+  const shared = (a, b) => a.data.tags.filter((t) => b.data.tags.includes(t)).length;
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, others: posts.filter((p) => p.id !== post.id).sort((a, b) => shared(b, post) - shared(a, post)) },
+  }));
 }
 
 const { post, others } = Astro.props;
@@ -81,7 +86,7 @@ const crumbs = [{ name: 'Blog', path: '/insights/' }, { name: d.title, path }];
         )}
         <aside class="post-author" aria-label="About the author">
           <span class="mono" aria-hidden="true">LB</span>
-          <p><b>{copy.site.name}</b> is a London-based marketing and brand lead who designs and writes social media, Mailchimp newsletters and WordPress blogs for small businesses in the UK and US. <a href={url('/about/')}>More about Lavi</a> or <a href={url('/services/')}>see the services</a>.</p>
+          <p><b>{copy.site.name}</b> is a London-based marketing and brand lead who designs and writes social media, Mailchimp newsletters and WordPress blogs for small businesses in the UK and US, and runs <a href={url('/work/pawspeacepoems/')}>Paws, Peace &amp; Poems</a>, a page explaining psychology in plain, kind words. <a href={url('/about/')}>More about Lavi</a> or <a href={url('/services/')}>see the services</a>.</p>
         </aside>
       </article>
     </div>

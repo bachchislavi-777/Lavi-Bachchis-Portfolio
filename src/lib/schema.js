@@ -15,8 +15,8 @@ export function personSchema(site, extra = {}) {
     url: absUrl('/about/', site),
     image: absUrl('og-image.jpg', site),
     address: { '@type': 'PostalAddress', addressLocality: 'London', addressCountry: 'GB' },
-    sameAs: [s.linkedin],
-    knowsAbout: ['Social media content', 'Instagram carousels', 'Reel covers', 'LinkedIn PDF carousels', 'Mailchimp newsletters', 'WordPress blogs', 'Brand kits', 'Content strategy'],
+    sameAs: [s.linkedin, s.instagram],
+    knowsAbout: ['Social media content', 'Instagram carousels', 'Reel covers', 'LinkedIn PDF carousels', 'Mailchimp newsletters', 'WordPress blogs', 'Brand kits', 'Content strategy', 'Mental health and wellbeing content'],
     ...extra,
   };
 }
@@ -61,6 +61,20 @@ export function servicesSchema(site) {
 
 export function caseSchema(site, id) {
   const c = copy.cases[id];
+  if (c.type === 'own') {
+    return {
+      '@type': 'CreativeWork',
+      name: `${c.name}: own project`,
+      headline: copy.seo[id].title,
+      description: c.summary,
+      genre: 'Mental health and wellbeing education',
+      about: c.sector,
+      creator: { '@id': `${absUrl('/', site)}#person` },
+      url: absUrl(`/work/${id}/`, site),
+      sameAs: (c.links || []).map((l) => l.url),
+      inLanguage: 'en-GB',
+    };
+  }
   return {
     '@type': 'CreativeWork',
     name: `${c.name}: sample case study`,

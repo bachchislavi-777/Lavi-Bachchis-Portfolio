@@ -1,23 +1,23 @@
 ---
-import Picture from './Picture.astro';
+import CaseArt from './CaseArt.astro';
 import copy from '../data/copy.json';
-import { LEAD } from '../data/images.js';
 import { url } from '../lib/url.js';
 import { brandMark } from '../lib/tiles.js';
 const { brand, index, headingLevel = 3, showSummary = true } = Astro.props;
 const c = copy.cases[brand.id];
 const Tag = `h${headingLevel}`;
 const num = String(index + 1).padStart(2, '0');
+const typeLabel = c.type === 'own' ? copy.work.ownLabel : c.type === 'product' ? 'Product' : 'Service';
 ---
 <article class="cover">
   <a class="cover-link" href={url(`/work/${brand.id}/`)}>
     <span class="cover-img">
-      <Picture name={LEAD[brand.id]} sizes="(min-width: 1000px) 380px, (min-width: 620px) 50vw, 100vw" decorative />
+      <CaseArt brand={brand} sizes="(min-width: 1000px) 380px, (min-width: 620px) 50vw, 100vw" decorative />
       <span class="cover-num" aria-hidden="true">{num}</span>
-      <span class="cover-tag">{copy.work.sampleLabel}</span>
+      <span class="cover-tag">{brand.own ? copy.work.ownLabel : copy.work.sampleLabel}</span>
     </span>
     <span class="cover-body">
-      <span class="cover-top"><Fragment set:html={brandMark(brand)} /><small>{c.type === 'product' ? 'Product' : 'Service'} · {c.sector}</small></span>
+      <span class="cover-top"><Fragment set:html={brandMark(brand)} /><small>{typeLabel} · {c.sector}</small></span>
       <Tag class="cover-h">{c.name}</Tag>
       {showSummary && <span class="cover-sum">{c.summary}</span>}
       <span class="cover-cta">{copy.work.cardCta} <span aria-hidden="true">→</span></span>

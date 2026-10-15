@@ -4,21 +4,22 @@ import PageHead from '../../components/PageHead.astro';
 import CoverCard from '../../components/CoverCard.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import copy from '../../data/copy.json';
-import { B } from '../../data/brands.js';
+import { ALL } from '../../data/brands.js';
 import { absUrl } from '../../lib/url.js';
 
 const w = copy.work;
 const site = Astro.site;
 const groups = [
-  { g: 'product', light: true, eyebrow: w.productEyebrow, h2: w.productH2, em: w.productH2Em, p: w.productIntro },
-  { g: 'service', light: false, eyebrow: w.serviceEyebrow, h2: w.serviceH2, em: w.serviceH2Em, p: w.serviceIntro },
+  { g: 'own', light: true, eyebrow: w.ownEyebrow, h2: w.ownH2, em: w.ownH2Em, p: w.ownIntro },
+  { g: 'product', light: false, eyebrow: w.productEyebrow, h2: w.productH2, em: w.productH2Em, p: w.productIntro },
+  { g: 'service', light: true, eyebrow: w.serviceEyebrow, h2: w.serviceH2, em: w.serviceH2Em, p: w.serviceIntro },
 ];
 const list = {
   '@type': 'CollectionPage',
   name: copy.seo.work.title,
   description: copy.seo.work.description,
   url: absUrl('/work/', site),
-  hasPart: B.map((b) => ({ '@type': 'CreativeWork', name: `${copy.cases[b.id].name}: sample case study`, url: absUrl(`/work/${b.id}/`, site) })),
+  hasPart: ALL.map((b) => ({ '@type': 'CreativeWork', name: `${copy.cases[b.id].name}: ${b.own ? 'own project' : 'sample case study'}`, url: absUrl(`/work/${b.id}/`, site) })),
 };
 ---
 <Layout title={copy.seo.work.title} description={copy.seo.work.description} path="/work/" current="/work/"
@@ -37,7 +38,7 @@ const list = {
             <p>{grp.p}</p>
           </div>
           <div class="covers">
-            {B.map((b, i) => b.g === grp.g ? <CoverCard brand={b} index={i} /> : null)}
+            {ALL.map((b, i) => b.g === grp.g ? <CoverCard brand={b} index={i} /> : null)}
           </div>
         </div>
       </section>

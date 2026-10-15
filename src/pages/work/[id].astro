@@ -1,27 +1,32 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Picture from '../../components/Picture.astro';
+import { getCollection } from 'astro:content';
+import CaseArt from '../../components/CaseArt.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import copy from '../../data/copy.json';
-import { B } from '../../data/brands.js';
-import { LEAD } from '../../data/images.js';
+import { ALL } from '../../data/brands.js';
 import { url } from '../../lib/url.js';
 import { varStyle, idBoard, feed, creatives } from '../../lib/tiles.js';
 import { caseSchema } from '../../lib/schema.js';
 
 export function getStaticPaths() {
-  return B.map((b, i) => ({ params: { id: b.id }, props: { b, i } }));
+  return ALL.map((b, i) => ({ params: { id: b.id }, props: { b, i } }));
 }
 const { b, i } = Astro.props;
 const c = copy.cases[b.id];
 const seo = copy.seo[b.id];
-const next = B.find((x) => x.id === c.nextCase);
+const next = ALL.find((x) => x.id === c.nextCase);
 const nc = copy.cases[next.id];
 const num = String(i + 1).padStart(2, '0');
-const groupLabel = c.type === 'product' ? 'Product brand' : 'Service brand';
+const typeLabel = (t) => (t === 'own' ? copy.work.ownLabel : t === 'product' ? 'Product brand' : 'Service brand');
+const groupLabel = typeLabel(c.type);
 const path = `/work/${b.id}/`;
 const crumbs = [{ name: 'Work', path: '/work/' }, { name: c.name, path }];
-const sampleText = copy.site.footerNote;
+const noteLabel = b.own ? copy.work.ownLabel : copy.work.sampleLabel;
+const noteText = b.own ? copy.work.ownNote : copy.site.footerNote;
+const briefBy = b.own ? `In my words · ${copy.site.name}, founder` : `Sample client brief · ${c.name}, ${c.location}`;
+// Blog posts tagged with this brand's name (own projects only).
+const related = b.own ? (await getCollection('blog', ({ data }) => !data.draft && data.tags.includes(c.name))) : [];
 ---
 <Layout title={seo.title} description={seo.description} path={path} current="/work/" brandFonts
   breadcrumbs={crumbs} schema={[caseSchema(Astro.site, b.id)]}>
@@ -51,7 +56,8 @@ const sampleText = copy.site.footerNote;
             </dl>
           </div>
         </div>
-        <p class="sample-note"><b>{copy.work.sampleLabel}</b><span>{sampleText}</span></p>
+        <p class="sample-note"><b>{noteLabel}</b><span>{noteText}</span></p>
+        {c.links && <p class="case-links">{c.links.map((l) => <a class="btn ghost sm" href={l.url} rel="noopener" target="_blank">{l.label}<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a>)}</p>}
       </div>
     </header>
 
@@ -60,13 +66,13 @@ const sampleText = copy.site.footerNote;
         <h2 class="sr-only" id="brief-h">The brief</h2>
         <div class="ch-hero">
           <div class="ch-photo">
-            <Picture name={LEAD[b.id]} sizes="(min-width: 1000px) 660px, 100vw" eager />
+            <CaseArt brand={b} sizes="(min-width: 1000px) 660px, 100vw" eager />
             <div class="idc id-logo" aria-label={`${c.name} logo and tagline`} role="group"><span class="lbl" style="font-family:var(--f-m);font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.7">Logo &amp; tagline</span><div set:html={b.logo} /><div class="tagl">{b.tagline}</div></div>
           </div>
           <div class="ch-brief">
             <span class="eyebrow">The brief</span>
             <blockquote><p>{c.brief}</p></blockquote>
-            <span class="who">Sample client brief · {c.name}, {c.location}</span>
+            <span class="who">{briefBy}</span>
           </div>
         </div>
         <div class="ch-cols" style="margin-top:16px">
@@ -98,17 +104,36 @@ const sampleText = copy.site.footerNote;
       </div>
     </section>
 
+    {related.length > 0 && (
+      <section class="band light" aria-labelledby="reads-h">
+        <div class="wrap">
+          <h2 class="mini-h" id="reads-h">Read the <em>articles</em></h2>
+          <ul class="posts">
+            {related.map((p) => (
+              <li>
+                <article class="post-card">
+                  <span class="eyebrow">{p.data.tags[0]}</span>
+                  <h3><a href={url(`/insights/${p.id}/`)}>{p.data.title}</a></h3>
+                  <p>{p.data.excerpt}</p>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+
     <section class="band light" aria-labelledby="next-h">
       <div class="wrap">
         <h2 class="eyebrow" id="next-h" style="margin-bottom:18px">Next case study</h2>
         <a class="next" href={url(`/work/${next.id}/`)}>
           <span class="next-txt">
-            <small>{nc.type === 'product' ? 'Product' : 'Service'} brand · {nc.sector}</small>
+            <small>{typeLabel(nc.type)} · {nc.sector}</small>
             <strong>{nc.name}</strong>
             <span>{nc.summary}</span>
             <span class="btn" style="align-self:flex-start;margin-top:10px">{copy.work.cardCta} <span aria-hidden="true">→</span></span>
           </span>
-          <span class="next-img"><Picture name={LEAD[next.id]} sizes="(min-width: 620px) 50vw, 100vw" decorative /></span>
+          <span class="next-img"><CaseArt brand={next} sizes="(min-width: 620px) 50vw, 100vw" decorative /></span>
         </a>
         <p style="margin-top:22px"><a href={url('/work/')} class="btn ghost">All work</a></p>
       </div>

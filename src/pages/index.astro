@@ -4,7 +4,7 @@ import CoverCard from '../components/CoverCard.astro';
 import Process from '../components/Process.astro';
 import CtaBand from '../components/CtaBand.astro';
 import copy from '../data/copy.json';
-import { B } from '../data/brands.js';
+import { B, OWN } from '../data/brands.js';
 import { url } from '../lib/url.js';
 import { R, varStyle, panel, tabButton } from '../lib/tiles.js';
 import { personSchema, businessSchema } from '../lib/schema.js';
@@ -74,6 +74,14 @@ const icons = ['✦', '✎', '↗'];
         {B.map((b, i) => <CoverCard brand={b} index={i} />)}
       </div>
       <p class="sample-note"><b>{copy.work.sampleLabel}</b><span>{copy.site.footerNote}</span></p>
+      <div class="own-row">
+        <div>
+          <span class="eyebrow">{copy.work.ownEyebrow}</span>
+          <h3 class="mini-h" style="margin:14px 0 12px">{copy.work.ownH2} <em>{copy.work.ownH2Em}</em></h3>
+          <p>{copy.work.ownIntro}</p>
+        </div>
+        {OWN.map((b, i) => <CoverCard brand={b} index={B.length + i} />)}
+      </div>
     </div>
   </section>
 

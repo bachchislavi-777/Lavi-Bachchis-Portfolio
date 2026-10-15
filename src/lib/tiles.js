@@ -76,7 +76,7 @@ export function feed(b, lv = 4, siteHref = '#') {
       <div class="igh"><span class="iga" style="background:var(--ink);color:var(--bg);font-family:var(--fd);font-weight:var(--fw)" aria-hidden="true">${b.mark}</span>
         <div class="ign"><b>${b.handle}</b><span class="igb">Follow</span><span class="igb s">Message</span></div></div>
       <div class="igbio"><b>${b.name}</b><span class="igc">${b.cat}</span><p>${b.bio}</p><a href="${siteHref}">${b.site}</a></div>
-      <div class="ighl" aria-hidden="true">${b.hl.map((h, i) => `<span><i style="${pic(b.hli[i])}"></i>${h}</span>`).join('')}</div>
+      <div class="ighl" aria-hidden="true">${b.hl.map((h, i) => `<span><i style="${b.hlc ? `background:${v(b.hlc[i])}` : pic(b.hli[i])}"></i>${h}</span>`).join('')}</div>
       <div class="igtabs" aria-hidden="true"><span class="on">Posts</span><span>Reels</span><span>Tagged</span></div>
       <div class="iggrid">${b.grid.map(R).join('')}</div>
     </figure>

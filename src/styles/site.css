@@ -195,6 +195,23 @@ figure.ab-photo { margin: 0; }
 .mini-h em { font-style: italic; color: var(--ac); }
 @media (max-width: 1000px) { .ab-grid, .two { grid-template-columns: 1fr; } .ab-photo { max-width: 520px; } .vals { grid-template-columns: 1fr; } }
 
+/* ---------- Own projects (type-led lead visual instead of a photo) ---------- */
+.case-art { position: absolute; inset: 0; display: block; background: var(--bg); color: var(--ink); font-family: var(--fd); }
+.ch-photo > .case-art, .next-img > .case-art { border-radius: inherit; }
+.pp-cover { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 14px; padding: 9% 9% 42%; background: radial-gradient(120% 90% at 85% 10%, var(--soft) 0 40%, transparent 41%), var(--bg); container-type: inline-size; }
+.pp-paw { font-size: clamp(56px, 18cqi, 150px); line-height: 1; display: inline-flex; }
+.pp-k { font-family: var(--f-m); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: .7; }
+.pp-t { font-family: var(--fd); font-weight: 600; font-size: clamp(28px, 8.5cqi, 60px); line-height: 1.05; max-width: 14ch; }
+.cover-img .pp-cover, .next-img .pp-cover { padding: 8%; justify-content: flex-end; }
+.cover-img .pp-paw { font-size: 22cqi; }
+.cover-img .pp-t { font-size: 8cqi; }
+.cover-img:has(.case-art)::after { opacity: 0; }
+.cover-img:has(.case-art) .cover-num { color: rgba(0, 0, 0, .72); }
+.case-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.own-row { margin-top: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 40px; align-items: center; padding-top: 48px; border-top: 1px solid var(--ln); }
+.own-row p { color: var(--mt); font-size: 17px; }
+@media (max-width: 1000px) { .own-row { grid-template-columns: 1fr; } }
+
 /* ---------- Blog (/insights/) ---------- */
 .posts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .post-card { position: relative; height: 100%; background: var(--sf); border: 1px solid var(--ln); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; gap: 12px; transition: border-color .2s; }

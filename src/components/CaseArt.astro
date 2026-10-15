@@ -1,0 +1,13 @@
+---
+// Lead visual for a case study: the lead photo when there is one (LEAD), otherwise the brand's own
+// type-led cover (b.cover), drawn in the brand's colours.
+import Picture from './Picture.astro';
+import { LEAD } from '../data/images.js';
+import { varStyle } from '../lib/tiles.js';
+interface Props { brand: any; sizes?: string; eager?: boolean; decorative?: boolean }
+const { brand, sizes, eager = false, decorative = false } = Astro.props;
+const photo = LEAD[brand.id];
+---
+{photo
+  ? <Picture name={photo} sizes={sizes} eager={eager} decorative={decorative} />
+  : <span class="case-art" style={varStyle(brand)} role={decorative ? undefined : 'img'} aria-label={decorative ? undefined : `${brand.name}: ${brand.tagline}`} aria-hidden={decorative ? 'true' : undefined} set:html={brand.cover} />}

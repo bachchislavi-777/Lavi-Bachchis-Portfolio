@@ -11,7 +11,7 @@ export const GET: APIRoute = async ({ site }) => {
     .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
   const link = (name: string, path: string, note: string) => `- [${name}](${absUrl(path, site)}): ${note}`;
   const cases = Object.entries(copy.cases).map(([id, c]: [string, any]) =>
-    link(`${c.name} (sample case study)`, `/work/${id}/`, c.summary));
+    link(`${c.name} (${c.type === 'own' ? "Lavi's own project" : 'sample case study'})`, `/work/${id}/`, c.summary));
 
   const body = `# ${s.name}, ${s.role}
 
@@ -23,7 +23,8 @@ export const GET: APIRoute = async ({ site }) => {
 - How it works: a short intro call, a brand kit, a monthly content calendar the client approves, then design, writing and scheduling. Nothing is published without the client's sign-off.
 - Pricing: fixed monthly fee, quoted after a short call. No hourly billing.
 - Contact: ${s.email} · ${absUrl('/contact/', site)}
-- The six brands in the portfolio are sample case studies created to show the work, not real clients.
+- The portfolio has six sample case studies created to show the work (not real clients) and one real project of Lavi's own.
+- Own project: Paws, Peace & Poems (https://www.instagram.com/pawspeacenpoems/), a mental-health education page that explains psychology in plain, kind words, with a LinkedIn community group. It shares general wellbeing information, not therapy or medical advice; Lavi is not a qualified therapist.
 
 ## Main pages
 ${link('Home', '/', copy.seo.home.description)}
@@ -35,7 +36,7 @@ ${link('Contact', '/contact/', copy.seo.contact.description)}
 ## Blog
 ${posts.map((p) => link(p.data.title, `/insights/${p.id}/`, p.data.description)).join('\n')}
 
-## Sample case studies
+## Case studies
 ${cases.join('\n')}
 `;
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

@@ -97,7 +97,7 @@ export function feed(b, lv = 4, siteHref = '#') {
 
 /** Trend-led creatives. `lt` = heading level of "Trend-led creatives", `li` = level of each creative title. */
 export function creatives(b, lt = 4, li = 5) {
-  return `<div class="crt">${H(lt, 'ttl', 'Trend-led <em>creatives</em>')}<span class="spec-note">Swipe the carousels sideways</span></div>
+  return `<div class="crt">${H(lt, 'ttl', 'Posts in <em>current formats</em>')}<span class="spec-note">Scroll sideways to see each carousel</span></div>
   <div class="crs">${b.creatives.map((c) => `<article class="cr ${c.kind === 'car' ? 'wide' : ''} ${c.kind === 'li' ? 'li' : ''}"><span class="trendchip">${c.trend}</span>${H(li, 'ttl', c.title)}<div class="crb">${frame(c, b)}</div><p class="why">${c.why}</p><p class="spec">${c.spec}</p></article>`).join('')}</div>`;
 }
 

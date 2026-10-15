@@ -8,7 +8,7 @@ const s = copy.site;
   <div class="wrap">
     <div class="ft-grid">
       <div class="ft-me">
-        <a class="me" href={url('/')}><img class="logo-mark ft-mark" src={url('brand/lb-mark-96.png')} alt={`${s.name}, home`} width="64" height="64" loading="lazy" /></a>
+        <a class="me" href={url('/')}><img class="logo-mark ft-mark" src={url('brand/lb-mark.svg')} alt={`${s.name}, home`} width="64" height="64" loading="lazy" /></a>
         <p>{s.tagline}</p>
         <p class="ft-loc">{s.location} · {s.coverage}</p>
       </div>
@@ -16,7 +16,7 @@ const s = copy.site;
         <h2 class="ft-h">Pages</h2>
         <ul>
           {copy.nav.map((n) => <li><a href={url(n.href)}>{n.label}</a></li>)}
-          <li><a href={url('/privacy/')}>Privacy &amp; cookies</a></li>
+          <li><a href={url('/privacy/')}>Privacy</a></li>
         </ul>
       </nav>
       <div>
@@ -24,11 +24,12 @@ const s = copy.site;
         <ul>
           <li><a href={`mailto:${s.email}`}>{s.email}</a></li>
           <li><a href={`tel:${s.phoneHref}`}>{s.phoneDisplay}</a></li>
+          <li><a href={s.whatsapp} rel="noopener" target="_blank">WhatsApp<span class="sr-only"> (opens in a new tab)</span></a></li>
           <li><a href={s.linkedin} rel="noopener" target="_blank">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a></li>
         </ul>
       </div>
     </div>
-    <div class="fl"><span>{s.copyright}</span><span>{s.footerNote}</span></div>
+    <div class="fl"><span>{s.copyright}</span><span>{s.footerShort}</span></div>
     <p class="credits">{s.photoCredits}</p>
   </div>
 </footer>

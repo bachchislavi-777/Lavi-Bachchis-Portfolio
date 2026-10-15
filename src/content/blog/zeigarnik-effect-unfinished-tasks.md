@@ -6,12 +6,12 @@ excerpt: "Ticked off ten things but still feel you didn't do enough? Blame the o
 keyword: "Zeigarnik effect"
 regions: ["uk"]
 published: 2026-10-15
-tags: ["Mental wellbeing", "Psychology", "Paws, Peace & Poems"]
+tags: ["Mental wellbeing", "Psychology", "Productivity"]
 faq:
   - q: "What is the Zeigarnik effect in simple terms?"
     a: "It's the idea that we tend to remember unfinished or interrupted tasks better than finished ones. An incomplete task stays 'open' in the mind, so it keeps coming back to you until it's done or you've made a plan for it."
   - q: "Who discovered the Zeigarnik effect?"
-    a: "It's named after Bluma Zeigarnik, a psychologist who published research on it in 1927 while working with Kurt Lewin in Berlin. She found that people recalled tasks they'd been interrupted during more readily than tasks they had completed."
+    a: "It's named after Bluma Zeigarnik, a psychologist who published research on it in 1927 while working with Kurt Lewin in Berlin. She found that people recalled interrupted tasks more readily than completed ones."
   - q: "Is the Zeigarnik effect real?"
     a: "The original findings have been tested many times with mixed results, so the memory effect isn't guaranteed for everyone in every situation. The broader idea, that unfinished goals keep pulling at our attention, is well supported."
   - q: "How do I stop thinking about unfinished tasks at night?"
@@ -20,15 +20,15 @@ faq:
 
 <p class="tldr"><strong>In short:</strong> the Zeigarnik effect is our tendency to remember unfinished tasks better than finished ones. An incomplete task stays "open" in your mind and keeps nudging you. The good news is you don't always have to finish something to quiet it: making a clear plan for when you'll do it can be enough.</p>
 
-Have you ever had a really productive day, ticked off ten things, and still gone to bed feeling like you didn't do enough?
+Have you ever had a productive day, ticked off ten things, and still gone to bed feeling like you didn't do enough?
 
 It's usually because of the one thing you didn't finish. That single unanswered email or half-written report somehow outweighs everything you did get done. It follows you into the evening, pops up while you're brushing your teeth and sits in the back of your mind like a sticky note you can't peel off.
 
-There's a name for that. It's called the Zeigarnik effect, and once you know about it, you start seeing it everywhere.
+It has a name: the Zeigarnik effect.
 
 ## Where the Zeigarnik effect comes from
 
-The effect is named after Bluma Zeigarnik, a psychologist who studied it in Berlin in the 1920s, working with the psychologist Kurt Lewin.
+The effect is named after Bluma Zeigarnik, a psychologist who studied it in Berlin in the 1920s, working with Kurt Lewin.
 
 The story often told is that Lewin noticed something about waiters in a café: they could remember long, complicated orders perfectly, right up until the bill was paid. Then the details seemed to vanish.
 
@@ -44,11 +44,11 @@ The trouble is that modern life gives us a lot of open loops at once. Work tasks
 
 ## What the research says now
 
-It's worth being honest here: psychology research has moved on since 1927.
+Psychology research has moved on since 1927.
 
 Since Zeigarnik's original study, many researchers have tried to repeat it, with mixed results. The memory advantage for unfinished tasks doesn't show up for everyone in every situation. It seems to depend on things like how much you care about the task and why it was interrupted.
 
-But the bigger idea, that unfinished goals keep tugging at our thoughts, holds up well. And one study in particular is really useful in everyday life.
+But the bigger idea, that unfinished goals keep tugging at our thoughts, holds up well. And one study in particular is useful in everyday life.
 
 In 2011, psychologists E. J. Masicampo and Roy Baumeister published a study with a hopeful finding. People who were reminded of an important unfinished goal had more of those goal-related thoughts popping up during other tasks. But when people made a specific plan for how and when they'd complete the goal, those intrusive thoughts dropped away, even though they still hadn't done the task.
 

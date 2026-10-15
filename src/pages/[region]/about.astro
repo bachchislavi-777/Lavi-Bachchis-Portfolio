@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import PageHead from '../../components/PageHead.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import Recommendations from '../../components/Recommendations.astro';
 import { getCopy, setRegion, REGIONS } from '../../lib/region.js';
 setRegion(Astro.params.region);
 const copy = getCopy();
@@ -13,9 +14,9 @@ const a = copy.about;
 const icons = ['✦', '✎', '↗'];
 const profile = {
   '@type': 'ProfilePage',
-  name: copy.seo.about.title,
+  name: copy.seo.about.title.replace(/ \| Lavi Bachchis$/, ''),
   url: new URL(url('/about/'), Astro.site).href,
-  mainEntity: { '@id': `${new URL(url('/'), Astro.site).href}#person` },
+  mainEntity: { '@id': `${new URL('/', Astro.site).href}#person` },
 };
 ---
 <Layout title={copy.seo.about.title} description={copy.seo.about.description} path="/about/" current="/about/"
@@ -67,5 +68,6 @@ const profile = {
     </div>
   </section>
 
+  <Recommendations />
   <CtaBand />
 </Layout>

@@ -1,6 +1,6 @@
 ---
 title: "How to plan a month of social media content for a small business"
-seoTitle: "Social Media Content Plan for Small Business (Template)"
+seoTitle: "Monthly Social Media Content Plan for Small Businesses"
 description: "A simple, step-by-step way to plan a month of social media content for your small business: content pillars, a weekly rhythm and a calendar you'll stick to."
 excerpt: "Content pillars, a weekly rhythm and one planning afternoon a month. The exact process I use for every brand."
 keyword: "social media content plan for small business"
@@ -19,7 +19,7 @@ faq:
 
 <p class="tldr"><strong>The process in one line:</strong> pick three or four content pillars, set a weekly rhythm you can actually keep, map the month's key dates, fill the calendar, then make everything in one or two batches. One afternoon of planning saves you from the "what do I post today?" panic for the rest of the month.</p>
 
-Most small businesses don't have a content problem. They have a planning problem. The ideas are there, but they arrive at 9pm on a Thursday, when nobody has the energy to design anything.
+Most small businesses have plenty of ideas; what they lack is a plan. The ideas are there, but they arrive at 9pm on a Thursday, when nobody has the energy to design anything.
 
 Here's the process I use for every brand I work with. It works whether you're doing it yourself or handing it to someone else.
 
@@ -40,7 +40,7 @@ You can see this in practice in the [Lowtide Coffee sample](../../work/lowtide/)
 
 ## Step 2: Set a weekly rhythm you can keep
 
-Consistency beats frequency every time. Three good posts a week, every week, will do more for you than daily posting for two weeks followed by silence.
+Three good posts a week, every week, will do more for you than daily posting for two weeks followed by silence.
 
 A simple rhythm might be:
 
@@ -50,7 +50,7 @@ A simple rhythm might be:
 | Wednesday | Product or service post | Product / answers |
 | Friday | Customer post, review or behind the scenes | Proof / people |
 
-Once a rhythm is set, a recurring series makes it even easier. "Tip Tuesday", "Ask us anything" or a monthly photo dump gives followers something they know on sight, and gives you a template to fill rather than a blank page.
+Once a rhythm is set, a recurring series makes it even easier. "Tip Monday", "Ask us anything Friday" or a monthly photo dump gives followers something they know on sight, and gives you a template to fill rather than a blank page.
 
 ## Step 3: Map the month's key dates
 
@@ -72,7 +72,7 @@ Now put it together. For each post, write down:
 4. **The hook**: the first line, or the text on the first slide
 5. **The call to action**: save this, shop now, book a call, reply with a question
 
-A spreadsheet is honestly enough for this. Don't spend a week choosing the perfect tool.
+A spreadsheet is enough for this. Don't spend a week choosing the perfect tool.
 
 Then look at the month as a whole. Is it all selling? Add some education. Is it all tips? Add some personality. Do three posts in a row look the same? Mix up the formats so your grid doesn't feel repetitive.
 
@@ -84,15 +84,15 @@ This is where most of the time is saved. Instead of making one post a day, make 
 - **Write** every caption in another, including alt text and a few relevant keywords, because people now search Instagram and LinkedIn the way they search Google.
 - **Schedule** the lot using Meta Business Suite, LinkedIn's own scheduler or whatever tool you prefer.
 
-Batching isn't just faster. Your content is more consistent, because you're in the same headspace for all of it.
+Batching is faster, and it makes your content more consistent, because you're in the same headspace for all of it.
 
 ## Step 6: Review, then repeat
 
-At the end of the month, spend twenty minutes looking at what worked. Not just likes. Look at saves, shares, comments and messages, because those tell you what people actually valued.
+At the end of the month, spend twenty minutes looking at what worked. Look beyond likes, at saves, shares, comments and messages, because those tell you what people actually valued.
 
 Do more of what earned saves and replies. Quietly drop what didn't. Then plan next month.
 
-## The bit nobody tells you
+## Keep it simple enough to stick to
 
 The plan matters less than sticking to it. A simple calendar you follow beats a beautiful one you abandon by week two. If you know you'll struggle to keep going in busy months, plan fewer posts, not more.
 

@@ -82,7 +82,7 @@ const related = b.own ? (await getCollection('blog', ({ data }) => !data.draft &
         <div class="ch-cols" style="margin-top:16px">
           <div class="ch-card"><span class="eyebrow">01 · Challenge</span><h3>The <em>challenge</em></h3><p>{c.challenge}</p></div>
           <div class="ch-card"><span class="eyebrow">02 · Approach</span><h3>The <em>approach</em></h3><ol>{c.approach.map((a) => <li><span>{a}</span></li>)}</ol></div>
-          <div class="ch-card"><span class="eyebrow">03 · Deliverables</span><h3>What I <em>delivered</em></h3><ul>{c.deliverables.map((d) => <li><span>{d}</span></li>)}</ul></div>
+          <div class="ch-card"><span class="eyebrow">03 · Deliverables</span><h3>What I <em>made</em></h3><ul>{c.deliverables.map((d) => <li><span>{d}</span></li>)}</ul></div>
         </div>
         {c.note && <p class="case-note"><b>Please note</b><span>{c.note}</span></p>}
       </div>
@@ -102,7 +102,7 @@ const related = b.own ? (await getCollection('blog', ({ data }) => !data.draft &
             <Fragment set:html={feed(b, 3, '#id-h')} />
           </div>
           <div class="case-sec">
-            <Fragment set:html={creatives(b, 2, 3).replace('class="ttl">Trend-led', 'class="ttl sec-h" style="margin:0">Trend-led')} />
+            <Fragment set:html={creatives(b, 2, 3).replace('class="ttl">Posts in', 'class="ttl sec-h" style="margin:0">Posts in')} />
           </div>
         </div>
       </div>

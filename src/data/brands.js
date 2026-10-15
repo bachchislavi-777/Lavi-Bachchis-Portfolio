@@ -35,7 +35,7 @@ export const B = [
  ],
  creatives:[
   {kind:'reel',trend:'Reels · 3-second hook',title:'Routine Reel cover',tile:{t:'reel',src:'sol4',hook:'Stop layering nine products.',hl:'bg',hc:'ink'},caption:'The 3-step evening routine our founder actually uses ↓',why:'The hook reads before the sound comes on, and the caption carries the search keyword.',spec:'9:16 · 1080×1920 · text in the centre safe zone'},
-  {kind:'single',trend:'Customer content',title:'Customer repost',tile:{t:'ugc',src:'gsol_face',text:'3 weeks in. Calmer skin, shorter routine.',handle:'@customer · reposted with permission'},why:'A real customer in real light builds more trust than another studio shot.',spec:'1080×1350 (4:5) · sample post'},
+  {kind:'single',trend:'Customer content',title:'Customer repost',tile:{t:'ugc',src:'gsol_face',text:'3 weeks in. Calmer skin, shorter routine.',handle:'Sample customer post'},why:'In a live feed this slot is a real customer’s photo, reposted with their permission. Customer photos build more trust than another studio shot.',spec:'1080×1350 (4:5) · sample post'},
   {kind:'car',trend:'Save-worthy carousel',title:'How-to carousel',slides:[
     {t:'pic',src:'gsol_hero',k:'Ritual Notes',title:'How to use face oil without the shine',fs:'10.5cqi',at:'bot'},
     {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'01',title:'Start on damp skin',body:'Oil spreads further and sinks in faster after toner or a splash of water.',brand:'Solenne',pg:'2 / 5'},
@@ -58,7 +58,7 @@ export const B = [
  logo:`<div class="lg" style="font-family:var(--fd);font-weight:800;font-size:clamp(44px,5.6vw,62px);letter-spacing:-.03em;display:flex;align-items:center;gap:.18em"><svg viewBox="0 0 40 26" width=".9em" height=".6em" aria-hidden="true"><path d="M2 8c6-6 10 6 18 0s12 6 18 0M2 19c6-6 10 6 18 0s12 6 18 0" style="fill:none;stroke:var(--acc);stroke-width:3.6;stroke-linecap:round"/></svg>lowtide</div><div class="lgs">Coffee roasters · Cornwall</div>`,
  tagline:'Roasted by the sea.',
  palette:[{n:'Foam',h:'#F3EEE6'},{n:'Sand',h:'#D9C2A0'},{n:'Sea Glass',h:'#8FB8B0'},{n:'Sunrise',h:'#F08A4B'},{n:'Deep Tide',h:'#13314A'}],
- sample:'Roasted every Tuesday on the Cornish coast and posted the same day, so it lands while it’s at its best.',
+ sample:'Roasted every Tuesday on the Cornish coast and sent out the same day, so it lands while it’s at its best.',
  voice:['Playful','Coastal','Unfussy'], say:'Roasted Tuesday. Gone by Friday.', nosay:'An artisanal coffee journey awaits.',
  handle:'lowtide.coffee', bio:'Small-batch coffee, roasted on the Cornish coast every Tuesday.', site:'lowtide.example', hl:['Brew guides','Roastery','Cupping Club','Café'], hli:['glow_pour','glow_bag','low4','glow_latte'],
  pillars:[{n:'Product',c:'acc',d:'Beans, brews and the roastery, shot warm and close.'},{n:'Brew education',c:'sec',d:'Recipes, grind guides and quick fixes.'},{n:'Community & series',c:'ink',d:'Cupping Club, collabs and customer words.'}],
@@ -68,7 +68,7 @@ export const B = [
  grid:[
   {t:'pic',src:'glow_bag',cap:'Sunrise Blend · 250 g',capc:'#fff'},
   {t:'type',bg:'ink',fg:'bg',k:'Fresh every week',kc:'acc',text:'Roasted Tuesday. In your cup by Friday.',fs:'11.5cqi'},
-  {t:'pic',src:'glow_latte',cap:'Flat white, Saturday'},
+  {t:'pic',src:'glow_latte',cap:'Latte, Saturday'},
   {t:'list',bg:'bg',fg:'ink',acc:'acc',k:'Brew guide',title:'V60 in four steps',items:['15 g coffee, medium-fine','250 g water at 94°C','Bloom for 40 seconds','Finish at about 3 minutes'],num:true},
   {t:'series',bg:'acc',fg:'ink',acc:'bg',name:'Cupping Club',ep:'Ep. 12',title:'Ethiopia, Guji',h:'Every Thursday'},
   {t:'pic',src:'low4',tag:'New',tagbg:'acc',tagc:'ink',cap:'Espresso, dialled in'},
@@ -78,7 +78,7 @@ export const B = [
  ],
  creatives:[
   {kind:'reel',trend:'Reels · 3-second hook',title:'Brew-fix Reel cover',tile:{t:'reel',src:'low4',hook:'Your coffee tastes bitter for one reason.',hl:'acc',hc:'ink'},caption:'(It’s usually the grind.) The fix is in the caption.',why:'A specific problem in the first frame stops the scroll; the answer keeps people watching.',spec:'9:16 · 1080×1920'},
-  {kind:'single',trend:'Collab post',title:'Collab with a local bakery',tile:{t:'pic',src:'glow_latte',k:'Saturdays only',title:'Lowtide × Harbour Bakery',fs:'10.5cqi',cap:'Cardamom bun + Sunrise flat white',tag:'Collab',tagbg:'acc',tagc:'ink'},why:'A collab post shows on both grids at once, so each brand reaches the other’s followers.',spec:'1080×1350 (4:5) · Instagram collab post'},
+  {kind:'single',trend:'Collab post',title:'Collab with a local bakery',tile:{t:'pic',src:'glow_latte',k:'Saturdays only',title:'Lowtide × Harbour Bakery',fs:'10.5cqi',cap:'Cardamom bun + Sunrise latte',tag:'Collab',tagbg:'acc',tagc:'ink'},why:'A collab post shows on both grids at once, so each brand reaches the other’s followers.',spec:'1080×1350 (4:5) · Instagram collab post'},
   {kind:'car',trend:'Repeatable series',title:'Cupping Club · one template, every week',slides:[
     {t:'series',bg:'acc',fg:'ink',acc:'bg',name:'Cupping Club',ep:'Ep. 12',title:'Ethiopia, Guji',h:'Jasmine · peach · black tea'},
     {t:'series',bg:'sec',fg:'ink',acc:'bg',name:'Cupping Club',ep:'Ep. 13',title:'Colombia, Huila',h:'Red apple · panela · cocoa'},
@@ -86,8 +86,8 @@ export const B = [
     {t:'series',bg:'ter',fg:'ink',acc:'bg',name:'Cupping Club',ep:'Ep. 15',title:'Kenya, Nyeri',h:'Blackcurrant · grapefruit'}],why:'The same layout every Thursday means followers recognise the post before they read it.',spec:'Weekly series · 1080×1350 (4:5) · matching Reel covers'},
   {kind:'car',trend:'Save-worthy carousel',title:'"Grind size, explained" carousel',slides:[
     {t:'pic',src:'glow_bag',k:'Brew school',title:'Grind size, explained in three slides',fs:'10.5cqi'},
-    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'Fine',ns:'15cqi',title:'Espresso',body:'About as fine as table salt. Water passes through fast, so the grind does the work.',brand:'Lowtide',pg:'2 / 5'},
-    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'Medium',ns:'15cqi',title:'Pour-over',body:'Like coarse sand. Brews in around three minutes.',brand:'Lowtide',pg:'3 / 5'},
+    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'Fine',ns:'15cqi',title:'Espresso',body:'A little finer than table salt. Water is pushed through in about 30 seconds.',brand:'Lowtide',pg:'2 / 5'},
+    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'Medium-fine',ns:'12cqi',title:'Pour-over',body:'Like table salt or fine sand. Brews in around three minutes.',brand:'Lowtide',pg:'3 / 5'},
     {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'Coarse',ns:'15cqi',title:'Cafetière',body:'Like sea salt. Four minutes of steeping, then press slowly.',brand:'Lowtide',pg:'4 / 5'},
     {t:'cta',bg:'acc',fg:'ink',acc:'ink',bc:'bg',title:'Not sure? We’ll grind it for you.',btn:'Choose your grind',sub:'Free on every order'}],why:'A plain answer to a common question gets saved and sent to friends.',spec:'5 slides · 1080×1350 (4:5)'}
  ]
@@ -110,7 +110,7 @@ export const B = [
  grid:[
   {t:'pic',src:'gloom_stack',cap:'Autumn throws · Merino blend'},
   {t:'type',bg:'ink',fg:'bg',k:'Loom House',kc:'acc',text:'Made to be lived on.',fs:'16cqi'},
-  {t:'pic',src:'loom4',cap:'Lancashire wool, ready to weave'},
+  {t:'pic',src:'loom4',cap:'Yarn, ready to weave'},
   {t:'swatch',bg:'soft',fg:'ink',k:'Autumn colourways',title:'Four shades, one weave',sw:[{n:'Indigo',c:'ink'},{n:'Saffron',c:'acc'},{n:'Olive',c:'sec'},{n:'Oat',c:'ter'}]},
   {t:'pic',src:'gloom_sofa',tag:'Your homes',tagbg:'bg',tagc:'ink'},
   {t:'list',bg:'bg',fg:'ink',acc:'acc',k:'Care guide',title:'Care in three lines',items:['Cool wash, wool cycle','Dry flat, away from heat','Air it between uses']},
@@ -119,7 +119,7 @@ export const B = [
   {t:'reel',src:'gloom_mill',hook:'60 seconds inside the mill',hl:'acc',hc:'ink'}
  ],
  creatives:[
-  {kind:'single',trend:'Editorial minimalism',title:'Single-product hero',tile:{t:'pic',src:'gloom_stack',shade:false,tag:'Loom House',tagbg:'bg',tagc:'ink'},why:'One room, soft light and plenty of space lets texture carry the post.',spec:'1080×1350 (4:5)'},
+  {kind:'single',trend:'Editorial minimalism',title:'Single-product hero',tile:{t:'pic',src:'gloom_stack',shade:false,tag:'Loom House',tagbg:'bg',tagc:'ink'},why:'One room, soft light and plenty of space let texture carry the post.',spec:'1080×1350 (4:5)'},
   {kind:'reel',trend:'Reels · 3-second hook',title:'Styling Reel cover',tile:{t:'reel',src:'gloom_sofa',hook:'One throw. Five ways. No new furniture.',hl:'acc',hc:'ink'},caption:'Number four is the one everyone screenshots.',why:'A promise in the first frame, with on-screen text for sound-off viewers.',spec:'9:16 · 1080×1920'},
   {kind:'single',trend:'Repeatable series',title:'Mill Diaries cover',tile:{t:'pic',src:'gloom_mill',k:'Mill Diaries · No. 07',title:'Warping the loom',fs:'12cqi',at:'bot'},why:'A recurring behind-the-scenes series turns the craft into content people look forward to.',spec:'1080×1350 (4:5) · every other Wednesday'},
   {kind:'car',trend:'Photo dump',title:'"A week at the mill" photo dump',slides:[
@@ -162,7 +162,7 @@ export const B = [
     {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'01',title:'Instruct and ID checks',body:'We check your ID, confirm where your funds come from and request the draft contract.',brand:'Ashby Grant',pg:'2 / 6'},
     {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'02',title:'Searches and enquiries',body:'Local authority, water and environmental searches, plus questions on anything unclear.',brand:'Ashby Grant',pg:'3 / 6'},
     {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'03',title:'Exchange of contracts',body:'Contracts are signed and swapped. From here, both sides are legally committed.',brand:'Ashby Grant',pg:'4 / 6'},
-    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'04',title:'Completion',body:'Money moves, the keys are released and we register you as the new owner.',brand:'Ashby Grant',pg:'5 / 6'},
+    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'04',title:'Completion',body:'Money moves and the keys are released. We then pay any Stamp Duty and register you with HM Land Registry.',brand:'Ashby Grant',pg:'5 / 6'},
     {t:'cta',bg:'ink',fg:'bg',acc:'acc',bc:'ink',title:'Questions about your move?',btn:'Ask in the comments',sub:'We reply to every one'}],why:'One step per slide, well under 60 words each, with the full explanation in the post copy.',spec:'6 slides · 1080×1350 · uploaded as a PDF'},
   {kind:'li',trend:'People over logos',title:'Partner’s personal LinkedIn post',who:'James Whitfield',role:'Partner, Private Client · Ashby Grant',avsrc:'ash3',ar:'1.91/1',
    text:`Last week a client asked why I always ask about the family dog.
@@ -175,9 +175,9 @@ Three things I now ask everyone:
 3. Has anything changed since your last will: a move, a marriage, a separation?
 
 Ten minutes of thinking now saves a family months of guessing later.`,
-   img:{t:'pic',src:'ash4',shade:false,pos:'center 60%'},why:'Written for a partner’s own profile, in the first person, about real work.',spec:'~120 words · 1200×627 image'},
-  {kind:'single',trend:'Lo-fi expert video',title:'60-second explainer cover',tile:{t:'video',src:'ash3',dur:'0:58',sub:'If you’re not married, your partner won’t automatically inherit without a will.',k:'Ask Ashby',kb:'acc',kc:'ink'},why:'A real solicitor, subtitled, filmed on a phone. It feels like advice, not an advert.',spec:'4:5 · 1080×1350 · burned-in subtitles'},
-  {kind:'single',trend:'Zero-click value',title:'Myth vs fact card',tile:{t:'myth',bg:'ink',fg:'bg',fb:'acc',fc:'ink',myth:'If we split up, the house is shared 50/50.',fact:'For unmarried couples it usually depends on whose name is on the deeds. A declaration of trust sets out who owns what.',h:'Ask Ashby · Q.09'},why:'The whole answer sits in the post, so nobody needs to click away to get value.',spec:'1080×1350 (4:5)'}
+   img:{t:'pic',src:'ash4',shade:false,pos:'center 60%'},why:'Written for a partner’s own profile, in the first person, about real work.',spec:'~90 words · 1200×627 image'},
+  {kind:'single',trend:'Lo-fi expert video',title:'60-second explainer cover',tile:{t:'video',src:'ash3',dur:'0:58',sub:'If you’re not married, your partner won’t automatically inherit without a will.',k:'Ask Ashby',kb:'acc',kc:'ink'},why:'A real solicitor, subtitled, filmed on a phone. It feels like a solicitor talking to you.',spec:'4:5 · 1080×1350 · burned-in subtitles'},
+  {kind:'single',trend:'Answer in the post',title:'Myth vs fact card',tile:{t:'myth',bg:'ink',fg:'bg',fb:'acc',fc:'ink',myth:'If we split up, the house is shared 50/50.',fact:'For unmarried couples it usually depends on whose name is on the deeds. A declaration of trust sets out who owns what.',h:'Ask Ashby · Q.09'},why:'The whole answer sits in the post, so nobody needs to click away to get value.',spec:'1080×1350 (4:5)'}
  ]
 },
 {
@@ -199,7 +199,7 @@ Ten minutes of thinking now saves a family months of guessing later.`,
   {t:'type',bg:'ink',fg:'bg',k:'Northfield Accountants',kc:'sec',text:'Numbers, made calm.',fs:'15cqi'},
   {t:'list',bg:'sec',fg:'ink',acc:'acc',k:'Tax diary',title:'Self Assessment dates',items:['31 Oct · paper returns due','31 Jan · online returns due','31 Jan · tax owed and first payment on account']},
   {t:'pic',src:'nor2',title:'Receipts in a shoebox? We’ve seen worse.',fs:'9cqi'},
-  {t:'list',bg:'bg',fg:'ink',acc:'acc',k:'Making Tax Digital',title:'The new yearly rhythm',items:['Keep digital records','Send quarterly updates','Submit a final declaration'],num:true},
+  {t:'list',bg:'bg',fg:'ink',acc:'acc',k:'Making Tax Digital',title:'The new yearly rhythm',items:['Keep digital records','Send quarterly updates','Submit your tax return by 31 January'],num:true},
   {t:'quote',bg:'acc',fg:'ink',acc:'ink',text:'Our accountant answers the phone. Revolutionary.',by:'Sample client review'},
   {t:'person',src:'nor3',name:'Maria Lopes',role:'Client Manager',nb:'bg',nc:'ink'},
   {t:'list',bg:'soft',fg:'ink',acc:'ink',k:'Year end',title:'Before you send us your books',items:['Every bank statement','Your mileage log','Receipts for new equipment']},
@@ -209,14 +209,14 @@ Ten minutes of thinking now saves a family months of guessing later.`,
  creatives:[
   {kind:'car',trend:'PDF carousel · 4:5',title:'Making Tax Digital explainer',slides:[
     {t:'type',bg:'ink',fg:'bg',k:'Making Tax Digital',kc:'sec',text:'Income Tax records are going quarterly. Here’s what changes.',fs:'10cqi',h:'Swipe →'},
-    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'01',title:'Who it affects',body:'Sole traders and landlords above the income threshold, which steps down over the next few years.',brand:'Northfield',pg:'2 / 6'},
+    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'01',title:'Who it affects',body:'Sole traders and landlords with over £50,000 of income before expenses, falling to £30,000 in 2027 and £20,000 in 2028.',brand:'Northfield',pg:'2 / 6'},
     {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'02',title:'Digital records',body:'Income and costs kept in compatible software as you go, not pieced together in January.',brand:'Northfield',pg:'3 / 6'},
     {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'03',title:'Quarterly updates',body:'A short summary of your figures sent to HMRC every three months.',brand:'Northfield',pg:'4 / 6'},
-    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'04',title:'Final declaration',body:'One year-end submission that confirms the full picture.',brand:'Northfield',pg:'5 / 6'},
-    {t:'cta',bg:'acc',fg:'ink',acc:'ink',bc:'bg',title:'Not sure if it applies to you?',btn:'Ask us in the comments',sub:'Every question gets an answer'}],why:'A process framework, one step per slide, posted from the partner’s own profile for reach.',spec:'6 slides · 1080×1350 · uploaded as a PDF'},
-  {kind:'single',trend:'Raw screenshots',title:'Annotated spreadsheet post',tile:{t:'sheet',file:'tax-pot.xlsx',rows:[['Month','Income','Costs','Set aside (25%)'],['Aug','£6,200','£1,450','£1,190'],['Sep','£5,800','£1,320','£1,120'],['Oct','£7,100','£1,610','£1,370']],hlcol:3,note:'↑ this column = no January panic',hc:'#C2410C'},why:'A real working file feels more trustworthy than another polished template.',spec:'1080×1350 (4:5) · illustrative figures'},
-  {kind:'single',trend:'Zero-click value',title:'"Screenshot this" checklist',tile:{t:'list',bg:'ink',fg:'bg',acc:'sec',k:'Screenshot this',title:'Your year-end checklist',items:['Statements for every account','Sales invoices and receipts','Mileage log','Use-of-home details','Pension contributions','New equipment bought'],h:'Northfield Accountants'},why:'Useful enough to save without clicking anywhere, and it brings people back in January.',spec:'1080×1350 (4:5)'},
-  {kind:'single',trend:'Newsletter with a fixed shape',title:'LinkedIn newsletter · 3-2-1',ar:'auto',tile:{t:'nl',bg:'bg',fg:'ink',acc:'sec',kc:'acc',k:'The Calm Ledger · Issue 14',title:'This month, in six lines',blocks:[{n:'3',h:'Things that held up',items:['Snapping receipts weekly makes quarterly updates quicker','A separate business account simplifies year end','A fixed monthly salary smooths cash flow']},{n:'2',h:'Our takes',items:['Software doesn’t replace a quarterly review','Your accountant should be a phone call, not a portal']},{n:'1',h:'Risk to watch',items:['Payments on account are due on 31 January. Set the money aside now.']}]},why:'The same 3-2-1 shape every issue makes it quick to read and quick to write.',spec:'LinkedIn newsletter · article + 1920×1080 cover'}
+    {t:'step',bg:'bg',fg:'ink',acc:'acc',num:'04',title:'Tax return',body:'One year-end return, by 31 January, that confirms the full picture.',brand:'Northfield',pg:'5 / 6'},
+    {t:'cta',bg:'acc',fg:'ink',acc:'ink',bc:'bg',title:'Not sure if it applies to you?',btn:'Ask us in the comments',sub:'Every question gets an answer'}],why:'One step per slide, posted from an accountant’s own profile, which usually reaches more people than the firm’s page.',spec:'6 slides · 1080×1350 · uploaded as a PDF'},
+  {kind:'single',trend:'Raw screenshots',title:'Annotated spreadsheet post',tile:{t:'sheet',file:'tax-pot.xlsx',rows:[['Month','Income','Costs','Set aside (25% of profit)'],['Aug','£6,200','£1,450','£1,190'],['Sep','£5,800','£1,320','£1,120'],['Oct','£7,100','£1,610','£1,370']],hlcol:3,note:'↑ this column = no January panic',hc:'#C2410C'},why:'A real working file feels more trustworthy than another polished template.',spec:'1080×1350 (4:5) · illustrative figures'},
+  {kind:'single',trend:'Answer in the post',title:'"Screenshot this" checklist',tile:{t:'list',bg:'ink',fg:'bg',acc:'sec',k:'Screenshot this',title:'Your year-end checklist',items:['Statements for every account','Sales invoices and receipts','Mileage log','Use-of-home details','Pension contributions','New equipment bought'],h:'Northfield Accountants'},why:'Useful enough to save without clicking anywhere, and it brings people back in January.',spec:'1080×1350 (4:5)'},
+  {kind:'single',trend:'Newsletter with a fixed shape',title:'LinkedIn newsletter · 3-2-1',ar:'auto',tile:{t:'nl',bg:'bg',fg:'ink',acc:'sec',kc:'acc',k:'The Calm Ledger · Issue 14',title:'This month, in six lines',blocks:[{n:'3',h:'Things that held up',items:['Snapping receipts weekly makes quarterly updates quicker','A separate business account simplifies year end','A fixed monthly salary smooths cash flow']},{n:'2',h:'Our takes',items:['Software doesn’t replace a quarterly review','Your accountant should be a phone call, not a portal']},{n:'1',h:'Risk to watch',items:['Payments on account are due on 31 January and 31 July. Set the money aside now.']}]},why:'The same 3-2-1 shape every issue makes it quick to read and quick to write.',spec:'LinkedIn newsletter · article + 1920×1080 cover'}
  ]
 },
 {
@@ -229,10 +229,10 @@ Ten minutes of thinking now saves a family months of guessing later.`,
  palette:[{n:'Cool White',h:'#F4F5F2'},{n:'Concrete',h:'#D7DBD6'},{n:'Signal Yellow',h:'#F5C543'},{n:'Teal',h:'#2B7A78'},{n:'Charcoal',h:'#1F2326'}],
  sample:'We’ll be there at 8, we’ll give you a fixed price before we start, and we’ll leave the place cleaner than we found it.',
  voice:['Straight-talking','Local','Dependable'], say:'We’ll be there at 8. Fixed price, no surprises.', nosay:'Your trusted total home solutions partner.',
- handle:'halden.heating', bio:'Gas Safe registered plumbing and heating in Leicester. Warm homes, straight answers.', site:'halden.example', hl:['Two-Minute Fix','Jobs','Radiators','Book'], hli:['hal3','hal1','hal2','ghal_boiler'],
+ handle:'halden.heating', bio:'Plumbing and heating in Leicester. Warm homes, straight answers.', site:'halden.example', hl:['Two-Minute Fix','Jobs','Radiators','Boilers'], hli:['hal3','hal1','hal2','ghal_boiler'],
  pillars:[{n:'Practical tips',c:'sec',d:'Two-Minute Fix and seasonal checks.'},{n:'Local proof',c:'acc',d:'Real jobs, before and afters, reviews.'},{n:'Team & van',c:'ink',d:'The engineers people already recognise.'}],
  gridNote:'Signal yellow is the van, the uniform and the logo, so it anchors one post per row. Teal handles the helpful tips, and real job photos keep it honest.',
- caption:'Radiator cold at the top? Bleed it in 60 seconds before you call anyone out. Here’s how, and when it’s time to call an engineer instead. Covering Leicester and 10 miles around. #heatingtips #boilerservice #localplumber',
+ caption:'Radiator cold at the top? Bleed it in 60 seconds before you call anyone out. Here’s how, and when it’s time to call an engineer instead. Heating off and cooled down first. Covering Leicester and within 10 miles. #heatingtips #boilerservice #localplumber',
  alt:'White combi boiler with neat copper pipework, fitted in a sage green kitchen.',
  grid:[
   {t:'pic',src:'ghal_boiler',cap:'Boiler service season',tag:'Book now',tagbg:'acc',tagc:'ink'},
@@ -241,18 +241,18 @@ Ten minutes of thinking now saves a family months of guessing later.`,
   {t:'list',bg:'bg',fg:'ink',acc:'sec',k:'Before you call us',title:'Boiler acting up? Check these',items:['Pressure: about 1–1.5 bar when cold','Bleed any cold-topped radiators','Thermostat batteries']},
   {t:'quote',bg:'sec',fg:'bg',acc:'acc',text:'Turned up when they said. Left it spotless.',by:'Sample customer review'},
   {t:'series',bg:'acc',fg:'ink',acc:'ink',name:'Two-Minute Fix',ep:'No. 05',title:'Bleeding a radiator',h:'Every Tuesday'},
-  {t:'reel',src:'hal3',hook:'A day in the van, in 30 seconds',hl:'acc',hc:'ink'},
-  {t:'type',bg:'acc',fg:'ink',k:'Where we work',text:'Leicester and 10 miles around.',sub:'Same-week appointments, fixed prices.',fs:'12cqi'},
+  {t:'reel',src:'hal1',hook:'A day in the van, in 30 seconds',hl:'acc',hc:'ink'},
+  {t:'type',bg:'acc',fg:'ink',k:'Where we work',text:'Leicester and within 10 miles.',sub:'Same-week appointments, fixed prices.',fs:'12cqi'},
   {t:'review',bg:'ter',kc:'ink',ini:'S',name:'Sample customer',brand:'Halden',text:'Fixed price, fixed on time.',when:'3 days ago',k:'Reviews'}
  ],
  creatives:[
   {kind:'reel',trend:'Reels · 3-second hook',title:'How-to Reel cover',tile:{t:'reel',src:'hal3',hook:'Cold at the top? Bleed it in 60 seconds.',hl:'acc',hc:'ink'},caption:'Do this before you call us out. Seriously, it saves you money.',why:'Useful and a little funny, so people send it to whoever does the DIY at home.',spec:'9:16 · 1080×1920'},
-  {kind:'single',trend:'Moment-led post',title:'Seasonal reminder',tile:{t:'type',bg:'acc',fg:'ink',k:'Heads up',text:'First cold snap = longest waiting list.',sub:'Book your boiler service now and skip the queue.',chip:'Gas Safe registered',chipbg:'ink',chipc:'acc',fs:'11.5cqi'},why:'Timed to the week people start thinking about heating, rather than a generic offer.',spec:'1080×1350 (4:5) · Facebook + Instagram'},
+  {kind:'single',trend:'Moment-led post',title:'Seasonal reminder',tile:{t:'type',bg:'acc',fg:'ink',k:'Heads up',text:'First cold snap = longest waiting list.',sub:'Book your boiler service now and skip the queue.',chip:'Book online',chipbg:'ink',chipc:'acc',fs:'11.5cqi'},why:'Timed to the week people start thinking about heating, rather than a generic offer.',spec:'1080×1350 (4:5) · Facebook + Instagram'},
   {kind:'single',trend:'Customer content',title:'Review card',tile:{t:'review',bg:'sec',kc:'bg',ini:'J',name:'Sample customer',brand:'Halden Plumbing &amp; Heating',text:'Explained everything in plain English, gave a fixed price and stuck to it.',when:'1 week ago',k:'What our customers say'},why:'Existing reviews, reformatted as clean graphics, become reliable weekly content.',spec:'1080×1350 (4:5) · sample review'},
   {kind:'car',trend:'Raw & relatable',title:'Job-of-the-week carousel',slides:[
     {t:'type',bg:'ink',fg:'bg',k:'This week in Leicester',kc:'acc',text:'A leaking kitchen, sorted in a morning.',fs:'11.5cqi',h:'Swipe →'},
     {t:'pic',src:'hal1',hand:'9:10am: found it',tape:true},
-    {t:'pic',src:'ghal_boiler',hand:'Thursday: new boiler, fitted',tape:true,handc:'ink',shade:false},
+    {t:'pic',src:'ghal_boiler',hand:'10:40am: dry and tested',tape:true,handc:'ink',shade:false},
     {t:'review',bg:'acc',kc:'ink',ini:'S',name:'Sample customer',brand:'Halden',text:'Turned up at 8 like they said, fixed the leak and left the kitchen cleaner than they found it.',when:'2 days ago',k:'The verdict'}],why:'Real jobs on real streets are the strongest proof a local trade can show.',spec:'4 slides · 1080×1350 (4:5)'}
  ]
 }
@@ -266,7 +266,7 @@ Ten minutes of thinking now saves a family months of guessing later.`,
 // so it stays sharp at any size. public/images/paws-logo.svg, cropped tight with the wordmark included.
 const LOGO_SRC = url('images/paws-logo.svg');
 const PAW = `<img src="${LOGO_SRC}" width="1232" height="1284" alt="" decoding="async">`;
-const PP_LOGO = `<div class="pp-logo"><img src="${LOGO_SRC}" width="1232" height="1284" alt="Paws, Peace &amp; Poems logo: a yellow paw with a meditating figure inside a black circle" decoding="async"></div>`;
+const PP_LOGO = `<div class="pp-logo"><img src="${LOGO_SRC}" width="1232" height="1284" alt="Paws, Peace &amp; Poems logo: a yellow paw with a meditating figure with an open black brush-stroke arc" decoding="async"></div>`;
 
 export const OWN = [
 {
@@ -283,7 +283,7 @@ export const OWN = [
  cover:`<div class="pp-cover">${PP_LOGO}</div>`,
  pillars:[{n:'Brain Bites',c:'acc',d:'One psychology idea a week, explained in plain words.'},{n:'Body & mind',c:'sec',d:'How stress shows up in sleep, skin and energy.'},{n:'Reflections',c:'ter',d:'First-person captions and short poems that make people feel less alone.'}],
  gridNote:'The logo tile sits on butter, and every other tile sits on cream or butter so the feed feels soft and calm. Paw yellow marks the weekly Brain Bites explainer, peach marks body-and-mind posts, and reflective posts stay quiet so the words do the work.',
- caption:'Ever finish a full day of work and still feel you didn’t do enough? That’s the Zeigarnik effect: your brain holds on to unfinished tasks more tightly than finished ones. Writing down when you’ll do the last thing can help you switch off. #mentalhealthawareness #psychologyfacts #zeigarnikeffect',
+ caption:'Ever finish a full day of work and still feel you didn’t do enough? That’s the Zeigarnik effect: your brain tends to hold on to unfinished tasks more tightly than finished ones. Writing down when you’ll do the last thing can help you switch off. #mentalhealthawareness #psychologyfacts #zeigarnikeffect',
  alt:'Paw-yellow square with the words “Brain Bites No. 12: the Zeigarnik effect” in black type.',
  grid:[
   {t:'series',bg:'acc',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 12',title:'The Zeigarnik effect',h:'Psychology, gently explained'},
@@ -291,7 +291,7 @@ export const OWN = [
   {t:'quote',bg:'soft',fg:'ink',acc:'sec',text:'Some days it isn’t a breakdown. Just a quiet kind of heaviness.',by:'From the journal',stars:false},
   {t:'list',bg:'bg',fg:'ink',acc:'sec',k:'Body & mind',title:'Stress can show up as…',items:['Tiredness after a full night’s sleep','Skin flare-ups','Brain fog and a short fuse']},
   {t:'type',bg:'ink',fg:'bg',k:'Optimism bias',kc:'acc',text:'“I don’t know how, but I know I will.”',fs:'11.5cqi'},
-  {t:'myth',bg:'bg',fg:'ink',fb:'ter',fc:'ink',myth:'OCD just means being very tidy.',fact:'OCD involves unwanted, distressing thoughts and urges. It isn’t a personality quirk.',h:'Understanding starts with compassion'},
+  {t:'myth',bg:'bg',fg:'ink',fb:'ter',fc:'ink',myth:'OCD just means being very tidy.',fact:'OCD involves unwanted, distressing thoughts and urges, often with compulsions to ease them.',h:'Understanding starts with compassion'},
   {t:'series',bg:'ter',fg:'ink',acc:'acc',name:'Neurodiversity, kindly',ep:'Part 4',title:'The highly sensitive brain',h:'Sensitive isn’t fragile'},
   {t:'type',bg:'soft',fg:'ink',k:'Gentle reminder',kc:'sec',text:'Rest isn’t a reward. It’s a need.',fs:'13cqi'},
   {t:'cta',bg:'sec',fg:'ink',acc:'ink',bc:'bg',title:'A place to be heard.',btn:'Join the community',sub:'Paws, Peace & Poems on LinkedIn'}
@@ -303,8 +303,8 @@ export const OWN = [
     {t:'step',bg:'bg',fg:'ink',acc:'sec',num:'02',title:'Stress keeps you on alert',body:'Stress hormones are meant for short bursts. Weeks of them can leave you wired at night and drained by day.',brand:'Paws, Peace & Poems',pg:'3 / 5'},
     {t:'step',bg:'bg',fg:'ink',acc:'sec',num:'03',title:'Rest is more than sleep',body:'Short breaks, time outdoors and switching off from screens give your mind a rest too.',brand:'Paws, Peace & Poems',pg:'4 / 5'},
     {t:'cta',bg:'ink',fg:'bg',acc:'acc',bc:'ink',title:'Tired for weeks and not sure why?',btn:'Talk to your GP',sub:'This is general information, not medical advice'}],why:'A relatable question on the first slide, one idea per slide, and a clear signpost to proper help on the last.',spec:'5 slides · 1080×1350 (4:5)'},
-  {kind:'single',trend:'Zero-click value',title:'Myth vs fact card',tile:{t:'myth',bg:'soft',fg:'ink',fb:'acc',fc:'ink',myth:'If you’re high-functioning, you can’t be struggling.',fact:'Plenty of people keep everything running on the outside while feeling exhausted on the inside.',h:'Paws, Peace & Poems'},why:'The whole message sits in the post, so it helps people even if they never click.',spec:'1080×1350 (4:5)'},
-  {kind:'li',trend:'People over logos',title:'Founder’s LinkedIn post',ini:'LB',who:'Lavi Bachchis',role:'Marketing & brand lead · Founder, Paws, Peace & Poems',text:'I started Paws, Peace & Poems for a simple reason: most of us were never taught how our own minds work.<br><br>So every week I take one idea from psychology, like why unfinished tasks follow you to bed, and explain it in plain, kind words.<br><br>No diagnosing. No quick fixes. Just a bit more understanding, and a place to be heard.<br><br>If that sounds like something you need, the group is open to everyone.',img:{t:'html',bg:'soft',fg:'ink',html:PP_LOGO},ar:'1.91/1'},
+  {kind:'single',trend:'Answer in the post',title:'Myth vs fact card',tile:{t:'myth',bg:'soft',fg:'ink',fb:'acc',fc:'ink',myth:'If you’re high-functioning, you can’t be struggling.',fact:'Plenty of people keep everything running on the outside while feeling exhausted on the inside.',h:'Paws, Peace & Poems'},why:'The whole message sits in the post, so it helps people even if they never click.',spec:'1080×1350 (4:5)'},
+  {kind:'li',trend:'People over logos',title:'Founder’s LinkedIn post',ini:'LB',who:'Lavi Bachchis',role:'Marketing & brand lead · Founder, Paws, Peace & Poems',text:'I started Paws, Peace & Poems for a simple reason: most of us were never taught how our own minds work.<br><br>So every week I take one idea from psychology, like why unfinished tasks follow you to bed, and explain it in plain, kind words.<br><br>I don’t diagnose or offer quick fixes. I explain, and I make room for people to be heard.<br><br>If that sounds like something you need, the group is open to everyone.',img:{t:'html',bg:'soft',fg:'ink',html:PP_LOGO},ar:'1.91/1'},
   {kind:'car',trend:'Repeatable series',title:'Brain Bites · one template, every week',slides:[
     {t:'series',bg:'acc',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 12',title:'The Zeigarnik effect',h:'Why unfinished tasks stay on your mind'},
     {t:'series',bg:'sec',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 13',title:'Emotional blunting',h:'When the feeling is there but the expression isn’t'},

@@ -48,12 +48,14 @@ const PHRASES = [
   [/\bUK or US\b/g, 'US or UK'],
   [/\bworking day\b/g, 'business day'],
   [/\bfortnight\b/g, 'two weeks'],
+  [/\byour GP\b/g, 'your doctor'],
+  [/\bfor your UK business\b/g, 'for your US business'],
   [/\ba fortnightly\b/g, 'an every-other-week'],
   [/\bfortnightly\b/g, 'every other week'],
 ];
 
 // Keys whose values are addresses, codes or data, never prose.
-const SKIP = new Set(['href', 'url', 'src', 'linkedin', 'instagram', 'youtube', 'email', 'phoneHref', 'phoneDisplay', 'id', 'hli', 'avatar']);
+const SKIP = new Set(['quote', 'href', 'url', 'src', 'whatsapp', 'linkedin', 'instagram', 'youtube', 'email', 'phoneHref', 'phoneDisplay', 'id', 'hli', 'avatar']);
 
 export function toUS(text) {
   if (typeof text !== 'string') return text;
@@ -78,12 +80,12 @@ export function localise(value, region = current) {
 const US_OVERRIDES = {
   seo: {
     home: {
-      title: 'Lavi Bachchis | Freelance Social Media Content for US Brands',
-      description: 'Freelance social media content, Mailchimp newsletters and WordPress blogs for US small businesses. Designed, written and delivered on time, with US-friendly hours.',
+      title: 'Freelance Social Media Content for US Brands | Lavi Bachchis',
+      description: 'Freelance social media content, Mailchimp newsletters and WordPress blogs for US small businesses. Designed, written and delivered on time, on US hours.',
     },
     insights: {
-      title: 'Social Media & Content Blog for Small Businesses | Lavi B.',
-      description: 'Practical articles on social media, newsletters and blog content for US small businesses, from a London-based freelance content creator who works with US brands.',
+      title: 'Small Business Social Media Blog | Lavi Bachchis',
+      description: 'Practical social media, newsletter and blog advice for US small businesses, from a London-based freelance content creator who works with US brands.',
     },
   },
   home: {
@@ -93,7 +95,7 @@ const US_OVERRIDES = {
     intro: 'Practical notes on social media, newsletters and blogs for small businesses, written from the work I do every week. More US-focused articles are on the way.',
   },
   work: {
-    ownNote: "Paws, Peace & Poems is my own, real project. It shares general wellbeing information, not therapy or medical advice, and I'm not a qualified therapist. If you're struggling, please talk to your doctor. In an emergency, call 911.",
+    ownNote: "Paws, Peace & Poems is my own, real project. It shares general wellbeing information, not therapy or medical advice, and I'm not a qualified therapist. If you're struggling, please talk to your doctor, or call or text 988 (the 988 Suicide & Crisis Lifeline), any time. In an emergency, call 911.",
   },
 };
 

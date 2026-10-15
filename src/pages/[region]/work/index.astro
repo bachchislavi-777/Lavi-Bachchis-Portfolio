@@ -20,7 +20,7 @@ const groups = [
 ];
 const list = {
   '@type': 'CollectionPage',
-  name: copy.seo.work.title,
+  name: copy.seo.work.title.replace(/ \| Lavi Bachchis$/, ''),
   description: copy.seo.work.description,
   url: absUrl('/work/', site),
   hasPart: ALL.map((b) => ({ '@type': 'CreativeWork', name: `${copy.cases[b.id].name}: ${b.own ? 'own project' : 'sample case study'}`, url: absUrl(`/work/${b.id}/`, site) })),

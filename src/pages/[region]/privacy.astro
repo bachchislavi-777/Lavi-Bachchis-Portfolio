@@ -9,7 +9,7 @@ import { PUBLIC_WEB3FORMS_KEY } from '../../data/settings.js';
 const s = copy.site;
 const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
 ---
-<Layout title="Privacy | Lavi Bachchis, Content & Creative" description="How Lavi Bachchis handles your details when you get in touch through this website: what is collected, why, who processes it and how to contact her."
+<Layout title="Privacy Policy | Lavi Bachchis" description="How I handle your details when you get in touch through this website: what is collected, why, who processes it, how long it is kept and how to contact me."
   path="/privacy/" breadcrumbs={[{ name: 'Privacy', path: '/privacy/' }]}>
   <PageHead eyebrow="Privacy" h1="Your details," h1Em="kept simple." intro="A short, plain-English note on what happens to your information when you visit this site or get in touch." crumbs={[{ name: 'Privacy', path: '/privacy/' }]} />
   <section class="band light">
@@ -17,7 +17,7 @@ const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
       <p class="upd">Last updated: October 2026</p>
 
       <h2>Who I am</h2>
-      <p>This website belongs to {s.name}, a freelance content and creative professional based in {s.location}. I am responsible for any personal information you share with me through this site. You can reach me at <a href={`mailto:${s.email}`}>{s.email}</a>.</p>
+      <p>This website belongs to {s.name}, a freelance social media content creator based in {s.location}. I am responsible for any personal information you share with me through this site. You can reach me at <a href={`mailto:${s.email}`}>{s.email}</a>.</p>
 
       <h2>What I collect</h2>
       <ul>
@@ -32,12 +32,12 @@ const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
       <h2>Who else handles it</h2>
       <ul>
         <li><b>Web3Forms</b> passes contact-form messages to my email inbox{formOn ? '' : ' (once the form is switched on)'}. Their privacy policy is at <a href="https://web3forms.com/privacy" rel="noopener">web3forms.com/privacy</a>.</li>
-        <li><b>Google</b> provides my email (Google Workspace / Gmail). The fonts on this site are stored on the site itself, so your browser does not contact Google or any other font service when you visit.</li>
+        <li><b>Google</b> provides my email (Gmail). The fonts on this site are stored on the site itself, so your browser does not contact Google or any other font service when you visit.</li>
         <li><b>GitHub Pages</b> hosts this website and may keep standard technical logs, such as IP addresses, to keep the service secure.</li>
       </ul>
 
       <h2 id="cookies">Cookies and analytics</h2>
-      <p>This website does not set any cookies and does not store anything in your browser, such as local storage. It does not use tracking, advertising or social media pixels, and it does not load content from other websites. That is why you will not see a cookie banner here: under the UK's Privacy and Electronic Communications Regulations (PECR), consent is only needed when a site stores or reads information on your device.</p>
+      <p>This website does not set any cookies. If you use the UK | US switcher, your choice is saved in your browser's local storage so the site remembers it next time. Nothing else is stored. Storage that is strictly necessary for a feature you ask for doesn't need consent, which is why there's no cookie banner. It does not use tracking, advertising or social media pixels, and it does not load content from other websites. That is why you will not see a cookie banner here: under the UK's Privacy and Electronic Communications Regulations (PECR), consent is only needed when a site stores or reads information on your device.</p>
       <p>If I add privacy-friendly analytics later, it will be a cookieless tool that only counts visits, and I will name it here before it goes live.</p>
 
       <h2>Security</h2>

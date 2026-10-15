@@ -15,7 +15,7 @@ const switcher = REGIONS.map((r) => ({
 ---
 <nav class="top" aria-label="Main">
   <div class="wrap">
-    <a class="me" href={url('/')}><img class="logo-full" src={url('brand/logo-h-112.png')} srcset={`${url('brand/logo-h-112.png')} 2x, ${url('brand/logo-h-168.png')} 3x`} alt={`${copy.site.name}, home`} width="241" height="56" /></a>
+    <a class="me" href={url('/')}><img class="logo-full" src={url('brand/logo-horizontal.svg')} alt={`${copy.site.name}, home`} width="241" height="56" /></a>
     <ul id="site-menu">
       {copy.nav.map((n) => (
         <li><a href={url(n.href)} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a></li>

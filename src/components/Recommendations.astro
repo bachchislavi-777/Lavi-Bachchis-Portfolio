@@ -21,7 +21,7 @@ const { light = false } = Astro.props;
             <figcaption>
               <b>{it.name}</b>
               {it.role && <span>{it.role}</span>}
-              <small>{r.source}</small>
+              <small>{r.source}{it.relation && <> · {it.relation}</>}</small>
             </figcaption>
           </figure>
         </li>

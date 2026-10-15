@@ -671,18 +671,26 @@
     "h2Em": "worked with say.",
     "intro": "Recommendations from my LinkedIn profile, quoted as they were written.",
     "source": "LinkedIn recommendation",
-    "linkText": "See all recommendations on LinkedIn",
-    "link": "https://www.linkedin.com/in/lavi-bachchis-63a758166/details/recommendations/",
+    "linkText": "See them on my LinkedIn profile",
+    "link": "https://www.linkedin.com/in/lavi-bachchis-63a758166/",
     "items": [
       {
         "quote": "I highly recommend Lavi for her exceptional marketing expertise. Her knowledge and execution of marketing strategies have made her a key asset to Waterstone Legal. With her strong skills in Content Creation, SEO research strategy, and marketing development, Lavi has played a pivotal role in the successful implementation of Waterstone Legal's conveyancing campaigns. Her contributions have had a significant impact, demonstrating her ability to drive results and support the firm's growth. Lavi is an invaluable team member and a true professional in her field.",
         "name": "Marie David",
-        "role": ""
+        "role": "Compliance Manager",
+        "relation": "Worked with Lavi on the same team · January 2025"
+      },
+      {
+        "quote": "Working with Lavi has been incredible, not only is she results- driven she has a supportive approach that makes collaboration full of opportunity. She is gifted with an exceptional blend of creativity and business strategy. I feel blessed and excited to be working with her in 2025 as part of the dream team at Waterstone Legal.",
+        "name": "Ashley Louise Brown",
+        "role": "Copywriter, author and scriptwriter",
+        "relation": "Worked with Lavi on the same team · December 2024"
       },
       {
         "quote": "It was great working with Lavi last year. She was leading the team where I worked. She would listen to everyone and was professional and approachable.",
-        "name": "A team member",
-        "role": "Name not shown publicly on LinkedIn"
+        "name": "Eugenia Sestini",
+        "role": "Multilingual writer and teacher, London",
+        "relation": "Studied with Lavi · January 2025"
       }
     ]
   },

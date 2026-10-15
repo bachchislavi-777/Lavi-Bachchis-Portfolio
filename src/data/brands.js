@@ -1,3 +1,4 @@
+import { url } from '../lib/url.js';
 // Brand data for the six sample case studies.
 // Ported unchanged from docs/reference/portfolio-v3-forest.html (const B), except:
 //  - "[Town]" is "Leicester" throughout Halden, matching its logo
@@ -261,11 +262,10 @@ Ten minutes of thinking now saves a family months of guessing later.`,
 //  - own: true (changes the "sample" labels on the case study, cards and schema)
 //  - hlc: highlight colours, used instead of photos (hli) on the Instagram mock-up
 //  - cover: HTML for the lead visual, used because there is no lead photo in LEAD
-// Traced from the Paws, Peace & Poems logo: a yellow paw, a black brush-stroke open circle sweeping from
-// bottom left over the top, and a hand-drawn meditating figure sitting on the main pad, offset to the right.
-// PAW is the mark only; PP_LOGO adds the thin uppercase wordmark underneath, as on the original.
-const PAW = `<svg viewBox="112 118 270 252" width="1.07em" height="1em" aria-hidden="true"><g fill="#F3C300"><ellipse cx="152" cy="243" rx="31" ry="46" transform="rotate(-16 152 243)"/><ellipse cx="208" cy="168" rx="33" ry="50" transform="rotate(-6 208 168)"/><ellipse cx="300" cy="163" rx="34" ry="50" transform="rotate(6 300 163)"/><ellipse cx="354" cy="250" rx="31" ry="46" transform="rotate(18 354 250)"/><path d="M174 351c-15-20-4-48 20-64 20-14 36-28 62-28 30 0 46 18 64 35 22 20 34 40 26 58-7 14-30 11-50 7-20-4-35 0-55 4-26 5-54 6-67-12z"/></g><g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round"><path d="M189 330C140 290 140 205 196 165c40-28 98-28 134 4" stroke-width="9"/><path d="M266 216c-7-6-10-16-8-26 2-11 10-16 19-15 10 1 15 11 12 22-1 8-5 14-2 19 14 6 26 14 28 31 3 22-1 41-6 54 15 5 32 13 38 26 4 12-3 20-15 20H215c-16 0-24-9-18-19 7-11 22-17 37-24-4-16-5-39 0-55 4-15 15-26 32-33z" stroke-width="4.5"/><path d="M224 334c30-13 66-14 104 0" stroke-width="4"/></g></svg>`;
-const PP_LOGO = `<div class="pp-logo">${PAW}<span>Paws, Peace &amp; Poems</span></div>`;
+// The real Paws, Peace & Poems logo (public/images/paws-logo.jpg, 500×500 on white, wordmark included).
+const LOGO_SRC = url('images/paws-logo.jpg');
+const PAW = `<img src="${LOGO_SRC}" width="500" height="500" alt="" decoding="async">`;
+const PP_LOGO = `<div class="pp-logo"><img src="${LOGO_SRC}" width="500" height="500" alt="Paws, Peace &amp; Poems logo: a yellow paw with a meditating figure inside a black circle" decoding="async"></div>`;
 
 export const OWN = [
 {

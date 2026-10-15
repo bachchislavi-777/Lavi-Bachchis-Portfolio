@@ -262,31 +262,32 @@ Ten minutes of thinking now saves a family months of guessing later.`,
 //  - own: true (changes the "sample" labels on the case study, cards and schema)
 //  - hlc: highlight colours, used instead of photos (hli) on the Instagram mock-up
 //  - cover: HTML for the lead visual, used because there is no lead photo in LEAD
-// The real Paws, Peace & Poems logo (public/images/paws-logo.jpg, 500×500 on white, wordmark included).
-const LOGO_SRC = url('images/paws-logo.jpg');
-const PAW = `<img src="${LOGO_SRC}" width="500" height="500" alt="" decoding="async">`;
-const PP_LOGO = `<div class="pp-logo"><img src="${LOGO_SRC}" width="500" height="500" alt="Paws, Peace &amp; Poems logo: a yellow paw with a meditating figure inside a black circle" decoding="async"></div>`;
+// The Paws, Peace & Poems logo: a vector trace of the original (public/images/paws-logo.jpg) on butter,
+// so it stays sharp at any size. public/images/paws-logo.svg, cropped tight with the wordmark included.
+const LOGO_SRC = url('images/paws-logo.svg');
+const PAW = `<img src="${LOGO_SRC}" width="1232" height="1284" alt="" decoding="async">`;
+const PP_LOGO = `<div class="pp-logo"><img src="${LOGO_SRC}" width="1232" height="1284" alt="Paws, Peace &amp; Poems logo: a yellow paw with a meditating figure inside a black circle" decoding="async"></div>`;
 
 export const OWN = [
 {
  id:'pawspeacepoems', g:'own', own:true, name:'Paws, Peace & Poems', mark:'P', cat:'Mental health & wellbeing', catLong:'Own project · Mental health & wellbeing', chan:'Instagram · YouTube · LinkedIn group',
  about:'My own mental-health education page. It explains psychology in gentle, plain words, with a little humour, a lot of kindness and a place for people to feel heard.',
- vars:{bg:'#FFF9E8',ink:'#141414',acc:'#F3C300',sec:'#E8956B',ter:'#FFFFFF',soft:'#FBEFC9',fd:"'Jost', system-ui, sans-serif",fb:"'Jost', system-ui, sans-serif",fw:'500'},
- fdn:'Jost', fbn:'Jost', lbg:'ter', lfg:'ink', avatar:PAW,
+ vars:{bg:'#FFF9E8',ink:'#141414',acc:'#F2C306',sec:'#E8956B',ter:'#FFFFFF',soft:'#FBEFC9',fd:"'Jost', system-ui, sans-serif",fb:"'Jost', system-ui, sans-serif",fw:'500'},
+ fdn:'Jost', fbn:'Jost', lbg:'soft', lfg:'ink', avatar:PAW,
  logo:PP_LOGO,
  tagline:'No matter how weird, you’re always PAWfect.',
- palette:[{n:'White',h:'#FFFFFF'},{n:'Cream',h:'#FFF9E8'},{n:'Paw Yellow',h:'#F3C300'},{n:'Peach Clay',h:'#E8956B'},{n:'Ink',h:'#141414'}],
+ palette:[{n:'Cream',h:'#FFF9E8'},{n:'Butter',h:'#FBEFC9'},{n:'Paw Yellow',h:'#F2C306'},{n:'Peach Clay',h:'#E8956B'},{n:'Ink',h:'#141414'}],
  sample:'Some days it isn’t a big breakdown. It’s just a quiet kind of heaviness you can’t quite explain.',
  voice:['Gentle','Relatable','Curious'], say:'You’re not lazy. Your brain is holding on to the unfinished thing.', nosay:'Five hacks to fix your anxiety today!',
  handle:'pawspeacenpoems', bio:'A space for everyone seeking mental stability, inner peace and a place to be heard 🧡', site:'linkedin.com/groups/10073484', hl:['Brain Bites','Neurodiversity','Body & mind','Poems'], hlc:['acc','ter','sec','ink'],
  cover:`<div class="pp-cover">${PP_LOGO}</div>`,
  pillars:[{n:'Brain Bites',c:'acc',d:'One psychology idea a week, explained in plain words.'},{n:'Body & mind',c:'sec',d:'How stress shows up in sleep, skin and energy.'},{n:'Reflections',c:'ter',d:'First-person captions and short poems that make people feel less alone.'}],
- gridNote:'The logo tile sits on white, exactly as on the profile, and every other tile sits on cream or butter so the feed feels soft and calm. Paw yellow marks the weekly Brain Bites explainer, peach marks body-and-mind posts, and reflective posts stay quiet so the words do the work.',
+ gridNote:'The logo tile sits on butter, and every other tile sits on cream or butter so the feed feels soft and calm. Paw yellow marks the weekly Brain Bites explainer, peach marks body-and-mind posts, and reflective posts stay quiet so the words do the work.',
  caption:'Ever finish a full day of work and still feel you didn’t do enough? That’s the Zeigarnik effect: your brain holds on to unfinished tasks more tightly than finished ones. Writing down when you’ll do the last thing can help you switch off. #mentalhealthawareness #psychologyfacts #zeigarnikeffect',
  alt:'Paw-yellow square with the words “Brain Bites No. 12: the Zeigarnik effect” in black type.',
  grid:[
   {t:'series',bg:'acc',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 12',title:'The Zeigarnik effect',h:'Psychology, gently explained'},
-  {t:'html',bg:'ter',fg:'ink',html:PP_LOGO},
+  {t:'html',bg:'soft',fg:'ink',html:PP_LOGO},
   {t:'quote',bg:'soft',fg:'ink',acc:'sec',text:'Some days it isn’t a breakdown. Just a quiet kind of heaviness.',by:'From the journal',stars:false},
   {t:'list',bg:'bg',fg:'ink',acc:'sec',k:'Body & mind',title:'Stress can show up as…',items:['Tiredness after a full night’s sleep','Skin flare-ups','Brain fog and a short fuse']},
   {t:'type',bg:'ink',fg:'bg',k:'Optimism bias',kc:'acc',text:'“I don’t know how, but I know I will.”',fs:'11.5cqi'},
@@ -303,7 +304,7 @@ export const OWN = [
     {t:'step',bg:'bg',fg:'ink',acc:'sec',num:'03',title:'Rest is more than sleep',body:'Short breaks, time outdoors and switching off from screens give your mind a rest too.',brand:'Paws, Peace & Poems',pg:'4 / 5'},
     {t:'cta',bg:'ink',fg:'bg',acc:'acc',bc:'ink',title:'Tired for weeks and not sure why?',btn:'Talk to your GP',sub:'This is general information, not medical advice'}],why:'A relatable question on the first slide, one idea per slide, and a clear signpost to proper help on the last.',spec:'5 slides · 1080×1350 (4:5)'},
   {kind:'single',trend:'Zero-click value',title:'Myth vs fact card',tile:{t:'myth',bg:'soft',fg:'ink',fb:'acc',fc:'ink',myth:'If you’re high-functioning, you can’t be struggling.',fact:'Plenty of people keep everything running on the outside while feeling exhausted on the inside.',h:'Paws, Peace & Poems'},why:'The whole message sits in the post, so it helps people even if they never click.',spec:'1080×1350 (4:5)'},
-  {kind:'li',trend:'People over logos',title:'Founder’s LinkedIn post',ini:'LB',who:'Lavi Bachchis',role:'Marketing & brand lead · Founder, Paws, Peace & Poems',text:'I started Paws, Peace & Poems for a simple reason: most of us were never taught how our own minds work.<br><br>So every week I take one idea from psychology, like why unfinished tasks follow you to bed, and explain it in plain, kind words.<br><br>No diagnosing. No quick fixes. Just a bit more understanding, and a place to be heard.<br><br>If that sounds like something you need, the group is open to everyone.',img:{t:'html',bg:'ter',fg:'ink',html:PP_LOGO},ar:'1.91/1'},
+  {kind:'li',trend:'People over logos',title:'Founder’s LinkedIn post',ini:'LB',who:'Lavi Bachchis',role:'Marketing & brand lead · Founder, Paws, Peace & Poems',text:'I started Paws, Peace & Poems for a simple reason: most of us were never taught how our own minds work.<br><br>So every week I take one idea from psychology, like why unfinished tasks follow you to bed, and explain it in plain, kind words.<br><br>No diagnosing. No quick fixes. Just a bit more understanding, and a place to be heard.<br><br>If that sounds like something you need, the group is open to everyone.',img:{t:'html',bg:'soft',fg:'ink',html:PP_LOGO},ar:'1.91/1'},
   {kind:'car',trend:'Repeatable series',title:'Brain Bites · one template, every week',slides:[
     {t:'series',bg:'acc',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 12',title:'The Zeigarnik effect',h:'Why unfinished tasks stay on your mind'},
     {t:'series',bg:'sec',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 13',title:'Emotional blunting',h:'When the feeling is there but the expression isn’t'},

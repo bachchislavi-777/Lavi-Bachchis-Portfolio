@@ -198,20 +198,19 @@ figure.ab-photo { margin: 0; }
 /* ---------- Own projects (type-led lead visual instead of a photo) ---------- */
 .case-art { position: absolute; inset: 0; display: block; background: var(--bg); color: var(--ink); font-family: var(--fd); }
 .ch-photo > .case-art, .next-img > .case-art { border-radius: inherit; }
-/* Paws, Peace & Poems logo: the real image file (white square, wordmark included). The logo artwork
-   sits in the middle of a lot of white space, so it is scaled up slightly inside its box to crop that margin. */
-.pp-logo { display: block; overflow: hidden; background: #fff; aspect-ratio: 1; width: 100%; }
-.pp-logo img, .iga-logo img, .bm-logo img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.3); }
-.id-logo .pp-logo { width: min(240px, 70%); border-radius: 12px; }
-.pp-cover { position: absolute; inset: 0; display: grid; place-items: center; padding: 4% 4% 38%; background: #fff; }
-.pp-cover .pp-logo { width: min(70%, 380px); }
-.cover-img .pp-cover, .next-img .pp-cover { padding: 4%; }
-.cover-img .pp-cover .pp-logo, .next-img .pp-cover .pp-logo { width: auto; height: 92%; }
+/* Paws, Peace & Poems logo: a vector trace of the original on butter (images/paws-logo.svg), already
+   cropped tight, so it is shown edge to edge on a butter background with no scaling. */
+.pp-logo { display: block; background: #FBEFC9; width: 100%; }
+.pp-logo img, .iga-logo img, .bm-logo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.id-logo .pp-logo { width: min(220px, 66%); padding: 6%; border-radius: 14px; }
+.pp-cover { position: absolute; inset: 0; display: grid; place-items: center; padding: 6% 6% 40%; background: #FBEFC9; }
+.pp-cover .pp-logo { width: min(56%, 320px); }
+.cover-img .pp-cover, .next-img .pp-cover { padding: 8%; }
+.cover-img .pp-cover .pp-logo, .next-img .pp-cover .pp-logo { width: auto; height: 100%; }
 .cover-img:has(.case-art)::after { opacity: 0; }
-.t.t-html { padding: 0; background: #fff; }
-.t-html .pp-logo { width: 100%; height: 100%; aspect-ratio: auto; }
-.iga.iga-logo, .bm-logo { display: block; background: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); overflow: hidden; }
-.iga.iga-logo img, .bm-logo img { transform: scale(1.45); }
+.t.t-html { display: grid; place-items: center; padding: 12%; background: #FBEFC9; }
+.t-html .pp-logo { height: 100%; }
+.iga.iga-logo, .bm-logo { display: block; padding: 10%; background: #FBEFC9; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .06); overflow: hidden; }
 .cover-img:has(.case-art) .cover-num { color: rgba(0, 0, 0, .72); }
 .case-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 .own-row { margin-top: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 40px; align-items: center; padding-top: 48px; border-top: 1px solid var(--ln); }

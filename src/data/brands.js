@@ -154,7 +154,7 @@ export const B = [
   {t:'quote',bg:'acc',fg:'ink',acc:'ink',text:'A will is the kindest piece of admin you’ll ever do.',by:'Sample post · Private Client team',stars:false},
   {t:'myth',bg:'bg',fg:'ink',fb:'ink',fc:'bg',myth:'Living together makes us common-law spouses.',fact:'Common-law marriage has no legal standing in England and Wales.'},
   {t:'person',src:'ash3',name:'James Whitfield',role:'Partner, Private Client',nb:'ink',nc:'bg'},
-  {t:'pic',src:'ash4',cap:'Old-fashioned care. Plain-English answers.'}
+  {t:'pic',src:'ash4',cap:'Find us on the high street'}
  ],
  creatives:[
   {kind:'car',trend:'PDF carousel · 4:5',title:'Conveyancing explainer',slides:[
@@ -229,7 +229,7 @@ Ten minutes of thinking now saves a family months of guessing later.`,
  palette:[{n:'Cool White',h:'#F4F5F2'},{n:'Concrete',h:'#D7DBD6'},{n:'Signal Yellow',h:'#F5C543'},{n:'Teal',h:'#2B7A78'},{n:'Charcoal',h:'#1F2326'}],
  sample:'We’ll be there at 8, we’ll give you a fixed price before we start, and we’ll leave the place cleaner than we found it.',
  voice:['Straight-talking','Local','Dependable'], say:'We’ll be there at 8. Fixed price, no surprises.', nosay:'Your trusted total home solutions partner.',
- handle:'halden.heating', bio:'Plumbing and heating in Leicester. Warm homes, straight answers.', site:'halden.example', hl:['Two-Minute Fix','Jobs','Boilers'], hli:['hal2','hal1','ghal_boiler'],
+ handle:'halden.heating', bio:'Plumbing and heating in Leicester. Warm homes, straight answers.', site:'halden.example', hl:['Two-Minute Fix','Jobs','Radiators','Boilers'], hli:['hal3','hal1','hal2','ghal_boiler'],
  pillars:[{n:'Practical tips',c:'sec',d:'Two-Minute Fix and seasonal checks.'},{n:'Local proof',c:'acc',d:'Real jobs, before and afters, reviews.'},{n:'Team & van',c:'ink',d:'The engineers people already recognise.'}],
  gridNote:'Signal yellow is the van, the uniform and the logo, so it anchors one post per row. Teal handles the helpful tips, and real job photos keep it honest.',
  caption:'Radiator cold at the top? Bleed it in 60 seconds before you call anyone out. Here’s how, and when it’s time to call an engineer instead. Heating off and cooled down first. Covering Leicester and within 10 miles. #heatingtips #boilerservice #localplumber',
@@ -246,7 +246,7 @@ Ten minutes of thinking now saves a family months of guessing later.`,
   {t:'review',bg:'ter',kc:'ink',ini:'S',name:'Sample customer',brand:'Halden',text:'Fixed price, fixed on time.',when:'3 days ago',k:'Reviews'}
  ],
  creatives:[
-  {kind:'reel',trend:'Reels · 3-second hook',title:'How-to Reel cover',tile:{t:'reel',src:'hal2',hook:'Cold at the top? Bleed it in 60 seconds.',hl:'acc',hc:'ink'},caption:'Do this before you call us out. Seriously, it saves you money.',why:'Useful and a little funny, so people send it to whoever does the DIY at home.',spec:'9:16 · 1080×1920'},
+  {kind:'reel',trend:'Reels · 3-second hook',title:'How-to Reel cover',tile:{t:'reel',src:'hal3',hook:'Cold at the top? Bleed it in 60 seconds.',hl:'acc',hc:'ink'},caption:'Do this before you call us out. Seriously, it saves you money.',why:'Useful and a little funny, so people send it to whoever does the DIY at home.',spec:'9:16 · 1080×1920'},
   {kind:'single',trend:'Moment-led post',title:'Seasonal reminder',tile:{t:'type',bg:'acc',fg:'ink',k:'Heads up',text:'First cold snap = longest waiting list.',sub:'Book your boiler service now and skip the queue.',chip:'Book online',chipbg:'ink',chipc:'acc',fs:'11.5cqi'},why:'Timed to the week people start thinking about heating, rather than a generic offer.',spec:'1080×1350 (4:5) · Facebook + Instagram'},
   {kind:'single',trend:'Customer content',title:'Review card',tile:{t:'review',bg:'sec',kc:'bg',ini:'J',name:'Sample customer',brand:'Halden Plumbing &amp; Heating',text:'Explained everything in plain English, gave a fixed price and stuck to it.',when:'1 week ago',k:'What our customers say'},why:'Existing reviews, reformatted as clean graphics, become reliable weekly content.',spec:'1080×1350 (4:5) · sample review'},
   {kind:'car',trend:'Raw & relatable',title:'Job-of-the-week carousel',slides:[

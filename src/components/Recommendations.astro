@@ -1,0 +1,32 @@
+---
+// Real LinkedIn recommendations, quoted word for word (copy.json → recommendations).
+// No Review/AggregateRating schema: self-published reviews of your own business aren't eligible.
+import { getCopy } from '../lib/region.js';
+const copy = getCopy();
+const r = copy.recommendations;
+const { light = false } = Astro.props;
+---
+<section class:list={['band', { light }]} aria-labelledby="recs-h">
+  <div class="wrap">
+    <div class="shead">
+      <span class="eyebrow">{r.eyebrow}</span>
+      <h2 id="recs-h">{r.h2} <em>{r.h2Em}</em></h2>
+      <p>{r.intro}</p>
+    </div>
+    <ul class="recs">
+      {r.items.map((it) => (
+        <li>
+          <figure class="rec">
+            <blockquote><p>{it.quote}</p></blockquote>
+            <figcaption>
+              <b>{it.name}</b>
+              {it.role && <span>{it.role}</span>}
+              <small>{r.source}{it.relation && <> · {it.relation}</>}</small>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+    <p class="recs-more"><a href={r.link} rel="noopener" target="_blank">{r.linkText}<span class="sr-only"> (opens in a new tab)</span> <span aria-hidden="true">↗</span></a></p>
+  </div>
+</section>

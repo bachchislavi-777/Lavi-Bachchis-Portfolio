@@ -93,9 +93,9 @@ The NHS suggests booking a GP appointment if:
 - your tiredness is affecting your daily life
 - you feel tired and have other symptoms, such as weight loss or changes in your mood
 
-You can read more on the [NHS page on tiredness and fatigue](https://www.nhs.uk/conditions/tiredness-and-fatigue/), and find practical tips for stress and low mood on [NHS Every Mind Matters](https://www.nhs.uk/every-mind-matters/). Mind also has a clear guide to [stress and how to cope with it](https://www.mind.org.uk/information-support/types-of-mental-health-problems/stress/).
+You can read more on the [NHS page on tiredness and fatigue](https://www.nhs.uk/conditions/tiredness-and-fatigue/), and find practical tips for stress and low mood on [NHS Every Mind Matters](https://www.nhs.uk/every-mind-matters/).
 
-**If you're struggling right now**, you don't have to wait. You can call NHS 111, or call [Samaritans](https://www.samaritans.org/how-we-can-help/contact-samaritan/) free on 116 123, any time of day or night. If you're in immediate danger, call 999.
+**If you're struggling right now**, you don't have to wait. Call your GP surgery, or call NHS 111 and choose the mental health option. If you're in immediate danger, call 999.
 
 ## A gentle reminder
 

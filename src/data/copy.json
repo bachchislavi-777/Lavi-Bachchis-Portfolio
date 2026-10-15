@@ -9,6 +9,7 @@
     "linkedin": "https://www.linkedin.com/in/lavi-bachchis-63a758166/",
     "linkedinDisplay": "linkedin.com/in/lavi-bachchis",
     "instagram": "https://www.instagram.com/pawspeacenpoems/",
+    "youtube": "https://www.youtube.com/@TakeaPawswithLavi",
     "location": "London, UK",
     "coverage": "Working with clients across the UK & US",
     "availability": "Taking on new clients · UK & US",
@@ -177,9 +178,9 @@
     "ownEyebrow": "My own project",
     "ownH2": "Where content meets",
     "ownH2Em": "mental wellbeing.",
-    "ownIntro": "Paws, Peace & Poems is my own Instagram page and LinkedIn community. It explains psychology in plain, kind words, and it's where my interest in mental health and therapy-led content comes from.",
+    "ownIntro": "Paws, Peace & Poems is my own Instagram page, YouTube channel and LinkedIn community. It explains psychology in plain, kind words, and it's where my interest in mental health and therapy-led content comes from.",
     "ownLabel": "Own project",
-    "ownNote": "Paws, Peace & Poems is my own, real project. It shares general wellbeing information, not therapy or medical advice, and I'm not a qualified therapist. If you're struggling, talk to your GP, or call Samaritans free on 116 123, day or night.",
+    "ownNote": "Paws, Peace & Poems is my own, real project. It shares general wellbeing information, not therapy or medical advice, and I'm not a qualified therapist. If you're struggling, please talk to your GP, or call NHS 111 and choose the mental health option. In an emergency, call 999.",
     "productEyebrow": "Product brands",
     "productH2": "For brands that",
     "productH2Em": "sell things.",
@@ -359,15 +360,16 @@
       "type": "own",
       "sector": "Mental health & wellbeing",
       "location": "Online, from London",
-      "channels": "Instagram · LinkedIn group",
+      "channels": "Instagram · YouTube · LinkedIn group",
       "summary": "My own mental-health education page: psychology explained gently, with a little humour and a lot of kindness.",
       "brief": "I started Paws, Peace & Poems as a space for anyone seeking mental stability, inner peace and a place to be heard. I wanted to explain how our minds work in plain, kind words, without it ever feeling clinical or preachy.",
       "challenge": "Mental health content has to be careful. It needs to be accurate, never diagnose, and point people to real help, while still feeling warm enough that people stop scrolling. It also had to sound like a person, not a textbook.",
       "approach": [
-        "Built a soft cream, butter and sunflower palette around a paw logo, so the feed feels calm and friendly at a glance.",
+        "Kept the original logo, a yellow paw with a meditating figure inside a black brush-stroke circle, and built a white, cream and paw-yellow palette around it so the feed feels calm and friendly at a glance.",
         "Created Brain Bites, a weekly explainer that takes one idea from psychology, like the Zeigarnik effect or emotional blunting, and explains it in plain words.",
         "Explained neurodiversity, such as ADHD, autism, OCD and high sensitivity, through familiar TV characters, so the posts feel relatable rather than clinical.",
-        "Linked body and mind with posts on how stress can show up in sleep, energy and skin, and paired facts with gentle first-person reflections."
+        "Linked body and mind with posts on how stress can show up in sleep, energy and skin, and paired facts with gentle first-person reflections.",
+        "Started Take a Paws with Lavi on YouTube for longer, slower content: imaginative stories, calming sounds and simple tools for emotional wellbeing, including the comfort pets bring."
       ],
       "deliverables": [
         "Brand name, paw logo and tagline",
@@ -376,10 +378,12 @@
         "Brain Bites weekly psychology series",
         "Neurodiversity and body-and-mind series",
         "Reflective captions written for search",
+        "Take a Paws with Lavi YouTube channel",
         "A LinkedIn community group"
       ],
       "links": [
         { "label": "Instagram · @pawspeacenpoems", "url": "https://www.instagram.com/pawspeacenpoems/" },
+        { "label": "YouTube · Take a Paws with Lavi", "url": "https://www.youtube.com/@TakeaPawswithLavi" },
         { "label": "LinkedIn group", "url": "https://www.linkedin.com/groups/10073484/" }
       ],
       "nextCase": "solenne"

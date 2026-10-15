@@ -40,6 +40,7 @@ export const T = {
   cta: (o) => `<div class="t t-cta" style="background:${v(o.bg)};color:${v(o.fg)};--fs:${o.fs || '12cqi'}"><span class="big">${o.title}</span><span class="btnx" style="background:${v(o.acc)};color:${v(o.bc || 'ink')}">${o.btn}</span>${o.sub ? `<span class="h">${o.sub}</span>` : ''}</div>`,
   sheet: (o) => `<div class="t t-sheet"><div class="sh-bar" aria-hidden="true"><i></i><i></i><i></i><span>${o.file}</span></div><div class="sh-wrap"><table><thead><tr>${o.rows[0].map((c) => `<th scope="col">${c}</th>`).join('')}</tr></thead><tbody>${o.rows.slice(1).map((r) => `<tr>${r.map((c, i) => `<td class="${i === o.hlcol ? 'hl' : ''}">${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div><span class="hand" style="color:${o.hc}">${o.note}</span></div>`,
   review: (o) => `<div class="t t-review" style="background:${v(o.bg)};color:${v(o.kc || 'ink')}">${o.k ? `<span class="k">${o.k}</span>` : ''}<div class="rv"><div class="rvh"><span class="av" style="background:var(--ink);color:var(--bg)" aria-hidden="true">${o.ini}</span><div><b>${o.name}</b><span>recommends ${o.brand}</span></div></div><p>${o.text}</p><div class="rvf">Sample review · ${o.when}</div></div></div>`,
+  html: (o) => `<div class="t t-html" style="background:${v(o.bg)};color:${v(o.fg || 'ink')}">${o.html}</div>`,
   nl: (o) => `<div class="t t-nl" style="background:${v(o.bg)};color:${v(o.fg)}"><span class="k" style="color:${v(o.kc || o.fg)}">${o.k}</span><span class="lt2">${o.title}</span>${o.blocks.map((b) => `<div class="nlb"><span class="nln" style="background:${v(o.acc)}">${b.n}</span><div><b>${b.h}</b><ul>${b.items.map((i) => `<li>${i}</li>`).join('')}</ul></div></div>`).join('')}</div>`,
 };
 
@@ -73,7 +74,7 @@ export function idBoard(b, lv = 4) {
 export function feed(b, lv = 4, siteHref = '#') {
   return `<div class="feedrow">
     <figure class="igm" aria-label="Instagram profile mock-up for ${esc(b.name)}">
-      <div class="igh"><span class="iga" style="background:var(--ink);color:var(--bg);font-family:var(--fd);font-weight:var(--fw)" aria-hidden="true">${b.mark}</span>
+      <div class="igh">${b.avatar ? `<span class="iga iga-logo" aria-hidden="true">${b.avatar}</span>` : `<span class="iga" style="background:var(--ink);color:var(--bg);font-family:var(--fd);font-weight:var(--fw)" aria-hidden="true">${b.mark}</span>`}
         <div class="ign"><b>${b.handle}</b><span class="igb">Follow</span><span class="igb s">Message</span></div></div>
       <div class="igbio"><b>${b.name}</b><span class="igc">${b.cat}</span><p>${b.bio}</p><a href="${siteHref}">${b.site}</a></div>
       <div class="ighl" aria-hidden="true">${b.hl.map((h, i) => `<span><i style="${b.hlc ? `background:${v(b.hlc[i])}` : pic(b.hli[i])}"></i>${h}</span>`).join('')}</div>
@@ -109,4 +110,6 @@ export function panel(b, caseHref, cta = 'View case study', hidden = false) {
 
 export const tabButton = (b, selected) => `<button class="bt" role="tab" type="button" id="tab-${b.id}" data-id="${b.id}" aria-controls="panel-${b.id}" aria-selected="${selected}" tabindex="${selected ? 0 : -1}"><span class="bm" style="${varStyle(b)};background:var(--ink);color:var(--bg);font-family:var(--fd);font-weight:var(--fw)" aria-hidden="true">${b.mark}</span><span><b>${b.name}</b><small>${b.cat}</small></span></button>`;
 
-export const brandMark = (b, cls = 'bm') => `<span class="${cls}" style="${varStyle(b)};background:var(--ink);color:var(--bg);font-family:var(--fd);font-weight:var(--fw)" aria-hidden="true">${b.mark}</span>`;
+export const brandMark = (b, cls = 'bm') => (b.avatar
+  ? `<span class="${cls} bm-logo" style="${varStyle(b)}" aria-hidden="true">${b.avatar}</span>`
+  : `<span class="${cls}" style="${varStyle(b)};background:var(--ink);color:var(--bg);font-family:var(--fd);font-weight:var(--fw)" aria-hidden="true">${b.mark}</span>`);

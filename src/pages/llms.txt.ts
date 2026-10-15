@@ -24,7 +24,7 @@ export const GET: APIRoute = async ({ site }) => {
 - Pricing: fixed monthly fee, quoted after a short call. No hourly billing.
 - Contact: ${s.email} · ${absUrl('/contact/', site)}
 - The portfolio has six sample case studies created to show the work (not real clients) and one real project of Lavi's own.
-- Own project: Paws, Peace & Poems (https://www.instagram.com/pawspeacenpoems/), a mental-health education page that explains psychology in plain, kind words, with a LinkedIn community group. It shares general wellbeing information, not therapy or medical advice; Lavi is not a qualified therapist.
+- Own project: Paws, Peace & Poems (https://www.instagram.com/pawspeacenpoems/), a mental-health education page that explains psychology in plain, kind words, with a YouTube channel, Take a Paws with Lavi (https://www.youtube.com/@TakeaPawswithLavi), and a LinkedIn community group. It shares general wellbeing information, not therapy or medical advice; Lavi is not a qualified therapist.
 
 ## Main pages
 ${link('Home', '/', copy.seo.home.description)}

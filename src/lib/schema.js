@@ -15,7 +15,7 @@ export function personSchema(site, extra = {}) {
     url: absUrl('/about/', site),
     image: absUrl('og-image.jpg', site),
     address: { '@type': 'PostalAddress', addressLocality: 'London', addressCountry: 'GB' },
-    sameAs: [s.linkedin, s.instagram],
+    sameAs: [s.linkedin, s.instagram, s.youtube],
     knowsAbout: ['Social media content', 'Instagram carousels', 'Reel covers', 'LinkedIn PDF carousels', 'Mailchimp newsletters', 'WordPress blogs', 'Brand kits', 'Content strategy', 'Mental health and wellbeing content'],
     ...extra,
   };

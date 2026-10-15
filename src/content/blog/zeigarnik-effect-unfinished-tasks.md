@@ -81,6 +81,6 @@ Feeling like you haven't done enough isn't always a sign that you haven't. Somet
 
 Write it down. Give it a time. Then let yourself rest.
 
-<p><em>This is general information about how our minds work, not medical or psychological advice. If racing thoughts, worry or poor sleep are affecting your daily life, talk to your GP. If you're struggling and need to talk to someone now, you can call <a href="https://www.samaritans.org/how-we-can-help/contact-samaritan/">Samaritans</a> free on 116 123, day or night.</em></p>
+<p><em>This is general information about how our minds work, not medical or psychological advice. If racing thoughts, worry or poor sleep are affecting your daily life, talk to your GP. If you're struggling and need help now, call NHS 111 and choose the mental health option, or call 999 in an emergency.</em></p>
 
 *This post is part of [Paws, Peace & Poems](/work/pawspeacepoems/), my own project explaining psychology in plain, kind words. You can follow along on [Instagram](https://www.instagram.com/pawspeacenpoems/).*

@@ -261,34 +261,37 @@ Ten minutes of thinking now saves a family months of guessing later.`,
 //  - own: true (changes the "sample" labels on the case study, cards and schema)
 //  - hlc: highlight colours, used instead of photos (hli) on the Instagram mock-up
 //  - cover: HTML for the lead visual, used because there is no lead photo in LEAD
-// Redrawn from the Paws, Peace & Poems logo: yellow paw, a line-drawn meditating figure and an open circle.
-const PAW = `<svg viewBox="0 0 100 100" width="1em" height="1em" aria-hidden="true"><g fill="#F2C200"><ellipse cx="19" cy="44" rx="9.5" ry="12.5" transform="rotate(-22 19 44)"/><ellipse cx="37" cy="22" rx="9.5" ry="13" transform="rotate(-6 37 22)"/><ellipse cx="63" cy="22" rx="9.5" ry="13" transform="rotate(6 63 22)"/><ellipse cx="81" cy="44" rx="9.5" ry="12.5" transform="rotate(22 81 44)"/><path d="M50 46c-15 0-29 15-29 29 0 10 8 15 17 13 5-1 8-3 12-3s7 2 12 3c9 2 17-3 17-13 0-14-14-29-29-29z"/></g><g fill="none" stroke="#141414" stroke-linecap="round" stroke-linejoin="round"><path d="M27 82A33 33 0 0 1 64 21" stroke-width="2"/><path d="M50 30c-3 0-5 3-5 6s2 5 3 6c-6 1-9 6-9 12v9c0 2-1 4-3 5l-6 4c-2 1-1 4 1 4h38c2 0 3-3 1-4l-6-4c-2-1-3-3-3-5v-9c0-6-3-11-9-12 1-1 3-3 3-6s-2-6-5-6z" stroke-width="2.4"/><path d="M33 75c7-4 13-4 17-1 4-3 10-3 17 1" stroke-width="2.2"/></g></svg>`;
+// Traced from the Paws, Peace & Poems logo: a yellow paw, a black brush-stroke open circle sweeping from
+// bottom left over the top, and a hand-drawn meditating figure sitting on the main pad, offset to the right.
+// PAW is the mark only; PP_LOGO adds the thin uppercase wordmark underneath, as on the original.
+const PAW = `<svg viewBox="112 118 270 252" width="1.07em" height="1em" aria-hidden="true"><g fill="#F3C300"><ellipse cx="152" cy="243" rx="31" ry="46" transform="rotate(-16 152 243)"/><ellipse cx="208" cy="168" rx="33" ry="50" transform="rotate(-6 208 168)"/><ellipse cx="300" cy="163" rx="34" ry="50" transform="rotate(6 300 163)"/><ellipse cx="354" cy="250" rx="31" ry="46" transform="rotate(18 354 250)"/><path d="M174 351c-15-20-4-48 20-64 20-14 36-28 62-28 30 0 46 18 64 35 22 20 34 40 26 58-7 14-30 11-50 7-20-4-35 0-55 4-26 5-54 6-67-12z"/></g><g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round"><path d="M189 330C140 290 140 205 196 165c40-28 98-28 134 4" stroke-width="9"/><path d="M266 216c-7-6-10-16-8-26 2-11 10-16 19-15 10 1 15 11 12 22-1 8-5 14-2 19 14 6 26 14 28 31 3 22-1 41-6 54 15 5 32 13 38 26 4 12-3 20-15 20H215c-16 0-24-9-18-19 7-11 22-17 37-24-4-16-5-39 0-55 4-15 15-26 32-33z" stroke-width="4.5"/><path d="M224 334c30-13 66-14 104 0" stroke-width="4"/></g></svg>`;
+const PP_LOGO = `<div class="pp-logo">${PAW}<span>Paws, Peace &amp; Poems</span></div>`;
 
 export const OWN = [
 {
- id:'pawspeacepoems', g:'own', own:true, name:'Paws, Peace & Poems', mark:'P', cat:'Mental health & wellbeing', catLong:'Own project · Mental health & wellbeing', chan:'Instagram · LinkedIn group',
+ id:'pawspeacepoems', g:'own', own:true, name:'Paws, Peace & Poems', mark:'P', cat:'Mental health & wellbeing', catLong:'Own project · Mental health & wellbeing', chan:'Instagram · YouTube · LinkedIn group',
  about:'My own mental-health education page. It explains psychology in gentle, plain words, with a little humour, a lot of kindness and a place for people to feel heard.',
- vars:{bg:'#FFF9E8',ink:'#2F2A3A',acc:'#F2C200',sec:'#E8956B',ter:'#B9C9A7',soft:'#FBEFC9',fd:"'Fraunces', Georgia, serif",fb:"'Plus Jakarta Sans', system-ui, sans-serif",fw:'600'},
- fdn:'Fraunces', fbn:'Plus Jakarta Sans', lbg:'soft', lfg:'ink',
- logo:`<div class="lg" style="font-family:var(--fd);font-weight:600;font-size:clamp(34px,4.4vw,48px);line-height:1.05;display:flex;align-items:center;gap:.28em"><span style="font-size:1.5em;display:inline-flex">${PAW}</span><span>Paws, Peace<br><em style="font-weight:400">&amp; Poems</em></span></div><div class="lgs">Mental wellbeing, gently explained</div>`,
+ vars:{bg:'#FFF9E8',ink:'#141414',acc:'#F3C300',sec:'#E8956B',ter:'#FFFFFF',soft:'#FBEFC9',fd:"'Jost', system-ui, sans-serif",fb:"'Jost', system-ui, sans-serif",fw:'500'},
+ fdn:'Jost', fbn:'Jost', lbg:'ter', lfg:'ink', avatar:PAW,
+ logo:PP_LOGO,
  tagline:'No matter how weird, you’re always PAWfect.',
- palette:[{n:'Cream',h:'#FFF9E8'},{n:'Butter',h:'#FBEFC9'},{n:'Sunflower',h:'#F2C200'},{n:'Peach Clay',h:'#E8956B'},{n:'Dusk',h:'#2F2A3A'}],
+ palette:[{n:'White',h:'#FFFFFF'},{n:'Cream',h:'#FFF9E8'},{n:'Paw Yellow',h:'#F3C300'},{n:'Peach Clay',h:'#E8956B'},{n:'Ink',h:'#141414'}],
  sample:'Some days it isn’t a big breakdown. It’s just a quiet kind of heaviness you can’t quite explain.',
  voice:['Gentle','Relatable','Curious'], say:'You’re not lazy. Your brain is holding on to the unfinished thing.', nosay:'Five hacks to fix your anxiety today!',
  handle:'pawspeacenpoems', bio:'A space for everyone seeking mental stability, inner peace and a place to be heard 🧡', site:'linkedin.com/groups/10073484', hl:['Brain Bites','Neurodiversity','Body & mind','Poems'], hlc:['acc','ter','sec','ink'],
- cover:`<div class="pp-cover"><span class="pp-paw">${PAW}</span><span class="pp-k">My own project</span><span class="pp-t">Psychology, gently explained.</span></div>`,
+ cover:`<div class="pp-cover">${PP_LOGO}</div>`,
  pillars:[{n:'Brain Bites',c:'acc',d:'One psychology idea a week, explained in plain words.'},{n:'Body & mind',c:'sec',d:'How stress shows up in sleep, skin and energy.'},{n:'Reflections',c:'ter',d:'First-person captions and short poems that make people feel less alone.'}],
- gridNote:'Every tile sits on cream or butter, so the feed feels soft and calm. Sunflower marks the weekly explainer, peach marks body-and-mind posts, and reflective posts stay quiet so the words do the work.',
+ gridNote:'The logo tile sits on white, exactly as on the profile, and every other tile sits on cream or butter so the feed feels soft and calm. Paw yellow marks the weekly Brain Bites explainer, peach marks body-and-mind posts, and reflective posts stay quiet so the words do the work.',
  caption:'Ever finish a full day of work and still feel you didn’t do enough? That’s the Zeigarnik effect: your brain holds on to unfinished tasks more tightly than finished ones. Writing down when you’ll do the last thing can help you switch off. #mentalhealthawareness #psychologyfacts #zeigarnikeffect',
- alt:'Cream square with the words “Brain Bites No. 12: the Zeigarnik effect” in dark serif type beside a small sunflower-yellow paw.',
+ alt:'Paw-yellow square with the words “Brain Bites No. 12: the Zeigarnik effect” in black type.',
  grid:[
   {t:'series',bg:'acc',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 12',title:'The Zeigarnik effect',h:'Psychology, gently explained'},
-  {t:'type',bg:'bg',fg:'ink',k:'Paws, Peace & Poems',kc:'sec',text:'No matter how weird, you’re always PAWfect.',fs:'11cqi'},
+  {t:'html',bg:'ter',fg:'ink',html:PP_LOGO},
   {t:'quote',bg:'soft',fg:'ink',acc:'sec',text:'Some days it isn’t a breakdown. Just a quiet kind of heaviness.',by:'From the journal',stars:false},
   {t:'list',bg:'bg',fg:'ink',acc:'sec',k:'Body & mind',title:'Stress can show up as…',items:['Tiredness after a full night’s sleep','Skin flare-ups','Brain fog and a short fuse']},
   {t:'type',bg:'ink',fg:'bg',k:'Optimism bias',kc:'acc',text:'“I don’t know how, but I know I will.”',fs:'11.5cqi'},
   {t:'myth',bg:'bg',fg:'ink',fb:'ter',fc:'ink',myth:'OCD just means being very tidy.',fact:'OCD involves unwanted, distressing thoughts and urges. It isn’t a personality quirk.',h:'Understanding starts with compassion'},
-  {t:'series',bg:'ter',fg:'ink',acc:'bg',name:'Neurodiversity, kindly',ep:'Part 4',title:'The highly sensitive brain',h:'Sensitive isn’t fragile'},
+  {t:'series',bg:'ter',fg:'ink',acc:'acc',name:'Neurodiversity, kindly',ep:'Part 4',title:'The highly sensitive brain',h:'Sensitive isn’t fragile'},
   {t:'type',bg:'soft',fg:'ink',k:'Gentle reminder',kc:'sec',text:'Rest isn’t a reward. It’s a need.',fs:'13cqi'},
   {t:'cta',bg:'sec',fg:'ink',acc:'ink',bc:'bg',title:'A place to be heard.',btn:'Join the community',sub:'Paws, Peace & Poems on LinkedIn'}
  ],
@@ -300,11 +303,11 @@ export const OWN = [
     {t:'step',bg:'bg',fg:'ink',acc:'sec',num:'03',title:'Rest is more than sleep',body:'Short breaks, time outdoors and switching off from screens give your mind a rest too.',brand:'Paws, Peace & Poems',pg:'4 / 5'},
     {t:'cta',bg:'ink',fg:'bg',acc:'acc',bc:'ink',title:'Tired for weeks and not sure why?',btn:'Talk to your GP',sub:'This is general information, not medical advice'}],why:'A relatable question on the first slide, one idea per slide, and a clear signpost to proper help on the last.',spec:'5 slides · 1080×1350 (4:5)'},
   {kind:'single',trend:'Zero-click value',title:'Myth vs fact card',tile:{t:'myth',bg:'soft',fg:'ink',fb:'acc',fc:'ink',myth:'If you’re high-functioning, you can’t be struggling.',fact:'Plenty of people keep everything running on the outside while feeling exhausted on the inside.',h:'Paws, Peace & Poems'},why:'The whole message sits in the post, so it helps people even if they never click.',spec:'1080×1350 (4:5)'},
-  {kind:'li',trend:'People over logos',title:'Founder’s LinkedIn post',ini:'LB',who:'Lavi Bachchis',role:'Marketing & brand lead · Founder, Paws, Peace & Poems',text:'I started Paws, Peace & Poems for a simple reason: most of us were never taught how our own minds work.<br><br>So every week I take one idea from psychology, like why unfinished tasks follow you to bed, and explain it in plain, kind words.<br><br>No diagnosing. No quick fixes. Just a bit more understanding, and a place to be heard.<br><br>If that sounds like something you need, the group is open to everyone.',img:{t:'type',bg:'acc',fg:'ink',k:'Paws, Peace & Poems',text:'A place to be heard.',fs:'13cqi'},ar:'1.91/1'},
+  {kind:'li',trend:'People over logos',title:'Founder’s LinkedIn post',ini:'LB',who:'Lavi Bachchis',role:'Marketing & brand lead · Founder, Paws, Peace & Poems',text:'I started Paws, Peace & Poems for a simple reason: most of us were never taught how our own minds work.<br><br>So every week I take one idea from psychology, like why unfinished tasks follow you to bed, and explain it in plain, kind words.<br><br>No diagnosing. No quick fixes. Just a bit more understanding, and a place to be heard.<br><br>If that sounds like something you need, the group is open to everyone.',img:{t:'html',bg:'ter',fg:'ink',html:PP_LOGO},ar:'1.91/1'},
   {kind:'car',trend:'Repeatable series',title:'Brain Bites · one template, every week',slides:[
     {t:'series',bg:'acc',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 12',title:'The Zeigarnik effect',h:'Why unfinished tasks stay on your mind'},
     {t:'series',bg:'sec',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 13',title:'Emotional blunting',h:'When the feeling is there but the expression isn’t'},
-    {t:'series',bg:'ter',fg:'ink',acc:'bg',name:'Brain Bites',ep:'No. 14',title:'Optimism bias',h:'“I don’t know how, but I know I will”'},
+    {t:'series',bg:'ter',fg:'ink',acc:'acc',name:'Brain Bites',ep:'No. 14',title:'Optimism bias',h:'“I don’t know how, but I know I will”'},
     {t:'series',bg:'ink',fg:'bg',acc:'acc',name:'Brain Bites',ep:'No. 15',title:'Mental exhaustion',h:'Tired, even after sleeping'}],why:'One layout every week, so followers recognise the post before they read it and come back for the next one.',spec:'Weekly series · 1080×1350 (4:5)'}
  ]
 }

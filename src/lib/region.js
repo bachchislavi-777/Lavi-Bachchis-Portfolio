@@ -95,7 +95,7 @@ const US_OVERRIDES = {
     intro: 'Practical notes on social media, newsletters and blogs for small businesses, written from the work I do every week. More US-focused articles are on the way.',
   },
   work: {
-    ownNote: "Paws, Peace & Poems is my own, real project. It shares general wellbeing information, not therapy or medical advice, and I'm not a qualified therapist. If you're struggling, please talk to your doctor. In an emergency, call 911.",
+    ownNote: "Paws, Peace & Poems is my own, real project. It shares general wellbeing information, not therapy or medical advice, and I'm not a qualified therapist. If you're struggling, please talk to your doctor, or call or text 988 (the 988 Suicide & Crisis Lifeline), any time. In an emergency, call 911.",
   },
 };
 

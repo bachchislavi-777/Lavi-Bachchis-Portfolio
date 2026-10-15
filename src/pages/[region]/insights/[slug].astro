@@ -31,7 +31,7 @@ const fmt = (x) => x.toLocaleDateString(REGION_META[Astro.params.region].lang, {
 const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
 const minutes = Math.max(1, Math.round(words / 220));
 const toc = headings.filter((h) => h.depth === 2);
-const home = absUrl('/', Astro.site);
+const home = absUrl('/', Astro.site, { region: null }); // one identity for Lavi across /uk and /us
 const schema = [
   {
     '@type': 'BlogPosting',
@@ -52,7 +52,7 @@ const schema = [
       name: copy.site.name,
       url: absUrl('/about/', Astro.site),
       jobTitle: 'Freelance content & creative; marketing and brand lead',
-      sameAs: [copy.site.linkedin],
+      sameAs: [copy.site.linkedin, copy.site.instagram, copy.site.youtube],
     },
     publisher: { '@id': `${home}#person` },
     isPartOf: { '@type': 'Blog', url: absUrl('/insights/', Astro.site) },

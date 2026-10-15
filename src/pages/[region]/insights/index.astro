@@ -15,11 +15,11 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft && data.reg
 const fmt = (d) => d.toLocaleDateString(meta.lang, { day: 'numeric', month: 'long', year: 'numeric' });
 const blog = {
   '@type': 'Blog',
-  name: copy.seo.insights.title,
+  name: copy.seo.insights.title.replace(/ \| Lavi Bachchis$/, ''),
   description: copy.seo.insights.description,
   url: absUrl('/insights/', Astro.site),
   inLanguage: meta.lang,
-  author: { '@id': `${absUrl('/', Astro.site)}#person` },
+  author: { '@id': `${absUrl('/', Astro.site, { region: null })}#person` },
   blogPost: posts.map((p) => ({
     '@type': 'BlogPosting',
     headline: p.data.title,

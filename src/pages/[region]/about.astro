@@ -13,9 +13,9 @@ const a = copy.about;
 const icons = ['✦', '✎', '↗'];
 const profile = {
   '@type': 'ProfilePage',
-  name: copy.seo.about.title,
+  name: copy.seo.about.title.replace(/ \| Lavi Bachchis$/, ''),
   url: new URL(url('/about/'), Astro.site).href,
-  mainEntity: { '@id': `${new URL(url('/'), Astro.site).href}#person` },
+  mainEntity: { '@id': `${new URL('/', Astro.site).href}#person` },
 };
 ---
 <Layout title={copy.seo.about.title} description={copy.seo.about.description} path="/about/" current="/about/"

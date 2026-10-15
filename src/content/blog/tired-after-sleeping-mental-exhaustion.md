@@ -1,12 +1,12 @@
 ---
 title: "Why am I so tired even after a full night's sleep? Mental exhaustion, explained"
-seoTitle: "Tired After Sleeping? Mental Exhaustion Explained"
-description: "Slept eight hours and still exhausted? A plain-English guide to mental exhaustion: why stress drains your energy, the common signs, what helps and when to see a GP."
+seoTitle: "Tired Even After Sleeping? Mental Exhaustion Explained"
+description: "Slept eight hours and still exhausted? A plain-English guide to mental exhaustion: why stress drains you, the common signs, what helps and when to see a GP."
 excerpt: "Sometimes we're not tired because we've done too much. We're tired because we've been carrying too much. Here's why, and what helps."
 keyword: "tired even after sleeping mental exhaustion"
 regions: ["uk"]
 published: 2026-10-15
-tags: ["Mental wellbeing", "Stress", "Paws, Peace & Poems"]
+tags: ["Mental wellbeing", "Stress", "Burnout"]
 faq:
   - q: "Can stress make you tired even if you sleep well?"
     a: "Yes. Stress is one of the common psychological causes of tiredness listed by the NHS. A mind that's busy worrying, planning and staying on alert uses energy, and long-term stress can also affect the quality of your sleep, even when you spend enough hours in bed."
@@ -72,14 +72,14 @@ Everyone's different, but these are some of the signs people often notice:
 - **Losing interest** in things you usually enjoy
 - **Physical signs**, such as headaches, tense shoulders, changes in appetite, or skin flare-ups during stressful spells
 
-Many of these signs overlap with other conditions, including depression, anxiety and physical health problems like anaemia or thyroid problems. That's one reason it's worth getting checked if they don't ease.
+Many of these signs overlap with other conditions, including depression, anxiety and physical conditions such as anaemia or thyroid problems. That's one reason it's worth getting checked if they don't ease.
 
 ## What can help
 
 These are small, everyday things. They won't fix everything, but they can give your mind more room to recover.
 
 1. **Take breaks that are actually breaks.** Five minutes away from screens, ideally outside, does more than five minutes of scrolling.
-2. **Keep a steady sleep routine.** The NHS suggests going to bed and getting up at roughly the same times, winding down for a while before bed and avoiding screens in the last hour.
+2. **Keep a steady sleep routine.** The NHS suggests going to bed and getting up at roughly the same times, winding down before bed and putting your phone away.
 3. **Get the to-do list out of your head.** Write down what's unfinished and when you'll deal with it. Your brain is more likely to let go once there's a plan.
 4. **Move a little.** It sounds backwards when you're tired, but gentle movement like a short walk often lifts energy more than resting on the sofa.
 5. **Make one thing measurable.** On heavy days, tracking something small, like your steps or a glass of water with each meal, can give a foggy mind something steady to hold on to.

@@ -2,14 +2,14 @@
 title: "How much does a freelance social media manager cost in the UK?"
 seoTitle: "Freelance Social Media Manager Cost UK (2026 Guide)"
 description: "What UK small businesses actually pay a freelance social media manager in 2026, what's included at each price, and the questions to ask before you sign."
-excerpt: "Monthly retainers, hourly rates and the hidden extras. An honest look at what you'll pay, and what you should get for it."
+excerpt: "Monthly retainers, hourly rates and the hidden extras: what you'll pay, and what you should get for it."
 keyword: "freelance social media manager cost UK"
 regions: ["uk"]
 published: 2026-10-15
 tags: ["Pricing", "Hiring help", "Social media"]
 faq:
   - q: "How much does a freelance social media manager cost per month in the UK?"
-    a: "Most UK freelancers charge a fixed monthly fee. For a small business, quotes commonly fall somewhere between about £250 and £1,200 a month, depending on how many platforms, how many posts and whether design, video or reporting is included. Ad spend is always extra."
+    a: "Most UK freelancers charge a fixed monthly fee. For a small business, quotes commonly fall somewhere between about £250 and £1,200 a month, depending on how many platforms, how many posts and whether design, video or reporting is included. Ad spend is almost always extra."
   - q: "Is it cheaper to hire a freelancer or an agency?"
     a: "Usually a freelancer. You're paying for one person's time rather than account managers and overheads. Agencies make sense when you need a big team, paid ads and video production all at once."
   - q: "What should be included in a social media management package?"
@@ -18,9 +18,9 @@ faq:
     a: "Monthly, if you can. A fixed fee for a fixed amount of content means no surprise bills and makes it easy to compare quotes."
 ---
 
-<p class="tldr"><strong>The short answer:</strong> most UK small businesses pay a freelance social media manager a fixed monthly fee of roughly £250 to £1,200. Where you land depends on how many platforms you're on, how many posts you need, and whether design and copywriting are both included. Ad spend is never part of that number.</p>
+<p class="tldr"><strong>The short answer:</strong> most UK small businesses pay a freelance social media manager a fixed monthly fee of roughly £250 to £1,200. Where you land depends on how many platforms you're on, how many posts you need, and whether design and copywriting are both included. Ad spend is almost always on top of that.</p>
 
-I get asked this on almost every intro call, usually a bit awkwardly, as if it's rude to bring up money. It isn't. It's the most sensible question you can ask, so here's the honest version, including the bits people selling social media packages don't always volunteer.
+I get asked this on almost every intro call, usually a bit awkwardly, as if it's rude to bring up money. It isn't. It's the most sensible question you can ask, so here's the straight version, including the bits people selling social media packages don't always volunteer.
 
 ## What you'll typically be quoted
 
@@ -34,7 +34,7 @@ Prices vary a lot, and anyone who gives you one number is guessing. But when you
 
 Hourly rates for UK freelancers are often quoted somewhere between £20 and £75 an hour, with very junior help below that and senior strategists above it.
 
-These are ballpark figures, not a price list. A skincare brand that needs four beautifully designed posts a week is a very different job from a plumber who wants one helpful tip every Tuesday.
+These are ballpark figures, based on quotes and rate cards I've seen in 2025 and 2026, not a price list. A skincare brand that needs four beautifully designed posts a week is a very different job from a plumber who wants one helpful tip every Tuesday.
 
 ## Why two quotes for "social media management" can be £800 apart
 
@@ -60,14 +60,14 @@ An agency starts to make sense when you need a lot at once: paid ads, video prod
 This is where cheap packages get expensive. Before you agree to anything, ask:
 
 1. **How many revisions are included?** Two rounds per piece is common. Unlimited usually means slow.
-2. **Is ad spend included?** It almost never is. Boosted posts and ads are paid to Meta or LinkedIn directly.
+2. **Is ad spend included?** Almost always not. Boosted posts and ads are paid to Meta or LinkedIn directly.
 3. **Who pays for stock photos, fonts and tools?** Canva Pro, scheduling tools and paid images can add up.
 4. **What's the notice period?** A rolling monthly agreement with 30 days' notice is fair. A 12-month lock-in for a small business is not.
 5. **Who owns the files?** You should. Templates should be built in your own accounts so they stay with you if you part ways.
 
 ## What "good value" actually looks like
 
-The cheapest quote is rarely the best value, and the most expensive one isn't automatically the best work. What you're really paying for is three things:
+The cheapest quote is rarely the best value, and the most expensive one isn't automatically the best work. What you're paying for:
 
 - **Consistency.** Content that goes out when it's meant to, every week, without you chasing it.
 - **Your brand, done properly.** Posts that look and sound like you, not like a template everyone else is using.

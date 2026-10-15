@@ -7,13 +7,14 @@
     "phoneDisplay": "+44 7438 216452",
     "phoneHref": "+447438216452",
     "linkedin": "https://www.linkedin.com/in/lavi-bachchis-63a758166/",
-    "linkedinDisplay": "linkedin.com/in/lavi-bachchis",
+    "linkedinDisplay": "linkedin.com/in/lavi-bachchis-63a758166",
     "instagram": "https://www.instagram.com/pawspeacenpoems/",
     "youtube": "https://www.youtube.com/@TakeaPawswithLavi",
     "location": "London, UK",
-    "coverage": "Working with clients across the UK & US",
+    "coverage": "I work with clients across the UK and US.",
     "availability": "Taking on new clients · UK & US",
-    "footerNote": "All six brands on this site are sample case studies I created to show my work. Names, people, reviews and figures in them are illustrative. Legal and tax points in the samples are not advice.",
+    "footerNote": "The six sample brands on this site are case studies I created to show my work. Names, people, reviews and figures in them are illustrative, and legal and tax points in them are not advice. Paws, Peace & Poems is my own, real project.",
+    "footerShort": "Sample brands are illustrative. Details on the Work page.",
     "photoCredits": "Product photography for the sample brands is art-directed and AI-generated. Additional photography via Unsplash: Kalos Skincare, Nathan Dumlao, Eric Muhr, Jakub Żerdzicki, Christina @ wocintechchat.com, LinkedIn Sales Solutions, Kellen Riggin, Timur Shakerzianov, Bernard Hermant and Anne Nygård, colour-graded for each brand.",
     "copyright": "© 2026 Lavi Bachchis · Content & Creative",
     "ctaNav": "Start a project"
@@ -42,28 +43,28 @@
   ],
   "seo": {
     "home": {
-      "title": "Lavi Bachchis | Freelance Social Media Content, London",
+      "title": "Freelance Social Media Manager, London | Lavi Bachchis",
       "description": "Freelance social media content, Mailchimp newsletters and WordPress blogs for UK and US businesses. Designed, written and delivered on time from London."
     },
     "work": {
-      "title": "Portfolio: Social Media & Brand Case Studies | Lavi B.",
+      "title": "Social Media Case Studies & Portfolio | Lavi Bachchis",
       "description": "Brand case studies: my own mental-wellbeing page plus six sample brands, with brand kits, planned Instagram grids, Reel covers and LinkedIn carousels."
     },
     "services": {
-      "title": "Services & Packages | Social, Email & Blog Content",
-      "description": "Monthly social media, Mailchimp newsletter and WordPress blog packages on a fixed fee. You approve the calendar, and nothing goes live without your sign-off."
+      "title": "Social Media Content Packages & Pricing | Lavi Bachchis",
+      "description": "Monthly social media, Mailchimp newsletter and WordPress blog packages for a fixed fee, planned a month ahead and approved by you before anything is posted."
     },
     "about": {
-      "title": "About Lavi Bachchis | Content & Brand, London",
-      "description": "London-based marketing and brand lead who designs and writes social media, newsletters and blogs for product and service businesses in the UK and the US."
+      "title": "About Lavi Bachchis | Freelance Content Creator, London",
+      "description": "Lavi Bachchis, freelance social media content creator and brand lead in London. Social posts, Mailchimp newsletters and WordPress blogs for UK and US brands."
     },
     "insights": {
-      "title": "Social Media & Content Blog for Small Businesses | Lavi B.",
+      "title": "Small Business Social Media Blog | Lavi Bachchis",
       "description": "Practical articles on social media, newsletters and blog content for UK and US small businesses, from a London freelance content creator and brand lead."
     },
     "contact": {
-      "title": "Contact | Plan Your First Month of Content",
-      "description": "Get in touch about freelance social media, newsletter and blog content for your UK or US business. I reply within one working day to book a short call."
+      "title": "Contact | Freelance Social Media Content | Lavi Bachchis",
+      "description": "Get in touch about freelance social media, newsletter and blog content for your UK business. I reply within one working day and we can book a short call."
     },
     "solenne": {
       "title": "Solenne Skincare: Instagram Case Study | Lavi Bachchis",
@@ -74,11 +75,11 @@
       "description": "Sample case study: a playful Instagram feed for a coffee roaster, with brew-guide carousels, a weekly Cupping Club series, a bakery collab and Reel covers."
     },
     "loomhouse": {
-      "title": "Loom House Homeware: Instagram Case Study | Lavi B.",
+      "title": "Loom House Homeware: Instagram Case Study | Lavi Bachchis",
       "description": "Sample case study: a textured Instagram feed for a woven homeware maker, with a woven-check grid, Mill Diaries series, a styling Reel cover and photo dump."
     },
     "ashbygrant": {
-      "title": "Ashby Grant: LinkedIn Carousels for Law Firms | Lavi B.",
+      "title": "Ashby Grant: LinkedIn Content for Law Firms | Lavi Bachchis",
       "description": "Sample case study: LinkedIn carousels for law firms, a partner's personal post, a subtitled explainer video and plain-English social content for solicitors."
     },
     "northfield": {
@@ -90,8 +91,8 @@
       "description": "Sample case study: Facebook and Instagram content for a local plumbing and heating firm, with a weekly tip series, review cards and job-of-the-week posts."
     },
     "pawspeacepoems": {
-      "title": "Paws, Peace & Poems: Mental Health Content | Lavi B.",
-      "description": "Case study: Paws, Peace & Poems, my own mental-wellbeing Instagram page and LinkedIn community, with gentle psychology explainers and a weekly series."
+      "title": "Paws, Peace & Poems: Mental Health Content | Lavi Bachchis",
+      "description": "Paws, Peace & Poems, my own mental-wellbeing Instagram page, YouTube channel and LinkedIn community: gentle psychology explainers and a weekly series."
     }
   },
   "home": {
@@ -118,7 +119,7 @@
       },
       {
         "n": "24",
-        "label": "trend-led creatives"
+        "label": "posts in current formats"
       }
     ],
     "ticker": [
@@ -155,13 +156,13 @@
       "eyebrow": "Selected work",
       "h2": "Six sample brands,",
       "h2Em": "built end to end.",
-      "text": "I created six brands to show the whole job: a brand kit, a planned Instagram grid and four trend-led creatives for each. Three sell products. Three sell expertise."
+      "text": "I created six brands to show the whole job: a brand kit, a planned Instagram grid and four posts in current formats for each. Three sell products. Three sell expertise."
     },
     "servicesTeaser": {
       "eyebrow": "Services",
       "h2": "What you get",
       "h2Em": "every month.",
-      "text": "Feed posts, carousels, Reel covers, newsletters and blog articles on a fixed monthly fee. You approve the calendar first, and nothing goes live without your sign-off."
+      "text": "Feed posts, carousels, Reel covers, newsletters and blog articles for a fixed monthly fee, planned a month ahead."
     },
     "cta": {
       "h2": "Let's plan your",
@@ -172,8 +173,8 @@
   },
   "work": {
     "eyebrow": "Work",
-    "h1": "Seven brands, each with",
-    "h1Em": "its own look and voice.",
+    "h1": "Six sample brands,",
+    "h1Em": "and one of my own.",
     "intro": "One is my own: Paws, Peace & Poems, a mental-wellbeing page I run. The other six are sample brands I created to show how I work, each with a brand kit, content pillars, a planned 9-post Instagram grid and four creatives built on current formats. In the samples, names, people, reviews and figures are illustrative.",
     "ownEyebrow": "My own project",
     "ownH2": "Where content meets",
@@ -201,10 +202,10 @@
       "channels": "Instagram · Facebook · Pinterest",
       "summary": "A calm, sensory Instagram feed for a small-batch skincare studio.",
       "brief": "We make botanical skincare in batches of 200 in Bristol. Our products are simple, but our feed looked busy and mismatched. We wanted it to feel as calm as our routines, with real texture and real customers.",
-      "challenge": "Skincare feeds blur together. Solenne needed a look people recognise in a second, and product claims that stay honest about what the products do.",
+      "challenge": "Skincare feeds blur together. Solenne needed a look people recognise in a second, and claims that don't overpromise.",
       "approach": [
         "Built a soft palette of milk, blush, clay rose, sage and plum, with Cormorant Garamond headlines and Jost body text.",
-        "Set three content pillars: product, ritual and education, and proof from the studio.",
+        "Set three content pillars: product; ritual and education; proof from the studio.",
         "Planned the grid so no two neighbouring posts share a format, with blush and plum alternating down the rows.",
         "Created Ritual Notes, a weekly education series with one fixed template."
       ],
@@ -227,7 +228,7 @@
       "location": "Cornwall",
       "channels": "Instagram · Facebook · TikTok",
       "summary": "A playful coastal feed for a coffee roaster, built on brew guides and a weekly series.",
-      "brief": "We roast coffee on the Cornish coast every Tuesday and post it the same day. We wanted a feed that sounds like us, playful and unfussy, and that helps people brew better coffee at home.",
+      "brief": "We roast coffee on the Cornish coast every Tuesday and send it out the same day. We wanted a feed that sounds like us, playful and unfussy, and that helps people brew better coffee at home.",
       "challenge": "Coffee photography is everywhere. Lowtide needed bold colour it could own, and brew education people save and share, so the feed builds interest in subscriptions week by week.",
       "approach": [
         "Paired warm coffee photography with bold Sunrise orange and Deep Tide navy tiles.",
@@ -278,7 +279,7 @@
       "name": "Ashby Grant",
       "type": "service",
       "sector": "Legal",
-      "location": "High-street firm, England",
+      "location": "England (high-street firm)",
       "channels": "LinkedIn · Facebook · Instagram",
       "summary": "Plain-English LinkedIn and social content for a firm of family, property and wills solicitors.",
       "brief": "We're a high-street firm handling family, property and wills work. Clients ask us the same good questions every week. We wanted to answer them in plain English and put our solicitors' faces on the firm.",
@@ -294,7 +295,7 @@
         "Tone-of-voice notes with lines to use and avoid",
         "9-post Instagram grid with team profile tiles",
         "6-slide LinkedIn PDF carousel on buying a home",
-        "Partner's personal LinkedIn post (about 120 words)",
+        "Partner's personal LinkedIn post (about 90 words)",
         "Subtitled 60-second explainer video cover",
         "Myth vs fact card on unmarried couples and property"
       ],
@@ -341,7 +342,7 @@
         "Made signal yellow, the colour of the van and uniform, the anchor of every grid row.",
         "Created Two-Minute Fix, a weekly tip series for simple jobs like bleeding a radiator.",
         "Timed a boiler-service reminder to the first cold snap.",
-        "Turned reviews and job photos into a weekly job-of-the-week carousel."
+        "Turned reviews and job photos into a job-of-the-week carousel."
       ],
       "deliverables": [
         "Logo, tagline and colour palette",
@@ -365,9 +366,9 @@
       "brief": "I started Paws, Peace & Poems as a space for anyone seeking mental stability, inner peace and a place to be heard. I wanted to explain how our minds work in plain, kind words, without it ever feeling clinical or preachy.",
       "challenge": "Mental health content has to be careful. It needs to be accurate, never diagnose, and point people to real help, while still feeling warm enough that people stop scrolling. It also had to sound like a person, not a textbook.",
       "approach": [
-        "Kept the original logo, a yellow paw with a meditating figure inside a black brush-stroke circle, and built a cream, butter and paw-yellow palette around it so the feed feels calm and friendly at a glance.",
+        "Kept the original logo: a yellow paw with a meditating figure inside an open black brush-stroke arc. I built a cream, butter and paw-yellow palette around it so the feed feels friendly at a glance.",
         "Created Brain Bites, a weekly explainer that takes one idea from psychology, like the Zeigarnik effect or emotional blunting, and explains it in plain words.",
-        "Explained neurodiversity, such as ADHD, autism, OCD and high sensitivity, through familiar TV characters, so the posts feel relatable rather than clinical.",
+        "Explained conditions such as ADHD, autism and OCD, and traits like high sensitivity, through familiar TV characters, so the posts feel relatable rather than clinical.",
         "Linked body and mind with posts on how stress can show up in sleep, energy and skin, and paired facts with gentle first-person reflections.",
         "Started Take a Paws with Lavi on YouTube for longer, slower content: imaginative stories, calming sounds and simple tools for emotional wellbeing, including the comfort pets bring."
       ],
@@ -393,7 +394,7 @@
     "eyebrow": "Services",
     "h1": "Content, designed and written",
     "h1Em": "for you every month.",
-    "intro": "You get social media, email and blog content from one person who knows your brand. Everything is planned in a monthly calendar that you approve before anything is made.",
+    "intro": "Social media, email and blog content, designed and written by the same person. Everything is planned in a monthly calendar you sign off before I start.",
     "list": [
       {
         "eyebrow": "Social",
@@ -609,20 +610,20 @@
     "paragraphs": [
       "In my in-house role, I lead marketing and brand for a London law firm. That means LinkedIn posts for partners, client newsletters, website articles and a brand that has to look right every time. I know how careful professional-services content needs to be, and how to keep it easy to read.",
       "As a freelancer, I bring the same habits to smaller businesses. You get one person who designs the graphics, writes the captions, builds the newsletter and formats the blog, so your brand stays consistent without hiring a team.",
-      "I plan each month around formats that are working now, from Reel hooks to LinkedIn PDF carousels. My promise is simple: content that looks like your brand, sounds like your brand and arrives when I said it would."
+      "I plan each month around formats that are working now, from Reel hooks to LinkedIn PDF carousels. You get content that looks and sounds like your brand, on the dates we agreed."
     ],
     "highlights": [
       {
-        "title": "In-house brand experience",
+        "title": "I've done this in-house",
         "text": "I run marketing and brand for a London law firm, so I'm used to approvals, accuracy and a brand that has to stay consistent."
       },
       {
-        "title": "Design and copy in one place",
-        "text": "Graphics, captions, newsletters and articles, all from one person who knows your brand."
+        "title": "You brief one person",
+        "text": "Graphics, captions, newsletters and articles, all designed and written by me."
       },
       {
-        "title": "Built around what works now",
-        "text": "I plan around the formats that are working on each platform right now, not last year's playbook."
+        "title": "Current formats",
+        "text": "I plan around the formats each platform is rewarding now."
       }
     ],
     "toolsTitle": "Tools I use",
@@ -652,7 +653,7 @@
         "text": "I promise finished, on-brand content. I don't promise follower or sales numbers that depend on things outside my control."
       }
     ],
-    "whyText": "Most small businesses need design and writing that match, but can't justify a team for it. That's the gap I fill: one person, one brief, every channel looking like the same brand."
+    "whyText": "Most small businesses need design and writing that match, but can't justify a team for it. That's the gap I fill: one brief, and everything from your posts to your newsletter looks like it came from the same business."
   },
   "insights": {
     "eyebrow": "Blog",
@@ -692,6 +693,6 @@
   },
   "notFound": {
     "h1": "This page has moved on.",
-    "text": "The link may be old or mistyped. Try the work or the services, or get in touch and I'll point you in the right direction."
+    "text": "The link may be old or mistyped. Have a look at my work or services, or get in touch and I'll point you in the right direction."
   }
 }

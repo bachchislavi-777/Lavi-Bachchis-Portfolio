@@ -16,7 +16,7 @@ const s = copy.site;
         <h2 class="ft-h">Pages</h2>
         <ul>
           {copy.nav.map((n) => <li><a href={url(n.href)}>{n.label}</a></li>)}
-          <li><a href={url('/privacy/')}>Privacy &amp; cookies</a></li>
+          <li><a href={url('/privacy/')}>Privacy</a></li>
         </ul>
       </nav>
       <div>
@@ -28,7 +28,7 @@ const s = copy.site;
         </ul>
       </div>
     </div>
-    <div class="fl"><span>{s.copyright}</span><span>{s.footerNote}</span></div>
+    <div class="fl"><span>{s.copyright}</span><span>{s.footerShort}</span></div>
     <p class="credits">{s.photoCredits}</p>
   </div>
 </footer>

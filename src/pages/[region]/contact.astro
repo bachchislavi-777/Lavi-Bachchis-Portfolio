@@ -13,9 +13,9 @@ const L = c.labels;
 const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
 const contactPage = {
   '@type': 'ContactPage',
-  name: copy.seo.contact.title,
+  name: copy.seo.contact.title.replace(/ \| Lavi Bachchis$/, ''),
   url: new URL(url('/contact/'), Astro.site).href,
-  mainEntity: { '@id': `${new URL(url('/'), Astro.site).href}#person` },
+  mainEntity: { '@id': `${new URL('/', Astro.site).href}#person` },
 };
 ---
 <Layout title={copy.seo.contact.title} description={copy.seo.contact.description} path="/contact/" current="/contact/"
@@ -27,14 +27,14 @@ const contactPage = {
       <div class="promise">
         <h2 class="eyebrow" id="reach-h">Get in touch</h2>
         <p class="big">{c.promise}</p>
-        <p style="color:var(--mt)">{s.coverage}. {c.hours}</p>
+        <p style="color:var(--mt)">{s.coverage} {c.hours}</p>
       </div>
       <div class="card">
         <div class="crow"><div><small>{L.name}</small><span class="v">{s.name}</span></div></div>
         <div class="crow"><div><small>{L.email}</small><a href={`mailto:${s.email}`}>{s.email}</a></div><button class="copy" type="button" data-copy={s.email} data-copied={L.copied} aria-label={`${L.copy} email address`}>{L.copy}</button><span class="copy-status" role="status" aria-live="polite"></span></div>
         <div class="crow"><div><small>{L.phone}</small><a href={`tel:${s.phoneHref}`}>{s.phoneDisplay}</a></div><button class="copy" type="button" data-copy={s.phoneDisplay} data-copied={L.copied} aria-label={`${L.copy} phone number`}>{L.copy}</button><span class="copy-status" role="status" aria-live="polite"></span></div>
         <div class="crow"><div><small>{L.linkedin}</small><a href={s.linkedin} target="_blank" rel="noopener">{s.linkedinDisplay}<span class="sr-only"> (opens in a new tab)</span></a></div></div>
-        <div class="crow"><div><small>{L.workingWith}</small><span class="v">{s.coverage.replace('Working with clients', 'Clients')}</span></div></div>
+        <div class="crow"><div><small>{L.workingWith}</small><span class="v">{s.coverage.replace(/^I work with clients across the /, '').replace(/.$/, '')}</span></div></div>
       </div>
     </div>
   </section>

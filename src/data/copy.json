@@ -665,6 +665,27 @@
     "empty": "New articles are on the way."
   },
 
+  "recommendations": {
+    "eyebrow": "Recommendations",
+    "h2": "What people I've",
+    "h2Em": "worked with say.",
+    "intro": "Recommendations from my LinkedIn profile, quoted as they were written.",
+    "source": "LinkedIn recommendation",
+    "linkText": "See all recommendations on LinkedIn",
+    "link": "https://www.linkedin.com/in/lavi-bachchis-63a758166/details/recommendations/",
+    "items": [
+      {
+        "quote": "I highly recommend Lavi for her exceptional marketing expertise. Her knowledge and execution of marketing strategies have made her a key asset to Waterstone Legal. With her strong skills in Content Creation, SEO research strategy, and marketing development, Lavi has played a pivotal role in the successful implementation of Waterstone Legal's conveyancing campaigns. Her contributions have had a significant impact, demonstrating her ability to drive results and support the firm's growth. Lavi is an invaluable team member and a true professional in her field.",
+        "name": "Marie David",
+        "role": ""
+      },
+      {
+        "quote": "It was great working with Lavi last year. She was leading the team where I worked. She would listen to everyone and was professional and approachable.",
+        "name": "A team member",
+        "role": "Name not shown publicly on LinkedIn"
+      }
+    ]
+  },
   "contact": {
     "eyebrow": "Contact",
     "h1": "Let's plan your",

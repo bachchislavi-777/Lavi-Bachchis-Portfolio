@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import CoverCard from '../../components/CoverCard.astro';
 import Process from '../../components/Process.astro';
+import Recommendations from '../../components/Recommendations.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { getCopy, setRegion, localise, REGIONS } from '../../lib/region.js';
 setRegion(Astro.params.region);
@@ -126,6 +127,7 @@ const icons = ['✦', '✎', '↗'];
   </section>
 
   <Process />
+  <Recommendations light />
   <CtaBand />
 </Layout>
 

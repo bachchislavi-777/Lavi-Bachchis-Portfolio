@@ -1,0 +1,13 @@
+---
+// Lavi's private studio for agreements and invoices. Sign-in is by a one-time code emailed to her.
+import AppLayout from '../../layouts/AppLayout.astro';
+---
+<AppLayout title="Studio | Lavi Bachchis" wide>
+  <nav slot="top" id="studio-nav" class="studio-nav" aria-label="Studio"></nav>
+  <div id="root"><div class="skeleton" aria-label="Loading"></div></div>
+  <noscript><div class="center-msg"><h1>Please switch on JavaScript</h1></div></noscript>
+</AppLayout>
+<script>
+  import { mount } from '../../lib/agreements/studio.js';
+  mount();
+</script>

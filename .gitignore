@@ -10,3 +10,9 @@ dist/
 .env.*
 .DS_Store
 npm-debug.log*
+
+# agreements: local test data and test reports (agreements/dist is covered by dist/ above)
+agreements/local/.data/
+test-results/
+playwright-report/
+*.tmp.mjs

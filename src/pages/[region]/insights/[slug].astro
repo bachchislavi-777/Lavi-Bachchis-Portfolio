@@ -26,6 +26,7 @@ const { post, others } = Astro.props;
 const d = post.data;
 const { Content, headings } = await render(post);
 const path = `/insights/${post.id}/`;
+const cs = d.caseStudy ? copy.cases[d.caseStudy] : null; // the case study that shows this advice in practice
 const iso = (x) => x.toISOString().slice(0, 10);
 const fmt = (x) => x.toLocaleDateString(REGION_META[Astro.params.region].lang, { day: 'numeric', month: 'long', year: 'numeric' });
 const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
@@ -88,6 +89,12 @@ const crumbs = [{ name: 'Blog', path: '/insights/' }, { name: d.title, path }];
             <h2 id="faq-h">Quick answers</h2>
             {d.faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
           </section>
+        )}
+        {cs && (
+          <aside class="post-case" aria-label="See it in practice">
+            <span class="eyebrow">See it in practice</span>
+            <p><a href={url(`/work/${d.caseStudy}/`)}><b>{cs.name}: {cs.h1Sub}</b></a>. {cs.summary} The sample case study shows the brief, the content plan and the finished posts.</p>
+          </aside>
         )}
         <aside class="post-author" aria-label="About the author">
           <span class="mono" aria-hidden="true">LB</span>

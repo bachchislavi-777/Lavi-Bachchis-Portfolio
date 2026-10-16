@@ -4,6 +4,7 @@ seoTitle: "Social Media for Solicitors & Law Firms in the UK"
 description: "A practical guide to social media for UK solicitors and law firms: what to post on LinkedIn and Instagram, how to stay within the SRA rules and keep it human."
 excerpt: "What to post, what to avoid and how to keep it compliant, from someone who runs marketing for a London law firm."
 keyword: "social media for solicitors UK"
+caseStudy: "ashbygrant"
 regions: ["uk"]
 published: 2026-10-15
 tags: ["Law firms", "LinkedIn", "Professional services"]

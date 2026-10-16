@@ -4,6 +4,7 @@ seoTitle: "Social Media for Law Firms & Attorneys: A Practical Guide"
 description: "A practical guide to social media for US law firms and attorneys: what to post on LinkedIn, Facebook and Instagram, what to avoid, and the ethics rules to know."
 excerpt: "What to post, what to skip and how to keep it within the ethics rules, from someone who runs marketing for a law firm."
 keyword: "social media for law firms"
+caseStudy: "ashbygrant"
 regions: ["us"]
 published: 2026-10-15
 tags: ["Law firms", "LinkedIn", "Professional services"]

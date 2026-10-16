@@ -18,6 +18,8 @@ const blog = defineCollection({
     tags: z.array(z.string()).default([]),
     // Short Q&As shown at the end of the post and marked up as FAQPage for search and AI answers.
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
+    // Optional: the case study (an id from src/data/brands.js) that shows this advice in practice. Links both ways.
+    caseStudy: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

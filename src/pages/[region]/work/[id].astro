@@ -29,8 +29,8 @@ const crumbs = [{ name: 'Work', path: '/work/' }, { name: c.name, path }];
 const noteLabel = b.own ? copy.work.ownLabel : copy.work.sampleLabel;
 const noteText = b.own ? copy.work.ownNote : copy.site.footerNote;
 const briefBy = b.own ? `In my words · ${copy.site.name}, founder` : `Sample client brief · ${c.name}, ${c.location}`;
-// Blog posts tagged with this brand's name (own projects only).
-const related = b.own ? (await getCollection('blog', ({ data }) => !data.draft && data.regions.includes(Astro.params.region) && data.tags.includes(c.name))) : [];
+// Articles for this case: own projects by tag (the brand's name), sample brands by the post's caseStudy field.
+const related = await getCollection('blog', ({ data }) => !data.draft && data.regions.includes(Astro.params.region) && (b.own ? data.tags.includes(c.name) : data.caseStudy === b.id));
 ---
 <Layout title={seo.title} description={seo.description} path={path} current="/work/" brandFonts
   breadcrumbs={crumbs} schema={[caseSchema(Astro.site, b.id)]}>
@@ -48,7 +48,7 @@ const related = b.own ? (await getCollection('blog', ({ data }) => !data.draft &
           <span class="ch-num" aria-hidden="true">{num}</span>
           <div>
             <span class="eyebrow">{groupLabel} · {c.sector}</span>
-            <h1>{c.name}</h1>
+            <h1>{c.name}{c.h1Sub && <span class="h1-sub"><span class="sr-only">: </span>{c.h1Sub}</span>}</h1>
             <div class="chan">{c.channels}</div>
           </div>
           <div class="ch-meta">

@@ -1,0 +1,28 @@
+/* The demo's own chrome around the real pages. */
+.demo-bar{background:#0F2A21;color:#F4ECDF;font:14px/1.45 var(--f-b);padding:10px 0}
+.demo-bar .app-wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.demo-bar b{color:#DCA94C;font-family:var(--f-m);letter-spacing:.12em;text-transform:uppercase;font-weight:400;font-size:12px;margin-right:8px}
+.demo-bar .ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.demo-bar .ctl span{color:#B7C7BA}
+.demo-bar .ctl strong{color:#FFF6EC;font-weight:600}
+.demo-bar button{background:transparent;color:#FFF6EC;border:1px solid rgba(244,236,223,.35);border-radius:99px;font:500 13px var(--f-b);padding:7px 12px;cursor:pointer;min-height:34px}
+.demo-bar button:hover{background:rgba(244,236,223,.12)}
+.demo-tabs{background:#E9DFCC;border-bottom:1px solid var(--line)}
+.demo-tabs .app-wrap{display:flex;gap:4px;overflow-x:auto}
+.demo-tabs button{border:0;background:transparent;font:600 15px var(--f-b);color:var(--forest);padding:12px 14px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;display:inline-flex;gap:6px;align-items:center}
+.demo-tabs button[aria-selected=true]{border-bottom-color:var(--terra);color:var(--terra-d)}
+.demo-tabs .count{background:var(--terra);color:#FFF6EC;border-radius:99px;font-size:12px;padding:1px 7px}
+#stage{flex:1;display:flex;flex-direction:column}
+#stage > main{flex:1;padding-top:28px;padding-bottom:56px}
+#stage .app-top{position:static}
+.demo-inbox .inbox{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:16px;align-items:start;margin-top:16px}
+@media (max-width:860px){.demo-inbox .inbox{grid-template-columns:minmax(0,1fr)}}
+.mails{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.mails button{width:100%;text-align:left;display:grid;gap:2px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;font:14px/1.4 var(--f-b);color:var(--text)}
+.mails button[aria-current=true]{border-color:var(--forest);box-shadow:0 0 0 1px var(--forest)}
+.mails button b{font-weight:600}
+.mails button span{color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.viewer{background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+.mailhead{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);font-size:14px}
+.mailhead span{color:var(--muted);flex:1 1 200px;overflow-wrap:anywhere}
+#mailframe{display:block;width:100%;border:0;min-height:420px;background:#F4ECDF}

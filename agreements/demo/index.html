@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <title>Agreements Demo</title>
+  <link rel="stylesheet" href="./demo.css">
+  <script src="./demo.js" defer></script>
+</head>
+<body class="app">
+  <div class="demo-bar"><div class="app-wrap wide">
+    <span><b>Demo</b>Your agreements &amp; invoices system, running in this page. Nothing is sent or saved online.</span>
+    <span class="ctl"><span>Demo date: <strong id="demo-date"></strong></span><button type="button" id="skip">Skip ahead a month</button><button type="button" id="reset">Start again</button></span>
+  </div></div>
+  <div class="demo-tabs"><div class="app-wrap wide" id="tabs" role="tablist" aria-label="Demo views">
+    <button type="button" role="tab" data-tab="studio" aria-selected="true">Your studio</button>
+    <button type="button" role="tab" data-tab="client" aria-selected="false">Client’s view</button>
+    <button type="button" role="tab" data-tab="inbox" aria-selected="false">Inbox <span class="count" id="inbox-count" hidden></span></button>
+  </div></div>
+  <div id="stage"></div>
+  <footer class="app-foot"><div class="app-wrap wide"><span>Lavi Bachchis · Content &amp; Creative · London</span><span>Demo of the agreements system on lavibachchis.com</span></div></footer>
+</body>
+</html>

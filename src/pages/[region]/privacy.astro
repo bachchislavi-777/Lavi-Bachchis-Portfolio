@@ -23,28 +23,29 @@ const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
       <ul>
         <li>If you email or phone me, I receive the details you choose to share, such as your name, email address, phone number and business details.</li>
         <li>{formOn ? 'If you use the contact form, I receive the name, email address, business details and message you enter.' : 'When the online contact form is switched on, it will collect the name, email address, business details and message you enter.'}</li>
-        <li>I do not ask for payment details on this website.</li>
+        <li>If we agree to work together, I send you a private link to sign our agreement online. Signing records the details you enter (your name, role, business, address, email and phone), your signature, the date and time, and your browser type, so we both have a reliable record of the contract. Invoices record your billing details.</li>
+        <li>I do not ask for card or bank details on this website.</li>
       </ul>
 
       <h2>Why I use it</h2>
-      <p>I only use your details to reply to your enquiry and, if we work together, to manage our project. I do not sell your details or add you to a mailing list without asking first.</p>
+      <p>I only use your details to reply to your enquiry and, if we work together, to manage our project, keep a record of our agreement and invoice you. The legal basis is taking steps to enter into, and then carrying out, our contract, and keeping the tax and accounting records the law requires. I do not sell your details or add you to a mailing list without asking first.</p>
 
       <h2>Who else handles it</h2>
       <ul>
         <li><b>Web3Forms</b> passes contact-form messages to my email inbox{formOn ? '' : ' (once the form is switched on)'}. Their privacy policy is at <a href="https://web3forms.com/privacy" rel="noopener">web3forms.com/privacy</a>.</li>
-        <li><b>Google</b> provides my email (Gmail). The fonts on this site are stored on the site itself, so your browser does not contact Google or any other font service when you visit.</li>
+        <li><b>Google</b> provides my email (Gmail and Google Workspace). Signed agreements, invoices and the emails about them are stored and sent through my Google Workspace account. The fonts on this site are stored on the site itself, so your browser does not contact Google or any other font service when you visit.</li>
         <li><b>GitHub Pages</b> hosts this website and may keep standard technical logs, such as IP addresses, to keep the service secure.</li>
       </ul>
 
       <h2 id="cookies">Cookies and analytics</h2>
-      <p>This website does not set any cookies or store anything in your browser. It does not use tracking, advertising or social media pixels, and it does not load content from other websites. That is why you will not see a cookie banner here: under the UK's Privacy and Electronic Communications Regulations (PECR), consent is only needed when a site stores or reads information on your device.</p>
+      <p>This website does not set any cookies or store anything in your browser. It does not use tracking, advertising or social media pixels, and it does not load content from other websites. The only exception is the private agreement and invoice pages I send to clients, which connect to my Google Workspace account to load and save your agreement. That is why you will not see a cookie banner here: under the UK's Privacy and Electronic Communications Regulations (PECR), consent is only needed when a site stores or reads information on your device.</p>
       <p>If I add privacy-friendly analytics later, it will be a cookieless tool that only counts visits, and I will name it here before it goes live.</p>
 
       <h2>Security</h2>
-      <p>The site is served over an encrypted HTTPS connection and uses a strict content security policy, which stops the browser from loading scripts or content from anywhere other than this site. If you spot a security problem, please email <a href={`mailto:${s.email}`}>{s.email}</a>.</p>
+      <p>The site is served over an encrypted HTTPS connection and uses a strict content security policy, which stops the browser from loading scripts or content from anywhere other than this site (and, on the private agreement pages, my Google Workspace account). Agreement and invoice links are private to each client: the secret part of the link stays in your browser and is not sent to the website’s host. If you spot a security problem, please email <a href={`mailto:${s.email}`}>{s.email}</a>.</p>
 
       <h2>How long I keep it</h2>
-      <p>I keep enquiry emails for as long as needed to reply and follow up, and no longer than two years unless we work together. Project records are kept as long as the law requires for tax and accounting.</p>
+      <p>I keep enquiry emails for as long as needed to reply and follow up, and no longer than two years unless we work together. Signed agreements are kept for six years after our agreement ends, the period in which a contract claim can be made in England and Wales. Invoices and payment records are kept as long as the law requires for tax and accounting.</p>
 
       <h2>Your rights</h2>
       <p>You can ask to see, correct or delete the information I hold about you, or object to how I use it. Email <a href={`mailto:${s.email}`}>{s.email}</a> and I will reply within one month. If you are unhappy with how I have handled your information, you can contact the UK Information Commissioner's Office at <a href="https://ico.org.uk" rel="noopener">ico.org.uk</a>.</p>

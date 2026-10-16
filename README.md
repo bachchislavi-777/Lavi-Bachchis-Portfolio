@@ -18,6 +18,14 @@ To switch it on the first time, go to the repo on github.com, then **Settings â†
 
 ---
 
+## Agreements & invoices
+
+Clients sign agreements online with a private link, and invoices are created automatically. It runs on your Google
+Workspace account. Your private studio is at `/studio/`. How it works and how to switch it on:
+**[agreements/README.md](agreements/README.md)**.
+
+---
+
 ## Changing text
 
 Nearly all the words on the site live in one file: **`src/data/copy.json`**. That covers headlines, page text, case-study briefs, services, packages, FAQ, about, insights and contact details.

@@ -7,7 +7,12 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "agreements:build": "node agreements/build.mjs",
+    "agreements:local": "node agreements/build.mjs && node agreements/local/server.mjs",
+    "agreements:test": "node agreements/build.mjs && node --test --test-concurrency=1 agreements/tests/core.test.mjs agreements/tests/api.test.mjs",
+    "agreements:e2e": "node agreements/build.mjs && playwright test -c agreements/playwright.config.mjs",
+    "agreements:demo": "node agreements/demo/build.mjs"
   },
   "engines": {
     "node": ">=20.3.0"
@@ -28,6 +33,11 @@
     "@fontsource/playfair-display": "^5.3.0",
     "@fontsource/plus-jakarta-sans": "^5.3.0",
     "@fontsource/work-sans": "^5.3.0",
-    "astro": "^5.18.2"
+    "astro": "^5.18.2",
+    "pdfmake": "^0.2.20"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "esbuild": "^0.28.2"
   }
 }

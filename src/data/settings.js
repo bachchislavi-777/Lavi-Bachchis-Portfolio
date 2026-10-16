@@ -9,3 +9,8 @@ export const PUBLIC_WEB3FORMS_KEY = '';
 // then write its file name here, e.g. 'images/lavi.jpg'. While this is empty, a placeholder card is shown.
 export const ABOUT_PHOTO = 'images/lavi.jpg';
 export const ABOUT_PHOTO_ALT = 'Lavi Bachchis, smiling, in a navy blazer';
+
+// Agreements & invoices (the /agreement/, /invoice/ and /studio/ pages). Paste the web app address of the
+// "LB Agreements" Google Apps Script here once it is deployed, e.g. 'https://script.google.com/macros/s/AKfy.../exec'.
+// While this is empty, those pages say the system is not switched on yet. See agreements/README.md.
+export const AGREEMENTS_API_URL = '';

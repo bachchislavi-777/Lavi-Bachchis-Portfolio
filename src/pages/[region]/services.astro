@@ -8,14 +8,20 @@ setRegion(Astro.params.region);
 const copy = getCopy();
 export const getStaticPaths = () => REGIONS.map((region) => ({ params: { region } }));
 import { servicesSchema } from '../../lib/schema.js';
-const s = copy.services;
+import { url } from '../../lib/url.js';
+import { price } from '../../lib/fx.js';
+// Prices are set in pounds in copy.json; the US site shows them in dollars at the latest official rate (src/lib/fx.js).
+const packages = await Promise.all(copy.services.packages.map(async (p) => ({ ...p, price: p.gbp ? await price(p.gbp, Astro.params.region) : null })));
+const byName = Object.fromEntries(packages.map((p) => [p.name, p.price?.text]));
+const fill = (t) => t.replace('{social}', byName['Social']).replace('{content}', byName['Content']).replace('{desk}', byName['Full content desk']);
+const s = { ...copy.services, packages, faq: copy.services.faq.map((f) => ({ ...f, a: fill(f.a) })) };
 const faqSchema = {
   '@type': 'FAQPage',
   mainEntity: s.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 ---
 <Layout title={copy.seo.services.title} description={copy.seo.services.description} path="/services/" current="/services/"
-  breadcrumbs={[{ name: 'Services', path: '/services/' }]} schema={[...servicesSchema(Astro.site), faqSchema]}>
+  breadcrumbs={[{ name: 'Services', path: '/services/' }]} schema={[...servicesSchema(Astro.site, packages), faqSchema]}>
   <PageHead eyebrow={s.eyebrow} h1={s.h1} h1Em={s.h1Em} intro={s.intro} crumbs={[{ name: 'Services', path: '/services/' }]} />
 
   <section class="band light" aria-labelledby="svc-h">
@@ -46,9 +52,13 @@ const faqSchema = {
           <div class:list={['pkg', { feat: p.featured }]}>
             {p.badge && <span class="pbadge">{p.badge}</span>}
             <h3 class="ttl">{p.name}</h3>
+            {p.price
+              ? <p class="pamt"><b>{p.price.text}</b> <span>/ month</span></p>
+              : <p class="pamt"><b class="pamt-text">{p.priceText}</b></p>}
             <p class="for">{p.for}</p>
             <ul>{p.items.map((i) => <li><span>{i.label}</span><b>{i.value}</b></li>)}</ul>
             {p.detail && <p class="detail">{p.detail}</p>}
+            {p.cta && <a class="btn" href={url(p.cta.href)}>{p.cta.label} <span aria-hidden="true">→</span></a>}
             <p class="price">{p.note}</p>
           </div>
         ))}

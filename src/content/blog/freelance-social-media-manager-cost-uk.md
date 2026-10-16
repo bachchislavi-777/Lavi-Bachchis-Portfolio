@@ -77,7 +77,7 @@ One thing I'd be wary of: anyone who guarantees follower numbers, leads or sales
 
 ## How my pricing works
 
-I charge a fixed monthly fee, quoted after a 20-minute call, once I know which channels matter to you and how much you need. There's no hourly billing, so you won't get a surprise invoice. Every month starts with a calendar you approve before I make anything, and nothing goes live without your sign-off.
+I charge a fixed monthly fee, and my three packages are £389, £720 and £989 a month, listed on the [services page](../../services/). Custom projects get a fixed quote after a 20-minute call. There's no hourly billing, so you won't get a surprise invoice. Every month starts with a calendar you approve before I make anything, and nothing goes live without your sign-off.
 
 If you'd like to see the kind of work you'd be paying for, have a look at the [sample case studies](../../work/), such as the [Halden plumbing and heating feed](../../work/halden/) or the [Solenne skincare grid](../../work/solenne/). The [services page](../../services/) shows what's in each package.
 

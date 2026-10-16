@@ -81,9 +81,9 @@ Be wary of anyone who guarantees follower counts, leads or sales. Results depend
 
 ## How my pricing works
 
-I work on a fixed monthly fee, in USD or GBP, quoted after a short call once I understand which channels matter to you and how much content you need. There's no hourly billing, so there are no surprise invoices. Each month starts with a content calendar you approve before I design or write anything, and nothing goes live without your sign-off.
+I work on a fixed monthly fee, and my package prices are listed on the [services page](../../services/). Custom projects get a fixed quote after a short call once I understand which channels matter to you and how much content you need. There's no hourly billing, so there are no surprise invoices. Each month starts with a content calendar you approve before I design or write anything, and nothing goes live without your sign-off.
 
-I'm based in London, which works well for East Coast clients: my afternoons line up with your mornings, so drafts and questions land while your day is getting started.
+Drafts and questions are timed to land at the start of your working day, so reviews never hold things up.
 
 If you'd like to see the kind of work you'd be paying for, take a look at the [sample case studies](../../work/), such as the [Halden home services feed](../../work/halden/) or the [Solenne skincare grid](../../work/solenne/). The [services page](../../services/) explains what each package includes, and my guide to [planning a month of social media content](../social-media-content-plan-small-business/) shows how the calendar side works.
 

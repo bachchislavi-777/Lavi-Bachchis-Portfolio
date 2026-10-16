@@ -103,6 +103,6 @@ What keeps it going:
 
 ## Want help with it?
 
-I write and design plain-English social content, LinkedIn carousels, Mailchimp newsletters and blog posts for law firms and other professional-services businesses. Everything is reviewed and approved by a licensed attorney on your side before it goes live. I'm based in London, so my afternoons overlap with East Coast mornings, which makes the review loop quick.
+I write and design plain-English social content, LinkedIn carousels, Mailchimp newsletters and blog posts for law firms and other professional-services businesses. Everything is reviewed and approved by a licensed attorney on your side before it goes live. Drafts are timed to land at the start of your working day, which keeps the review loop quick.
 
 Take a look at the [Ashby Grant sample](../../work/ashbygrant/) or the [Northfield accounting sample](../../work/northfield/) to see the style. If you're wondering about budget, my guide to [what a freelance social media manager costs](../freelance-social-media-manager-cost-us/) sets out typical ranges. When you're ready, [get in touch](../../contact/) to talk about your firm.

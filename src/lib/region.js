@@ -77,23 +77,9 @@ export function localise(value, region = current) {
 }
 
 // US-specific wording, applied on top of the converted copy.
+// Site copy doesn't name a country or city (only the URL and the contact page do), so this is
+// only for things that genuinely differ, such as crisis-line numbers.
 const US_OVERRIDES = {
-  seo: {
-    home: {
-      title: 'Freelance Social Media Content for US Brands | Lavi Bachchis',
-      description: 'Freelance social media content, Mailchimp newsletters and WordPress blogs for US small businesses. Designed, written and delivered on time, on US hours.',
-    },
-    insights: {
-      title: 'Small Business Social Media Blog | Lavi Bachchis',
-      description: 'Practical social media, newsletter and blog advice for US small businesses, from a London-based freelance content creator who works with US brands.',
-    },
-  },
-  home: {
-    lede: 'I design and write social media, Mailchimp newsletters and WordPress blogs for product and service businesses across the US. You get on-brand content, planned a month ahead and delivered on time, so you can get on with running the business.',
-  },
-  insights: {
-    intro: 'Practical notes on social media, newsletters and blogs for small businesses, written from the work I do every week. More US-focused articles are on the way.',
-  },
   work: {
     ownNote: "Paws, Peace & Poems is my own, real project. It shares general wellbeing information, not therapy or medical advice, and I'm not a qualified therapist. If you're struggling, please talk to your doctor, or call or text 988 (the 988 Suicide & Crisis Lifeline), any time. In an emergency, call 911.",
   },

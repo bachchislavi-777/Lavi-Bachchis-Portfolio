@@ -291,7 +291,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .svc p{font-size:15px;color:var(--mt)}
 .scope{margin-top:20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center;background:var(--forest);color:var(--ivory);border-radius:18px;padding:22px 26px;font-size:16px}
 .scope b{font-family:var(--f-d);font-style:italic;font-size:24px;font-weight:400;white-space:nowrap;color:var(--ochre)}
-.pk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:56px}
+.pk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:56px}
 .pkg{background:var(--sf);border:1px solid var(--ln);border-radius:22px;padding:30px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .pkg.feat{background:var(--forest);color:var(--ivory);border-color:var(--forest);--mt:var(--sagey);--ln:rgba(244,236,223,.16)}
 .pkg .ttl{font-family:var(--f-d);font-size:34px}

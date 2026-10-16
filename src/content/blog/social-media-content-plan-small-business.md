@@ -100,4 +100,4 @@ The plan matters less than sticking to it. A simple calendar you follow beats a 
 
 This planning process is exactly how I work with clients. You get a full month of planned posts to approve before I make anything, then I design, write and schedule it all for the dates we agreed.
 
-If you're weighing up the cost first, I've written an honest guide to [what a freelance social media manager costs in the UK](/uk/insights/freelance-social-media-manager-cost-uk/). Otherwise, have a look at the [services and packages](../../services/) or [get in touch](../../contact/) to plan your first month.
+If you're weighing up the cost first, my [blog](../) has an honest guide to what a freelance social media manager costs. Otherwise, have a look at the [services and packages](../../services/) or [get in touch](../../contact/) to plan your first month.

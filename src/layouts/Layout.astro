@@ -155,10 +155,6 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
     </main>
     <Footer />
     <script>
-      // Remember the region a visitor picks, so lavibachchis.com sends them back to it next time.
-      document.querySelectorAll<HTMLAnchorElement>('.region-switch a[data-region]').forEach((a) => {
-        a.addEventListener('click', () => { try { localStorage.setItem('lb-region', a.dataset.region || ''); } catch {} });
-      });
       // Mobile nav toggle
       const toggle = document.querySelector<HTMLButtonElement>('.navtoggle');
       const menu = document.getElementById('site-menu');

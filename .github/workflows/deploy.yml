@@ -1,12 +1,16 @@
 # Builds the site and publishes it to GitHub Pages.
 # Runs automatically on every change to the `main` branch (the live site),
 # and can be run by hand from the Actions tab ("Run workflow").
+# It also rebuilds every weekday evening, so the US prices pick up the latest Bank of England
+# exchange rate (published around 4pm London time; see src/lib/fx.js).
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "30 17 * * 1-5"
 
 permissions:
   contents: read

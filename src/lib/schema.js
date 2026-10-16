@@ -36,29 +36,39 @@ export function businessSchema(site) {
     email: s.email,
     telephone: s.phoneHref,
     address: { '@type': 'PostalAddress', addressLocality: 'London', addressCountry: 'GB' },
-    areaServed: [{ '@type': 'Country', name: 'United Kingdom' }, { '@type': 'Country', name: 'United States' }],
+    areaServed: { '@type': 'Country', name: REGION_META[getRegion()].name },
     founder: { '@id': `${absUrl('/', site, { region: null })}#person` },
     sameAs: [s.linkedin, s.instagram, s.youtube],
   };
 }
 
-export function servicesSchema(site) {
-  const copy = getCopy(), s = copy.site;
+// packages: copy.services.packages with a price ({ amount, currency }) for the region being built.
+export function servicesSchema(site, packages = getCopy().services.packages) {
+  const copy = getCopy();
+  const area = REGION_META[getRegion()].name; // each regional site serves its own country
   return copy.services.list.map((x) => ({
     '@type': 'Service',
     name: x.title,
     serviceType: x.eyebrow,
     description: x.text,
     provider: { '@id': `${absUrl('/', site, { region: null })}#person` },
-    areaServed: ['United Kingdom', 'United States'],
+    areaServed: area,
     url: absUrl('/services/', site),
-  })).concat(copy.services.packages.map((p) => ({
+  })).concat(packages.map((p) => ({
     '@type': 'Service',
-    name: `${p.name} package`,
+    name: p.custom ? p.name : `${p.name} package`,
     description: `${p.for} ${p.items.map((i) => `${i.label}: ${i.value}`).join('; ')}. ${p.note}.`,
     provider: { '@id': `${absUrl('/', site, { region: null })}#person` },
-    areaServed: ['United Kingdom', 'United States'],
+    areaServed: area,
     url: absUrl('/services/', site),
+    ...(p.price && {
+      offers: {
+        '@type': 'Offer',
+        price: p.price.amount,
+        priceCurrency: p.price.currency,
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: p.price.amount, priceCurrency: p.price.currency, unitText: 'MONTH' },
+      },
+    }),
   })));
 }
 

@@ -13,7 +13,7 @@
     "youtube": "https://www.youtube.com/@TakeaPawswithLavi",
     "location": "London, UK",
     "coverage": "I work with clients across the UK and US.",
-    "availability": "Taking on new clients · UK & US",
+    "availability": "Taking on new clients",
     "footerNote": "The six sample brands on this site are case studies I created to show my work. Names, people, reviews and figures in them are illustrative, and legal and tax points in them are not advice. Paws, Peace & Poems is my own, real project.",
     "footerShort": "Sample brands are illustrative. Details on the Work page.",
     "photoCredits": "Product photography for the sample brands is art-directed and AI-generated. Additional photography via Unsplash: Kalos Skincare, Nathan Dumlao, Eric Muhr, Jakub Żerdzicki, Christina @ wocintechchat.com, LinkedIn Sales Solutions, Kellen Riggin, Timur Shakerzianov, Bernard Hermant and Anne Nygård, colour-graded for each brand.",
@@ -44,8 +44,8 @@
   ],
   "seo": {
     "home": {
-      "title": "Freelance Social Media Manager, London | Lavi Bachchis",
-      "description": "Freelance social media content, Mailchimp newsletters and WordPress blogs for UK and US businesses. Designed, written and delivered on time from London."
+      "title": "Freelance Social Media Content Creator | Lavi Bachchis",
+      "description": "Freelance social media content, Mailchimp newsletters and WordPress blogs for small businesses. Designed, written and delivered on time, every month."
     },
     "work": {
       "title": "Social Media Case Studies & Portfolio | Lavi Bachchis",
@@ -56,12 +56,12 @@
       "description": "Monthly social media, Mailchimp newsletter and WordPress blog packages for a fixed fee, planned a month ahead and approved by you before anything is posted."
     },
     "about": {
-      "title": "About Lavi Bachchis | Freelance Content Creator, London",
-      "description": "Lavi Bachchis, freelance social media content creator and brand lead in London. Social posts, Mailchimp newsletters and WordPress blogs for UK and US brands."
+      "title": "About Lavi Bachchis | Freelance Content Creator",
+      "description": "Lavi Bachchis, freelance social media content creator and marketing and brand lead. Social posts, Mailchimp newsletters and WordPress blogs for small brands."
     },
     "insights": {
       "title": "Small Business Social Media Blog | Lavi Bachchis",
-      "description": "Practical articles on social media, newsletters and blog content for UK and US small businesses, from a London freelance content creator and brand lead."
+      "description": "Practical articles on social media, newsletters and blog content for small businesses, from a freelance content creator and marketing and brand lead."
     },
     "contact": {
       "title": "Contact | Freelance Social Media Content | Lavi Bachchis",
@@ -97,7 +97,7 @@
     }
   },
   "home": {
-    "eyebrow": "Freelance content & creative · UK & US",
+    "eyebrow": "Freelance content & creative",
     "h1": "Content that makes your brand look",
     "h1Em": "as good as it is.",
     "lede": "I design and write social media, Mailchimp newsletters and WordPress blogs for product and service businesses. You get on-brand content, planned a month ahead and delivered on time, so you can get on with running the business.",
@@ -137,12 +137,12 @@
     ],
     "intro": {
       "eyebrow": "Hello",
-      "text": "I'm Lavi, a marketing and brand lead in London. I help businesses show up consistently on social, in the inbox and on their blog, without hiring an in-house team."
+      "text": "I'm Lavi, a marketing and brand lead. I help businesses show up consistently on social, in the inbox and on their blog, without hiring an in-house team."
     },
     "pillars": [
       {
         "title": "In-house brand experience",
-        "text": "I lead marketing and brand for a London law firm, so I know how careful professional-services content needs to be, and how to keep it readable."
+        "text": "I lead marketing and brand for a law firm, so I know how careful professional-services content needs to be, and how to keep it readable."
       },
       {
         "title": "Design and copy in one place",
@@ -368,7 +368,7 @@
       "type": "own",
       "sector": "Mental health & wellbeing",
       "h1Sub": "Mental health content, my own project",
-      "location": "Online, from London",
+      "location": "Online",
       "channels": "Instagram · YouTube · LinkedIn group",
       "summary": "My own mental-health education page: psychology explained gently, with a little humour and a lot of kindness.",
       "brief": "I started Paws, Peace & Poems as a space for anyone seeking mental stability, inner peace and a place to be heard. I wanted to explain how our minds work in plain, kind words, without it ever feeling clinical or preachy.",
@@ -391,9 +391,18 @@
         "A LinkedIn community group"
       ],
       "links": [
-        { "label": "Instagram · @pawspeacenpoems", "url": "https://www.instagram.com/pawspeacenpoems/" },
-        { "label": "YouTube · Take a Paws with Lavi", "url": "https://www.youtube.com/@TakeaPawswithLavi" },
-        { "label": "LinkedIn group", "url": "https://www.linkedin.com/groups/10073484/" }
+        {
+          "label": "Instagram · @pawspeacenpoems",
+          "url": "https://www.instagram.com/pawspeacenpoems/"
+        },
+        {
+          "label": "YouTube · Take a Paws with Lavi",
+          "url": "https://www.youtube.com/@TakeaPawswithLavi"
+        },
+        {
+          "label": "LinkedIn group",
+          "url": "https://www.linkedin.com/groups/10073484/"
+        }
       ],
       "nextCase": "solenne"
     }
@@ -458,8 +467,8 @@
       "text": "You get finished, on-brand content, delivered on time. I don't promise follower, lead or sales numbers, because those depend on your offer, budget and market. Legal, tax and other regulated content is checked and approved by a qualified person on your side before it goes out."
     },
     "packagesEyebrow": "Packages",
-    "packagesH2": "Three ways",
-    "packagesH2Em": "to work together.",
+    "packagesH2": "Three packages,",
+    "packagesH2Em": "or one built for you.",
     "packages": [
       {
         "name": "Social",
@@ -487,7 +496,8 @@
           }
         ],
         "featured": false,
-        "note": "Fixed monthly fee · quoted after a short call"
+        "note": "Fixed monthly fee · no long contract",
+        "gbp": 389
       },
       {
         "name": "Content",
@@ -516,7 +526,8 @@
         ],
         "featured": true,
         "badge": "A good place to start",
-        "note": "Fixed monthly fee · quoted after a short call"
+        "note": "Fixed monthly fee · no long contract",
+        "gbp": 720
       },
       {
         "name": "Full content desk",
@@ -545,17 +556,40 @@
         ],
         "featured": false,
         "detail": "Website upkeep covers small text and image updates on your existing site.",
-        "note": "Fixed monthly fee · quoted after a short call"
+        "note": "Fixed monthly fee · no long contract",
+        "gbp": 989
+      },
+      {
+        "name": "Custom project",
+        "for": "Something bigger or different: a launch, a rebrand, a one-off campaign or a mix of services.",
+        "custom": true,
+        "priceText": "Let's discuss",
+        "items": [
+          {
+            "label": "Scope",
+            "value": "Built around you"
+          },
+          {
+            "label": "Quote",
+            "value": "Fixed, agreed upfront"
+          }
+        ],
+        "cta": {
+          "label": "Book a call",
+          "href": "/contact/"
+        },
+        "featured": false,
+        "note": "Tell me what you have in mind"
       }
     ],
-    "packagesFootnote": "All quantities are per month. Need something different? Packages can be adjusted on our first call.",
+    "packagesFootnote": "Prices and quantities are per month. Need something different? Packages can be adjusted on our first call.",
     "faqEyebrow": "Questions",
     "faqH2": "Good to know",
     "faqH2Em": "before we start.",
     "faq": [
       {
         "q": "How much does it cost?",
-        "a": "Each package is a fixed monthly fee, quoted after a short call once I know your channels and how much you need. One-off projects, such as a brand kit on its own, get a fixed quote too. You'll know the full price before we start, and there are no hourly bills."
+        "a": "Social is {social} a month, Content is {content} a month and Full content desk is {desk} a month. Each is a fixed monthly fee with no hourly bills. Custom and one-off projects, such as a brand kit on its own, get a fixed quote after a short call. You will know the full price before we start."
       },
       {
         "q": "How quickly can you start?",
@@ -574,10 +608,6 @@
         "a": "Yes, a short written agreement that sets out what's included each month, the fee and the key dates. After the first month it rolls monthly, and either of us can end it with 30 days' notice."
       },
       {
-        "q": "Do you work with US clients?",
-        "a": "Yes. I'm in London, and UK afternoons overlap with US mornings, so calls are easy to book with the East Coast and can be arranged with the West Coast. I write in US or UK English and schedule posts for your local time."
-      },
-      {
         "q": "Which tools do you use?",
         "a": "Canva for design, Mailchimp for email, WordPress for blogs, and Meta Business Suite and LinkedIn for scheduling. If you already use other tools, tell me on our call and I'll confirm I can work in them."
       },
@@ -594,7 +624,7 @@
     "steps": [
       {
         "title": "Intro call",
-        "text": "Twenty minutes on your brand, your customers and the channels that matter most. You get a fixed monthly quote afterwards."
+        "text": "Twenty minutes on your brand, your customers and the channels that matter most. You get your package confirmed, or a fixed quote for a custom project, afterwards."
       },
       {
         "title": "Brand kit",
@@ -614,16 +644,16 @@
     "eyebrow": "About",
     "h1": "Hi, I'm Lavi. I help your brand",
     "h1Em": "look like itself everywhere.",
-    "intro": "I'm a marketing and brand lead based in London. I design and write content for product and service businesses across the UK and US.",
+    "intro": "I'm a marketing and brand lead. I design and write content for product and service businesses.",
     "paragraphs": [
-      "In my in-house role, I lead marketing and brand for a London law firm. That means LinkedIn posts for partners, client newsletters, website articles and a brand that has to look right every time. I know how careful professional-services content needs to be, and how to keep it easy to read.",
+      "In my in-house role, I lead marketing and brand for a law firm. That means LinkedIn posts for partners, client newsletters, website articles and a brand that has to look right every time. I know how careful professional-services content needs to be, and how to keep it easy to read.",
       "As a freelancer, I bring the same habits to smaller businesses. You get one person who designs the graphics, writes the captions, builds the newsletter and formats the blog, so your brand stays consistent without hiring a team.",
       "I plan each month around formats that are working now, from Reel hooks to LinkedIn PDF carousels. You get content that looks and sounds like your brand, on the dates we agreed."
     ],
     "highlights": [
       {
         "title": "I've done this in-house",
-        "text": "I run marketing and brand for a London law firm, so I'm used to approvals, accuracy and a brand that has to stay consistent."
+        "text": "I run marketing and brand for a law firm, so I'm used to approvals, accuracy and a brand that has to stay consistent."
       },
       {
         "title": "You brief one person",
@@ -672,7 +702,6 @@
     "readMore": "Read the article",
     "empty": "New articles are on the way."
   },
-
   "recommendations": {
     "eyebrow": "Recommendations",
     "h2": "What people I've",
@@ -697,7 +726,7 @@
       {
         "quote": "It was great working with Lavi last year. She was leading the team where I worked. She would listen to everyone and was professional and approachable.",
         "name": "Eugenia Sestini",
-        "role": "Multilingual writer and teacher, London",
+        "role": "Multilingual writer and teacher",
         "relation": "Studied with Lavi · January 2025"
       }
     ]
@@ -707,7 +736,7 @@
     "h1": "Let's plan your",
     "h1Em": "first month of content.",
     "intro": "Tell me about your brand and the channels you want to focus on. I work with product and service businesses across the UK and US.",
-    "promise": "I reply within one working day to book a short call. You get a fixed monthly quote within two working days of that call.",
+    "promise": "I reply within one working day to book a short call. You get your package confirmed, or a fixed quote for a custom project, within two working days of that call.",
     "whatToSendTitle": "Helpful to include",
     "whatToSend": [
       "Your business name and website",

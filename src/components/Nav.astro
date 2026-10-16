@@ -1,17 +1,10 @@
 ---
-import { getCopy, getRegion, REGIONS, REGION_META } from '../lib/region.js';
+import { getCopy } from '../lib/region.js';
 const copy = getCopy();
 import { url } from '../lib/url.js';
-const { current = '', regions = REGIONS, path = '/' } = Astro.props;
-const region = getRegion();
-// UK | US switcher: the same page in the other region, or that region's home page if the page is UK-only.
-const switcher = REGIONS.map((r) => ({
-  r,
-  label: REGION_META[r].label,
-  name: REGION_META[r].name,
-  href: url(regions.includes(r) ? path : '/', { region: r }),
-  on: r === region,
-}));
+// No UK | US switcher: visitors are sent to their regional site automatically ([...legacy].astro),
+// and the region only shows in the URL.
+const { current = '' } = Astro.props;
 ---
 <nav class="top" aria-label="Main">
   <div class="wrap">
@@ -22,13 +15,6 @@ const switcher = REGIONS.map((r) => ({
       ))}
       <li class="menu-cta"><a class="btn" href={url('/contact/')}>{copy.site.ctaNav}</a></li>
     </ul>
-    <div class="region-switch" role="group" aria-label="Choose your region">
-      {switcher.map((s) => (
-        <a href={s.href} data-region={s.r} hreflang={REGION_META[s.r].lang} aria-current={s.on ? 'true' : undefined}>
-          {s.label}<span class="sr-only"> ({s.name}{s.on ? ', current' : ''})</span>
-        </a>
-      ))}
-    </div>
     <a class="btn navcta" href={url('/contact/')}>{copy.site.ctaNav}</a>
     <button class="navtoggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
       <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>

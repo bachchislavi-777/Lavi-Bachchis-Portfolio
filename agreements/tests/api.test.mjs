@@ -114,7 +114,7 @@ test('monthly agreement: create, edit while sent, sign, emails and PDF', async (
   const p = await call('agreement.pdf', { id, token, v: 1, pdf });
   assert.ok(p.emailed);
   const mails = (await outbox()).slice(before);
-  assert.deepEqual(mails.map((m) => m.to).sort(), ['hello@lavibachchis.com', 'sam@example.com']);
+  assert.deepEqual(mails.map((m) => m.to).sort(), ['bachchis.lavi@gmail.com', 'sam@example.com']);
   assert.ok(mails.every((m) => m.attachments.length === 1 && m.attachments[0].name.startsWith('LB-A-2026-001 v1')));
   assert.ok((await call('agreement.pdf', { id, token, v: 1, pdf })).already);
 
@@ -137,7 +137,7 @@ test('monthly invoices: issued at the end of each cycle, emailed, idempotent', a
   assert.equal(inv.issueDate, '2026-11-15');
   const m = (await outbox()).at(-1);
   assert.equal(m.to, 'sam@example.com');
-  assert.equal(m.cc, 'hello@lavibachchis.com');
+  assert.equal(m.cc, 'bachchis.lavi@gmail.com');
   assert.match(m.subject, /Invoice LB-INV-2026-0001 from Lavi Bachchis, £750\.00 due 22 November 2026/);
   // client view of the invoice
   const full = await admin('admin.invoice.get', { id: inv.id });

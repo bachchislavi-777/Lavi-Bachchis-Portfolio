@@ -5,3 +5,4 @@ export * as terms from './terms.js';
 export * as schedule from './schedule.js';
 export * as util from './util.js';
 export { PACKAGES } from './packages.js';
+export { CONTACT_EMAIL } from './contact.js';

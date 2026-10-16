@@ -1,13 +1,13 @@
 // The client's invoice page: lavibachchis.com/invoice/#<id>.<token>
 import { call, linkParts, configured, BASE, esc, IS_DEMO } from './api.js';
-import { dates } from '../../../agreements/core/index.js';
+import { dates, CONTACT_EMAIL } from '../../../agreements/core/index.js';
 import { invoiceHtml, invoiceStatus } from './render.js';
 
 let root;
 const msg = (t, x) => { root.innerHTML = `<div class="center-msg"><h1>${esc(t)}</h1><p class="muted">${x}</p></div>`; };
 
 async function start() {
-  if (!configured()) return msg('Not switched on yet', 'Please email <a href="mailto:hello@lavibachchis.com">hello@lavibachchis.com</a> for a copy of your invoice.');
+  if (!configured()) return msg('Not switched on yet', `Please email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a> for a copy of your invoice.`);
   const parts = linkParts();
   if (!parts) return msg('This link isn’t complete', 'Please open the full link from your email.');
   let inv;
@@ -24,7 +24,7 @@ async function start() {
   const dl = document.getElementById('dl');
   dl.addEventListener('click', async () => {
     dl.disabled = true; dl.innerHTML = '<span class="spin" aria-hidden="true"></span> Preparing…';
-    try { const { invoicePdf } = await import('./pdf.js'); await (await invoicePdf(inv, { base: BASE, today })).download(); } catch (e) { document.getElementById('pdf-msg').textContent = 'Sorry, the PDF could not be made on this device. Please use Print, or email hello@lavibachchis.com for a copy.'; }
+    try { const { invoicePdf } = await import('./pdf.js'); await (await invoicePdf(inv, { base: BASE, today })).download(); } catch (e) { document.getElementById('pdf-msg').textContent = `Sorry, the PDF could not be made on this device. Please use Print, or email ${CONTACT_EMAIL} for a copy.`; }
     dl.disabled = false; dl.textContent = 'Download PDF';
   });
 }

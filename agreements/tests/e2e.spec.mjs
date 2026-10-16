@@ -98,7 +98,7 @@ test('monthly agreement: create in studio, client signs, PDF, emails, amendment,
     expect(text).not.toContain('{{');
   }
   const mails = (await outbox()).filter((m) => m.subject.includes('Signed'));
-  expect(mails.map((m) => m.to).sort()).toEqual(['hello@lavibachchis.com', 'sam@example.com']);
+  expect(mails.map((m) => m.to).sort()).toEqual(['bachchis.lavi@gmail.com', 'sam@example.com']);
   expect(mails.every((m) => m.attachments.length === 1 && m.attachments[0].type === 'application/pdf')).toBeTruthy();
 
   // Returning visit shows the signed copy

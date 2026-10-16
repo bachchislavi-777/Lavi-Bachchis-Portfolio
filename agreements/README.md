@@ -1,10 +1,11 @@
 # Agreements & invoices
 
 Online agreements your clients sign with a private link, and invoices that are created automatically. It all runs on
-your own Google Workspace account (hello@lavibachchis.com): no monthly fees and no outside e-signature service.
+your own Google account: no monthly fees and no outside e-signature service.
 
-> **Status:** built and tested on the branch `feature/agreements-billing`. Not live yet. It is switched on once
-> Google Workspace admin access for hello@lavibachchis.com is ready (see *Switching it on* below).
+> **Status:** built and tested on the branch `feature/agreements-billing`. Not live yet.
+> **For now it uses your Gmail, bachchis.lavi@gmail.com**, until Google Workspace (hello@lavibachchis.com) is ready.
+> The address comes from one place: `site.email` in `src/data/copy.json` (the same email the website shows).
 
 ---
 
@@ -29,7 +30,7 @@ your own Google Workspace account (hello@lavibachchis.com): no monthly fees and 
 **Your client (`lavibachchis.com/agreement/#…`)**
 - Reads the agreement, says whether they're signing **for a business** or **as an individual**, fills in their
   details (which appear in the agreement as they type), ticks the consents, and types or draws their signature.
-- Downloads the signed PDF straight away. A copy is emailed to them and to you (hello@lavibachchis.com).
+- Downloads the signed PDF straight away. A copy is emailed to them and to you (bachchis.lavi@gmail.com for now).
 - The same link later shows their signed copy.
 
 **Billing (automatic, every morning at 8 to 9am London time)**
@@ -65,10 +66,10 @@ improved after an independent review:
 **This is a careful plain-English draft, not legal advice.** Before relying on it for large contracts, have a UK
 solicitor review `terms.js` once (in particular the consumer, liability and data-processing clauses).
 
-## Switching it on (once hello@lavibachchis.com admin access is ready)
+## Switching it on (now, with bachchis.lavi@gmail.com)
 
 Claude does these steps with you; you only sign in and approve.
-1. Signed in as **hello@lavibachchis.com**, create an Apps Script project called *LB Agreements* and paste in
+1. Signed in as **bachchis.lavi@gmail.com**, create an Apps Script project called *LB Agreements* and paste in
    `agreements/dist/gas/Code.js` and `appsscript.json` (made by `npm run agreements:build`).
 2. Run `setup` once and approve Google's permission screen. It creates the Drive folder, the Sheet and the
    daily and hourly checks, and sends studio codes to the account that ran it.
@@ -78,7 +79,16 @@ Claude does these steps with you; you only sign in and approve.
 6. In the studio, fill in **Settings** (business address, bank details, PayPal), then run one **Test agreement**
    end to end with your own email.
 
-Deploying from the hello@ account matters: emails are sent from the Google account that runs the script.
+Emails are sent from the Google account that runs the script (your Gmail for now; it can send about 100 emails a
+day, which is plenty).
+
+## Moving to hello@lavibachchis.com later
+
+1. Change `site.email` in `src/data/copy.json` to hello@lavibachchis.com (this also updates the website's contact email),
+   and change **Settings → Business email** in the studio.
+2. Run the same setup from the hello@ account so emails come from the business address, and point
+   `AGREEMENTS_API_URL` at the new web app. Claude moves your existing agreements and invoices across first
+   (share the "LB Agreements" folder and Sheet with hello@, or copy them), so nothing is lost and numbering continues.
 
 ## For Claude: building and testing
 

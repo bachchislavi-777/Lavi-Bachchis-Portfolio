@@ -16,6 +16,7 @@
 
 import * as money from './money.js';
 import * as dates from './dates.js';
+import { CONTACT_EMAIL } from './contact.js';
 
 export const WORDING_VERSION = '2.0';
 export const WORDING_DATE = 'October 2026';
@@ -23,7 +24,7 @@ export const WORDING_DATE = 'October 2026';
 export const BUSINESS_DEFAULTS = {
   name: 'Lavi Bachchis',
   trading: 'Lavi Bachchis Content & Creative',
-  email: 'hello@lavibachchis.com',
+  email: CONTACT_EMAIL, // bachchis.lavi@gmail.com until Google Workspace (hello@lavibachchis.com) is ready
   website: 'lavibachchis.com',
   address: '',
   privacyUrl: { uk: 'https://lavibachchis.com/uk/privacy/', us: 'https://lavibachchis.com/us/privacy/' },

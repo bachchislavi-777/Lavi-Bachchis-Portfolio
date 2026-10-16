@@ -1,6 +1,6 @@
 // The client's signing page: lavibachchis.com/agreement/#<id>.<token>
 import { call, linkParts, configured, BASE, esc, ApiError, IS_DEMO } from './api.js';
-import { terms as T, money, dates } from '../../../agreements/core/index.js';
+import { terms as T, money, dates, CONTACT_EMAIL } from '../../../agreements/core/index.js';
 import { agreementHtml, signedWhen } from './render.js';
 
 let root;
@@ -14,9 +14,9 @@ function message(title, text, extra = '') {
 
 async function start() {
   S = { data: null, clientType: '', earlyStart: false, sigMode: 'type', strokes: 0, pdf: null };
-  if (!configured()) return message('Not switched on yet', 'Online signing isn’t available just yet. Please email <a href="mailto:hello@lavibachchis.com">hello@lavibachchis.com</a> and I’ll send your agreement another way.');
+  if (!configured()) return message('Not switched on yet', `Online signing isn’t available just yet. Please email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a> and I’ll send your agreement another way.`);
   const parts = linkParts();
-  if (!parts) return message('This link isn’t complete', 'Please open the full link from your email or message. If it still doesn’t work, email <a href="mailto:hello@lavibachchis.com">hello@lavibachchis.com</a>.');
+  if (!parts) return message('This link isn’t complete', `Please open the full link from your email or message. If it still doesn’t work, email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`);
   root.innerHTML = '<div class="skeleton" aria-label="Loading your agreement"></div>';
   try {
     S.data = await call('agreement.get', parts);
@@ -30,7 +30,7 @@ function route() {
   const a = S.data.agreement;
   if (a.pending) return renderSign();
   if (a.signed) return renderSigned();
-  if (a.status === 'cancelled') return message('This agreement was withdrawn', 'Lavi has withdrawn this agreement. If you think that’s a mistake, email <a href="mailto:hello@lavibachchis.com">hello@lavibachchis.com</a>.');
+  if (a.status === 'cancelled') return message('This agreement was withdrawn', `Lavi has withdrawn this agreement. If you think that’s a mistake, email <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`);
   return message('Not ready yet', 'This agreement isn’t ready to sign yet. Lavi will send you the link when it is.');
 }
 
@@ -279,7 +279,7 @@ function renderSigned({ justSigned = false } = {}) {
   const dl = document.getElementById('dl');
   dl.addEventListener('click', async () => {
     dl.disabled = true; const label = dl.textContent; dl.innerHTML = '<span class="spin" aria-hidden="true"></span> Preparing PDF…';
-    try { await (await getPdf()).download(); } catch (e) { document.getElementById('mail-status').textContent = 'Sorry, the PDF could not be made on this device. Please use Print, or email hello@lavibachchis.com for a copy.'; }
+    try { await (await getPdf()).download(); } catch (e) { document.getElementById('mail-status').textContent = `Sorry, the PDF could not be made on this device. Please use Print, or email ${CONTACT_EMAIL} for a copy.`; }
     dl.disabled = false; dl.textContent = label;
   });
   if (justSigned) { window.scrollTo({ top: 0 }); uploadCopy(); }

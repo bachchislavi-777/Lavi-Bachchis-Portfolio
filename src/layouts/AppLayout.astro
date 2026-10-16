@@ -15,6 +15,7 @@ import '@fontsource/dm-mono/500.css';
 import '@fontsource/caveat/600.css';
 import '../styles/app.css';
 import { AGREEMENTS_API_URL } from '../data/settings.js';
+import { CONTACT_EMAIL } from '../../agreements/core/contact.js';
 
 interface Props { title: string; description?: string; wide?: boolean }
 const { title, description = '', wide = false } = Astro.props;
@@ -62,7 +63,7 @@ const csp = `default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 's
     <footer class="app-foot">
       <div class={`app-wrap${wide ? ' wide' : ''}`}>
         <span>Lavi Bachchis · Content &amp; Creative · London</span>
-        <span><a href="mailto:hello@lavibachchis.com">hello@lavibachchis.com</a> · <a href={`${BASE}/uk/privacy/`}>Privacy</a></span>
+        <span><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> · <a href={`${BASE}/uk/privacy/`}>Privacy</a></span>
       </div>
     </footer>
   </body>

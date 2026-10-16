@@ -56,7 +56,7 @@ export function saveSettings(next) {
 
 /** Where studio sign-in codes go: the Google account that runs the system (set once at setup). */
 export const ownerEmail = () => prop('OWNER_EMAIL') || getSettings().business.email;
-/** Lavi's official address for copies, replies and alerts (Settings → Business email, e.g. hello@lavibachchis.com). */
+/** Lavi's official address for copies, replies and alerts (Settings → Business email). */
 export const notifyEmail = () => getSettings().business.email || ownerEmail();
 export const siteUrl = () => (prop('SITE_URL') || 'https://lavibachchis.com').replace(/\/$/, '');
 export const agreementLink = (a) => `${siteUrl()}/agreement/#${a.id}.${a.token}`;

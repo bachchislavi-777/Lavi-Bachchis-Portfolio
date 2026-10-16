@@ -1,10 +1,11 @@
 ---
 // Client invoice page. Each invoice has a private link: lavibachchis.com/invoice/#<id>.<token>
 import AppLayout from '../../layouts/AppLayout.astro';
+import { CONTACT_EMAIL } from '../../../agreements/core/contact.js';
 ---
 <AppLayout title="Invoice | Lavi Bachchis" description="Your invoice from Lavi Bachchis.">
   <div id="root"><div class="skeleton" aria-label="Loading"></div></div>
-  <noscript><div class="center-msg"><h1>Please switch on JavaScript</h1><p>Or email hello@lavibachchis.com for a PDF copy.</p></div></noscript>
+  <noscript><div class="center-msg"><h1>Please switch on JavaScript</h1><p>Or email {CONTACT_EMAIL} for a PDF copy.</p></div></noscript>
 </AppLayout>
 <script>
   import { mount } from '../../lib/agreements/invoice-page.js';

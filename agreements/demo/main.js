@@ -109,10 +109,8 @@ function viewMail(m) {
   v.querySelectorAll('[data-att]').forEach((b) => b.addEventListener('click', () => {
     const a = m.attachments[Number(b.dataset.att)];
     const bytes = D.attachment(a.key);
-    if (!bytes) { alert('Attachments are only kept until the page is reloaded in this demo.'); return; }
-    const url = URL.createObjectURL(new Blob([bytes], { type: a.type }));
-    const link = document.createElement('a'); link.href = url; link.download = a.name; document.body.appendChild(link); link.click(); link.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 30000);
+    if (!bytes) { b.textContent = 'Attachment cleared when the page reloaded'; b.disabled = true; return; }
+    D.save(a.name, new Blob([bytes], { type: a.type })).catch(() => { b.textContent = 'Downloads aren’t available here'; b.disabled = true; });
   }));
 }
 
@@ -134,7 +132,12 @@ document.getElementById('skip').addEventListener('click', () => {
   const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), 4500);
   show(state.tab);
 });
-document.getElementById('reset').addEventListener('click', () => { if (confirm('Start the demo again from scratch?')) D.reset(); });
+document.getElementById('reset').addEventListener('click', (e) => {
+  const b = e.currentTarget;
+  if (b.dataset.armed) { D.reset(); return; }
+  b.dataset.armed = '1'; b.textContent = 'Click again to clear everything';
+  setTimeout(() => { delete b.dataset.armed; b.textContent = 'Start again'; }, 4000);
+});
 updateDate();
 state.seen = 0;
 setHash(state.studio);

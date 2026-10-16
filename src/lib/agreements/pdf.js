@@ -180,6 +180,13 @@ function invoiceDef(inv, logo, today) {
   return baseDoc(content, `Invoice ${inv.number} · ${inv.from.name}`, { title: `Invoice ${inv.number}`, author: inv.from.name, subject: 'Invoice', creator: 'lavibachchis.com' });
 }
 
+/** Save a PDF: a normal browser download, or the demo page's "save file" (where downloads must be confirmed). */
+function saveVia(pdf, fileName) {
+  if (globalThis.LB_DEMO && globalThis.LB_DEMO.save) return new Promise((ok, fail) => pdf.getBlob((b) => globalThis.LB_DEMO.save(fileName, b).then(ok, fail)));
+  pdf.download(fileName);
+  return Promise.resolve();
+}
+
 async function make(def, base) {
   const { pdfMake, vfs, fontDefs } = await engine(base);
   return pdfMake.createPdf(def, null, fontDefs, vfs);
@@ -192,12 +199,12 @@ export async function agreementPdf(doc, signed, { base = '' } = {}) {
   const c = doc.client || {};
   const who = (c.company || c.name || 'client').replace(/[\\/:*?"<>|]/g, '');
   const fileName = `${doc.ref}${doc.version > 1 ? ` v${doc.version}` : ''} - ${who} - ${signed ? 'signed' : 'draft'}.pdf`;
-  return { pdf, fileName, base64: () => new Promise((ok) => pdf.getBase64(ok)), download: () => pdf.download(fileName) };
+  return { pdf, fileName, base64: () => new Promise((ok) => pdf.getBase64(ok)), download: () => saveVia(pdf, fileName) };
 }
 
 export async function invoicePdf(inv, { base = '', today } = {}) {
   const { logo } = await engine(base);
   const pdf = await make(invoiceDef(inv, logo, today), base);
   const fileName = `${inv.number} - ${(inv.billTo.company || inv.billTo.name || '').replace(/[\\/:*?"<>|]/g, '')}.pdf`;
-  return { pdf, fileName, download: () => pdf.download(fileName) };
+  return { pdf, fileName, download: () => saveVia(pdf, fileName) };
 }

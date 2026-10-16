@@ -47,4 +47,15 @@ globalThis.LB_DEMO = {
     return summary;
   },
   reset() { gas.reset(); location.hash = ''; location.reload(); },
+  /** Downloads inside a claude.ai page go through its "save file" prompt; elsewhere, a normal download. */
+  async save(filename, blob) {
+    const downloads = globalThis.claude && globalThis.claude.use ? await globalThis.claude.use('downloads') : null;
+    if (downloads) {
+      try { await downloads.save({ filename, data: blob }); } catch (e) { if (e && e.code !== 'declined') throw new Error('Downloads aren’t available in this view.'); }
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  },
 };

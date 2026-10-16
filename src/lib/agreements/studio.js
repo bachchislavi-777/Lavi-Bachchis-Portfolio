@@ -40,8 +40,12 @@ function busy(btn, on, label) {
 }
 async function act(btn, fn, okMsg) {
   busy(btn, true);
-  try { const r = await fn(); if (okMsg) toast(okMsg); return r; } catch (e) { if (e.code !== 'auth') alert(e.message); return null; } finally { busy(btn, false); }
+  try { const r = await fn(); if (okMsg) toast(okMsg); return r; } catch (e) { if (e.code !== 'auth') notice('That didn’t work', e.message); return null; } finally { busy(btn, false); }
 }
+// In-page dialogs (browser pop-ups are blocked in some places, and these match the brand).
+const confirmBox = async (title, text, okLabel) => !!(await ask(title, `<p>${esc(text)}</p>`, okLabel));
+const notice = (title, text) => ask(title, `<p style="overflow-wrap:anywhere">${esc(text)}</p>`, 'OK', { cancel: false });
+
 function signOut(expired) {
   if (!expired && st.session) call('admin.signout', { session: st.session }).catch(() => {});
   st.session = ''; st.ov = null;
@@ -255,14 +259,14 @@ async function renderAgreement(id) {
     const m = await ask('Email the link', `<p class="muted">Sent to ${esc(c.email || latest.terms.client.email || 'the client')} from your Google Workspace account, with a copy to ${esc(st.ov.settings.business.email)}.</p><label class="f" for="msg">Add a personal note <span class="hint">(optional)</span><textarea id="msg" rows="4" placeholder="Lovely to speak today. As discussed…"></textarea></label>`, 'Send email');
     if (m) act(b, () => api('admin.agreement.sendLink', { id: a.id, message: m.querySelector('#msg').value }), 'Email sent').then((x) => x && route());
   });
-  on('withdraw', async (b) => { if (confirm(latest.v > 1 ? 'Withdraw this amendment? The signed version stays in force.' : 'Withdraw this agreement? The link will stop working for signing.')) act(b, () => api('admin.agreement.withdraw', { id: a.id }), 'Withdrawn').then((x) => x && route()); });
+  on('withdraw', async (b) => { if (await confirmBox(latest.v > 1 ? 'Withdraw this amendment?' : 'Withdraw this agreement?', latest.v > 1 ? 'The signed version stays in force.' : 'The link will stop working for signing.', 'Withdraw')) act(b, () => api('admin.agreement.withdraw', { id: a.id }), 'Withdrawn').then((x) => x && route()); });
   on('amend', (b) => act(b, () => api('admin.agreement.amend', { id: a.id })).then((x) => { if (x) location.hash = `#/edit/${a.id}`; }));
   on('end', () => endDialog(a, last));
   on('unend', (b) => act(b, () => api('admin.agreement.undoEnd', { id: a.id }), 'Ending undone').then((x) => x && route()));
-  on('balance', (b) => { if (confirm('Issue the balance invoice today and email it to the client?')) act(b, () => api('admin.agreement.issueBalance', { id: a.id }), 'Balance invoice issued').then((x) => x && route()); });
+  on('balance', async (b) => { if (await confirmBox('Issue the balance invoice now?', 'It is dated today and emailed to the client.', 'Issue invoice')) act(b, () => api('admin.agreement.issueBalance', { id: a.id }), 'Balance invoice issued').then((x) => x && route()); });
   on('resend', (b) => act(b, () => api('admin.agreement.resendSigned', { id: a.id, v: last.v }), 'Signed copy emailed to the client and you'));
-  on('verify', (b) => act(b, () => api('admin.agreement.verify', { id: a.id, v: last.v })).then((x) => x && alert(x.ok ? `Fingerprint matches. The signed record hasn’t changed since signing.\n\n${x.fingerprint}` : 'Fingerprint does NOT match. The record may have been altered. Ask Claude to look into it.')));
-  on('pdf', async (b) => { busy(b, true, 'Preparing…'); try { const { agreementPdf } = await import('./pdf.js'); (await agreementPdf(last.signed.doc, last.signed, { base: BASE })).download(); } catch (e) { alert(`Couldn’t make the PDF: ${e.message}`); } busy(b, false); });
+  on('verify', (b) => act(b, () => api('admin.agreement.verify', { id: a.id, v: last.v })).then((x) => x && notice(x.ok ? 'Fingerprint matches' : 'Fingerprint does NOT match', x.ok ? `The signed record hasn’t changed since signing. ${x.fingerprint}` : 'The record may have been altered. Ask Claude to look into it.')));
+  on('pdf', async (b) => { busy(b, true, 'Preparing…'); try { const { agreementPdf } = await import('./pdf.js'); await (await agreementPdf(last.signed.doc, last.signed, { base: BASE })).download(); } catch (e) { notice('Couldn’t make the PDF', e.message); } busy(b, false); });
   bindInvoiceRows();
 }
 
@@ -280,10 +284,10 @@ function bindInvoiceRows() {
   });
 }
 
-function ask(title, html, okLabel = 'Save') {
+function ask(title, html, okLabel = 'Save', { cancel = true } = {}) {
   return new Promise((resolve) => {
     const dlg = document.createElement('dialog');
-    dlg.innerHTML = `<form method="dialog" style="display:grid;gap:14px"><h2>${esc(title)}</h2>${html}<div class="row"><button class="btn dark" value="ok">${esc(okLabel)}</button><button class="btn ghost" value="cancel" formnovalidate>Cancel</button></div></form>`;
+    dlg.innerHTML = `<form method="dialog" style="display:grid;gap:14px"><h2>${esc(title)}</h2>${html}<div class="row"><button class="btn dark" value="ok">${esc(okLabel)}</button>${cancel ? '<button class="btn ghost" value="cancel" formnovalidate>Cancel</button>' : ''}</div></form>`;
     document.body.appendChild(dlg);
     dlg.addEventListener('close', () => { resolve(dlg.returnValue === 'ok' ? dlg : null); setTimeout(() => dlg.remove(), 0); });
     dlg.showModal();
@@ -535,7 +539,7 @@ async function renderEditor(id) {
   if ($('save-draft')) $('save-draft').addEventListener('click', (e) => save(false, e.currentTarget));
   $('pdf-prev').addEventListener('click', async (e) => {
     read(); const b = e.currentTarget; busy(b, true, 'Preparing…');
-    try { const { agreementPdf } = await import('./pdf.js'); const doc = T.resolveDoc(T.buildDoc(terms, { ref: a ? a.ref : 'LB-A-DRAFT', version: ver ? ver.v : 1, offeredDate: today(), business }), {}); (await agreementPdf(doc, null, { base: BASE })).download(); } catch (x) { alert(x.message); }
+    try { const { agreementPdf } = await import('./pdf.js'); const doc = T.resolveDoc(T.buildDoc(terms, { ref: a ? a.ref : 'LB-A-DRAFT', version: ver ? ver.v : 1, offeredDate: today(), business }), {}); await (await agreementPdf(doc, null, { base: BASE })).download(); } catch (x) { notice('Couldn’t make the PDF', x.message); }
     busy(b, false);
   });
   setv(); preview();
@@ -640,11 +644,11 @@ async function renderInvoice(id) {
   const on = (sel, fn) => { const el = document.getElementById(sel); if (el) el.addEventListener('click', (e) => fn(e.currentTarget)); };
   on('paid', async () => { const dlg = await ask('Mark as paid', `<label class="f" for="pd">Paid on<input type="date" id="pd" value="${today()}" required></label>`, 'Mark as paid'); if (dlg) { await act(null, () => api('admin.invoice.update', { id, op: 'paid', date: dlg.querySelector('#pd').value }), 'Marked as paid'); route(); } });
   on('unpaid', (b) => act(b, () => api('admin.invoice.update', { id, op: 'unpaid' }), 'Marked as unpaid').then((x) => x && route()));
-  on('remind', (b) => { if (confirm(`Email a polite payment reminder to ${inv.billTo.billingEmail || inv.billTo.email}?`)) act(b, () => api('admin.invoice.update', { id, op: 'remind' }), 'Reminder sent').then((x) => x && route()); });
+  on('remind', async (b) => { if (await confirmBox('Send a payment reminder?', `A polite reminder goes to ${inv.billTo.billingEmail || inv.billTo.email}.`, 'Send reminder')) act(b, () => api('admin.invoice.update', { id, op: 'remind' }), 'Reminder sent').then((x) => x && route()); });
   on('resend', (b) => act(b, () => api('admin.invoice.update', { id, op: 'resend' }), 'Invoice emailed again').then((x) => x && route()));
   on('void', async () => { const dlg = await ask('Cancel this invoice', '<p class="muted">The number is kept (invoice numbers are never reused) and it’s marked Cancelled. Nothing is emailed.</p><label class="f" for="vr">Reason<input id="vr" type="text" required placeholder="e.g. Raised in error"></label>', 'Cancel invoice'); if (dlg) { await act(null, () => api('admin.invoice.update', { id, op: 'void', reason: dlg.querySelector('#vr').value }), 'Invoice cancelled'); route(); } });
-  on('copy', async () => { try { await navigator.clipboard.writeText(r.link); toast('Link copied'); } catch { prompt('Copy this link:', r.link); } });
-  on('pdf', async (b) => { busy(b, true, 'Preparing…'); try { const { invoicePdf } = await import('./pdf.js'); (await invoicePdf(inv, { base: BASE, today: today() })).download(); } catch (e) { alert(e.message); } busy(b, false); });
+  on('copy', async () => { try { await navigator.clipboard.writeText(r.link); toast('Link copied'); } catch { notice('Copy this link', r.link); } });
+  on('pdf', async (b) => { busy(b, true, 'Preparing…'); try { const { invoicePdf } = await import('./pdf.js'); await (await invoicePdf(inv, { base: BASE, today: today() })).download(); } catch (e) { notice('Couldn’t make the PDF', e.message); } busy(b, false); });
 }
 
 // =========================================================================================================

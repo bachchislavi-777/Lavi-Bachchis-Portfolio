@@ -1,5 +1,5 @@
 // The client's signing page: lavibachchis.com/agreement/#<id>.<token>
-import { call, linkParts, configured, BASE, esc, ApiError } from './api.js';
+import { call, linkParts, configured, BASE, esc, ApiError, IS_DEMO } from './api.js';
 import { terms as T, money, dates } from '../../../agreements/core/index.js';
 import { agreementHtml, signedWhen } from './render.js';
 
@@ -271,15 +271,15 @@ function renderSigned({ justSigned = false } = {}) {
       <h2>${justSigned ? `Signed. Thank you${first ? `, ${esc(first)}` : ''}.` : 'Your signed agreement'}</h2>
       <p>Agreement ${esc(a.ref)}${s.v > 1 ? `, version ${s.v},` : ''} was signed on ${esc(signedWhen(s.at, doc.region))}.</p>
       <p class="muted" id="mail-status" role="status">${justSigned ? 'Preparing your signed copy…' : 'A signed copy was emailed to you when you signed.'}</p>
-      <div class="row"><button class="btn dark" id="dl" type="button">Download signed copy (PDF)</button><button class="btn ghost" type="button" id="print">Print</button></div>
+      <div class="row"><button class="btn dark" id="dl" type="button">Download signed copy (PDF)</button>${IS_DEMO ? '' : '<button class="btn ghost" type="button" id="print">Print</button>'}</div>
     </section>
     <br>${ended}
     <div id="doc">${agreementHtml(doc, { signed: s, logo })}</div>`;
-  document.getElementById('print').addEventListener('click', () => window.print());
+  document.getElementById('print')?.addEventListener('click', () => window.print());
   const dl = document.getElementById('dl');
   dl.addEventListener('click', async () => {
     dl.disabled = true; const label = dl.textContent; dl.innerHTML = '<span class="spin" aria-hidden="true"></span> Preparing PDF…';
-    try { (await getPdf()).download(); } catch (e) { alert('Sorry, the PDF could not be made on this device. Please use Print instead, or email hello@lavibachchis.com.'); }
+    try { await (await getPdf()).download(); } catch (e) { document.getElementById('mail-status').textContent = 'Sorry, the PDF could not be made on this device. Please use Print, or email hello@lavibachchis.com for a copy.'; }
     dl.disabled = false; dl.textContent = label;
   });
   if (justSigned) { window.scrollTo({ top: 0 }); uploadCopy(); }

@@ -6,6 +6,7 @@ const DEMO = globalThis.LB_DEMO || null;
 export const API = DEMO ? 'demo' : (document.querySelector('meta[name="lb-api"]')?.getAttribute('content') || '').trim();
 export const BASE = DEMO ? DEMO.base : document.querySelector('meta[name="lb-base"]')?.getAttribute('content') || '';
 export const configured = () => !!DEMO || /^https?:\/\//.test(API);
+export const IS_DEMO = !!DEMO;
 
 export class ApiError extends Error {
   constructor(message, code) { super(message); this.code = code; }

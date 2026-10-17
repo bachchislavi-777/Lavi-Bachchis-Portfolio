@@ -17,6 +17,7 @@ class Blob2 {
   getContentType() { return this.type; }
   getName() { return this.name; }
   setName(n) { this.name = n; return this; }
+  setContentType(t) { this.type = t; return this; }
   copyBlob() { return new Blob2(this.u8.slice(), this.type, this.name); }
   getAs(type) { const head = enc.encode('%PDF-1.4 converted from HTML\n'); const u = new Uint8Array(head.length + this.u8.length); u.set(head); u.set(this.u8, head.length); return new Blob2(u, type, this.name.replace(/\.html$/, '.pdf')); }
 }
@@ -24,61 +25,51 @@ class Blob2 {
 export function createBrowserGas({ storageKey = 'lb-demo-state', owner = 'hello@lavibachchis.com', onMail = () => {} } = {}) {
   let S = null;
   try { S = JSON.parse(localStorage.getItem(storageKey) || 'null'); } catch { S = null; }
-  if (!S) S = { props: {}, sheets: {}, folders: {}, files: {}, triggers: [], seq: 0, mail: 0, outbox: [] };
+  if (!S) S = { props: {}, triggers: [], seq: 0, mail: 0, outbox: [] };
   const attachments = new Map(); // big PDF bytes stay in memory only
   const save = () => { try { localStorage.setItem(storageKey, JSON.stringify(S)); } catch { /* storage full or blocked: memory only */ } };
   const id = (p) => `${p}${(++S.seq).toString(36)}${uuid().slice(0, 6)}`;
 
-  const cellIn = (v) => (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) ? { $date: v } : v);
-  const cellOut = (v) => (v && typeof v === 'object' && v.$date ? new Date(`${v.$date}T00:00:00`) : v);
-  function sheetApi(ssId, name) {
-    const rows = () => S.sheets[ssId].tabs[name];
-    const range = (r, c, nr = 1, nc = 1) => {
-      const api = {
-        getValues: () => Array.from({ length: nr }, (_, i) => Array.from({ length: nc }, (_, j) => cellOut((rows()[r - 1 + i] || [])[c - 1 + j] ?? ''))),
-        setValues: (vals) => { vals.forEach((row, i) => { const R = (rows()[r - 1 + i] ||= []); row.forEach((v, j) => { R[c - 1 + j] = cellIn(v); }); }); return api; },
-        setFontWeight: () => api, setBackground: () => api, setFontColor: () => api,
-      };
-      return api;
-    };
-    return { getName: () => name, getLastRow: () => rows().length, getLastColumn: () => Math.max(0, ...rows().map((r) => r.length)), getRange: range, appendRow: (vals) => { rows().push(vals.map(cellIn)); }, setFrozenRows: () => {} };
+  // A tiny in-memory Supabase (the parts the backend uses: table rows, next_number, PDF storage).
+  S.db ||= { agreements: {}, invoices: {}, activity_log: [], settings: {}, counters: {} };
+  const PK = { agreements: 'id', invoices: 'id', settings: 'key', counters: 'key' };
+  const reply = (code, body, u8) => ({ getResponseCode: () => code, getContentText: () => (body === undefined ? '' : JSON.stringify(body)), getBlob: () => new Blob2(u8 || new Uint8Array(0), 'application/pdf', '') });
+  function supabase(url, o) {
+    const u = new URL(url);
+    const method = String(o.method || 'get').toUpperCase();
+    const body = o.payload === undefined ? undefined : o.contentType === 'application/json' ? JSON.parse(o.payload) : toU8(o.payload);
+    let m = /^\/rest\/v1\/rpc\/next_number$/.exec(u.pathname);
+    if (m) { const k = body.counter_key; const n = Math.max(S.db.counters[k] || 0, body.floor_value || 0) + 1; S.db.counters[k] = n; return reply(200, n); }
+    m = /^\/rest\/v1\/(\w+)$/.exec(u.pathname);
+    if (m) {
+      const t = m[1];
+      if (method === 'POST') {
+        const list = Array.isArray(body) ? body : [body];
+        if (t === 'activity_log') S.db.activity_log.push(...list.slice(0));
+        else for (const r of list) S.db[t][r[PK[t]]] = { ...(S.db[t][r[PK[t]]] || {}), ...r };
+        return reply(201);
+      }
+      let rows = t === 'activity_log' ? S.db.activity_log.slice() : Object.values(S.db[t]);
+      for (const [k, v] of u.searchParams) if (/^eq\./.test(v)) rows = rows.filter((r) => String(r[k]) === v.slice(3));
+      const order = (u.searchParams.get('order') || '').split(',').filter(Boolean).map((x) => x.split('.')[0]);
+      rows.sort((a, b) => { for (const c of order) { const x = String(a[c] ?? ''); const y = String(b[c] ?? ''); if (x !== y) return x < y ? -1 : 1; } return 0; });
+      const sel = (u.searchParams.get('select') || '*').split(',');
+      rows = rows.map((r) => (sel[0] === '*' ? r : Object.fromEntries(sel.map((c) => [c, r[c] ?? null]))));
+      if (u.searchParams.get('limit')) rows = rows.slice(0, Number(u.searchParams.get('limit')));
+      return reply(200, JSON.parse(JSON.stringify(rows)));
+    }
+    if (/^\/storage\/v1\/bucket\//.test(u.pathname)) return reply(200, {});
+    m = /^\/storage\/v1\/object\/([\w-]+)\/(.+)$/.exec(u.pathname);
+    if (m) {
+      const key = `file:${decodeURIComponent(m[2])}`;
+      if (method === 'POST') { attachments.set(key, body); return reply(200, { Key: key }); }
+      return attachments.has(key) ? reply(200, undefined, attachments.get(key)) : reply(404, { message: 'Object not found' });
+    }
+    return reply(404, { message: 'not found' });
   }
-  const spreadsheetApi = (ssId) => ({
-    getId: () => ssId,
-    setSpreadsheetTimeZone: () => {},
-    getSheetByName: (n) => (S.sheets[ssId].tabs[n] ? sheetApi(ssId, n) : null),
-    insertSheet: (n) => { S.sheets[ssId].tabs[n] = []; return sheetApi(ssId, n); },
-    deleteSheet: (sh) => { delete S.sheets[ssId].tabs[sh.getName()]; },
-  });
-  const fileApi = (fid) => ({
-    getId: () => fid, getName: () => S.files[fid].name,
-    getBlob: () => new Blob2(attachments.get(fid) || unb64(S.files[fid].b64 || ''), S.files[fid].mime, S.files[fid].name),
-    setContent: (s) => { S.files[fid].b64 = b64(enc.encode(String(s))); return fileApi(fid); },
-    moveTo: (folder) => { S.files[fid].folder = folder.getId(); },
-  });
-  const iter = (list) => { let i = 0; return { hasNext: () => i < list.length, next: () => list[i++] }; };
-  const folderApi = (fo) => ({
-    getId: () => fo,
-    createFolder: (name) => { const i = id('fo'); S.folders[i] = { name, parent: fo }; return folderApi(i); },
-    createFile: (a, content, mime) => {
-      const i = id('fi');
-      if (a instanceof Blob2) { S.files[i] = { name: a.name, mime: a.type, folder: fo }; attachments.set(i, a.u8); } else S.files[i] = { name: a, mime: mime || 'text/plain', b64: b64(enc.encode(String(content))), folder: fo };
-      return fileApi(i);
-    },
-    getFilesByName: (name) => iter(Object.keys(S.files).filter((k) => S.files[k].folder === fo && S.files[k].name === name).map(fileApi)),
-  });
 
   const ctx = {
-    SpreadsheetApp: {
-      flush: () => {},
-      create: (name) => { const i = id('ss'); S.sheets[i] = { name, tabs: { Sheet1: [] } }; S.files[i] = { name, folder: null }; return spreadsheetApi(i); },
-      openById: (i) => spreadsheetApi(i),
-    },
-    DriveApp: {
-      createFolder: (name) => { const i = id('fo'); S.folders[i] = { name, parent: null }; return folderApi(i); },
-      getFolderById: (i) => folderApi(i),
-      getFileById: (i) => fileApi(i),
-    },
+    UrlFetchApp: { fetch: (url, o = {}) => supabase(url, o) },
     MailApp: {
       sendEmail: (o) => {
         const n = ++S.mail;
@@ -96,6 +87,7 @@ export function createBrowserGas({ storageKey = 'lb-demo-state', owner = 'hello@
       base64Decode: (s) => toSigned(unb64(s)),
       newBlob: (data, type, name) => new Blob2(data, type, name),
       getUuid: uuid,
+      sleep: () => {},
     },
     PropertiesService: { getScriptProperties: () => ({
       getProperty: (k) => (k in S.props ? S.props[k] : null),

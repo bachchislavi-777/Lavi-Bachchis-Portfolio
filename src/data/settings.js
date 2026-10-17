@@ -13,4 +13,4 @@ export const ABOUT_PHOTO_ALT = 'Lavi Bachchis, smiling, in a navy blazer';
 // Agreements & invoices (the /agreement/, /invoice/ and /studio/ pages). Paste the web app address of the
 // "LB Agreements" Google Apps Script here once it is deployed, e.g. 'https://script.google.com/macros/s/AKfy.../exec'.
 // While this is empty, those pages say the system is not switched on yet. See agreements/README.md.
-export const AGREEMENTS_API_URL = 'https://script.google.com/macros/s/AKfycbx-Be-wP_NvQj91LQ2MWRM_r1uzMEbh_syfsa6VxC_uhGuvgtzIGK0ut35QLRXZSSPi/exec';
+export const AGREEMENTS_API_URL = 'https://script.google.com/macros/s/AKfycbyyDDx-oJ4y1l0s195SJpvD19crE4xBj1KV_xbO6aIpj0eHbo1TEJiUxMJmIGhbTfkubQ/exec';

@@ -23,9 +23,9 @@ await build({
 // Apps Script calls these by name.
 function doGet(e) { return LB.httpGet(e); }
 function doPost(e) { return LB.httpPost(e); }
-function runDailyJob() { return LB.dailyJob(); }
+function runDailyJob() { return LB.daily(); }
 function runHourlyJob() { return LB.hourlyJob(); }
-function setup() { var done = LB.setup(); Logger.log(done.join('\\n')); return done; }
+function setup() { var done = LB.runSetup(); Logger.log(done.join('\\n')); return done; }
 ` },
 });
 copyFileSync(join(here, 'server', 'appsscript.json'), join(out, 'appsscript.json'));

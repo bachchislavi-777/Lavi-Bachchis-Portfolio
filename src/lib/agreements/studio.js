@@ -10,7 +10,8 @@ let nav;
 let signal;
 const logo = `${BASE}/brand/logo-horizontal.svg`;
 const KEY = 'lb-studio-session';
-const OV_KEY = 'lb-studio-overview'; // last overview, kept for this browser tab only, so a reload shows straight away
+const DATA_KEY = 'lb-studio-data'; // last loaded studio data, so any new visit shows straight away (cleared on sign-out)
+const MAX_CACHED = 40;            // agreements/invoices kept for instant opening
 // ov: the front-page data (lists, settings). cache: one agreement or invoice per key ('ag:<id>', 'inv:<id>').
 const st = { session: '', ov: null, ovStale: true, cache: {} };
 try { st.session = localStorage.getItem(KEY) || ''; } catch { /* private mode: sign in each visit */ }
@@ -51,7 +52,7 @@ const notice = (title, text) => ask(title, `<p style="overflow-wrap:anywhere">${
 function signOut(expired) {
   if (!expired && st.session) call('admin.signout', { session: st.session }).catch(() => {});
   st.session = ''; st.ov = null; st.cache = {}; st.ovStale = true;
-  try { localStorage.removeItem(KEY); sessionStorage.removeItem(OV_KEY); } catch { /* ignore */ }
+  try { localStorage.removeItem(KEY); localStorage.removeItem(DATA_KEY); sessionStorage.removeItem('lb-studio-overview'); } catch { /* ignore */ }
   location.hash = '';
   renderLogin(expired ? 'Please sign in again.' : '');
 }
@@ -100,7 +101,8 @@ function renderLogin(note = '') {
     try {
       const r = await call('admin.login', { code: document.getElementById('code').value });
       st.session = r.session;
-      try { localStorage.setItem(KEY, r.session); } catch { /* ignore */ }
+      st.cache = {}; st.ov = null;
+      try { localStorage.setItem(KEY, r.session); localStorage.removeItem(DATA_KEY); } catch { /* ignore */ }
       route({ fresh: true });
     } catch (e) { err(e.message); busy(b, false); }
   });
@@ -121,16 +123,39 @@ function setNav(current) {
 // fresh data is fetched in the background: if anything changed, the page is redrawn. Only the very first
 // visit, or a page never opened before, waits for the server. Requests for a page run in parallel.
 // ---------------------------------------------------------------------------------------------------------
+// Saved on this computer for the signed-in session only (the same browser already keeps the sign-in), so the
+// studio opens instantly next time, even in a new tab or the next day; it then refreshes in the background.
+const sessionTag = () => (st.session || '').slice(-12);
+let saveTimer;
+function persist() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    try {
+      const keys = Object.keys(st.cache);
+      for (const k of keys.slice(0, Math.max(0, keys.length - MAX_CACHED))) delete st.cache[k]; // oldest first
+      try { localStorage.setItem(DATA_KEY, JSON.stringify({ tag: sessionTag(), ov: st.ov, cache: st.cache })); }
+      catch { localStorage.setItem(DATA_KEY, JSON.stringify({ tag: sessionTag(), ov: st.ov, cache: {} })); } // too big: keep the lists
+    } catch { /* private mode or storage full: the studio still works, just loads from the server */ }
+  }, 300);
+}
+function restore() {
+  try {
+    const d = JSON.parse(localStorage.getItem(DATA_KEY) || 'null');
+    if (d && d.tag && d.tag === sessionTag()) { st.ov = d.ov || null; st.cache = d.cache || {}; st.ovStale = true; }
+  } catch { /* ignore */ }
+}
+function cacheSet(key, value) { delete st.cache[key]; st.cache[key] = value; persist(); } // re-insert = most recent
 function rememberOverview(ov) {
   st.ov = ov; st.ovStale = false;
-  try { sessionStorage.setItem(OV_KEY, JSON.stringify(ov)); } catch { /* private mode or full: fine */ }
+  persist();
 }
 /** Keep what a save/action returned (it is the same shape as the page's own data), so the next page is current. */
 function remember(r) {
   if (!r) return r;
-  if (r.agreement && r.link && Array.isArray(r.invoices)) st.cache[`ag:${r.agreement.id}`] = r;
-  if (r.invoice && r.link) st.cache[`inv:${r.invoice.id}`] = r;
+  if (r.agreement && r.link && Array.isArray(r.invoices)) cacheSet(`ag:${r.agreement.id}`, r);
+  if (r.invoice && r.link) cacheSet(`inv:${r.invoice.id}`, r);
   st.ovStale = true; // lists and totals may have changed
+  persist();
   return r;
 }
 function parseHash() {
@@ -165,14 +190,26 @@ async function route({ fresh = false } = {}) {
   };
 
   // The editor always works on the latest version (the server refuses to save over a newer one).
+  // It opens straight away from what the studio has, then checks for a newer version in the background: if
+  // there is one and nothing has been typed yet, the editor reloads with it; otherwise Lavi gets a clear note.
   if (view === 'edit') {
-    root.innerHTML = '<div class="skeleton"></div>';
+    const isNew = !id || id === 'new';
+    const cached = isNew ? null : st.cache[`ag:${id}`];
+    const instant = st.ov && (isNew || cached);
+    st.editDirty = false;
+    if (instant) { await renderEditor(id || 'new', cached ? cached.agreement : null); loading(true); } else root.innerHTML = '<div class="skeleton"></div>';
     try {
-      const [, r] = await Promise.all([st.ov && !st.ovStale ? null : api('admin.overview').then(rememberOverview), id && id !== 'new' ? api('admin.agreement.get', { id }) : null]);
+      const [, r] = await Promise.all([st.ov && !st.ovStale && instant ? null : api('admin.overview').then(rememberOverview), isNew ? null : api('admin.agreement.get', { id })]);
       if (!current()) return;
-      if (r) remember(r);
-      return await renderEditor(id || 'new', r ? r.agreement : null);
-    } catch (e) { return fail(e); } finally { if (current()) loading(false); }
+      if (r) cacheSet(`ag:${id}`, r);
+      if (!instant) return await renderEditor(id || 'new', r ? r.agreement : null);
+      const stamp = (x) => { const v = x && x.versions[x.versions.length - 1]; return v ? `${v.v}:${v.rev}:${v.status}` : ''; };
+      if (r && stamp(r.agreement) !== stamp(cached.agreement)) {
+        if (!st.editDirty) await renderEditor(id, r.agreement);
+        else if (!root.querySelector('#stale-note')) root.querySelector('.lead')?.insertAdjacentHTML('afterend', '<p class="warn" id="stale-note">This agreement was changed somewhere else since this page opened. Copy anything you need, then reload the page before saving.</p>');
+      }
+    } catch (e) { if (!instant) return fail(e); if (e.code !== 'auth' && current()) toast(`Couldn’t refresh: ${e.message}`); } finally { if (current()) loading(false); }
+    return;
   }
 
   const key = detailKey(view, id);
@@ -195,17 +232,50 @@ async function route({ fresh = false } = {}) {
     const before = { ov: st.ov, d: key ? st.cache[key] : null };
     const [ov, detail] = await Promise.all([wantOv ? api('admin.overview') : null, key ? fetchDetail(key) : null]);
     if (ov) rememberOverview(ov);
-    if (key) st.cache[key] = detail;
+    if (key) cacheSet(key, detail);
     if (!current()) return;
     const changed = !ready || (ov && !same(ov, before.ov)) || (key && !same(detail, before.d));
     // Don't redraw under an open dialog or while Lavi is typing; the next visit shows the update.
     if (changed && !document.querySelector('dialog[open]') && !(ready && root.contains(document.activeElement) && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))) draw();
+    if (ov) prefetch();
   } catch (e) {
     if (ready && e.code !== 'auth') { if (current()) toast(`Couldn’t refresh: ${e.message}`); } else fail(e);
   } finally { if (current()) loading(false); }
 }
-/** After a change: keep what the server returned, then show the page with fresh data. */
-const refresh = (r) => { remember(r); return route({ fresh: true }); };
+/**
+ * After a change. When the server's reply already holds the page's new state (most actions return it), show it
+ * straight away and refresh the rest in the background; otherwise wait for fresh data, keeping the page on screen.
+ */
+const refresh = (r) => {
+  remember(r);
+  const { view, id } = parseHash();
+  const key = detailKey(view, id);
+  const hasPage = r && key && ((r.agreement && `ag:${r.agreement.id}` === key) || (r.invoice && `inv:${r.invoice.id}` === key));
+  return route({ fresh: !hasPage });
+};
+
+/**
+ * Quietly load the most likely next pages (recent agreements, unpaid invoices) while Lavi looks at a list, so
+ * opening them is instant. Two at a time, only ones not loaded yet, and only while the studio tab is visible.
+ */
+let prefetching = false;
+async function prefetch() {
+  if (prefetching || !st.ov) return;
+  prefetching = true;
+  try {
+    const wanted = [
+      ...st.ov.agreements.filter((a) => a.status !== 'deleted').slice(-8).reverse().map((a) => `ag:${a.id}`),
+      ...st.ov.invoices.filter((i) => i.status === 'issued').slice(-6).reverse().map((i) => `inv:${i.id}`),
+    ].filter((k) => !st.cache[k]);
+    const next = async () => {
+      while (wanted.length && st.session && document.visibilityState === 'visible') {
+        const k = wanted.shift();
+        try { cacheSet(k, await fetchDetail(k)); } catch { /* not essential: the page loads normally when opened */ }
+      }
+    };
+    await Promise.all([next(), next()]);
+  } finally { prefetching = false; }
+}
 
 // =========================================================================================================
 // Agreements list
@@ -258,7 +328,7 @@ async function runJob(btn) {
   if (s.ended.length) parts.push(`Ended ${s.ended.join(', ')}`);
   if (s.errors.length) parts.push(`Problems: ${s.errors.join('; ')}`);
   toast(parts.length ? parts.join(' · ') : 'All up to date. Nothing was due.');
-  st.cache = {}; // invoices may have been issued on any agreement
+  st.cache = {}; persist(); // invoices may have been issued on any agreement
   refresh();
 }
 
@@ -762,7 +832,7 @@ function renderSettings() {
       out[g][k] = el.type === 'checkbox' ? el.checked : el.value.trim();
     }
     const r = await act(document.getElementById('ssave'), () => api('admin.settings.save', { settings: out }), 'Settings saved');
-    if (r) { st.ov.settings = r.settings; rememberOverview(st.ov); st.cache = {}; /* warnings depend on settings */ }
+    if (r) { st.cache = {}; st.ov.settings = r.settings; rememberOverview(st.ov); /* warnings depend on settings */ }
   });
 }
 
@@ -771,12 +841,10 @@ export function mount({ root: r, nav: n, signal: sg } = {}) {
   root = r || document.getElementById('root');
   nav = n || document.getElementById('studio-nav');
   signal = sg;
-  try {
-    st.session = localStorage.getItem(KEY) || '';
-    const saved = st.session && sessionStorage.getItem(OV_KEY);
-    if (saved) { st.ov = JSON.parse(saved); st.ovStale = true; }
-  } catch { /* private mode: load from the server */ }
+  try { st.session = localStorage.getItem(KEY) || ''; } catch { /* private mode: sign in each visit */ }
+  restore();
   window.addEventListener('hashchange', () => route(), { signal });
+  root.addEventListener('input', () => { if (location.hash.startsWith('#/edit')) st.editDirty = true; }, { signal });
   document.addEventListener('change', syncEndDate, { signal });
   route();
 }

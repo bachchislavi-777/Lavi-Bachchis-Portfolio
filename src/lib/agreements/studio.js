@@ -1,8 +1,8 @@
 // Lavi's private studio: lavibachchis.com/studio/
 // Sign in with a code emailed to her business address, then create, edit, amend and end agreements,
-// and see, chase and mark invoices. Everything is stored in her Google account, not on the website.
+// and see, chase and mark invoices. Everything is stored in her Supabase project, not on the website.
 import { call, configured, BASE, esc, ApiError } from './api.js';
-import { terms as T, money, dates, util, schedule as S } from '../../../agreements/core/index.js';
+import { terms as T, money, dates, util, schedule as S, reminders as R } from '../../../agreements/core/index.js';
 import { agreementHtml, invoiceHtml, invoiceStatus } from './render.js';
 
 let root;
@@ -10,7 +10,9 @@ let nav;
 let signal;
 const logo = `${BASE}/brand/logo-horizontal.svg`;
 const KEY = 'lb-studio-session';
-const st = { session: '', ov: null };
+const OV_KEY = 'lb-studio-overview'; // last overview, kept for this browser tab only, so a reload shows straight away
+// ov: the front-page data (lists, settings). cache: one agreement or invoice per key ('ag:<id>', 'inv:<id>').
+const st = { session: '', ov: null, ovStale: true, cache: {} };
 try { st.session = localStorage.getItem(KEY) || ''; } catch { /* private mode: sign in each visit */ }
 
 const STATUS = {
@@ -48,8 +50,8 @@ const notice = (title, text) => ask(title, `<p style="overflow-wrap:anywhere">${
 
 function signOut(expired) {
   if (!expired && st.session) call('admin.signout', { session: st.session }).catch(() => {});
-  st.session = ''; st.ov = null;
-  try { localStorage.removeItem(KEY); } catch { /* ignore */ }
+  st.session = ''; st.ov = null; st.cache = {}; st.ovStale = true;
+  try { localStorage.removeItem(KEY); sessionStorage.removeItem(OV_KEY); } catch { /* ignore */ }
   location.hash = '';
   renderLogin(expired ? 'Please sign in again.' : '');
 }
@@ -60,6 +62,8 @@ function signOut(expired) {
 let codeSent = null;
 function renderLogin(note = '') {
   nav.innerHTML = '';
+  // Wake the backend while Lavi reads the screen, so the code email and the first load are quicker.
+  call('ping').catch(() => {});
   root.innerHTML = `<div class="panel" style="max-width:520px;margin:30px auto">
     <p class="lbl">Studio</p><h2>Agreements &amp; invoices</h2>
     <p class="muted">Your private area. A one-time sign-in code is emailed to your business address.</p>
@@ -97,7 +101,7 @@ function renderLogin(note = '') {
       const r = await call('admin.login', { code: document.getElementById('code').value });
       st.session = r.session;
       try { localStorage.setItem(KEY, r.session); } catch { /* ignore */ }
-      route();
+      route({ fresh: true });
     } catch (e) { err(e.message); busy(b, false); }
   });
 }
@@ -112,28 +116,96 @@ function setNav(current) {
   document.getElementById('signout').addEventListener('click', () => signOut(false));
 }
 
-async function loadOverview(force = false) {
-  if (!st.ov || force) st.ov = await api('admin.overview');
-  return st.ov;
+// ---------------------------------------------------------------------------------------------------------
+// Loading. Every page is drawn straight away from what the studio already has (instant tab switches), and
+// fresh data is fetched in the background: if anything changed, the page is redrawn. Only the very first
+// visit, or a page never opened before, waits for the server. Requests for a page run in parallel.
+// ---------------------------------------------------------------------------------------------------------
+function rememberOverview(ov) {
+  st.ov = ov; st.ovStale = false;
+  try { sessionStorage.setItem(OV_KEY, JSON.stringify(ov)); } catch { /* private mode or full: fine */ }
+}
+/** Keep what a save/action returned (it is the same shape as the page's own data), so the next page is current. */
+function remember(r) {
+  if (!r) return r;
+  if (r.agreement && r.link && Array.isArray(r.invoices)) st.cache[`ag:${r.agreement.id}`] = r;
+  if (r.invoice && r.link) st.cache[`inv:${r.invoice.id}`] = r;
+  st.ovStale = true; // lists and totals may have changed
+  return r;
+}
+function parseHash() {
+  const [, view = 'agreements', id = ''] = (location.hash.replace(/^#\/?/, '').match(/^([\w-]+)?\/?([\w-]*)/) || []);
+  return { view, id };
+}
+const detailKey = (view, id) => (view === 'agreements' && id ? `ag:${id}` : view === 'invoices' && id && id !== 'new' ? `inv:${id}` : '');
+const fetchDetail = (key) => (key.startsWith('ag:') ? api('admin.agreement.get', { id: key.slice(3) }) : api('admin.invoice.get', { id: key.slice(4) }));
+const same = (x, y) => JSON.stringify(x) === JSON.stringify(y);
+
+let loadingBar;
+function loading(on) {
+  if (!loadingBar) { loadingBar = document.createElement('div'); loadingBar.className = 'loadbar'; loadingBar.setAttribute('aria-hidden', 'true'); document.body.appendChild(loadingBar); }
+  loadingBar.classList.toggle('on', !!on);
 }
 
-async function route() {
+let routeSeq = 0;
+/**
+ * Show the page in the address bar.
+ * fresh: wait for the server before drawing (after Lavi changes something), but keep the current page on
+ * screen meanwhile instead of blanking it.
+ */
+async function route({ fresh = false } = {}) {
   if (!configured()) { root.innerHTML = '<div class="center-msg"><h1>Not switched on yet</h1><p class="muted">Add the Google Apps Script address to <code>AGREEMENTS_API_URL</code> in <code>src/data/settings.js</code>. See <code>agreements/README.md</code>.</p></div>'; return; }
   if (!st.session) return renderLogin();
-  const [, view = 'agreements', id = ''] = (location.hash.replace(/^#\/?/, '').match(/^([\w-]+)?\/?([\w-]*)/) || []);
-  root.innerHTML = '<div class="skeleton"></div>';
-  try {
-    await loadOverview(true);
-    if (view === 'agreements' && id) return await renderAgreement(id);
-    if (view === 'edit') return await renderEditor(id || 'new');
-    if (view === 'invoices' && id) return await renderInvoice(id);
-    if (view === 'invoices') return renderInvoices();
+  const seq = ++routeSeq;
+  const { view, id } = parseHash();
+  const current = () => seq === routeSeq;
+  const fail = (e) => {
+    if (e.code === 'auth' || !current()) return;
+    root.innerHTML = `<div class="center-msg"><h1>Couldn’t load</h1><p class="err">${esc(e.message)}</p><p><button class="btn" onclick="location.reload()">Try again</button></p></div>`;
+  };
+
+  // The editor always works on the latest version (the server refuses to save over a newer one).
+  if (view === 'edit') {
+    root.innerHTML = '<div class="skeleton"></div>';
+    try {
+      const [, r] = await Promise.all([st.ov && !st.ovStale ? null : api('admin.overview').then(rememberOverview), id && id !== 'new' ? api('admin.agreement.get', { id }) : null]);
+      if (!current()) return;
+      if (r) remember(r);
+      return await renderEditor(id || 'new', r ? r.agreement : null);
+    } catch (e) { return fail(e); } finally { if (current()) loading(false); }
+  }
+
+  const key = detailKey(view, id);
+  const draw = () => {
+    if (key.startsWith('ag:')) return renderAgreement(id, st.cache[key]);
+    if (key.startsWith('inv:')) return renderInvoice(id, st.cache[key]);
+    if (view === 'invoices') return id === 'new' ? (location.hash = '#/invoices') : renderInvoices();
     if (view === 'settings') return renderSettings();
     return renderAgreements();
+  };
+  const ready = !fresh && st.ov && (!key || st.cache[key]);
+  if (ready) draw();
+  else if (fresh && root.firstElementChild && !root.querySelector('.skeleton')) loading(true);
+  else root.innerHTML = '<div class="skeleton"></div>';
+  if (ready) loading(true);
+
+  try {
+    // Lists need fresh totals; a detail page refreshes the lists only when something was changed.
+    const wantOv = !key || st.ovStale || !st.ov || fresh;
+    const before = { ov: st.ov, d: key ? st.cache[key] : null };
+    const [ov, detail] = await Promise.all([wantOv ? api('admin.overview') : null, key ? fetchDetail(key) : null]);
+    if (ov) rememberOverview(ov);
+    if (key) st.cache[key] = detail;
+    if (!current()) return;
+    const changed = !ready || (ov && !same(ov, before.ov)) || (key && !same(detail, before.d));
+    // Don't redraw under an open dialog or while Lavi is typing; the next visit shows the update.
+    if (changed && !document.querySelector('dialog[open]') && !(ready && root.contains(document.activeElement) && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))) draw();
   } catch (e) {
-    if (e.code !== 'auth') root.innerHTML = `<div class="center-msg"><h1>Couldn’t load</h1><p class="err">${esc(e.message)}</p><p><button class="btn" onclick="location.reload()">Try again</button></p></div>`;
-  }
+    if (ready && e.code !== 'auth') { if (current()) toast(`Couldn’t refresh: ${e.message}`); } else fail(e);
+  } finally { if (current()) loading(false); }
 }
+/** After a change: keep what the server returned, then show the page with fresh data. */
+const refresh = (r) => { remember(r); return route({ fresh: true }); };
 
 // =========================================================================================================
 // Agreements list
@@ -186,15 +258,15 @@ async function runJob(btn) {
   if (s.ended.length) parts.push(`Ended ${s.ended.join(', ')}`);
   if (s.errors.length) parts.push(`Problems: ${s.errors.join('; ')}`);
   toast(parts.length ? parts.join(' · ') : 'All up to date. Nothing was due.');
-  route();
+  st.cache = {}; // invoices may have been issued on any agreement
+  refresh();
 }
 
 // =========================================================================================================
 // One agreement
 // =========================================================================================================
-async function renderAgreement(id) {
+function renderAgreement(id, r) {
   setNav('agreements');
-  const r = await api('admin.agreement.get', { id });
   const a = r.agreement;
   const latest = a.versions[a.versions.length - 1];
   const last = [...a.versions].reverse().find((v) => v.signed);
@@ -254,16 +326,16 @@ async function renderAgreement(id) {
 
   const on = (sel, fn) => { const el = document.getElementById(sel); if (el) el.addEventListener('click', (e) => fn(e.currentTarget)); };
   on('copy', async (b) => { try { await navigator.clipboard.writeText(r.link); toast('Link copied'); } catch { const i = document.getElementById('link'); i.select(); toast('Selected: press Ctrl+C or Cmd+C'); } });
-  on('offer', (b) => act(b, () => api('admin.agreement.save', { id: a.id, v: latest.v, terms: latest.terms, offer: true, effectiveFrom: latest.effectiveFrom }), 'Ready to sign. Copy the link or email it.').then((x) => x && route()));
+  on('offer', (b) => act(b, () => api('admin.agreement.save', { id: a.id, v: latest.v, terms: latest.terms, offer: true, effectiveFrom: latest.effectiveFrom }), 'Ready to sign. Copy the link or email it.').then((x) => x && refresh(x)));
   on('email', async (b) => {
     const m = await ask('Email the link', `<p class="muted">Sent to ${esc(c.email || latest.terms.client.email || 'the client')} from your Google Workspace account, with a copy to ${esc(st.ov.settings.business.email)}.</p><label class="f" for="msg">Add a personal note <span class="hint">(optional)</span><textarea id="msg" rows="4" placeholder="Lovely to speak today. As discussed…"></textarea></label>`, 'Send email');
-    if (m) act(b, () => api('admin.agreement.sendLink', { id: a.id, message: m.querySelector('#msg').value }), 'Email sent').then((x) => x && route());
+    if (m) act(b, () => api('admin.agreement.sendLink', { id: a.id, message: m.querySelector('#msg').value }), 'Email sent').then((x) => x && refresh(x));
   });
-  on('withdraw', async (b) => { if (await confirmBox(latest.v > 1 ? 'Withdraw this amendment?' : 'Withdraw this agreement?', latest.v > 1 ? 'The signed version stays in force.' : 'The link will stop working for signing.', 'Withdraw')) act(b, () => api('admin.agreement.withdraw', { id: a.id }), 'Withdrawn').then((x) => x && route()); });
-  on('amend', (b) => act(b, () => api('admin.agreement.amend', { id: a.id })).then((x) => { if (x) location.hash = `#/edit/${a.id}`; }));
+  on('withdraw', async (b) => { if (await confirmBox(latest.v > 1 ? 'Withdraw this amendment?' : 'Withdraw this agreement?', latest.v > 1 ? 'The signed version stays in force.' : 'The link will stop working for signing.', 'Withdraw')) act(b, () => api('admin.agreement.withdraw', { id: a.id }), 'Withdrawn').then((x) => x && refresh(x)); });
+  on('amend', (b) => act(b, () => api('admin.agreement.amend', { id: a.id })).then((x) => { if (x) { remember(x); location.hash = `#/edit/${a.id}`; } }));
   on('end', () => endDialog(a, last));
-  on('unend', (b) => act(b, () => api('admin.agreement.undoEnd', { id: a.id }), 'Ending undone').then((x) => x && route()));
-  on('balance', async (b) => { if (await confirmBox('Issue the balance invoice now?', 'It is dated today and emailed to the client.', 'Issue invoice')) act(b, () => api('admin.agreement.issueBalance', { id: a.id }), 'Balance invoice issued').then((x) => x && route()); });
+  on('unend', (b) => act(b, () => api('admin.agreement.undoEnd', { id: a.id }), 'Ending undone').then((x) => x && refresh(x)));
+  on('balance', async (b) => { if (await confirmBox('Issue the balance invoice now?', 'It is dated today and emailed to the client.', 'Issue invoice')) act(b, () => api('admin.agreement.issueBalance', { id: a.id }), 'Balance invoice issued').then((x) => x && refresh(x)); });
   on('resend', (b) => act(b, () => api('admin.agreement.resendSigned', { id: a.id, v: last.v }), 'Signed copy emailed to the client and you'));
   on('verify', (b) => act(b, () => api('admin.agreement.verify', { id: a.id, v: last.v })).then((x) => x && notice(x.ok ? 'Fingerprint matches' : 'Fingerprint does NOT match', x.ok ? `The signed record hasn’t changed since signing. ${x.fingerprint}` : 'The record may have been altered. Ask Claude to look into it.')));
   on('pdf', async (b) => { busy(b, true, 'Preparing…'); try { const { agreementPdf } = await import('./pdf.js'); await (await agreementPdf(last.signed.doc, last.signed, { base: BASE })).download(); } catch (e) { notice('Couldn’t make the PDF', e.message); } busy(b, false); });
@@ -309,8 +381,8 @@ async function endDialog(a, last) {
     <label class="check"><input type="checkbox" id="nf" checked><span>Email the client to confirm the end date</span></label>`, project ? 'Cancel project' : 'Confirm end date');
   if (!dlg) return;
   const v = (id) => dlg.querySelector(`#${id}`);
-  await act(null, () => api('admin.agreement.end', { id: a.id, noticeDate: v('nd').value, endDate: v('ed').value, by: v('by').value, note: v('nt').value, notify: v('nf').checked }), 'End date saved');
-  route();
+  const r = await act(null, () => api('admin.agreement.end', { id: a.id, noticeDate: v('nd').value, endDate: v('ed').value, by: v('by').value, note: v('nt').value, notify: v('nf').checked }), 'End date saved');
+  refresh(r);
 }
 // keep the end date in step with the notice date while the dialog is open
 function syncEndDate(e) {
@@ -324,12 +396,12 @@ function syncEndDate(e) {
 // =========================================================================================================
 // Editor (new agreement, draft, or amendment)
 // =========================================================================================================
-async function renderEditor(id) {
+async function renderEditor(id, agreement) {
   setNav('agreements');
   const isNew = id === 'new';
   let a = null, ver = null;
   if (!isNew) {
-    a = (await api('admin.agreement.get', { id })).agreement;
+    a = agreement;
     ver = a.versions[a.versions.length - 1];
     if (!['draft', 'offered'].includes(ver.status)) { location.hash = `#/agreements/${id}`; return; }
   }
@@ -531,6 +603,7 @@ async function renderEditor(id) {
     busy(btn, true, 'Saving…');
     try {
       const r = await api('admin.agreement.save', { id: a ? a.id : undefined, v: ver ? ver.v : undefined, terms, offer: offer || (ver && ver.status === 'offered'), test: isNew ? $('test').checked : undefined, effectiveFrom });
+      remember(r);
       toast(offer ? 'Saved. The link is ready to send.' : 'Draft saved');
       location.hash = `#/agreements/${r.agreement.id}`;
     } catch (e2) { if (e2.code !== 'auth') { err.textContent = e2.message; err.hidden = false; } busy(btn, false); }
@@ -611,6 +684,7 @@ function newInvoice(agreementId = '') {
     const b = q('#nok'); busy(b, true, 'Creating…'); q('#nerr').hidden = true;
     try {
       const r = await api('admin.invoice.manual', body);
+      remember(r);
       toast(body.send ? 'Invoice created and emailed' : 'Invoice created');
       dlg.close('done');
       location.hash = `#/invoices/${r.invoice.id}`;
@@ -620,10 +694,8 @@ function newInvoice(agreementId = '') {
   dlg.showModal();
 }
 
-async function renderInvoice(id) {
+function renderInvoice(id, r) {
   setNav('invoices');
-  if (id === 'new') { location.hash = '#/invoices'; return; }
-  const r = await api('admin.invoice.get', { id });
   const inv = r.invoice;
   const s = invoiceStatus(inv, today());
   root.innerHTML = `
@@ -638,15 +710,15 @@ async function renderInvoice(id) {
         <button class="btn ghost" id="copy">Copy client link</button>
         ${inv.status === 'issued' ? '<button class="btn danger" id="void">Cancel invoice</button>' : ''}
       </div>
-      <p class="muted small" style="margin-top:12px">${inv.sentAt ? `Emailed ${esc(dates.londonDateTime(new Date(inv.sentAt)))}` : 'Not emailed yet'}${inv.viewedAt ? ` · opened by the client ${esc(d(inv.viewedAt.slice(0, 10)))}` : ''}${inv.reminderSentAt ? ` · reminder sent ${esc(d(inv.reminderSentAt.slice(0, 10)))}` : ''}${inv.voidReason ? ` · cancelled: ${esc(inv.voidReason)}` : ''}</p>
+      <p class="muted small" style="margin-top:12px">${inv.sentAt ? `Emailed ${esc(dates.londonDateTime(new Date(inv.sentAt)))}` : 'Not emailed yet'}${inv.viewedAt ? ` · opened by the client ${esc(d(inv.viewedAt.slice(0, 10)))}` : ''}${(inv.reminders || []).length ? ` · reminder${inv.reminders.length > 1 ? 's' : ''} sent ${inv.reminders.map((x) => esc(d(x.at.slice(0, 10)))).join(', ')}` : inv.reminderSentAt ? ` · reminder sent ${esc(d(inv.reminderSentAt.slice(0, 10)))}` : ''}${inv.status === 'issued' && st.ov.settings.invoices.autoReminders ? ` · automatic reminders ${R.reminderDates(inv).map((x) => esc(d(x))).join(', ')} if still unpaid` : ''}${inv.voidReason ? ` · cancelled: ${esc(inv.voidReason)}` : ''}</p>
     </div><br>
     ${invoiceHtml(inv, { today: today(), logo })}`;
   const on = (sel, fn) => { const el = document.getElementById(sel); if (el) el.addEventListener('click', (e) => fn(e.currentTarget)); };
-  on('paid', async () => { const dlg = await ask('Mark as paid', `<label class="f" for="pd">Paid on<input type="date" id="pd" value="${today()}" required></label>`, 'Mark as paid'); if (dlg) { await act(null, () => api('admin.invoice.update', { id, op: 'paid', date: dlg.querySelector('#pd').value }), 'Marked as paid'); route(); } });
-  on('unpaid', (b) => act(b, () => api('admin.invoice.update', { id, op: 'unpaid' }), 'Marked as unpaid').then((x) => x && route()));
-  on('remind', async (b) => { if (await confirmBox('Send a payment reminder?', `A polite reminder goes to ${inv.billTo.billingEmail || inv.billTo.email}.`, 'Send reminder')) act(b, () => api('admin.invoice.update', { id, op: 'remind' }), 'Reminder sent').then((x) => x && route()); });
-  on('resend', (b) => act(b, () => api('admin.invoice.update', { id, op: 'resend' }), 'Invoice emailed again').then((x) => x && route()));
-  on('void', async () => { const dlg = await ask('Cancel this invoice', '<p class="muted">The number is kept (invoice numbers are never reused) and it’s marked Cancelled. Nothing is emailed.</p><label class="f" for="vr">Reason<input id="vr" type="text" required placeholder="e.g. Raised in error"></label>', 'Cancel invoice'); if (dlg) { await act(null, () => api('admin.invoice.update', { id, op: 'void', reason: dlg.querySelector('#vr').value }), 'Invoice cancelled'); route(); } });
+  on('paid', async () => { const dlg = await ask('Mark as paid', `<label class="f" for="pd">Paid on<input type="date" id="pd" value="${today()}" required></label>`, 'Mark as paid'); if (dlg) refresh(await act(null, () => api('admin.invoice.update', { id, op: 'paid', date: dlg.querySelector('#pd').value }), 'Marked as paid')); });
+  on('unpaid', (b) => act(b, () => api('admin.invoice.update', { id, op: 'unpaid' }), 'Marked as unpaid').then((x) => x && refresh(x)));
+  on('remind', async (b) => { if (await confirmBox('Send a payment reminder?', `A polite reminder goes to ${inv.billTo.billingEmail || inv.billTo.email}.`, 'Send reminder')) act(b, () => api('admin.invoice.update', { id, op: 'remind' }), 'Reminder sent').then((x) => x && refresh(x)); });
+  on('resend', (b) => act(b, () => api('admin.invoice.update', { id, op: 'resend' }), 'Invoice emailed again').then((x) => x && refresh(x)));
+  on('void', async () => { const dlg = await ask('Cancel this invoice', '<p class="muted">The number is kept (invoice numbers are never reused) and it’s marked Cancelled. Nothing is emailed.</p><label class="f" for="vr">Reason<input id="vr" type="text" required placeholder="e.g. Raised in error"></label>', 'Cancel invoice'); if (dlg) refresh(await act(null, () => api('admin.invoice.update', { id, op: 'void', reason: dlg.querySelector('#vr').value }), 'Invoice cancelled')); });
   on('copy', async () => { try { await navigator.clipboard.writeText(r.link); toast('Link copied'); } catch { notice('Copy this link', r.link); } });
   on('pdf', async (b) => { busy(b, true, 'Preparing…'); try { const { invoicePdf } = await import('./pdf.js'); await (await invoicePdf(inv, { base: BASE, today: today() })).download(); } catch (e) { notice('Couldn’t make the PDF', e.message); } busy(b, false); });
 }
@@ -660,7 +732,7 @@ function renderSettings() {
   const f = (g, k, label, { type = 'text', hint = '', area = false } = {}) => `<label class="f" for="s-${g}-${k}">${esc(label)}${area ? `<textarea id="s-${g}-${k}" rows="3">${esc(s[g][k])}</textarea>` : `<input id="s-${g}-${k}" type="${type}" value="${esc(s[g][k])}">`}${hint ? `<span class="hint">${esc(hint)}</span>` : ''}</label>`;
   root.innerHTML = `
     <div class="lead"><div><p class="lbl">Studio</p><h1>Settings</h1></div></div>
-    <p class="note">These details are stored privately in your Google account, never on the public website. They appear on agreements and invoices. Changes apply to new agreements and invoices; ones already sent keep the details they had.</p><br>
+    <p class="note">These details are stored privately in your Supabase project, never on the public website. They appear on agreements and invoices. Changes apply to new agreements and invoices; ones already sent keep the details they had.</p><br>
     <form id="sf">
       <fieldset><legend>Your business</legend>
         <div class="grid2">${f('business', 'name', 'Your name')}${f('business', 'trading', 'Trading as')}${f('business', 'email', 'Business email', { type: 'email', hint: 'Shown on documents. Emails are sent from the Google account that runs the system.' })}${f('business', 'website', 'Website')}${f('business', 'phone', 'Phone')}</div>
@@ -676,7 +748,8 @@ function renderSettings() {
       <fieldset><legend>Invoices</legend>
         <label class="check"><input type="checkbox" id="s-invoices-autoSend" ${s.invoices.autoSend ? 'checked' : ''}><span>Email invoices to clients automatically when they are issued</span></label>
         <label class="check"><input type="checkbox" id="s-invoices-copyMe" ${s.invoices.copyMe ? 'checked' : ''}><span>Copy me on every invoice email</span></label>
-        <label class="f" for="s-invoices-reminderDays">Automatic payment reminder<select id="s-invoices-reminderDays">${[0, 1, 3, 7, 14].map((n) => `<option value="${n}" ${s.invoices.reminderDays === n ? 'selected' : ''}>${n ? `${n} day${n > 1 ? 's' : ''} after the due date` : 'Off (I’ll chase myself)'}</option>`).join('')}</select></label>
+        <label class="check"><input type="checkbox" id="s-invoices-autoReminders" ${s.invoices.autoReminders ? 'checked' : ''}><span>Send payment reminders automatically if an invoice isn’t marked as paid: 1, 7 and 14 days after the due date</span></label>
+        <p class="muted small">Mark invoices as paid when the money arrives, so paid clients are never chased.</p>
       </fieldset>
       <div class="row"><button class="btn dark" id="ssave" type="submit">Save settings</button></div>
       <p class="muted small" style="margin-top:14px">Studio sign-in codes go to ${esc(st.ov.owner)}. Agreement wording version ${esc(st.ov.wording)}.</p>
@@ -686,10 +759,10 @@ function renderSettings() {
     const out = { business: {}, payment: {}, invoices: {} };
     for (const g of Object.keys(out)) for (const k of Object.keys(s[g])) {
       const el = document.getElementById(`s-${g}-${k}`); if (!el) continue;
-      out[g][k] = el.type === 'checkbox' ? el.checked : el.tagName === 'SELECT' && g === 'invoices' ? Number(el.value) : el.value.trim();
+      out[g][k] = el.type === 'checkbox' ? el.checked : el.value.trim();
     }
     const r = await act(document.getElementById('ssave'), () => api('admin.settings.save', { settings: out }), 'Settings saved');
-    if (r) st.ov.settings = r.settings;
+    if (r) { st.ov.settings = r.settings; rememberOverview(st.ov); st.cache = {}; /* warnings depend on settings */ }
   });
 }
 
@@ -698,8 +771,12 @@ export function mount({ root: r, nav: n, signal: sg } = {}) {
   root = r || document.getElementById('root');
   nav = n || document.getElementById('studio-nav');
   signal = sg;
-  try { st.session = localStorage.getItem(KEY) || ''; } catch { /* private mode */ }
-  window.addEventListener('hashchange', route, { signal });
+  try {
+    st.session = localStorage.getItem(KEY) || '';
+    const saved = st.session && sessionStorage.getItem(OV_KEY);
+    if (saved) { st.ov = JSON.parse(saved); st.ovStale = true; }
+  } catch { /* private mode: load from the server */ }
+  window.addEventListener('hashchange', () => route(), { signal });
   document.addEventListener('change', syncEndDate, { signal });
   route();
 }

@@ -3,10 +3,12 @@
 // Test-only extras (never exist in Google): /__test/outbox, /__test/clock, /__test/job, /__test/reset.
 import http from 'node:http';
 import vm from 'node:vm';
-import { readFileSync, rmSync, mkdirSync } from 'node:fs';
+import { readFileSync, rmSync, mkdirSync, mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { createGasContext } from './gas-shim.mjs';
+import { startLocalSupabase } from './supabase-local.mjs';
 
 process.env.TZ = 'Europe/London';
 const here = dirname(fileURLToPath(import.meta.url));
@@ -14,20 +16,27 @@ const PORT = Number(process.env.PORT || 8787);
 const DIR = process.env.LB_DATA_DIR || join(here, '.data');
 const SITE = process.env.SITE_URL || 'http://localhost:4321';
 
-let gas, sandbox, clockOffset = 0, fixedNow = null;
-function boot({ fresh = false } = {}) {
+let gas, sandbox, sb, clockOffset = 0, fixedNow = null;
+// Records go to a local Supabase stand-in (real PostgreSQL + PostgREST, see supabase-local.mjs), started fresh.
+async function boot({ fresh = false } = {}) {
+  if (sb && fresh) { sb.stop(); sb = null; await new Promise((ok) => setTimeout(ok, 500)); }
   if (fresh) rmSync(DIR, { recursive: true, force: true });
   mkdirSync(DIR, { recursive: true });
+  if (!sb) sb = await startLocalSupabase({ dir: join(mkdtempSync(join(tmpdir(), 'lb-supabase-')), 'db') });
   gas = createGasContext({ dir: DIR });
   sandbox = vm.createContext({ ...gas.ctx, __lbNow: () => (fixedNow ? new Date(fixedNow) : new Date(Date.now() + clockOffset)) });
   vm.runInContext(readFileSync(join(here, '..', 'dist', 'gas', 'Code.js'), 'utf8'), sandbox, { filename: 'Code.js' });
-  if (!gas.state.props.SHEET_ID) {
+  gas.state.props.SUPABASE_URL = sb.url;
+  gas.state.props.SUPABASE_SECRET_KEY = sb.key;
+  if (!gas.state.props.OWNER_EMAIL) {
     sandbox.setup();
     gas.state.props.SITE_URL = SITE;
-    gas.flush();
   }
+  gas.flush();
 }
-boot({ fresh: process.argv.includes('--fresh') });
+await boot({ fresh: true });
+process.on('exit', () => sb && sb.stop());
+process.on('SIGTERM', () => process.exit(0));
 
 const send = (res, code, body, type = 'application/json') => {
   res.writeHead(code, { 'Content-Type': type, 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store' });
@@ -66,7 +75,8 @@ http.createServer(async (req, res) => {
     }
     if (url.pathname === '/__test/job' && req.method === 'POST') { const s = sandbox.runDailyJob(); gas.flush(); return send(res, 200, s); }
     if (url.pathname === '/__test/hourly' && req.method === 'POST') { const s = sandbox.runHourlyJob(); gas.flush(); return send(res, 200, s); }
-    if (url.pathname === '/__test/reset' && req.method === 'POST') { fixedNow = null; boot({ fresh: true }); return send(res, 200, { ok: true }); }
+    if (url.pathname === '/__test/reset' && req.method === 'POST') { fixedNow = null; await boot({ fresh: true }); return send(res, 200, { ok: true }); }
+    if (url.pathname === '/__test/sql' && req.method === 'POST') return send(res, 200, sb.psql(`select coalesce(json_agg(t), '[]') from (${await readBody(req)}) t`));
     if (url.pathname === '/__test/state') return send(res, 200, gas.state);
     if (url.pathname === '/__test/props' && req.method === 'POST') { Object.assign(gas.state.props, JSON.parse(await readBody(req))); gas.flush(); return send(res, 200, { ok: true }); }
     return send(res, 404, { ok: false, error: 'Not found' });

@@ -2,8 +2,9 @@
 // properties, locks, triggers). It lets the exact Code.js that goes to Google run on this computer, so the
 // whole system can be tested before Google Workspace is ready. Data is kept in a folder as JSON.
 import { createHash, randomUUID } from 'node:crypto';
-import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 
 const toSigned = (buf) => Array.from(buf, (b) => (b > 127 ? b - 256 : b));
 const toBuf = (v) => (Buffer.isBuffer(v) ? v : Array.isArray(v) ? Buffer.from(v.map((b) => (b + 256) % 256)) : Buffer.from(String(v), 'utf8'));
@@ -14,6 +15,7 @@ class Blob {
   getContentType() { return this.type; }
   getName() { return this.name; }
   setName(n) { this.name = n; return this; }
+  setContentType(t) { this.type = t; return this; }
   copyBlob() { return new Blob(Buffer.from(this.buf), this.type, this.name); }
   getAs(type) { return new Blob(Buffer.concat([Buffer.from('%PDF-1.4 converted from HTML\n'), this.buf]), type, this.name.replace(/\.html$/, '.pdf')); }
   getDataAsString(charset) { return charset === 'ISO-8859-1' ? this.buf.toString('latin1') : this.buf.toString('utf8'); }
@@ -112,7 +114,35 @@ export function createGasContext({ dir, owner = 'hello@lavibachchis.com' }) {
     },
   };
 
+  // UrlFetchApp is synchronous in Apps Script, so the stand-in uses curl (synchronously) to make the request.
+  const UrlFetchApp = {
+    fetch: (url, o = {}) => {
+      // Like Apps Script: characters that must be URL-encoded are refused ("Exception: Invalid argument").
+      if (/[<>"{}|\\^`\s]/.test(url)) throw new Error(`Invalid argument: ${url}`);
+      const tmp = join(dir, `.http-${randomUUID()}`);
+      const args = ['-s', '-S', '-X', String(o.method || 'get').toUpperCase(), '-o', `${tmp}.out`, '-w', '%{http_code}'];
+      for (const [k, v] of Object.entries(o.headers || {})) args.push('-H', `${k}: ${v}`);
+      if (o.payload !== undefined) {
+        const data = o.payload instanceof Blob ? o.payload.buf : toBuf(o.payload);
+        writeFileSync(`${tmp}.in`, data);
+        args.push('-H', `Content-Type: ${o.contentType || 'application/x-www-form-urlencoded'}`, '--data-binary', `@${tmp}.in`);
+      }
+      if (o.followRedirects !== false) args.push('-L');
+      args.push('--noproxy', 'localhost,127.0.0.1');
+      args.push(url);
+      let code;
+      try { code = Number(execFileSync('curl', args, { encoding: 'utf8' }).trim()); } finally { rmSync(`${tmp}.in`, { force: true }); }
+      const body = existsSync(`${tmp}.out`) ? readFileSync(`${tmp}.out`) : Buffer.alloc(0);
+      rmSync(`${tmp}.out`, { force: true });
+      if (!o.muteHttpExceptions && code >= 400) throw new Error(`Request failed for ${url} returned code ${code}`);
+      return { getResponseCode: () => code, getContentText: () => body.toString('utf8'), getBlob: () => new Blob(body, 'application/octet-stream', '') };
+    },
+    // Apps Script sends these in parallel; one after another is fine for the local stand-in.
+    fetchAll: (reqs) => reqs.map((r) => UrlFetchApp.fetch(r.url, r)),
+  };
+
   const Utilities = {
+    sleep: (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms),
     DigestAlgorithm: { SHA_256: 'sha256' },
     Charset: { UTF_8: 'utf8' },
     computeDigest: (alg, value) => toSigned(createHash(alg).update(toBuf(value)).digest()),
@@ -137,7 +167,7 @@ export function createGasContext({ dir, owner = 'hello@lavibachchis.com' }) {
   };
 
   const ctx = {
-    SpreadsheetApp, DriveApp, MailApp, Utilities,
+    SpreadsheetApp, DriveApp, MailApp, Utilities, UrlFetchApp,
     PropertiesService: { getScriptProperties: () => props },
     LockService: { getScriptLock: () => ({ waitLock: () => {}, releaseLock: () => {} }) },
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: (s) => { const o = { content: s, setMimeType: () => o, getContent: () => s }; return o; } },

@@ -31,8 +31,8 @@ async function admin(action, body = {}) {
 }
 
 before(async () => {
-  srv = spawn(process.execPath, [join(here, '..', 'local', 'server.mjs'), '--fresh'], { env: { ...process.env, PORT: String(PORT), LB_DATA_DIR: mkdtempSync(join(tmpdir(), 'lb-')) }, stdio: 'pipe' });
-  await new Promise((ok) => srv.stdout.on('data', (d) => String(d).includes('LB Agreements') && ok()));
+  srv = spawn(process.execPath, [join(here, '..', 'local', 'server.mjs'), '--fresh'], { env: { ...process.env, PORT: String(PORT), LB_DATA_DIR: mkdtempSync(join(tmpdir(), 'lb-')) }, stdio: ['ignore', 'pipe', 'inherit'] });
+  await new Promise((ok, fail) => { srv.stdout.on('data', (d) => String(d).includes('LB Agreements') && ok()); srv.on('exit', (c) => fail(new Error(`local backend stopped (${c})`))); });
   await setNow('2026-10-16T12:30:00Z');
 });
 after(() => srv.kill());
@@ -135,9 +135,12 @@ test('monthly invoices: issued at the end of each cycle, emailed, idempotent', a
   assert.equal(inv.amount, 75000);
   assert.equal(inv.dueDate, '2026-11-22');
   assert.equal(inv.issueDate, '2026-11-15');
-  const m = (await outbox()).at(-1);
+  const sent = (await outbox()).slice(-2);
+  const m = sent[0];
   assert.equal(m.to, 'sam@example.com');
-  assert.equal(m.cc, 'hello@lavibachchis.com');
+  assert.equal(m.cc, '', 'the client gets their own email, no cc');
+  assert.equal(sent[1].to, 'hello@lavibachchis.com');
+  assert.equal(sent[1].subject, `Copy: ${m.subject}`);
   assert.match(m.subject, /Invoice LB-INV-2026-0001 from Lavi Bachchis, £750\.00 due 22 November 2026/);
   // client view of the invoice
   const full = await admin('admin.invoice.get', { id: inv.id });
@@ -240,19 +243,19 @@ test('test agreements use T numbers; manual invoice; void', async () => {
   assert.equal((await admin('admin.invoice.update', { id: m.invoice.id, op: 'paid' })).code, 'bad_request');
 });
 
-test('edge cases: formula-safe Sheet, 100% deposit, cancelled deposit, US consumer', async () => {
+test('edge cases: formula-safe register, 100% deposit, cancelled deposit, US consumer', async () => {
   await setNow('2027-05-03T10:00:00Z');
   const mk = async (terms) => { const r = await admin('admin.agreement.save', { terms, offer: true }); assert.ok(r.ok, r.error); const [id, token] = r.link.split('#')[1].split('.'); return { id, token, g: await call('agreement.get', { id, token }) }; };
   const sign = (x, clientType, client, extra = {}) => call('agreement.sign', { id: x.id, token: x.token, v: 1, rev: x.g.agreement.pending.rev, clientType, client, consents: { agree: true, esign: true, authority: clientType === 'business', ...extra }, signature: { method: 'type', name: client.name } });
 
-  // A name that looks like a formula is stored as text in the Sheet
+  // A name that looks like a formula is stored as text in the register columns (safe in a CSV export)
   const f = await mk({ type: 'project', fee: 100000, depositPercent: 100, items: [{ label: 'Logo', value: '1' }] });
   const s1 = await sign(f, 'business', { name: '=HYPERLINK("http://x")', role: 'Owner', company: '+Evil Co', email: 'x@example.com', address: '1 Road, Town' });
   assert.ok(s1.ok, s1.error);
-  const state = await (await fetch(`${BASE}/__test/state`)).json();
-  const tab = Object.values(state.sheets)[0].tabs.Agreements;
-  const row = tab.find((r) => r.includes(f.id));
-  assert.ok(row.includes("'=HYPERLINK(\"http://x\")") && row.includes("'+Evil Co"));
+  const [row] = await (await fetch(`${BASE}/__test/sql`, { method: 'POST', body: `select client, company, data->'versions'->0->'signed'->'client'->>'name' as name from agreements where id = '${f.id}'` })).json();
+  assert.equal(row.client, "'=HYPERLINK(\"http://x\")");
+  assert.equal(row.company, "'+Evil Co");
+  assert.equal(row.name, '=HYPERLINK("http://x")'); // the full record keeps exactly what was typed
   // 100% deposit: one invoice for the full fee, no £0 balance at the end
   await setNow('2027-06-03T08:00:00Z');
   await job();
@@ -281,4 +284,27 @@ test('edge cases: formula-safe Sheet, 100% deposit, cancelled deposit, US consum
   assert.match(t, /certified alternative dispute resolution/);
   assert.doesNotMatch(t, /sharing the cost equally/);
   assert.equal(su.agreement.signed.doc.annex.length, 1);
+});
+
+test('Supabase: signed PDFs in storage, activity log, nothing readable with the public key', async () => {
+  const sql = async (q) => (await fetch(`${BASE}/__test/sql`, { method: 'POST', body: q })).json();
+  const [a] = await sql("select id, data->'versions'->0->'signed'->>'pdfFileId' as pdf from agreements where ref = 'LB-A-2026-001'");
+  assert.match(a.pdf, /^sb:2026\/LB-A-2026-001 v1 - Example Studio Ltd - signed\.pdf$/);
+  // Re-sending downloads the stored PDF from Supabase Storage and attaches it
+  const before = (await outbox()).length;
+  const r = await admin('admin.agreement.resendSigned', { id: a.id, v: 1 });
+  assert.ok(r.ok, r.error);
+  const sent = (await outbox()).slice(before);
+  assert.equal(sent.length, 2);
+  const original = (await outbox()).find((m) => m.subject.includes('Signed: your agreement') && m.subject.includes('LB-A-2026-001') && m.attachments.length);
+  assert.ok(sent.every((m) => m.attachments.length === 1 && m.attachments[0].sha256 === original.attachments[0].sha256 && m.attachments[0].name === 'LB-A-2026-001 v1 - Example Studio Ltd - signed.pdf'));
+  const [log] = await sql("select count(*)::int as n, count(*) filter (where event = 'signed')::int as signed, count(*) filter (where event = 'error')::int as errors from activity_log");
+  assert.ok(log.n > 20 && log.signed >= 1, JSON.stringify(log));
+  assert.equal(log.errors, 0);
+  const [priv] = await sql(`select bool_or(has_table_privilege(r, 'public.' || t, 'select')) as any from unnest(array['anon','authenticated']) r, unnest(array['agreements','invoices','activity_log','settings','counters']) t`);
+  assert.equal(priv.any, false);
+  const [rls] = await sql("select bool_and(relrowsecurity) as on from pg_class where relname in ('agreements','invoices','activity_log','settings','counters') and relnamespace = 'public'::regnamespace");
+  assert.equal(rls.on, true);
+  const [settings] = await sql("select value->'business'->>'address' as address from settings where key = 'studio'");
+  assert.equal(settings.address, '1 Example Road\nLondon N1 1AA');
 });

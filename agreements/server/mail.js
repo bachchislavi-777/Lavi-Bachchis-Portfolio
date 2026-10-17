@@ -4,6 +4,7 @@ import { util, money, dates } from '../core/index.js';
 import { getSettings, ownerEmail, notifyEmail, siteUrl, studioLink } from './settings.js';
 import { agreementHtml } from '../../src/lib/agreements/render.js';
 import { log } from './store.js';
+import { today } from './env.js';
 
 const C = { forest: '#163A2E', forestD: '#0F2A21', ivory: '#F4ECDF', paper: '#FBF6EE', line: '#DDD0BA', terra: '#B4532F', muted: '#566A5F', ochre: '#DCA94C' };
 const e = util.esc;
@@ -27,13 +28,23 @@ ${button ? `<tr><td style="padding:16px 28px 8px 28px;"><a href="${e(button.href
 const p = (text) => `<p style="margin:0 0 14px 0;">${text}</p>`;
 const table = (rows) => `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:6px 0 16px 0;border-top:1px solid ${C.line};">${rows.map(([k, v]) => `<tr><td style="padding:9px 0;border-bottom:1px solid ${C.line};color:${C.muted};font-size:14px;">${e(k)}</td><td style="padding:9px 0;border-bottom:1px solid ${C.line};text-align:right;font-weight:bold;font-size:14px;">${e(v)}</td></tr>`).join('')}</table>`;
 
+// The client always gets an email of their own. Lavi's copy is sent as a separate email rather than a cc:
+// Google blocked every cc'd client email from the new Workspace account (bounce 5.7.1 "Message rejected",
+// 17 October 2026), while the same kind of email sent to one person at a time was delivered.
 function send({ to, cc, subject, html, text, attachments, ref }) {
   const b = getSettings().business;
-  const opts = { to, subject, htmlBody: html, body: text || subject, name: `${b.name} · ${b.trading.replace(`${b.name} `, '')}`, replyTo: notifyEmail() };
-  if (cc && cc !== to) opts.cc = cc;
-  if (attachments && attachments.length) opts.attachments = attachments;
-  MailApp.sendEmail(opts);
-  log(ref, 'email', `${subject} → ${to}${opts.cc ? ` (cc ${opts.cc})` : ''}`);
+  const base = { subject, htmlBody: html, body: text || subject, name: `${b.name} · ${b.trading.replace(`${b.name} `, '')}`, replyTo: notifyEmail() };
+  if (attachments && attachments.length) base.attachments = attachments;
+  MailApp.sendEmail({ ...base, to });
+  log(ref, 'email', `${subject} → ${to}`);
+  if (cc && cc.toLowerCase() !== String(to).toLowerCase()) {
+    try {
+      const copy = { ...base, to: cc, subject: `Copy: ${subject}` };
+      if (base.attachments) copy.attachments = base.attachments.map((a) => (a.copyBlob ? a.copyBlob() : a));
+      MailApp.sendEmail(copy);
+      log(ref, 'email', `Copy: ${subject} → ${cc}`);
+    } catch (e) { log(ref, 'error', `copy to ${cc}: ${e}`); } // the client's email already went; don't fail the action
+  }
 }
 
 const testTag = (test) => (test ? '[TEST] ' : '');
@@ -83,24 +94,41 @@ export function sendSigned(a, ver, pdfBlob, link) {
   });
 }
 
-export function sendInvoice(inv, link, { reminder = false } = {}) {
+/**
+ * An invoice email, or a payment reminder for it.
+ * stage: which automatic reminder (1 friendly, 2 second, 3 final); 0 or missing for a manual reminder.
+ * terms: the agreement terms in force, so the final reminder quotes what the agreement actually says.
+ */
+export function sendInvoice(inv, link, { reminder = false, stage = 0, final = false, terms = null } = {}) {
   const st = getSettings();
   const total = money.format(inv.amount, inv.currency);
   const due = dates.format(inv.dueDate, inv.region);
   const pay = paymentRows(inv.payment, inv.number);
-  const overdue = reminder && inv.dueDate < dates.londonDate(new Date());
+  const t = today();
+  const overdue = reminder && inv.dueDate < t;
+  const late = overdue ? dates.diffDays(inv.dueDate, t) : 0;
+  const label = !reminder ? '' : final ? 'Final reminder: ' : stage === 2 ? 'Second reminder: ' : 'Reminder: ';
+  // Quote the pause-work clause only if the agreement still has the standard wording (Lavi can edit or remove it).
+  const lateEdited = terms && terms.overrides && ['fees.late.business', 'fees.late.consumer'].some((k) => Object.prototype.hasOwnProperty.call(terms.overrides, k));
+  const pause = final && terms && terms.pauseAfterDays && !lateEdited ? p(`As set out in our agreement, if an invoice is more than ${e(String(terms.pauseAfterDays))} days overdue, I may pause work after telling you in writing. I’d much rather keep going, so if there’s a problem with this invoice or you need a little more time, just reply and let me know.`) : '';
+  const lead = !reminder
+    ? `Here is your invoice for ${e(inv.lines[0].text.replace(/\.$/, ''))}${inv.lines.length > 1 ? ' and more' : ''}.`
+    : !overdue ? `A friendly reminder that invoice ${e(inv.number)} for ${e(total)} is due on ${e(due)}. If you’ve already paid, thank you, and please ignore this.`
+    : stage >= 2 ? `Invoice ${e(inv.number)} for ${e(total)} was due on ${e(due)} and is now ${late} day${late === 1 ? '' : 's'} overdue. I haven’t been able to match a payment to it yet. If you’ve paid in the last few days, thank you, and please ignore this; otherwise I’d be grateful if you could pay it now.`
+    : `A friendly reminder that invoice ${e(inv.number)} for ${e(total)} was due on ${e(due)}. If you’ve already paid, thank you, and please ignore this.`;
   send({
     to: inv.billTo.billingEmail || inv.billTo.email,
     cc: st.invoices.copyMe ? notifyEmail() : '',
     ref: inv.agreementRef || inv.number,
-    subject: `${testTag(inv.test)}${reminder ? 'Reminder: ' : ''}Invoice ${inv.number} from ${st.business.name}, ${total} due ${due}`,
+    subject: `${testTag(inv.test)}${label}Invoice ${inv.number} from ${st.business.name}, ${total} ${overdue ? `was due ${due}` : `due ${due}`}`,
     html: layout({
-      preheader: `${total} due ${due}.`,
-      title: reminder ? (overdue ? `Invoice ${inv.number} is overdue` : `Reminder: invoice ${inv.number}`) : `Invoice ${inv.number}`,
+      preheader: overdue ? `${total} was due ${due}.` : `${total} due ${due}.`,
+      title: !reminder ? `Invoice ${inv.number}` : final ? `Final reminder: invoice ${inv.number}` : overdue ? `Invoice ${inv.number} is overdue` : `Reminder: invoice ${inv.number}`,
       body: p(`Hi ${e((inv.billTo.name || '').split(' ')[0] || 'there')},`)
-        + p(reminder ? `A friendly reminder that invoice ${e(inv.number)} for ${e(total)} ${overdue ? `was due on ${e(due)}` : `is due on ${e(due)}`}. If you’ve already paid, thank you, and please ignore this.` : `Here is your invoice for ${e(inv.lines[0].text.replace(/\.$/, ''))}${inv.lines.length > 1 ? ' and more' : ''}.`)
+        + p(lead)
         + table([['Invoice', inv.number], ['Amount due', total], ['Due by', due]])
-        + (pay ? `<p style="margin:0 0 6px 0;font-weight:bold;">How to pay</p>${pay}` : ''),
+        + (pay ? `<p style="margin:0 0 6px 0;font-weight:bold;">How to pay</p>${pay}` : '')
+        + pause,
       button: { href: link, label: 'View or download invoice' },
       footnote: 'Payment terms are set out in our agreement.',
     }),

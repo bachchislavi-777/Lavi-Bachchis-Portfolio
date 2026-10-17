@@ -94,9 +94,12 @@ export function expectedInvoices(agreement, { today, horizon, issued = [] } = {}
   if (issueDate && issueDate <= until) {
     const fee = amounts(last.terms).fee;
     // The deposit actually invoiced (a cancelled one counts as nothing); if it hasn't been issued yet,
-    // it is being issued in this same run, so count it.
+    // it is being issued in this same run, so count it. A deposit known only by its key (the backend passes
+    // amount 0 when the invoice row is missing) still counts as the deposit amount, so it is never billed twice.
     const dep = issued.find((i) => i.key === 'deposit');
-    const depositsBilled = dep ? (dep.status === 'void' ? 0 : dep.amount) : (a1.deposit > 0 && signDate <= until ? a1.deposit : 0);
+    const depositsBilled = dep
+      ? (dep.status === 'void' ? 0 : (Number(dep.amount) > 0 ? dep.amount : a1.deposit))
+      : (a1.deposit > 0 && signDate <= until ? a1.deposit : 0);
     const amount = Math.max(0, fee - depositsBilled);
     const cur = last.terms.currency;
     out.push({

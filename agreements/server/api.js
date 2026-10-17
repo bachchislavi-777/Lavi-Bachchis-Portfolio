@@ -2,7 +2,7 @@
 // Public actions (used by clients through their private link) are in PUBLIC. Studio actions are in ADMIN and
 // need a session, which only someone who can read Lavi's inbox can get (a 6-digit code emailed to her).
 /* global Utilities */
-import { terms as T, schedule as S, dates, money, util, PACKAGES } from '../core/index.js';
+import { terms as T, schedule as S, reminders as R, dates, money, util, PACKAGES } from '../core/index.js';
 import * as store from './store.js';
 import * as mail from './mail.js';
 import { getSettings, saveSettings, businessForDocs, agreementLink, invoiceLink, ownerEmail, notifyEmail } from './settings.js';
@@ -243,7 +243,8 @@ function requireAdmin(r) {
   const exp = sessions[key];
   const t = now().getTime();
   if (!exp || exp < t) throw new UserError('Please sign in again.', 'auth');
-  if (exp - t < 29 * 86400_000) { sessions[key] = t + 30 * 86400_000; setPropJson('SESSIONS', sessions); }
+  // Sessions last 30 days and are topped up about once a week, not on every request (each top-up is a write).
+  if (exp - t < 23 * 86400_000) { sessions[key] = t + 30 * 86400_000; setPropJson('SESSIONS', sessions); }
 }
 const maskEmail = (e) => String(e).replace(/^(.)(.*)(@.*)$/, (m, a, b, c) => `${a}${'•'.repeat(Math.min(6, b.length))}${c}`);
 
@@ -289,17 +290,23 @@ function validateSignature(s, name) {
 // Invoices
 // =========================================================================================================
 function clientInvoice(inv) {
-  const { token, events, voidReason, reminderSentAt, sentAt, viewedAt, ...rest } = inv;
+  const { token, events, voidReason, reminderSentAt, reminders, autoReminders, sentAt, viewedAt, ...rest } = inv;
   return rest;
 }
 
-/** Issue every invoice this agreement should have by today. Safe to run any number of times. */
-export function issueDue(a0) {
-  return locked(() => {
+/**
+ * Issue every invoice this agreement should have by today. Safe to run any number of times.
+ * Email problems go into `errors` (the daily job sends Lavi one alert for all of them); called on its own
+ * (signing, "issue balance now"), Lavi gets an alert straight away.
+ */
+export function issueDue(a0, errors) {
+  const problems = errors || [];
+  const numbers = locked(() => {
     const a = store.getAgreement(a0.id);
     // Keys are kept in the agreement record as well as the Sheet, so editing the Sheet can't cause double billing.
-    const issued = store.listInvoices().filter((i) => i.agreementId === a.id);
-    const keys = new Set([...(a.issuedKeys || []), ...issued.map((i) => i.key)]);
+    const issued = store.listInvoicesFor(a.id);
+    // Only scheduled invoices have a key (manual ones have none, and must not be counted here).
+    const keys = new Set([...(a.issuedKeys || []), ...issued.map((i) => i.key)].filter(Boolean));
     const known = [...issued, ...[...keys].filter((k) => !issued.some((i) => i.key === k)).map((k) => ({ key: k, agreementId: a.id, status: 'issued', amount: 0 }))];
     const out = [];
     for (const x of S.missingInvoices(a, known, today())) {
@@ -313,7 +320,17 @@ export function issueDue(a0) {
     }
     if (out.length || (a.issuedKeys || []).length !== keys.size) { a.issuedKeys = [...keys]; store.saveAgreement(a); }
     return out;
-  }).map((inv) => { maybeSend(inv); return inv.number; });
+  }).map((inv) => { maybeSend(inv, problems); return inv.number; });
+  if (!errors) alertOwner(problems, 'An invoice was issued but its email didn’t go out');
+  return numbers;
+}
+
+/** One alert email to Lavi for a list of problems (never throws: the alert must not break anything else). */
+function alertOwner(problems, what) {
+  if (!problems.length) return;
+  try {
+    mail.sendOwnerAlert('Agreements: something needs a look', `${what}:\n\n${problems.join('\n')}\n\nNothing was double-billed. Open the studio to check, or ask Claude.`);
+  } catch (e) { store.log('system', 'error', `owner alert: ${e}`); }
 }
 
 function createInvoice(a, x) {
@@ -338,19 +355,23 @@ function createInvoice(a, x) {
   return inv;
 }
 
-function maybeSend(inv) {
+function maybeSend(inv, errors = []) {
   if (!getSettings().invoices.autoSend) return;
   try {
     mail.sendInvoice(inv, invoiceLink(inv));
     locked(() => { const f = store.getInvoice(inv.id); f.sentAt = stamp(); store.saveInvoice(f); });
-  } catch (e) { store.log(inv.agreementRef, 'error', `sending ${inv.number}: ${e}`); }
+  } catch (e) {
+    store.log(inv.agreementRef, 'error', `sending ${inv.number}: ${e}`);
+    errors.push(`${inv.number}: issued but the email to the client may not have gone (${(e && e.message) || e}). Use “Resend” in the studio.`);
+  }
 }
 
 /**
  * Signed copies not emailed yet (the client closed the page before their browser saved the PDF):
  * after 10 minutes, email both sides with a link to the signed copy instead. Runs every hour.
  */
-export function sendPendingCopies() {
+export function sendPendingCopies(errors) {
+  const problems = errors || [];
   const sent = [];
   for (const row of store.listAgreements()) {
     if (!['signed', 'amending', 'ending'].includes(row.status)) continue;
@@ -364,8 +385,12 @@ export function sendPendingCopies() {
       return { a: f, v };
     });
     if (!claimed) continue;
-    try { mail.sendSigned(claimed.a, claimed.v, mail.serverCopy(claimed.a, claimed.v), agreementLink(claimed.a)); sent.push(claimed.a.ref); } catch (e) { store.log(claimed.a.ref, 'error', `signed copy email: ${e}`); }
+    try { mail.sendSigned(claimed.a, claimed.v, mail.serverCopy(claimed.a, claimed.v), agreementLink(claimed.a)); sent.push(claimed.a.ref); } catch (e) {
+      store.log(claimed.a.ref, 'error', `signed copy email: ${e}`);
+      problems.push(`${claimed.a.ref}: signed copy not emailed (${(e && e.message) || e}). Use “Resend signed copy” in the studio.`);
+    }
   }
+  if (!errors) alertOwner(problems, 'The hourly check for signed copies hit a problem');
   return sent;
 }
 
@@ -373,10 +398,12 @@ export function sendPendingCopies() {
 export function dailyJob() {
   const summary = { issued: [], ended: [], reminded: [], emailed: [], errors: [] };
   const t = today();
-  for (const row of store.listAgreements()) {
+  let rows = [];
+  try { rows = store.listAgreements(); } catch (e) { summary.errors.push(`Couldn’t read the agreements: ${e.message || e}`); }
+  for (const row of rows) {
     if (!['signed', 'amending', 'ending'].includes(row.status)) continue;
     try {
-      summary.issued.push(...issueDue({ id: row.id }));
+      summary.issued.push(...issueDue({ id: row.id }, summary.errors));
       locked(() => {
         const a = store.getAgreement(row.id);
         let changed = false;
@@ -385,19 +412,60 @@ export function dailyJob() {
       });
     } catch (e) { summary.errors.push(`${row.ref}: ${e.message || e}`); }
   }
-  summary.emailed = sendPendingCopies();
-  const rd = getSettings().invoices.reminderDays;
-  if (rd > 0) {
-    for (const row of store.listInvoices()) {
-      if (row.status !== 'issued' || dates.addDays(row.dueDate, rd) > t) continue;
-      const inv = store.getInvoice(row.id);
-      if (inv.reminderSentAt) continue;
-      try { mail.sendInvoice(inv, invoiceLink(inv), { reminder: true }); locked(() => { const f = store.getInvoice(inv.id); f.reminderSentAt = stamp(); store.saveInvoice(f); }); summary.reminded.push(inv.number); } catch (e) { summary.errors.push(`${inv.number}: ${e.message || e}`); }
-    }
-  }
-  if (summary.errors.length) mail.sendOwnerAlert('Agreements: something needs a look', `The daily invoice check hit a problem:\n\n${summary.errors.join('\n')}\n\nNothing was double-billed. Open the studio to check, or ask Claude.`);
+  try { summary.emailed = sendPendingCopies(summary.errors); } catch (e) { summary.errors.push(`Signed copies: ${e.message || e}`); }
+  try { summary.reminded = sendDueReminders(t, summary.errors); } catch (e) { summary.errors.push(`Payment reminders: ${e.message || e}`); }
+  alertOwner(summary.errors, 'The daily invoice check hit a problem');
   store.log('system', 'daily job', JSON.stringify(summary));
   return summary;
+}
+
+/**
+ * Automatic payment reminders for unpaid invoices: 1, 7 and 14 days after the due date (see core/reminders.js).
+ * Each invoice is claimed under the lock before its email goes, so two runs can never send the same reminder.
+ */
+function sendDueReminders(t, errors = []) {
+  const sent = [];
+  if (!getSettings().invoices.autoReminders) return sent;
+  const terms = {}; // agreement id -> terms in force, for the wording of the final reminder
+  for (const row of store.listInvoices()) {
+    if (row.status !== 'issued' || !row.dueDate || dates.addDays(row.dueDate, R.SCHEDULE[0]) > t) continue;
+    let claimed = null;
+    try {
+      claimed = locked(() => {
+        const f = store.getInvoice(row.id);
+        const stage = R.reminderDue(f, t);
+        if (!stage) return null;
+        f.autoReminders = stage;
+        f.reminderSentAt = stamp();
+        (f.reminders ||= []).push({ at: f.reminderSentAt, stage, auto: true });
+        store.saveInvoice(f);
+        return { inv: f, stage };
+      });
+      if (!claimed) continue;
+      const { inv, stage } = claimed;
+      if (inv.agreementId && !(inv.agreementId in terms)) { const a = store.getAgreement(inv.agreementId); const v = a && S.latestSigned(a); terms[inv.agreementId] = v ? v.terms : null; }
+      mail.sendInvoice(inv, invoiceLink(inv), { reminder: true, stage, final: stage === R.SCHEDULE.length, terms: terms[inv.agreementId] || null });
+      store.log(inv.agreementRef || inv.number, 'invoice reminder', `${inv.number}: reminder ${stage} of ${R.SCHEDULE.length}`);
+      sent.push(inv.number);
+    } catch (e) {
+      errors.push(`${row.number}: payment reminder not sent (${e.message || e}). It will be tried again tomorrow.`);
+      // The email didn't go (a failed copy to Lavi doesn't throw), so release the claim and try again tomorrow.
+      if (claimed) {
+        try {
+          locked(() => {
+            const f = store.getInvoice(row.id);
+            const at = claimed.inv.reminderSentAt;
+            f.reminders = (f.reminders || []).filter((x) => !(x.auto && x.at === at));
+            f.autoReminders = f.reminders.filter((x) => x.auto).reduce((m, x) => Math.max(m, Number(x.stage) || 0), 0);
+            const prev = f.reminders[f.reminders.length - 1];
+            f.reminderSentAt = prev ? prev.at : '';
+            store.saveInvoice(f);
+          });
+        } catch (e2) { store.log(row.agreementRef || row.number, 'error', `releasing reminder claim: ${e2}`); }
+      }
+    }
+  }
+  return sent;
 }
 
 // =========================================================================================================
@@ -453,8 +521,8 @@ function warningsFor(terms) {
   return w;
 }
 
-function adminAgreement(a) {
-  const issued = store.listInvoices().filter((i) => i.agreementId === a.id);
+function adminAgreement(a, invoices) {
+  const issued = invoices || store.listInvoicesFor(a.id);
   return {
     agreement: a, link: agreementLink(a), invoices: issued,
     upcoming: S.latestSigned(a) ? S.upcomingInvoices(a, issued, today(), 3) : [],
@@ -469,12 +537,15 @@ function nextCycleStart(a) {
 }
 
 const ADMIN = {
-  'admin.overview': () => ({
-    agreements: store.listAgreements().filter((x) => x.status !== 'deleted'),
-    invoices: store.listInvoices(),
-    settings: getSettings(), packages: PACKAGES, today: today(), owner: ownerEmail(),
-    wording: `${T.WORDING_VERSION} (${T.WORDING_DATE})`,
-  }),
+  'admin.overview': () => {
+    const { agreements, invoices } = store.overviewData(); // also loads the settings, in the same round trip
+    return {
+      agreements: agreements.filter((x) => x.status !== 'deleted'),
+      invoices,
+      settings: getSettings(), packages: PACKAGES, today: today(), owner: ownerEmail(),
+      wording: `${T.WORDING_VERSION} (${T.WORDING_DATE})`,
+    };
+  },
 
   'admin.signout': (r) => {
     locked(() => { const s = propJson('SESSIONS', {}); delete s[sha256(`session:${clean(r.session, 100)}`)]; setPropJson('SESSIONS', s); });
@@ -482,9 +553,9 @@ const ADMIN = {
   },
 
   'admin.agreement.get': (r) => {
-    const a = store.getAgreement(r.id);
+    const { agreement: a, invoices } = store.agreementWithInvoices(r.id);
     if (!a) throw new UserError('Not found.', 'not_found');
-    return adminAgreement(a);
+    return adminAgreement(a, invoices);
   },
 
   'admin.agreement.preview': (r) => {
@@ -594,7 +665,7 @@ const ADMIN = {
     const a = locked(() => {
       const a = store.getAgreement(r.id);
       if (!a || !a.ending) throw new UserError('This agreement isn’t ending.');
-      if (store.listInvoices().some((i) => i.agreementId === a.id && i.kind === 'final' && i.status !== 'void')) throw new UserError('The final invoice has already been issued. Void it first if you want to undo the ending.');
+      if (store.listInvoicesFor(a.id).some((i) => i.kind === 'final' && i.status !== 'void')) throw new UserError('The final invoice has already been issued. Void it first if you want to undo the ending.');
       delete a.ending;
       a.status = latest(a).status === 'signed' || latest(a).status === 'withdrawn' ? 'signed' : 'amending';
       event(a, 'ending undone');
@@ -652,7 +723,7 @@ const ADMIN = {
       if (op === 'paid') { if (f.status === 'void') throw new UserError('This invoice is void.'); f.status = 'paid'; f.paidOn = dates.isDate(r.date) ? r.date : today(); }
       else if (op === 'unpaid') { if (f.status !== 'paid') throw new UserError('Not marked as paid.'); f.status = 'issued'; f.paidOn = ''; }
       else if (op === 'void') { if (f.status === 'paid') throw new UserError('Mark it unpaid first.'); f.status = 'void'; f.voidReason = clean(r.reason, 300); }
-      else if (op === 'remind') f.reminderSentAt = stamp();
+      else if (op === 'remind') { f.reminderSentAt = stamp(); (f.reminders ||= []).push({ at: f.reminderSentAt, auto: false }); }
       else if (op === 'resend') f.sentAt = stamp();
       else throw new UserError('Unknown change.');
       store.log(f.agreementRef || f.number, `invoice ${op}`, f.number);

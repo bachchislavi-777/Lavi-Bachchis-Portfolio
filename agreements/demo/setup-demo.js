@@ -3,6 +3,7 @@ import { createBrowserGas } from './browser-gas.js';
 import { handle, dailyJob, sendPendingCopies } from '../server/api.js';
 import { setup } from '../server/setup.js';
 import { saveSettings } from '../server/settings.js';
+import { flushLog, resetCache } from '../server/store.js';
 import { dates } from '../core/index.js';
 
 const listeners = new Set();
@@ -13,7 +14,9 @@ const DAY = 86400000;
 const offset = () => Number(S.props.DEMO_OFFSET_DAYS || 0);
 globalThis.__lbNow = () => new Date(Date.now() + offset() * DAY);
 
-if (!S.props.SHEET_ID) {
+S.props.SUPABASE_URL = 'https://demo.supabase.local'; // the in-memory stand-in in browser-gas.js
+S.props.SUPABASE_SECRET_KEY = 'demo';
+if (!S.db.settings.studio) {
   setup();
   S.props.SITE_URL = 'https://lavibachchis.com';
   saveSettings({
@@ -28,7 +31,9 @@ globalThis.LB_DEMO = {
   base: '.',
   async call(req) {
     await new Promise((r) => setTimeout(r, 150));
+    resetCache();
     const out = clone(handle(clone(req)));
+    flushLog();
     gas.save();
     return out;
   },

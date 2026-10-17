@@ -19,7 +19,7 @@ class Blob {
   getDataAsString(charset) { return charset === 'ISO-8859-1' ? this.buf.toString('latin1') : this.buf.toString('utf8'); }
 }
 
-export function createGasContext({ dir, owner = 'bachchis.lavi@gmail.com' }) {
+export function createGasContext({ dir, owner = 'hello@lavibachchis.com' }) {
   mkdirSync(join(dir, 'outbox'), { recursive: true });
   const stateFile = join(dir, 'state.json');
   const S = existsSync(stateFile)

@@ -1,4 +1,4 @@
-Contact: mailto:bachchis.lavi@gmail.com
+Contact: mailto:hello@lavibachchis.com
 Expires: 2027-10-14T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://lavibachchis.com/.well-known/security.txt

@@ -24,7 +24,7 @@ export const WORDING_DATE = 'October 2026';
 export const BUSINESS_DEFAULTS = {
   name: 'Lavi Bachchis',
   trading: 'Lavi Bachchis Content & Creative',
-  email: CONTACT_EMAIL, // bachchis.lavi@gmail.com until Google Workspace (hello@lavibachchis.com) is ready
+  email: CONTACT_EMAIL,
   website: 'lavibachchis.com',
   address: '',
   privacyUrl: { uk: 'https://lavibachchis.com/uk/privacy/', us: 'https://lavibachchis.com/us/privacy/' },

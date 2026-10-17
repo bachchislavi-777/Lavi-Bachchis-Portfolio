@@ -21,7 +21,7 @@ class Blob2 {
   getAs(type) { const head = enc.encode('%PDF-1.4 converted from HTML\n'); const u = new Uint8Array(head.length + this.u8.length); u.set(head); u.set(this.u8, head.length); return new Blob2(u, type, this.name.replace(/\.html$/, '.pdf')); }
 }
 
-export function createBrowserGas({ storageKey = 'lb-demo-state', owner = 'bachchis.lavi@gmail.com', onMail = () => {} } = {}) {
+export function createBrowserGas({ storageKey = 'lb-demo-state', owner = 'hello@lavibachchis.com', onMail = () => {} } = {}) {
   let S = null;
   try { S = JSON.parse(localStorage.getItem(storageKey) || 'null'); } catch { S = null; }
   if (!S) S = { props: {}, sheets: {}, folders: {}, files: {}, triggers: [], seq: 0, mail: 0, outbox: [] };

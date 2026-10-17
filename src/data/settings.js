@@ -1,6 +1,6 @@
 // Site settings you may want to change. Keep the quotes and the semicolons.
 
-// Contact form (Web3Forms, free). Get a key at https://web3forms.com (enter bachchis.lavi@gmail.com),
+// Contact form (Web3Forms, free). Get a key at https://web3forms.com (enter hello@lavibachchis.com),
 // then paste it between the quotes, e.g. 'a1b2c3d4-....'. While this is empty, the contact page
 // shows email and phone only, with the note "Online form coming soon".
 export const PUBLIC_WEB3FORMS_KEY = '';

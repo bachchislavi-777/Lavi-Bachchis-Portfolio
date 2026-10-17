@@ -64,7 +64,7 @@ The About page shows a placeholder card ("Photo coming soon") until you add a ph
 
 Until it's switched on, the contact page shows your email and phone with the note "Online form coming soon". It never pretends to send anything.
 
-1. Go to **https://web3forms.com**, enter `bachchis.lavi@gmail.com` and create a free access key (250 messages a month). The key arrives by email.
+1. Go to **https://web3forms.com**, enter `hello@lavibachchis.com` and create a free access key (250 messages a month). The key arrives by email.
 2. Open **`src/data/settings.js`** and paste the key between the quotes: `export const PUBLIC_WEB3FORMS_KEY = 'your-key-here';`
 3. Commit and publish. The form appears on the Contact page. Messages go to your Gmail.
 4. Send yourself a test message once it's live.

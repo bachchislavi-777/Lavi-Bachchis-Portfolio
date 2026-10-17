@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "agreements:build": "node agreements/build.mjs",
     "agreements:local": "node agreements/build.mjs && node agreements/local/server.mjs",
-    "agreements:test": "node agreements/build.mjs && node --test --test-concurrency=1 agreements/tests/core.test.mjs agreements/tests/api.test.mjs",
+    "agreements:test": "node agreements/build.mjs && node --test --test-concurrency=1 agreements/tests/core.test.mjs agreements/tests/invoicing.test.mjs agreements/tests/api.test.mjs agreements/tests/reminders.test.mjs",
     "agreements:e2e": "node agreements/build.mjs && playwright test -c agreements/playwright.config.mjs",
     "agreements:demo": "node agreements/demo/build.mjs"
   },

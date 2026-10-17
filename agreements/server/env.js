@@ -1,6 +1,6 @@
 // Thin wrappers around Google Apps Script services. The local test harness (agreements/local) provides the
 // same globals, so every line of the backend runs in tests exactly as it will in Google.
-/* global Utilities, PropertiesService, LockService, SpreadsheetApp */
+/* global Utilities, PropertiesService, LockService */
 import { dates } from '../core/index.js';
 
 export const now = () => (globalThis.__lbNow ? globalThis.__lbNow() : new Date());
@@ -41,10 +41,7 @@ export const setPropJson = (k, v) => P().setProperty(k, JSON.stringify(v));
 export function locked(fn) {
   const l = LockService.getScriptLock();
   l.waitLock(30000);
-  try { return fn(); } finally {
-    try { if (typeof SpreadsheetApp !== 'undefined' && SpreadsheetApp.flush) SpreadsheetApp.flush(); } catch (e) { /* nothing pending */ }
-    l.releaseLock();
-  }
+  try { return fn(); } finally { l.releaseLock(); }
 }
 
 export class UserError extends Error {

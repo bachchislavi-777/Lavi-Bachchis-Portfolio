@@ -1,7 +1,8 @@
-// Lavi's business and payment details. Stored in the Apps Script project's private settings (Script
-// Properties), never in the website repository, which is public.
+// Lavi's business and payment details. Stored privately in her Supabase project (table "settings"), never in
+// the website repository, which is public.
 import { terms as T } from '../core/index.js';
-import { propJson, setPropJson, prop } from './env.js';
+import { prop } from './env.js';
+import { getSettingsRaw, saveSettingsRaw } from './store.js';
 
 export const SETTINGS_DEFAULTS = {
   business: {
@@ -27,7 +28,7 @@ export const SETTINGS_DEFAULTS = {
   invoices: {
     autoSend: true,         // email invoices to clients as soon as they are issued
     copyMe: true,           // copy Lavi on every invoice email
-    reminderDays: 0,        // 0 = no automatic reminders; e.g. 3 = one reminder 3 days after the due date
+    autoReminders: true,    // chase unpaid invoices automatically: 1, 7 and 14 days after the due date
   },
 };
 
@@ -38,7 +39,7 @@ const merge = (a, b) => {
 };
 
 export function getSettings() {
-  return merge(SETTINGS_DEFAULTS, propJson('SETTINGS', {}));
+  return merge(SETTINGS_DEFAULTS, getSettingsRaw() || {});
 }
 export function saveSettings(next) {
   const cur = getSettings();
@@ -49,8 +50,8 @@ export function saveSettings(next) {
   out.business.vatRegistered = !!out.business.vatRegistered;
   out.invoices.autoSend = !!out.invoices.autoSend;
   out.invoices.copyMe = !!out.invoices.copyMe;
-  out.invoices.reminderDays = Math.max(0, Math.min(60, Number(out.invoices.reminderDays) || 0));
-  setPropJson('SETTINGS', out);
+  out.invoices.autoReminders = !!out.invoices.autoReminders;
+  saveSettingsRaw(out);
   return out;
 }
 

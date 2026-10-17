@@ -1,32 +1,23 @@
-// One-time setup in Lavi's Google account. Safe to run again: it only creates what is missing.
-/* global DriveApp, SpreadsheetApp, ScriptApp, Session */
-import { prop, setProp } from './env.js';
-import { COLUMNS } from './store.js';
+// One-time setup in Lavi's Google account. Safe to run again: it only does what is missing.
+// Before running it, add two Script Properties (Project Settings → Script properties):
+//   SUPABASE_URL         e.g. https://xysgfgkgndpgcctrnrla.supabase.co
+//   SUPABASE_SECRET_KEY  the project's secret key (Supabase → Project Settings → API Keys)
+/* global ScriptApp, Session */
+import { prop, setProp, propJson } from './env.js';
+import { connected } from './supabase.js';
+import { checkConnection, getSettingsRaw, saveSettingsRaw, flushLog, log } from './store.js';
 
 export function setup() {
   const done = [];
-  let root;
-  if (!prop('FOLDER_ID')) {
-    root = DriveApp.createFolder('LB Agreements');
-    setProp('FOLDER_ID', root.getId());
-    setProp('DATA_FOLDER_ID', root.createFolder('data (do not edit)').getId());
-    setProp('SIGNED_FOLDER_ID', root.createFolder('Signed agreements').getId());
-    done.push('Created the "LB Agreements" folder in Google Drive');
-  } else root = DriveApp.getFolderById(prop('FOLDER_ID'));
+  if (!connected()) throw new Error('First add SUPABASE_URL and SUPABASE_SECRET_KEY under Project Settings → Script properties, then run setup again.');
+  checkConnection();
+  done.push('Connected to Supabase: records are stored there (tables agreements, invoices, activity_log, settings; bucket signed-agreements)');
 
-  if (!prop('SHEET_ID')) {
-    const ss = SpreadsheetApp.create('LB Agreements & Invoices');
-    setProp('SHEET_ID', ss.getId());
-    try { ss.setSpreadsheetTimeZone('Europe/London'); } catch (e) { /* uses the account default */ }
-    try { DriveApp.getFileById(ss.getId()).moveTo(root); } catch (e) { /* stays in My Drive */ }
-    for (const [name, head] of Object.entries(COLUMNS)) {
-      const sh = ss.insertSheet(name);
-      sh.getRange(1, 1, 1, head.length).setValues([head]).setFontWeight('bold').setBackground('#163A2E').setFontColor('#F4ECDF');
-      sh.setFrozenRows(1);
-    }
-    const first = ss.getSheetByName('Sheet1');
-    if (first) ss.deleteSheet(first);
-    done.push('Created the "LB Agreements & Invoices" register (Google Sheet)');
+  // Settings saved in the earlier Google-only setup move across once.
+  if (!getSettingsRaw()) {
+    const old = propJson('SETTINGS', null);
+    saveSettingsRaw(old || {});
+    done.push(old ? 'Copied your studio Settings to Supabase' : 'Created your studio Settings in Supabase (fill them in from the studio)');
   }
 
   if (!prop('OWNER_EMAIL')) {
@@ -39,5 +30,7 @@ export function setup() {
   ScriptApp.newTrigger('runDailyJob').timeBased().everyDays(1).atHour(8).inTimezone('Europe/London').create();
   ScriptApp.newTrigger('runHourlyJob').timeBased().everyHours(1).create();
   done.push('Daily invoice check scheduled for 8 to 9am London time, plus an hourly check for unsent signed copies');
+  log('system', 'setup', done.join(' | '));
+  flushLog();
   return done;
 }

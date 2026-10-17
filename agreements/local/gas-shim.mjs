@@ -99,6 +99,23 @@ export function createGasContext({ dir, owner = 'hello@lavibachchis.com' }) {
     getFileById: (i) => { if (!S.files[i]) throw new Error(`No file ${i}`); return fileApi(i); },
   };
 
+  // Minimal MIME reader for the messages agreements/server/gmail.js builds (base64 parts, encoded words).
+  const unword = (v) => String(v || '').replace(/\?=\s+=\?UTF-8\?B\?/g, '?==?UTF-8?B?').replace(/=\?UTF-8\?B\?([^?]*)\?=/g, (m, x) => Buffer.from(x, 'base64').toString('utf8'));
+  function gmailSend(raw, o) {
+    if (!o.headers || !/^Bearer .+/.test(o.headers.Authorization || '')) return { getResponseCode: () => 401, getContentText: () => '{"error":"no token"}' };
+    const msg = Buffer.from(String(raw).replace(/-/g, '+').replace(/_/g, '/'), 'base64').toString('utf8');
+    const head = msg.split('\r\n\r\n')[0].replace(/\r\n[ \t]+/g, ' '); // unfold long headers
+    const h = (name) => { const m = new RegExp(`^${name}: (.*)$`, 'm').exec(head); return m ? m[1] : ''; };
+    const parts = msg.split(/\r\n--lb-[a-z]+-[0-9a-f]+(?:--)?\r\n/).slice(1);
+    const part = (re) => parts.find((x) => re.test(x));
+    const bodyOf = (x) => Buffer.from(x.split('\r\n\r\n').slice(1).join('').replace(/\s+/g, ''), 'base64');
+    const html = part(/^Content-Type: text\/html/m);
+    const atts = parts.filter((x) => /Content-Disposition: attachment/.test(x)).map((x) => new Blob(bodyOf(x), /^Content-Type: ([^;]+)/m.exec(x)[1], unword(/filename="([^"]*)"/.exec(x.replace(/\r\n[ \t]+/g, ' '))[1])));
+    const from = h('From');
+    MailApp.sendEmail({ to: h('To'), replyTo: h('Reply-To'), name: unword(from.replace(/\s*<[^>]*>$/, '')), subject: unword(h('Subject')), htmlBody: html ? bodyOf(html).toString('utf8') : '', attachments: atts, via: 'gmail', from: (/<([^>]+)>/.exec(from) || [])[1] });
+    return { getResponseCode: () => 200, getContentText: () => JSON.stringify({ id: `gm-${S.mail}` }) };
+  }
+
   const MailApp = {
     sendEmail: (o) => {
       const n = String(++S.mail).padStart(4, '0');
@@ -107,7 +124,7 @@ export function createGasContext({ dir, owner = 'hello@lavibachchis.com' }) {
         writeFileSync(join(dir, 'outbox', fname), b.buf);
         return { name: b.name, type: b.type, size: b.buf.length, file: fname, sha256: createHash('sha256').update(b.buf).digest('hex') };
       });
-      const rec = { n: Number(n), at: new Date().toISOString(), to: o.to, cc: o.cc || '', replyTo: o.replyTo, name: o.name, subject: o.subject, attachments: atts, html: `${n}.html` };
+      const rec = { n: Number(n), at: new Date().toISOString(), to: o.to, cc: o.cc || '', replyTo: o.replyTo, name: o.name, subject: o.subject, attachments: atts, html: `${n}.html`, via: o.via || 'mailapp', from: o.from || '' };
       writeFileSync(join(dir, 'outbox', `${n}.html`), o.htmlBody || '');
       writeFileSync(join(dir, 'outbox', `${n}.json`), JSON.stringify(rec, null, 2));
       (S.outbox ||= []).push(rec);
@@ -117,6 +134,8 @@ export function createGasContext({ dir, owner = 'hello@lavibachchis.com' }) {
   // UrlFetchApp is synchronous in Apps Script, so the stand-in uses curl (synchronously) to make the request.
   const UrlFetchApp = {
     fetch: (url, o = {}) => {
+      // The Gmail API ("send from Lavi's mailbox"): decode the MIME message and put it in the same outbox.
+      if (String(url).startsWith('https://gmail.googleapis.com/gmail/v1/users/me/messages/send')) return gmailSend(JSON.parse(o.payload).raw, o);
       // Like Apps Script: characters that must be URL-encoded are refused ("Exception: Invalid argument").
       if (/[<>"{}|\\^`\s]/.test(url)) throw new Error(`Invalid argument: ${url}`);
       const tmp = join(dir, `.http-${randomUUID()}`);
@@ -175,6 +194,7 @@ export function createGasContext({ dir, owner = 'hello@lavibachchis.com' }) {
       getProjectTriggers: () => S.triggers.map((t, i) => ({ getHandlerFunction: () => t.fn, _i: i })),
       deleteTrigger: (t) => { S.triggers.splice(t._i, 1); },
       newTrigger: triggerBuilder,
+      getOAuthToken: () => 'local-test-token',
     },
     Session: { getEffectiveUser: () => ({ getEmail: () => owner }) },
     Logger: { log: () => {} },

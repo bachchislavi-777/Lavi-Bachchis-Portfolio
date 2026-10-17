@@ -5,6 +5,7 @@ import { getSettings, ownerEmail, notifyEmail, siteUrl, studioLink } from './set
 import { agreementHtml } from '../../src/lib/agreements/render.js';
 import { log } from './store.js';
 import { today } from './env.js';
+import { sendViaGmail } from './gmail.js';
 
 const C = { forest: '#163A2E', forestD: '#0F2A21', ivory: '#F4ECDF', paper: '#FBF6EE', line: '#DDD0BA', terra: '#B4532F', muted: '#566A5F', ochre: '#DCA94C' };
 const e = util.esc;
@@ -28,20 +29,28 @@ ${button ? `<tr><td style="padding:16px 28px 8px 28px;"><a href="${e(button.href
 const p = (text) => `<p style="margin:0 0 14px 0;">${text}</p>`;
 const table = (rows) => `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:6px 0 16px 0;border-top:1px solid ${C.line};">${rows.map(([k, v]) => `<tr><td style="padding:9px 0;border-bottom:1px solid ${C.line};color:${C.muted};font-size:14px;">${e(k)}</td><td style="padding:9px 0;border-bottom:1px solid ${C.line};text-align:right;font-weight:bold;font-size:14px;">${e(v)}</td></tr>`).join('')}</table>`;
 
-// The client always gets an email of their own. Lavi's copy is sent as a separate email rather than a cc:
-// Google blocked every cc'd client email from the new Workspace account (bounce 5.7.1 "Message rejected",
-// 17 October 2026), while the same kind of email sent to one person at a time was delivered.
+// The client always gets an email of their own; Lavi's copy is a separate email ("Copy: …"), never a cc.
+// Emails go out through Lavi's own Gmail mailbox (see gmail.js): Google rejected the same emails when they
+// were sent through Apps Script's separate mail service. That service is kept only as a fallback.
+function deliver(o) {
+  try { sendViaGmail({ to: o.to, fromName: o.name, replyTo: o.replyTo, subject: o.subject, text: o.body, html: o.htmlBody, attachments: o.attachments || [] }); return 'gmail'; }
+  catch (e) {
+    log('system', 'error', `Gmail send to ${o.to} failed, used the fallback: ${e}`);
+    MailApp.sendEmail(o);
+    return 'mailapp';
+  }
+}
 function send({ to, cc, subject, html, text, attachments, ref }) {
   const b = getSettings().business;
   const base = { subject, htmlBody: html, body: text || subject, name: `${b.name} · ${b.trading.replace(`${b.name} `, '')}`, replyTo: notifyEmail() };
   if (attachments && attachments.length) base.attachments = attachments;
-  MailApp.sendEmail({ ...base, to });
-  log(ref, 'email', `${subject} → ${to}`);
+  const via = deliver({ ...base, to });
+  log(ref, 'email', `${subject} → ${to}${via === 'gmail' ? '' : ' (fallback)'}`);
   if (cc && cc.toLowerCase() !== String(to).toLowerCase()) {
     try {
       const copy = { ...base, to: cc, subject: `Copy: ${subject}` };
       if (base.attachments) copy.attachments = base.attachments.map((a) => (a.copyBlob ? a.copyBlob() : a));
-      MailApp.sendEmail(copy);
+      deliver(copy);
       log(ref, 'email', `Copy: ${subject} → ${cc}`);
     } catch (e) { log(ref, 'error', `copy to ${cc}: ${e}`); } // the client's email already went; don't fail the action
   }

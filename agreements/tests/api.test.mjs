@@ -140,6 +140,10 @@ test('monthly invoices: issued at the end of each cycle, emailed, idempotent', a
   assert.equal(m.to, 'sam@example.com');
   assert.equal(m.cc, '', 'the client gets their own email, no cc');
   assert.equal(sent[1].to, 'hello@lavibachchis.com');
+  assert.equal(m.via, 'gmail', 'client emails go out through the Gmail mailbox, not MailApp');
+  assert.equal(sent[1].via, 'gmail');
+  assert.match(m.name, /Lavi Bachchis · Content & Creative/, 'sender name with non-ASCII characters survives encoding');
+  assert.match(m.subject, /£750\.00/, 'subject with £ survives encoding');
   assert.equal(sent[1].subject, `Copy: ${m.subject}`);
   assert.match(m.subject, /Invoice LB-INV-2026-0001 from Lavi Bachchis, £750\.00 due 22 November 2026/);
   // client view of the invoice

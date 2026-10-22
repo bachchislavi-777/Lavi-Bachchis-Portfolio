@@ -5,7 +5,10 @@
 //   1. a region they picked before with the UK | US switcher (localStorage 'lb-region'), else
 //   2. US if their time zone is in the Americas (or their browser language is en-US), else UK.
 // UK-only pages always go to /uk/. The canonical points at the UK version, so search engines treat these
-// addresses as duplicates of it and pass their signals on. GitHub Pages can't redirect by IP on the server,
+// addresses as duplicates of it and pass their signals on. Search engine crawlers are always sent to that same
+// canonical (UK) page: Googlebot's browser reports a US time zone, and sending it to /us/ while the canonical
+// said /uk/ made Google treat /us/ as a copy of lavibachchis.com/ and leave it out of search (Oct 2026).
+// These pages carry no hreflang tags: they are not part of the UK/US page set, only doorways to it. GitHub Pages can't redirect by IP on the server,
 // which is why this runs in the browser.
 import { getCollection } from 'astro:content';
 import { ALL } from '../data/brands.js';
@@ -29,7 +32,9 @@ const site = Astro.site ?? new URL('https://lavibachchis.com');
 const targets = Object.fromEntries(regions.map((r) => [r, url(path, { region: r })]));
 const canonical = absUrl(path, site, { region: regions[0] });
 const script = `(function(){var t=${JSON.stringify(targets)},r;
-try{r=localStorage.getItem('lb-region')}catch(e){}
+var bot=/bot|crawl|spider|slurp|mediapartners|lighthouse|facebookexternalhit|preview/i.test(navigator.userAgent||'');
+if(bot)r=${JSON.stringify(regions[0])};
+else try{r=localStorage.getItem('lb-region')}catch(e){}
 if(!t[r]){var z='',l=(navigator.language||'').toLowerCase();try{z=Intl.DateTimeFormat().resolvedOptions().timeZone||''}catch(e){}
 r=/^(America|US|Canada)\\//.test(z)||z==='Pacific/Honolulu'||(!z&&l==='en-us')?'us':'uk';}
 if(!t[r])r=${JSON.stringify(regions[0])};
@@ -42,8 +47,6 @@ location.replace(t[r]+location.search+location.hash);})();`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Lavi Bachchis | Content & Creative</title>
     <link rel="canonical" href={canonical} />
-    {regions.length > 1 && regions.map((r) => <link rel="alternate" hreflang={REGION_META[r].lang} href={absUrl(path, site, { region: r })} />)}
-    {regions.length > 1 && <link rel="alternate" hreflang="x-default" href={canonical} />}
     <script is:inline set:html={script} />
     <noscript><meta http-equiv="refresh" content={`0; url=${targets[regions[0]]}`} /></noscript>
     <style>body{font-family:system-ui,sans-serif;background:#163A2E;color:#FAF5E9;display:grid;place-items:center;min-height:100vh;margin:0}a{color:#E9B949;margin:0 .5em}</style>

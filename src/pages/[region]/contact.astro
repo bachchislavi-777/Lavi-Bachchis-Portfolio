@@ -6,11 +6,15 @@ setRegion(Astro.params.region);
 const copy = getCopy();
 export const getStaticPaths = () => REGIONS.map((region) => ({ params: { region } }));
 import { url } from '../../lib/url.js';
-import { PUBLIC_WEB3FORMS_KEY } from '../../data/settings.js';
+import { PUBLIC_WEB3FORMS_KEY, PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_KEY } from '../../data/settings.js';
 const c = copy.contact;
 const s = copy.site;
 const L = c.labels;
-const formOn = Boolean(PUBLIC_WEB3FORMS_KEY && PUBLIC_WEB3FORMS_KEY.trim());
+const w3Key = (PUBLIC_WEB3FORMS_KEY || '').trim();
+const sbUrl = (PUBLIC_SUPABASE_URL || '').trim().replace(/\/+$/, '');
+const sbKey = (PUBLIC_SUPABASE_KEY || '').trim();
+const formOn = Boolean(w3Key || (sbUrl && sbKey));
+const region = Astro.params.region;
 const contactPage = {
   '@type': 'ContactPage',
   name: copy.seo.contact.title.replace(/ \| Lavi Bachchis$/, ''),
@@ -49,16 +53,18 @@ const contactPage = {
       </div>
 
       {formOn ? (
-        <form class="formcard" id="enquiry" action="https://api.web3forms.com/submit" method="POST" novalidate data-key={PUBLIC_WEB3FORMS_KEY} data-sent={localise('Thank you, your message has been sent. I reply within one working day.')}>
+        <form class="formcard" id="enquiry" action="https://api.web3forms.com/submit" method="POST" novalidate data-w3={w3Key ? '1' : ''} data-sb-url={sbKey ? sbUrl : ''} data-sb-key={sbKey} data-region={region} data-sent={localise('Thank you, your message has been sent. I reply within one working day.')}>
           <h2>Send a message</h2>
-          <input type="hidden" name="access_key" value={PUBLIC_WEB3FORMS_KEY} />
+          {w3Key && <input type="hidden" name="access_key" value={w3Key} />}
           <input type="hidden" name="subject" value="New enquiry from your website" />
           <input type="hidden" name="from_name" value="Lavi Bachchis website" />
           <div class="hp" aria-hidden="true"><label for="f-botcheck">Leave this empty</label><input id="f-botcheck" type="checkbox" name="botcheck" tabindex="-1" /></div>
-          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
-          <div class="field"><label for="f-email">Your email</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
-          <div class="field"><label for="f-biz">Business name and website</label><input id="f-biz" name="business" type="text" autocomplete="organization" /></div>
-          <div class="field"><label for="f-msg">Your message</label><textarea id="f-msg" name="message" required></textarea></div>
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required /></div>
+          <div class="field"><label for="f-email">Your email</label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="254" required /></div>
+          <div class="field"><label for="f-phone">Phone number (optional)</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" /></div>
+          <div class="field"><label for="f-country">Country / location</label><input id="f-country" name="country" type="text" autocomplete="country-name" maxlength="120" required /></div>
+          <div class="field"><label for="f-biz">Business name and website</label><input id="f-biz" name="business" type="text" autocomplete="organization" maxlength="300" /></div>
+          <div class="field"><label for="f-msg">Your message</label><textarea id="f-msg" name="message" maxlength="5000" required></textarea></div>
           <button class="btn" type="submit" style="justify-self:start">Send message</button>
           <p class="form-status" role="status" aria-live="polite"></p>
           <p class="form-note">{c.formNote} See the <a href={url('/privacy/')}>privacy note</a>.</p>
@@ -75,44 +81,65 @@ const contactPage = {
 </Layout>
 
 <script>
-  // Web3Forms submit. Only says "sent" when the API confirms success.
+  // Contact form: saves each enquiry in Supabase (insert-only) and emails it via Web3Forms.
+  // Only says "sent" when at least one of them confirms success; never claims success otherwise.
   const form = document.querySelector<HTMLFormElement>('form#enquiry');
   if (form) {
     const status = form.querySelector<HTMLElement>('.form-status')!;
     const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const { w3, sbUrl, sbKey, region } = form.dataset;
+
+    const saveToSupabase = async (d: Record<string, string>) => {
+      if (!sbUrl || !sbKey) return false;
+      const res = await fetch(`${sbUrl}/rest/v1/contact_enquiries`, {
+        method: 'POST',
+        headers: { apikey: sbKey, Authorization: `Bearer ${sbKey}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({
+          region, name: d.name, email: d.email, phone: d.phone || null, country: d.country, business: d.business || null,
+          message: d.message, page: location.pathname.slice(0, 200),
+        }),
+      });
+      return res.ok;
+    };
+    const emailViaWeb3Forms = async (d: Record<string, string>) => {
+      if (!w3) return false;
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(d),
+      });
+      const data = await res.json().catch(() => ({}));
+      return res.ok && data.success === true;
+    };
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       status.className = 'form-status';
       if (!form.checkValidity()) {
         status.classList.add('err');
-        status.textContent = 'Please add your name, a valid email address and a message.';
+        status.textContent = 'Please add your name, a valid email address, your country or location and a message.';
         form.querySelector<HTMLElement>(':invalid')?.focus();
         return;
       }
+      const d = Object.fromEntries(new FormData(form)) as Record<string, string>;
+      // Spam trap: real people never tick the hidden box. Pretend success, send nothing.
+      if (d.botcheck) { status.classList.add('ok'); status.textContent = form.dataset.sent || 'Thank you.'; form.reset(); return; }
+      for (const k of ['name', 'email', 'phone', 'country', 'business', 'message']) d[k] = (d[k] || '').trim();
       btn.disabled = true;
       const label = btn.textContent;
       btn.textContent = 'Sending…';
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(new FormData(form))),
-        });
-        const data = await res.json().catch(() => ({}));
-        if (res.ok && data.success === true) {
-          status.classList.add('ok');
-          status.textContent = form.dataset.sent || 'Thank you, your message has been sent.';
-          form.reset();
-        } else {
-          throw new Error(data.message || 'Request failed');
-        }
-      } catch {
+      const results = await Promise.allSettled([saveToSupabase(d), emailViaWeb3Forms(d)]);
+      const ok = results.some((r) => r.status === 'fulfilled' && r.value === true);
+      if (ok) {
+        status.classList.add('ok');
+        status.textContent = form.dataset.sent || 'Thank you, your message has been sent.';
+        form.reset();
+      } else {
         status.classList.add('err');
         status.textContent = 'Sorry, your message could not be sent. Please email hello@lavibachchis.com instead.';
-      } finally {
-        btn.disabled = false;
-        btn.textContent = label;
       }
+      btn.disabled = false;
+      btn.textContent = label;
     });
   }
 </script>

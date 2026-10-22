@@ -3,7 +3,7 @@
 // Contact form (Web3Forms, free). Get a key at https://web3forms.com (enter hello@lavibachchis.com),
 // then paste it between the quotes, e.g. 'a1b2c3d4-....'. While this is empty, the contact page
 // shows email and phone only, with the note "Online form coming soon".
-export const PUBLIC_WEB3FORMS_KEY = '';
+export const PUBLIC_WEB3FORMS_KEY = 'af33ae85-65a1-4fc5-aadb-e3d8f8c3e227';
 
 // Contact form records (Supabase). Every enquiry is also saved in Supabase → Table Editor → contact_enquiries.
 // The publishable key is safe to be public: the database only lets it ADD enquiries, never read them.

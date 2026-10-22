@@ -61,6 +61,8 @@ const contactPage = {
           <div class="hp" aria-hidden="true"><label for="f-botcheck">Leave this empty</label><input id="f-botcheck" type="checkbox" name="botcheck" tabindex="-1" /></div>
           <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required /></div>
           <div class="field"><label for="f-email">Your email</label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="254" required /></div>
+          <div class="field"><label for="f-phone">Phone number (optional)</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40" /></div>
+          <div class="field"><label for="f-country">Country / location</label><input id="f-country" name="country" type="text" autocomplete="country-name" maxlength="120" required /></div>
           <div class="field"><label for="f-biz">Business name and website</label><input id="f-biz" name="business" type="text" autocomplete="organization" maxlength="300" /></div>
           <div class="field"><label for="f-msg">Your message</label><textarea id="f-msg" name="message" maxlength="5000" required></textarea></div>
           <button class="btn" type="submit" style="justify-self:start">Send message</button>
@@ -93,7 +95,7 @@ const contactPage = {
         method: 'POST',
         headers: { apikey: sbKey, Authorization: `Bearer ${sbKey}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
         body: JSON.stringify({
-          region, name: d.name, email: d.email, business: d.business || null,
+          region, name: d.name, email: d.email, phone: d.phone || null, country: d.country, business: d.business || null,
           message: d.message, page: location.pathname.slice(0, 200),
         }),
       });
@@ -115,14 +117,14 @@ const contactPage = {
       status.className = 'form-status';
       if (!form.checkValidity()) {
         status.classList.add('err');
-        status.textContent = 'Please add your name, a valid email address and a message.';
+        status.textContent = 'Please add your name, a valid email address, your country or location and a message.';
         form.querySelector<HTMLElement>(':invalid')?.focus();
         return;
       }
       const d = Object.fromEntries(new FormData(form)) as Record<string, string>;
       // Spam trap: real people never tick the hidden box. Pretend success, send nothing.
       if (d.botcheck) { status.classList.add('ok'); status.textContent = form.dataset.sent || 'Thank you.'; form.reset(); return; }
-      for (const k of ['name', 'email', 'business', 'message']) d[k] = (d[k] || '').trim();
+      for (const k of ['name', 'email', 'phone', 'country', 'business', 'message']) d[k] = (d[k] || '').trim();
       btn.disabled = true;
       const label = btn.textContent;
       btn.textContent = 'Sending…';

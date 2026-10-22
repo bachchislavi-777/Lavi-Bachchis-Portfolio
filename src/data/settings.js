@@ -5,6 +5,12 @@
 // shows email and phone only, with the note "Online form coming soon".
 export const PUBLIC_WEB3FORMS_KEY = '';
 
+// Contact form records (Supabase). Every enquiry is also saved in Supabase → Table Editor → contact_enquiries.
+// The publishable key is safe to be public: the database only lets it ADD enquiries, never read them.
+// The form switches on when either the Web3Forms key or both Supabase values are filled in.
+export const PUBLIC_SUPABASE_URL = 'https://xysgfgkgndpgcctrnrla.supabase.co';
+export const PUBLIC_SUPABASE_KEY = 'sb_publishable_bX947SOMRliTEQJO5T4J6g_Q_3ALwFy';
+
 // About-page photo. Upload your photo to public/images/ (e.g. lavi.jpg, ideally 1080×1350 portrait),
 // then write its file name here, e.g. 'images/lavi.jpg'. While this is empty, a placeholder card is shown.
 export const ABOUT_PHOTO = 'images/lavi.jpg';

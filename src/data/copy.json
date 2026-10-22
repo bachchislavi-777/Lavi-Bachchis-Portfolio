@@ -4,8 +4,6 @@
     "role": "Content & Creative",
     "tagline": "Social media, newsletters and blogs, designed and written for you.",
     "email": "hello@lavibachchis.com",
-    "phoneDisplay": "+44 7438 216452",
-    "phoneHref": "+447438216452",
     "whatsapp": "https://wa.me/447438216452",
     "linkedin": "https://www.linkedin.com/in/lavi-bachchis-63a758166/",
     "linkedinDisplay": "linkedin.com/in/lavi-bachchis-63a758166",
@@ -737,27 +735,20 @@
     "h1Em": "first month of content.",
     "intro": "Tell me about your brand and the channels you want to focus on. I work with product and service businesses across the UK and US.",
     "promise": "I reply within one working day to book a short call. You get your package confirmed, or a fixed quote for a custom project, within two working days of that call.",
-    "whatToSendTitle": "Helpful to include",
-    "whatToSend": [
-      "Your business name and website",
-      "What you sell, and who buys it",
-      "The channels you want covered",
-      "Roughly when you'd like to start",
-      "A few examples of content you like"
-    ],
-    "formNote": "Your details are only used to reply to your enquiry. Prefer email? Write to hello@lavibachchis.com.",
+    "formNote": "Your details are only used to reply to your enquiry.",
     "labels": {
-      "name": "Name",
       "email": "Email",
-      "phone": "Phone · UK",
       "whatsapp": "WhatsApp",
-      "whatsappText": "Message me on WhatsApp (handy from the US)",
+      "whatsappText": "Message me on WhatsApp",
       "linkedin": "LinkedIn",
-      "workingWith": "Working with",
       "copy": "Copy",
-      "copied": "Copied"
+      "copied": "Copied",
+      "linkedinText": "Connect on LinkedIn"
     },
-    "hours": "Based in London, on UK time (GMT/BST). UK afternoons overlap with US mornings, so calls are easy to book from the East Coast and can be arranged from the West Coast."
+    "hours": "Based in London, on UK time (GMT/BST). UK afternoons overlap with US mornings, so calls are easy to book from the East Coast and can be arranged from the West Coast.",
+    "whatToSendHint": "Helpful to include: what you sell and who buys it, the channels you want covered, roughly when you'd like to start, and a few examples of content you like.",
+    "otherWaysTitle": "Prefer to message?",
+    "whereTitle": "Where I work"
   },
   "notFound": {
     "h1": "This page has moved on.",

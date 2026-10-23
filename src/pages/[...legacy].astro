@@ -2,9 +2,10 @@
 // Region chooser for lavibachchis.com/ and every pre-/uk-/us address (/about/, /work/solenne/ and so on,
 // some of which Google has already indexed). Each one is a tiny page that sends the visitor to the same
 // page under /uk/ or /us/:
-//   1. a region they picked before with the UK | US switcher (localStorage 'lb-region'), else
+//   1. a region saved earlier in this browser (localStorage 'lb-region', from the old UK | US switcher), else
 //   2. US if their time zone is in the Americas (or their browser language is en-US), else UK.
-// UK-only pages always go to /uk/. The canonical points at the UK version, so search engines treat these
+// UK-only pages always go to /uk/. A blog post with a regional twin (src/lib/twins.js) sends visitors in the
+// other region to the twin instead, e.g. /insights/x-cost-uk/ -> /us/insights/x-cost-us/ for US visitors. The canonical points at the UK version, so search engines treat these
 // addresses as duplicates of it and pass their signals on. Search engine crawlers are always sent to that same
 // canonical (UK) page: Googlebot's browser reports a US time zone, and sending it to /us/ while the canonical
 // said /uk/ made Google treat /us/ as a copy of lavibachchis.com/ and leave it out of search (Oct 2026).
@@ -14,22 +15,28 @@ import { getCollection } from 'astro:content';
 import { ALL } from '../data/brands.js';
 import { url, absUrl } from '../lib/url.js';
 import { REGIONS, REGION_META } from '../lib/region.js';
+import { getTwins } from '../lib/twins.js';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const twins = await getTwins();
   const both = REGIONS;
   const pages = [
     ['', both], ['about', both], ['contact', both], ['privacy', both], ['services', both], ['work', both], ['insights', both],
     ...ALL.map((b) => [`work/${b.id}`, both]),
-    ...posts.map((p) => [`insights/${p.id}`, p.data.regions]),
+    ...posts.map((p) => {
+      const t = twins.get(p.id);
+      // twin: the post's own region stays first (canonical, and where bots go); the twin serves the other region
+      return [`insights/${p.id}`, t ? [t.region, t.other.region] : p.data.regions, t ? { [t.other.region]: `/insights/${t.other.id}/` } : {}];
+    }),
   ];
-  return pages.map(([legacy, regions]) => ({ params: { legacy: legacy || undefined }, props: { regions } }));
+  return pages.map(([legacy, regions, paths = {}]) => ({ params: { legacy: legacy || undefined }, props: { regions, paths } }));
 }
 
-const { regions } = Astro.props;
+const { regions, paths } = Astro.props;
 const path = `/${Astro.params.legacy ? `${Astro.params.legacy}/` : ''}`;
 const site = Astro.site ?? new URL('https://lavibachchis.com');
-const targets = Object.fromEntries(regions.map((r) => [r, url(path, { region: r })]));
+const targets = Object.fromEntries(regions.map((r) => [r, url(paths[r] ?? path, { region: r })]));
 const canonical = absUrl(path, site, { region: regions[0] });
 const script = `(function(){var t=${JSON.stringify(targets)},r;
 var bot=/bot|crawl|spider|slurp|mediapartners|lighthouse|facebookexternalhit|preview/i.test(navigator.userAgent||'');

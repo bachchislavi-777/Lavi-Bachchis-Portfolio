@@ -2,7 +2,7 @@
 title: "Social media for law firms: what US attorneys should post"
 seoTitle: "Social Media for Law Firms & Attorneys: A Practical Guide"
 description: "A practical guide to social media for US law firms and attorneys: what to post on LinkedIn, Facebook and Instagram, what to avoid, and the ethics rules to know."
-excerpt: "What to post, what to skip and how to keep it within the ethics rules, from someone who runs marketing for a law firm."
+excerpt: "What to post, what to skip and how to keep it within the ethics rules, from a branding and content expert who has worked with law firms."
 keyword: "social media for law firms"
 caseStudy: "ashbygrant"
 regions: ["us"]
@@ -21,7 +21,7 @@ faq:
 
 <p class="tldr"><strong>In short:</strong> law firms that do well on social media answer real client questions in plain English, put their attorneys ahead of the logo, and have a licensed lawyer approve every post before it goes out. LinkedIn comes first for most firms. Facebook and Instagram earn their place for consumer practices like family law, estate planning and personal injury.</p>
 
-My day job is leading marketing and brand at a law firm. I've seen up close how much care legal content needs, and how easily it turns into posts that are technically correct and impossible to read.
+I've spent the last 10 years in content marketing and branding, including for law firms and other professional-services businesses. I've seen up close how much care legal content needs, and how easily it turns into posts that are technically correct and impossible to read.
 
 Attorneys start with an advantage most businesses would envy: people want what you know. They just want it without the legalese.
 
@@ -71,7 +71,7 @@ You don't need all three. One platform done well beats three done halfway.
 
 ## The compliance part, kept simple
 
-I'm not a lawyer, and nothing here is legal advice. Every post should be approved by a licensed attorney at your firm who knows your state's rules. With that said, here's the landscape as I understand it from working in-house.
+I'm not a lawyer, and nothing here is legal advice. Every post should be approved by a licensed attorney at your firm who knows your state's rules. With that said, here's the landscape as I understand it from years of working alongside legal teams.
 
 The American Bar Association's [Model Rules of Professional Conduct](https://www.americanbar.org/groups/professional_responsibility/publications/model_rules_of_professional_conduct/model_rules_of_professional_conduct_table_of_contents/) are the template most states build on. Four rules come up again and again for social media:
 

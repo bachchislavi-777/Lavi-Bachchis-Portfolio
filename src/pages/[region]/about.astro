@@ -62,8 +62,26 @@ const profile = {
         {a.values.map((v) => <div><h3>{v.title}</h3><p>{v.text}</p></div>)}
       </div>
       <div style="margin-top:56px">
-        <h2 class="mini-h">{a.toolsTitle}</h2>
-        <ul class="tools">{a.tools.map((t) => <li>{t}</li>)}</ul>
+        <div class="tk-head">
+          <h2 class="mini-h">{a.toolsTitle.split(' ').slice(0, -1).join(' ')} <em>{a.toolsTitle.split(' ').slice(-1)}</em></h2>
+          {a.toolsIntro && <p>{a.toolsIntro}</p>}
+        </div>
+        <div class="toolkit">
+          {a.tools.map((g) => (
+            <div class="tk-group">
+              <h3 class="tk-label">{g.group}</h3>
+              <ul>
+                {g.items.map((t) => (
+                  <li class="tk-tool">
+                    <span class="tk-logo"><img src={url(`/images/tools/${t.logo}.svg`)} alt="" width="40" height="40" loading="lazy" decoding="async" /></span>
+                    <span class="tk-txt"><b>{t.name}</b><small>{t.use}</small></span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p class="tk-note">Logos are trademarks of their owners and are shown only to name the tools I use.</p>
       </div>
     </div>
   </section>

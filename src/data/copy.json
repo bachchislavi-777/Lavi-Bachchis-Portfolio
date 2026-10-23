@@ -609,7 +609,7 @@
       },
       {
         "q": "Which tools do you use?",
-        "a": "Canva for design, Mailchimp for email, WordPress for blogs, and Meta Business Suite and LinkedIn for scheduling. If you already use other tools, tell me on our call and I'll confirm I can work in them."
+        "a": "Canva for design, CapCut for video, Mailchimp for email, WordPress for blogs, and Meta Business Suite and LinkedIn for scheduling. I also use generative AI tools when a project calls for it. If you already use other tools, tell me on our call and I'll confirm I can work in them."
       },
       {
         "q": "Who owns the files?",
@@ -668,7 +668,7 @@
     "toolsTitle": "My creative toolkit",
     "tools": [
       {
-        "group": "Design",
+        "group": "Design & video",
         "items": [
           {
             "name": "Canva",
@@ -676,9 +676,14 @@
             "use": "Brand kits, graphics and templates"
           },
           {
-            "name": "Pinterest",
-            "logo": "pinterest",
-            "use": "Pins and visual direction"
+            "name": "CapCut",
+            "logo": "video",
+            "use": "Reels and short-form video edits"
+          },
+          {
+            "name": "Generative AI",
+            "logo": "ai-sparkle",
+            "use": "Concepts, imagery and ideas, as and when a project needs it"
           }
         ]
       },
@@ -694,6 +699,11 @@
             "name": "LinkedIn",
             "logo": "linkedin",
             "use": "Posts, carousels and scheduling"
+          },
+          {
+            "name": "Pinterest",
+            "logo": "pinterest",
+            "use": "Pins and visual direction"
           }
         ]
       },

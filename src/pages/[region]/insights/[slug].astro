@@ -7,8 +7,10 @@ import { getCopy, setRegion, REGIONS, REGION_META } from '../../../lib/region.js
 setRegion(Astro.params.region);
 const copy = getCopy();
 import { url, absUrl } from '../../../lib/url.js';
+import { getTwins, twinHreflang } from '../../../lib/twins.js';
 
 export async function getStaticPaths() {
+  const twins = await getTwins(); // validates every counterpart pair; a broken pair fails the build
   const all = (await getCollection('blog', ({ data }) => !data.draft))
     .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf());
   // "Keep reading": posts sharing the most tags first, then newest.
@@ -17,12 +19,16 @@ export async function getStaticPaths() {
     const posts = all.filter((p) => p.data.regions.includes(region));
     return posts.map((post) => ({
       params: { region, slug: post.id },
-      props: { post, others: posts.filter((p) => p.id !== post.id).sort((a, b) => shared(b, post) - shared(a, post)) },
+      props: {
+        post,
+        others: posts.filter((p) => p.id !== post.id).sort((a, b) => shared(b, post) - shared(a, post)),
+        hreflang: twinHreflang(post, twins), // UK/US twin with a different slug, if any
+      },
     }));
   });
 }
 
-const { post, others } = Astro.props;
+const { post, others, hreflang } = Astro.props;
 const d = post.data;
 const { Content, headings } = await render(post);
 const path = `/insights/${post.id}/`;
@@ -65,7 +71,7 @@ const schema = [
 ];
 const crumbs = [{ name: 'Blog', path: '/insights/' }, { name: d.title, path }];
 ---
-<Layout title={d.seoTitle} description={d.description} path={path} regions={d.regions} current="/insights/" breadcrumbs={crumbs} schema={schema}
+<Layout title={d.seoTitle} description={d.description} path={path} regions={d.regions} hreflang={hreflang} current="/insights/" breadcrumbs={crumbs} schema={schema}
   article={{ published: iso(d.published), modified: d.updated ? iso(d.updated) : undefined, tags: d.tags }}>
   <PageHead eyebrow={d.tags[0] ?? 'Blog'} h1={d.title} crumbs={crumbs}>
     <p class="post-meta">

@@ -1,8 +1,8 @@
 {
   "site": {
     "name": "Lavi Bachchis",
-    "role": "Content & Creative",
-    "tagline": "Social media, newsletters and blogs, designed and written for you.",
+    "role": "Creative Branding & Content",
+    "tagline": "Creative branding and content: brand identity, social media, newsletters and blogs, designed and written for you.",
     "email": "hello@lavibachchis.com",
     "whatsapp": "https://wa.me/447438216452",
     "linkedin": "https://www.linkedin.com/in/lavi-bachchis-63a758166/",
@@ -15,7 +15,7 @@
     "footerNote": "The six sample brands on this site are case studies I created to show my work. Names, people, reviews and figures in them are illustrative, and legal and tax points in them are not advice. Paws, Peace & Poems is my own, real project.",
     "footerShort": "Sample brands are illustrative. Details on the Work page.",
     "photoCredits": "Product photography for the sample brands is art-directed and AI-generated. Additional photography via Unsplash: Kalos Skincare, Nathan Dumlao, Eric Muhr, Jakub Żerdzicki, Christina @ wocintechchat.com, LinkedIn Sales Solutions, Kellen Riggin, Timur Shakerzianov, Bernard Hermant and Anne Nygård, colour-graded for each brand.",
-    "copyright": "© 2026 Lavi Bachchis · Content & Creative",
+    "copyright": "© 2026 Lavi Bachchis · Creative Branding & Content",
     "ctaNav": "Start a project"
   },
   "nav": [
@@ -42,28 +42,28 @@
   ],
   "seo": {
     "home": {
-      "title": "Freelance Social Media Content Creator | Lavi Bachchis",
-      "description": "Freelance social media content, Mailchimp newsletters and WordPress blogs for small businesses. Designed, written and delivered on time, every month."
+      "title": "Creative Branding & Content Expert | Lavi Bachchis",
+      "description": "Creative branding and content marketing expert with 10 years across industries. Brand identity, social media, newsletters and blogs for UK and US brands."
     },
     "work": {
       "title": "Social Media Case Studies & Portfolio | Lavi Bachchis",
       "description": "Brand case studies: my own mental-wellbeing page plus six sample brands, with brand kits, planned Instagram grids, Reel covers and LinkedIn carousels."
     },
     "services": {
-      "title": "Social Media Content Packages & Pricing | Lavi Bachchis",
-      "description": "Monthly social media, Mailchimp newsletter and WordPress blog packages for a fixed fee, planned a month ahead and approved by you before anything is posted."
+      "title": "Branding & Content Packages and Pricing | Lavi Bachchis",
+      "description": "Brand kits, social media, Mailchimp newsletters and WordPress blogs for a fixed monthly fee, planned a month ahead and approved by you before anything goes out."
     },
     "about": {
-      "title": "About Lavi Bachchis | Freelance Content Creator",
-      "description": "Lavi Bachchis, freelance social media content creator and marketing and brand lead. Social posts, Mailchimp newsletters and WordPress blogs for small brands."
+      "title": "About Lavi Bachchis | Creative Branding Expert",
+      "description": "Lavi Bachchis, a creative branding and content marketing expert with 10 years across industries. Brand identity, social content, newsletters and blogs."
     },
     "insights": {
       "title": "Small Business Social Media Blog | Lavi Bachchis",
-      "description": "Practical articles on social media, newsletters and blog content for small businesses, from a freelance content creator and marketing and brand lead."
+      "description": "Practical articles on branding, social media, newsletters and blog content for growing businesses, from a creative branding and content marketing expert."
     },
     "contact": {
-      "title": "Contact | Freelance Social Media Content | Lavi Bachchis",
-      "description": "Get in touch about freelance social media, newsletter and blog content for your UK business. I reply within one working day and we can book a short call."
+      "title": "Contact | Creative Branding & Content | Lavi Bachchis",
+      "description": "Get in touch about branding, social media, newsletters and blog content for your UK business. I reply within one working day and we can book a short call."
     },
     "solenne": {
       "title": "Solenne Skincare: Instagram Case Study | Lavi Bachchis",
@@ -95,10 +95,10 @@
     }
   },
   "home": {
-    "eyebrow": "Freelance content & creative",
-    "h1": "Content that makes your brand look",
+    "eyebrow": "Creative branding & content",
+    "h1": "Branding that makes your business look",
     "h1Em": "as good as it is.",
-    "lede": "I design and write social media, Mailchimp newsletters and WordPress blogs for product and service businesses. You get on-brand content, planned a month ahead and delivered on time, so you can get on with running the business.",
+    "lede": "For 10 years I've worked in content marketing and branding across industries. I shape how your brand looks and sounds, then design and write the social media, Mailchimp newsletters and WordPress blogs that carry it, planned a month ahead and delivered on time.",
     "ctaPrimary": {
       "label": "See the work",
       "href": "/work/"
@@ -109,19 +109,22 @@
     },
     "facts": [
       {
+        "n": "10",
+        "label": "years in content marketing & branding"
+      },
+      {
         "n": "6",
         "label": "sample brands, built end to end"
       },
       {
         "n": "54",
         "label": "grid posts planned"
-      },
-      {
-        "n": "24",
-        "label": "posts in current formats"
       }
     ],
     "ticker": [
+      "Brand identity",
+      "Brand kits",
+      "Tone of voice",
       "Instagram",
       "LinkedIn",
       "Facebook",
@@ -129,22 +132,21 @@
       "WordPress",
       "Reel covers",
       "Carousels",
-      "Brand kits",
       "Newsletters",
       "Blogs"
     ],
     "intro": {
       "eyebrow": "Hello",
-      "text": "I'm Lavi, a marketing and brand lead. I help businesses show up consistently on social, in the inbox and on their blog, without hiring an in-house team."
+      "text": "I'm Lavi, a creative branding and content marketing expert. For the last 10 years I've helped businesses across industries find a clear brand, and show up consistently on social, in the inbox and on their blog."
     },
     "pillars": [
       {
-        "title": "In-house brand experience",
-        "text": "I lead marketing and brand for a law firm, so I know how careful professional-services content needs to be, and how to keep it readable."
+        "title": "10 years of brand experience",
+        "text": "I've spent a decade in content marketing and branding across industries, from regulated professional services to creative projects, so I know how to keep a brand consistent, accurate and easy to read."
       },
       {
-        "title": "Design and copy in one place",
-        "text": "Graphics, captions, newsletters and articles come from one person who knows your brand. You brief once, and everything matches."
+        "title": "Strategy, design and copy in one place",
+        "text": "Brand direction, graphics, captions, newsletters and articles come from one person who knows your brand. You brief once, and everything matches."
       },
       {
         "title": "Built around what works now",
@@ -161,11 +163,11 @@
       "eyebrow": "Services",
       "h2": "What you get",
       "h2Em": "every month.",
-      "text": "Feed posts, carousels, Reel covers, newsletters and blog articles for a fixed monthly fee, planned a month ahead."
+      "text": "Brand kits, feed posts, carousels, Reel covers, newsletters and blog articles for a fixed monthly fee, planned a month ahead."
     },
     "cta": {
-      "h2": "Let's plan your",
-      "h2Em": "first month of content.",
+      "h2": "Let's shape your brand",
+      "h2Em": "and its first month of content.",
       "text": "Tell me about your brand and the channels that matter to you. I'll reply within one working day to book a short call.",
       "button": "Get in touch"
     }
@@ -407,10 +409,22 @@
   },
   "services": {
     "eyebrow": "Services",
-    "h1": "Content, designed and written",
+    "h1": "Branding and content, designed and written",
     "h1Em": "for you every month.",
-    "intro": "Social media, email and blog content, designed and written by the same person. Everything is planned in a monthly calendar you sign off before I start.",
+    "intro": "Brand identity, social media, email and blog content, shaped and created by the same person. Everything is planned in a monthly calendar you sign off before I start.",
     "list": [
+      {
+        "eyebrow": "Brand",
+        "title": "Brand identity & kit",
+        "text": "Your palette, type, logo files and tone of voice pulled into one clear identity, with reusable Canva templates so every post matches from month one.",
+        "deliverables": [
+          "Colour palette and type pairing",
+          "Tone-of-voice notes with lines to use and avoid",
+          "Content pillars",
+          "Reusable Canva templates",
+          "Brand kit set up in your own Canva account"
+        ]
+      },
       {
         "eyebrow": "Social",
         "title": "Feeds & carousels",
@@ -445,18 +459,6 @@
           "A featured image designed to match",
           "Meta title and description",
           "Published, or saved as a draft for your review"
-        ]
-      },
-      {
-        "eyebrow": "Brand",
-        "title": "Brand kit set-up",
-        "text": "Your palette, fonts, logo files and tone of voice gathered in one place, with reusable Canva templates so every post matches from month one.",
-        "deliverables": [
-          "Colour palette and type pairing",
-          "Tone-of-voice notes with lines to use and avoid",
-          "Content pillars",
-          "Reusable Canva templates",
-          "Brand kit set up in your own Canva account"
         ]
       }
     ],
@@ -607,7 +609,7 @@
       },
       {
         "q": "Which tools do you use?",
-        "a": "Canva for design, Mailchimp for email, WordPress for blogs, and Meta Business Suite and LinkedIn for scheduling. If you already use other tools, tell me on our call and I'll confirm I can work in them."
+        "a": "Canva for design, CapCut for video, Mailchimp for email, WordPress for blogs, and Meta Business Suite and LinkedIn for scheduling. I also use generative AI tools when a project calls for it. If you already use other tools, tell me on our call and I'll confirm I can work in them."
       },
       {
         "q": "Who owns the files?",
@@ -642,37 +644,104 @@
     "eyebrow": "About",
     "h1": "Hi, I'm Lavi. I help your brand",
     "h1Em": "look like itself everywhere.",
-    "intro": "I'm a marketing and brand lead. I design and write content for product and service businesses.",
+    "intro": "I'm a creative branding and content marketing expert with 10 years' experience across industries. I shape brands, and create the content that carries them.",
     "paragraphs": [
-      "In my in-house role, I lead marketing and brand for a law firm. That means LinkedIn posts for partners, client newsletters, website articles and a brand that has to look right every time. I know how careful professional-services content needs to be, and how to keep it easy to read.",
-      "As a freelancer, I bring the same habits to smaller businesses. You get one person who designs the graphics, writes the captions, builds the newsletter and formats the blog, so your brand stays consistent without hiring a team.",
+      "For the last 10 years I've worked in content marketing and branding across a range of industries. I've shaped brand identities, planned content calendars, written LinkedIn posts for senior leaders, and produced newsletters and website articles for brands that have to look right every time.",
+      "Working across sectors has taught me that every brand needs two things: a clear identity, and the discipline to apply it everywhere. Detail-heavy, regulated work taught me accuracy and careful approvals. Creative work taught me to make things people stop scrolling for.",
+      "Today I bring both to businesses that want a brand with real character. You get one person who shapes your look and voice, designs the graphics, writes the captions, builds the newsletter and formats the blog, so your brand stays consistent without hiring a team.",
       "I plan each month around formats that are working now, from Reel hooks to LinkedIn PDF carousels. You get content that looks and sounds like your brand, on the dates we agreed."
     ],
     "highlights": [
       {
-        "title": "I've done this in-house",
-        "text": "I run marketing and brand for a law firm, so I'm used to approvals, accuracy and a brand that has to stay consistent."
+        "title": "A decade of brand experience",
+        "text": "10 years in content marketing and branding across industries, so I'm used to approvals, accuracy and brands that have to stay consistent."
       },
       {
         "title": "You brief one person",
-        "text": "Graphics, captions, newsletters and articles, all designed and written by me."
+        "text": "Brand direction, graphics, captions, newsletters and articles, all shaped and created by me."
       },
       {
         "title": "Current formats",
         "text": "I plan around the formats each platform is rewarding now."
       }
     ],
-    "toolsTitle": "Tools I use",
+    "toolsTitle": "My creative toolkit",
     "tools": [
-      "Canva",
-      "Mailchimp",
-      "WordPress",
-      "Meta Business Suite",
-      "LinkedIn",
-      "Google Analytics",
-      "Google Business Profile",
-      "Google Workspace",
-      "Pinterest"
+      {
+        "group": "Design & video",
+        "items": [
+          {
+            "name": "Canva",
+            "logo": "canva",
+            "use": "Brand kits, graphics and templates"
+          },
+          {
+            "name": "CapCut",
+            "logo": "video",
+            "use": "Reels and short-form video edits"
+          },
+          {
+            "name": "Generative AI",
+            "logo": "ai-sparkle",
+            "use": "Concepts, imagery and ideas, as and when a project needs it"
+          }
+        ]
+      },
+      {
+        "group": "Social",
+        "items": [
+          {
+            "name": "Meta Business Suite",
+            "logo": "meta",
+            "use": "Instagram and Facebook scheduling"
+          },
+          {
+            "name": "LinkedIn",
+            "logo": "linkedin",
+            "use": "Posts, carousels and scheduling"
+          },
+          {
+            "name": "Pinterest",
+            "logo": "pinterest",
+            "use": "Pins and visual direction"
+          }
+        ]
+      },
+      {
+        "group": "Email & web",
+        "items": [
+          {
+            "name": "Mailchimp",
+            "logo": "mailchimp",
+            "use": "Branded newsletters"
+          },
+          {
+            "name": "WordPress",
+            "logo": "wordpress",
+            "use": "Blogs and web content"
+          }
+        ]
+      },
+      {
+        "group": "Insight",
+        "items": [
+          {
+            "name": "Google Analytics",
+            "logo": "google-analytics",
+            "use": "What's working, and why"
+          },
+          {
+            "name": "Google Business Profile",
+            "logo": "google",
+            "use": "Local search presence"
+          },
+          {
+            "name": "Google Workspace",
+            "logo": "google",
+            "use": "Plans, calendars and approvals"
+          }
+        ]
+      }
     ],
     "valuesTitle": "How I work",
     "values": [
@@ -689,13 +758,14 @@
         "text": "I promise finished, on-brand content. I don't promise follower or sales numbers that depend on things outside my control."
       }
     ],
-    "whyText": "Most small businesses need design and writing that match, but can't justify a team for it. That's the gap I fill: one brief, and everything from your posts to your newsletter looks like it came from the same business."
+    "whyText": "Most businesses need a brand that looks and sounds like them everywhere, but can't justify an agency or a team for it. That's the gap I fill: one brief, and everything from your posts to your newsletter looks like it came from the same business.",
+    "toolsIntro": "The tools I use every day to build brands and keep them consistent. Already working in something else? Tell me on our call."
   },
   "insights": {
     "eyebrow": "Blog",
     "h1": "Straight answers on content,",
     "h1Em": "for busy business owners.",
-    "intro": "Practical notes on social media, newsletters and blogs for small businesses, plus gentle, plain-English pieces on mental wellbeing from my own project, Paws, Peace & Poems.",
+    "intro": "Practical notes on branding, social media, newsletters and blogs for growing businesses, plus gentle, plain-English pieces on mental wellbeing from my own project, Paws, Peace & Poems.",
     "listTitle": "Latest articles",
     "readMore": "Read the article",
     "empty": "New articles are on the way."
@@ -704,19 +774,19 @@
     "eyebrow": "Recommendations",
     "h2": "What people I've",
     "h2Em": "worked with say.",
-    "intro": "Recommendations from my LinkedIn profile, quoted as they were written.",
+    "intro": "Excerpts from recommendations on my LinkedIn profile, in the writers' own words.",
     "source": "LinkedIn recommendation",
     "linkText": "See them on my LinkedIn profile",
     "link": "https://www.linkedin.com/in/lavi-bachchis-63a758166/",
     "items": [
       {
-        "quote": "I highly recommend Lavi for her exceptional marketing expertise. Her knowledge and execution of marketing strategies have made her a key asset to Waterstone Legal. With her strong skills in Content Creation, SEO research strategy, and marketing development, Lavi has played a pivotal role in the successful implementation of Waterstone Legal's conveyancing campaigns. Her contributions have had a significant impact, demonstrating her ability to drive results and support the firm's growth. Lavi is an invaluable team member and a true professional in her field.",
+        "quote": "I highly recommend Lavi for her exceptional marketing expertise. … Her contributions have had a significant impact, demonstrating her ability to drive results and support the firm's growth. Lavi is an invaluable team member and a true professional in her field.",
         "name": "Marie David",
         "role": "Compliance Manager",
         "relation": "Worked with Lavi on the same team · January 2025"
       },
       {
-        "quote": "Working with Lavi has been incredible, not only is she results- driven she has a supportive approach that makes collaboration full of opportunity. She is gifted with an exceptional blend of creativity and business strategy. I feel blessed and excited to be working with her in 2025 as part of the dream team at Waterstone Legal.",
+        "quote": "Working with Lavi has been incredible, not only is she results- driven she has a supportive approach that makes collaboration full of opportunity. She is gifted with an exceptional blend of creativity and business strategy.",
         "name": "Ashley Louise Brown",
         "role": "Copywriter, author and scriptwriter",
         "relation": "Worked with Lavi on the same team · December 2024"
@@ -731,9 +801,9 @@
   },
   "contact": {
     "eyebrow": "Contact",
-    "h1": "Let's plan your",
-    "h1Em": "first month of content.",
-    "intro": "Tell me about your brand and the channels you want to focus on. I work with product and service businesses across the UK and US.",
+    "h1": "Let's shape your brand",
+    "h1Em": "and its first month of content.",
+    "intro": "Tell me about your brand and where you want it to show up. I work with product and service businesses across the UK and US.",
     "promise": "I reply within one working day to book a short call. You get your package confirmed, or a fixed quote for a custom project, within two working days of that call.",
     "formNote": "Your details are only used to reply to your enquiry.",
     "labels": {

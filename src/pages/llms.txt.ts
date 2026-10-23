@@ -17,10 +17,10 @@ export const GET: APIRoute = async ({ site }) => {
 
   const body = `# ${s.name}, ${s.role}
 
-> ${s.name} is a London-based freelance content creator and marketing and brand lead. Lavi designs and writes social media content, Mailchimp newsletters and WordPress blog articles for small product and service businesses in the UK and the US, on a fixed monthly fee.
+> ${s.name} is a London-based creative branding and content marketing expert with 10 years' experience across industries. Lavi shapes brand identities and designs and writes the content that carries them: social media, Mailchimp newsletters and WordPress blog articles for product and service businesses in the UK and the US, on a fixed monthly fee.
 
 - Location: ${s.location}. Works with clients across the UK and US.
-- Services: social media feed posts, Instagram and LinkedIn carousels, Reel covers, captions and scheduling; Mailchimp newsletters; WordPress blog articles; brand kit and Canva template set-up.
+- Services: brand identity, brand kits and tone of voice; social media feed posts, Instagram and LinkedIn carousels, Reel covers, captions and scheduling; Mailchimp newsletters; WordPress blog articles; reusable Canva templates.
 - Sectors: skincare and beauty, food and drink, homeware, law firms, accountants and local trades, among others.
 - How it works: a short intro call, a brand kit, a monthly content calendar the client approves, then design, writing and scheduling. Nothing is published without the client's sign-off.
 - Pricing: fixed monthly fee, quoted after a short call. No hourly billing.

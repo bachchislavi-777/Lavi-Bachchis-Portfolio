@@ -2,7 +2,7 @@
 title: "Social media for solicitors: what UK law firms should actually post"
 seoTitle: "Social Media for Solicitors & Law Firms in the UK"
 description: "A practical guide to social media for UK solicitors and law firms: what to post on LinkedIn and Instagram, how to stay within the SRA rules and keep it human."
-excerpt: "What to post, what to avoid and how to keep it compliant, from someone who runs marketing for a law firm."
+excerpt: "What to post, what to avoid and how to keep it compliant, from a branding and content expert who has worked with law firms."
 keyword: "social media for solicitors UK"
 caseStudy: "ashbygrant"
 regions: ["uk"]
@@ -21,7 +21,7 @@ faq:
 
 <p class="tldr"><strong>In short:</strong> the law firms that do well on social media answer real client questions in plain English, put their people in front of the logo, and get every post checked before it goes out. LinkedIn comes first for most firms. Instagram and Facebook earn their place for private client, family and residential property work.</p>
 
-My day job is running marketing and brand for a law firm. So I've seen, up close, how much care legal content needs, and how easily it slides into posts that are technically correct and completely unreadable.
+I've spent the last 10 years in content marketing and branding, including for law firms and other professional-services businesses. So I've seen, up close, how much care legal content needs, and how easily it slides into posts that are technically correct and completely unreadable.
 
 The good news is that solicitors have something most businesses would love: people want what you know. They just want it without the Latin.
 

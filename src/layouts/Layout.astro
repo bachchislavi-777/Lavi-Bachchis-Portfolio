@@ -62,13 +62,20 @@ interface Props {
   noindex?: boolean;
   current?: string;
   article?: { published: string; modified?: string; tags?: string[] }; // blog posts: og:type article + dates
-  regions?: string[]; // regional sites this page exists on (default both); drives hreflang and the UK/US switcher
+  regions?: string[]; // regional sites this page exists on (default both); drives hreflang
+  // Regional versions at different paths (blog twins, see src/lib/twins.js). Replaces the same-path hreflang.
+  hreflang?: { region: 'uk' | 'us'; path: string }[];
 }
-const { title, description, path = '/', schema = [], breadcrumbs, brandFonts = false, noindex = false, current = '', article, regions = REGIONS } = Astro.props;
+const { title, description, path = '/', schema = [], breadcrumbs, brandFonts = false, noindex = false, current = '', article, regions = REGIONS, hreflang } = Astro.props;
 const region = getRegion();
 const meta = REGION_META[region];
 // hreflang: each regional version points at all of them; the UK version is the default for everyone else.
-const alternates = regions.map((r) => ({ lang: REGION_META[r].lang, href: absUrl(path, Astro.site ?? new URL('https://lavibachchis.com'), { region: r }) }));
+// Usually the same path in each region; blog twins pass their own pairs (different slugs per region).
+const pairs = (hreflang ?? regions.map((r) => ({ region: r, path })))
+  .slice()
+  .sort((a, b) => REGIONS.indexOf(a.region) - REGIONS.indexOf(b.region)); // UK first, so x-default = UK
+const altRegions = pairs.map((p) => p.region);
+const alternates = pairs.map((p) => ({ lang: REGION_META[p.region].lang, href: absUrl(p.path, Astro.site ?? new URL('https://lavibachchis.com'), { region: p.region }) }));
 const xDefault = alternates.length > 1 ? alternates[0].href : null;
 const site = Astro.site ?? new URL('https://bachchislavi-777.github.io');
 const canonical = absUrl(path, site);
@@ -131,7 +138,7 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
     {article?.tags?.map((t) => <meta property="article:tag" content={t} />)}
     <meta property="og:site_name" content={`${copy.site.name}, ${copy.site.role}`} />
     <meta property="og:locale" content={meta.ogLocale} />
-    {regions.filter((r) => r !== region).map((r) => <meta property="og:locale:alternate" content={REGION_META[r].ogLocale} />)}
+    {altRegions.filter((r) => r !== region).map((r) => <meta property="og:locale:alternate" content={REGION_META[r].ogLocale} />)}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {!noindex && <meta property="og:url" content={canonical} />}

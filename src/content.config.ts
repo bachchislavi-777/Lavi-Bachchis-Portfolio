@@ -20,6 +20,10 @@ const blog = defineCollection({
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     // Optional: the case study (an id from src/data/brands.js) that shows this advice in practice. Links both ways.
     caseStudy: z.string().optional(),
+    // Optional: slug of this post's twin in the other region (same topic, written separately for UK or US
+    // readers). Only for single-region posts, and both posts must name each other. Pairs them in hreflang,
+    // the sitemap and llms.txt (checked at build time in src/lib/twins.js).
+    counterpart: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });

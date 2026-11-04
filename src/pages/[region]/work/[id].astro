@@ -71,7 +71,7 @@ const related = await getCollection('blog', ({ data }) => !data.draft && data.re
         <div class="ch-hero">
           <div class="ch-photo">
             <CaseArt brand={b} sizes="(min-width: 1000px) 660px, 100vw" eager />
-            <div class="idc id-logo" aria-label={`${c.name} logo and tagline`} role="group"><span class="lbl" style="font-family:var(--f-m);font-size:11px;text-transform:uppercase;letter-spacing:.1em;opacity:.7">Logo &amp; tagline</span><div set:html={b.logo} /><div class="tagl">{b.tagline}</div></div>
+            <div class="idc id-logo" aria-label={`${c.name} logo and tagline`} role="group"><span class="lbl" style="font-family:var(--f-m);font-size:11px;text-transform:uppercase;letter-spacing:.1em">Logo &amp; tagline</span><div set:html={b.logo} /><div class="tagl">{b.tagline}</div></div>
           </div>
           <div class="ch-brief">
             <span class="eyebrow">The brief</span>

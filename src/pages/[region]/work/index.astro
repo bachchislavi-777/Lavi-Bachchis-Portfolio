@@ -34,7 +34,7 @@ const list = {
   {groups.map((grp) => {
     let n = 0;
     return (
-      <section class:list={['band', { light: grp.light }]} id={grp.g} aria-labelledby={`${grp.g}-h`}>
+      <section class:list={['band', 'lazy-render', { light: grp.light }]} id={grp.g} aria-labelledby={`${grp.g}-h`}>
         <div class="wrap">
           <div class="shead">
             <span class="eyebrow">{grp.eyebrow}</span>

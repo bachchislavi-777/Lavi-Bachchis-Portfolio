@@ -132,7 +132,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .iga{width:80px;height:80px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:22px;box-shadow:0 0 0 3px #fff,0 0 0 5px var(--terra)}
 .ign{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .ign b{font-size:16px;font-weight:600;margin-right:4px}
-.igb{font-size:12px;font-weight:600;padding:6px 16px;border-radius:8px;background:#0095F6;color:#fff}
+.igb{font-size:12px;font-weight:600;padding:6px 16px;border-radius:8px;background:#0070C9;color:#fff}
 .igb.s{background:#EFEFEF;color:#161616}
 .igbio{padding:12px 18px 0;font-size:14px;line-height:1.45}
 .igbio b{font-weight:600}
@@ -142,7 +142,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[tabindex]:focus-visi
 .ighl span{display:grid;justify-items:center;gap:6px;font-size:11px;flex:none;width:62px;text-align:center}
 .ighl i{width:58px;height:58px;border-radius:50%;box-shadow:0 0 0 2px #fff,0 0 0 3px #DBDBDB;background-size:cover;background-position:center}
 .igtabs{display:flex;border-top:1px solid #E7E2D9}
-.igtabs span{flex:1;text-align:center;font-size:12px;font-weight:600;padding:10px 0;color:#8E8E8E;letter-spacing:.06em;text-transform:uppercase}
+.igtabs span{flex:1;text-align:center;font-size:12px;font-weight:600;padding:10px 0;color:#6F6F6F;letter-spacing:.06em;text-transform:uppercase}
 .igtabs .on{color:#161616;box-shadow:inset 0 1px 0 #161616}
 .iggrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;--ar:3/4}
 .fplan{background:var(--sf);border:1px solid var(--ln);border-radius:20px;padding:26px;display:grid;gap:14px;min-width:0}

@@ -1,4 +1,4 @@
-// Alt text for every photo (from docs/graphics.md). Files: public/images/<name>-540.webp, -1080.webp, .jpg
+// Alt text for every photo (from docs/graphics.md). Files: public/images/<name>-540.webp, -720.webp, -1080.webp, .jpg
 export const ALT = {
   ash1: 'A hand holding up a set of house keys, one bright green, on a large silver house-shaped keyring, against a blurred green-grey background.',
   ash2: 'Smiling young woman with long hair in a grey blazer, leaning on a closed laptop against an orange wall, with office buildings through the window.',

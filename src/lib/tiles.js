@@ -12,12 +12,12 @@ const strip = (s = '') => String(s).replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+
 
 export const v = (k) => (!k ? 'transparent' : k[0] === '#' || k.startsWith('rgb') || k.startsWith('var') ? k : `var(--${k})`);
 
-/** CSS background for a photo: JPEG first (fallback), then image-set with WebP 1x/2x. */
+/** CSS background for a photo: JPEG first (fallback), then image-set with WebP 540/720 for 1x/2x. */
 export const pic = (s) => {
   const jpg = url(`images/${s}.jpg`);
   const w5 = url(`images/${s}-540.webp`);
-  const w10 = url(`images/${s}-1080.webp`);
-  return `background-image:url(${jpg});background-image:image-set(url(${w5}) type('image/webp') 1x, url(${w10}) type('image/webp') 2x, url(${jpg}) type('image/jpeg') 1x)`;
+  const w7 = url(`images/${s}-720.webp`); // mock-up tiles are small, so 720px covers 2x screens
+  return `background-image:url(${jpg});background-image:image-set(url(${w5}) type('image/webp') 1x, url(${w7}) type('image/webp') 2x, url(${jpg}) type('image/jpeg') 1x)`;
 };
 
 /** Accessible name for photo tiles: role="img" when the tile has no text, otherwise a visually hidden description. */

@@ -40,7 +40,6 @@ h1, h2, h3 { overflow-wrap: break-word; }
   .top .menu-cta { display: block; }
   .navtoggle { margin-left: auto; }
 }
-@media (max-width: 620px) { .navtoggle { margin-left: 4px; } }
 @media (max-width: 620px) { .logo-full { height: 44px; } }
 @media (max-width: 380px) { .logo-full { height: 38px; } .top .wrap { gap: 12px; } }
 

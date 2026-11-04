@@ -44,6 +44,15 @@ import '@fontsource/archivo/latin-400.css';
 import '@fontsource/archivo/latin-600.css';
 import '@fontsource/archivo/latin-800.css';
 import '@fontsource/archivo/latin-900.css';
+// Core fonts used above the fold, preloaded so text appears in the right font straight away (no layout shift on desktop)
+import fHanken400 from '@fontsource/hanken-grotesk/files/hanken-grotesk-latin-400-normal.woff2?url';
+import fHanken600 from '@fontsource/hanken-grotesk/files/hanken-grotesk-latin-600-normal.woff2?url';
+import fHanken700 from '@fontsource/hanken-grotesk/files/hanken-grotesk-latin-700-normal.woff2?url';
+import fPlayfair400 from '@fontsource/playfair-display/files/playfair-display-latin-400-normal.woff2?url';
+import fPlayfair400i from '@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff2?url';
+import fPlayfair600 from '@fontsource/playfair-display/files/playfair-display-latin-600-normal.woff2?url';
+import fMono500 from '@fontsource/dm-mono/files/dm-mono-latin-500-normal.woff2?url';
+const PRELOAD_FONTS = [fHanken400, fHanken600, fHanken700, fPlayfair400, fPlayfair400i, fPlayfair600, fMono500];
 import '../styles/base.css';
 import '../styles/site.css';
 import { getCopy, getRegion, REGIONS, REGION_META } from '../lib/region.js';
@@ -111,6 +120,7 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <html lang={meta.lang}>
   <head>
     <meta charset="utf-8" />
+    {PRELOAD_FONTS.map((f) => <link rel="preload" href={f} as="font" type="font/woff2" crossorigin />)}
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://api.web3forms.com https://xysgfgkgndpgcctrnrla.supabase.co; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

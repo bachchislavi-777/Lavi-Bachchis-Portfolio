@@ -79,8 +79,33 @@ export function localise(value, region = current) {
 // US-specific wording, applied on top of the converted copy.
 // Site copy doesn't name a country or city (only the URL and the contact page do), so this is
 // only for things that genuinely differ, such as crisis-line numbers.
+//
+// The US homepage and Work page also get their own wording: with spelling changes alone, Google treated
+// /us/ and /us/work/ as copies of the UK pages and indexed only the UK versions ("Duplicate, Google chose
+// different canonical than user", Search Console, Nov 2026).
 const US_OVERRIDES = {
+  seo: {
+    home: {
+      title: 'Creative Branding & Content for US Brands | Lavi Bachchis',
+      description: 'Creative branding and content marketing for US small businesses: brand identity, social media, newsletters and blogs, planned a month ahead and approved by you.',
+    },
+    work: {
+      title: 'US Social Media Case Studies & Portfolio | Lavi Bachchis',
+      description: 'Social media case studies for US brands: six sample brands plus my own wellbeing page, with brand kits, Instagram grids, Reel covers and LinkedIn carousels.',
+    },
+  },
+  home: {
+    eyebrow: 'Creative branding & content for US brands',
+    lede: "For 10 years I've worked in content marketing and branding across industries. I help US small businesses shape how their brand looks and sounds, then design and write the social media, Mailchimp newsletters and WordPress blogs that carry it, planned a month ahead and delivered on time.",
+    intro: {
+      text: "I'm Lavi, a creative branding and content marketing expert working with businesses across the US. For the last 10 years I've helped brands across industries find a clear identity and show up consistently on social, in the inbox and on their blog.",
+    },
+    servicesTeaser: {
+      text: 'Brand kits, feed posts, carousels, Reel covers, newsletters and blog articles for a fixed monthly fee in US dollars, planned a month ahead.',
+    },
+  },
   work: {
+    intro: "These case studies show how I build a brand's content from the ground up, the same way I would for a US small business. One is my own: Paws, Peace & Poems, a mental-wellbeing page I run. The other six are sample brands I created, each with a brand kit, content pillars, a planned 9-post Instagram grid and four creatives built on current formats. In the samples, names, people, reviews and figures are illustrative.",
     ownNote: "Paws, Peace & Poems is my own, real project. It shares general wellbeing information, not therapy or medical advice, and I'm not a qualified therapist. If you're struggling, please talk to your doctor, or call or text 988 (the 988 Suicide & Crisis Lifeline), any time. In an emergency, call 911.",
   },
 };

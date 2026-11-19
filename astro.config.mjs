@@ -42,12 +42,15 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Only the regional pages. The root and old addresses are region choosers, not content.
-      filter: (page) => /\/(uk|us)\//.test(new URL(page).pathname) && !/\/404\/?$/.test(page),
+      // The privacy policy is one page for everyone: /us/privacy/ points its canonical at /uk/privacy/,
+      // so only the UK copy is listed, with no UK/US alternates.
+      filter: (page) => /\/(uk|us)\//.test(new URL(page).pathname) && !/\/404\/?$/.test(page) && !/\/us\/privacy\/?$/.test(new URL(page).pathname),
       // Adds UK/US alternate links (hreflang) for each page that exists in both regions.
       i18n: { defaultLocale: 'uk', locales: { uk: 'en-GB', us: 'en-US' } },
       // Blog twins have different slugs, which i18n can't pair, so give them their alternates here.
       serialize(item) {
         const pathname = new URL(item.url).pathname;
+        if (/\/uk\/privacy\/?$/.test(pathname)) { delete item.links; return item; }
         const pair = twins[BASE && pathname.startsWith(BASE) ? pathname.slice(BASE.length) : pathname];
         if (pair) {
           item.links = [

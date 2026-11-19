@@ -74,8 +74,11 @@ interface Props {
   regions?: string[]; // regional sites this page exists on (default both); drives hreflang
   // Regional versions at different paths (blog twins, see src/lib/twins.js). Replaces the same-path hreflang.
   hreflang?: { region: 'uk' | 'us'; path: string }[];
+  // Point the canonical at one region's copy (e.g. a policy page that is the same everywhere).
+  // That page then carries no hreflang, so Google indexes the one copy and doesn't report a duplicate.
+  canonicalRegion?: 'uk' | 'us';
 }
-const { title, description, path = '/', schema = [], breadcrumbs, brandFonts = false, noindex = false, current = '', article, regions = REGIONS, hreflang } = Astro.props;
+const { title, description, path = '/', schema = [], breadcrumbs, brandFonts = false, noindex = false, current = '', article, regions = REGIONS, hreflang, canonicalRegion } = Astro.props;
 const region = getRegion();
 const meta = REGION_META[region];
 // hreflang: each regional version points at all of them; the UK version is the default for everyone else.
@@ -84,10 +87,10 @@ const pairs = (hreflang ?? regions.map((r) => ({ region: r, path })))
   .slice()
   .sort((a, b) => REGIONS.indexOf(a.region) - REGIONS.indexOf(b.region)); // UK first, so x-default = UK
 const altRegions = pairs.map((p) => p.region);
-const alternates = pairs.map((p) => ({ lang: REGION_META[p.region].lang, href: absUrl(p.path, Astro.site ?? new URL('https://lavibachchis.com'), { region: p.region }) }));
+const alternates = canonicalRegion ? [] : pairs.map((p) => ({ lang: REGION_META[p.region].lang, href: absUrl(p.path, Astro.site ?? new URL('https://lavibachchis.com'), { region: p.region }) }));
 const xDefault = alternates.length > 1 ? alternates[0].href : null;
 const site = Astro.site ?? new URL('https://bachchislavi-777.github.io');
-const canonical = absUrl(path, site);
+const canonical = absUrl(path, site, canonicalRegion ? { region: canonicalRegion } : {});
 const ogImage = absUrl('og-image.jpg', site);
 const homeUrl = absUrl('/', site);
 
